@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver Available - خدمات التوصيل والنقل</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- شريط التنقل المحسن -->
+    <header id="mainHeader" class="glass-header">
+        <div class="nav-wrap">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-car"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>Driver Available</h1>
+                    <p>سائق متوفر</p>
+                </div>
+            </div>
+            
+            <nav class="nav-links" id="navLinks">
+                <a href="#home" class="nav-link active">الرئيسية</a>
+                <a href="#about" class="nav-link">من نحن</a>
+                <a href="#services" class="nav-link">الخدمات</a>
+                <a href="#how-it-works" class="nav-link">كيف يعمل</a>
+                <a href="#contact" class="nav-link">التواصل</a>
+                <div class="nav-indicator" id="indicator"></div>
+            </nav>
+            
+            <a href="https://wa.me/21612345678" class="nav-cta">
+                <i class="fab fa-whatsapp"></i> <span class="cta-text">تواصل الآن</span>
+            </a>
+            
+            <button class="burger" id="burger" aria-label="قائمة التنقل">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- القسم الرئيسي - السلايدر -->
+    <section id="home" class="hero">
+        <div class="slider-container">
+            <div class="slider">
+                <!-- الشريحة 1 -->
+                <div class="slide active">
+                    <div class="slide-content">
+                        <h2>التوصيل المحلي المستقل</h2>
+                        <p>داخل تونس وقطر عبر سائقين مستقلين</p>
+                        <a href="#services" class="btn">تعرف على خدماتنا</a>
+                    </div>
+                    <div class="slide-overlay"></div>
+                </div>
+                
+                <!-- الشريحة 2 -->
+                <div class="slide">
+                    <div class="slide-content">
+                        <h2>توصيل الأغراض بين قطر وتونس</h2>
+                        <p>نظام يدًا بيد عبر المسافرين الموثوقين</p>
+                        <a href="#services" class="btn">اطلب الخدمة الآن</a>
+                    </div>
+                    <div class="slide-overlay"></div>
+                </div>
+                
+                <!-- الشريحة 3 -->
+                <div class="slide">
+                    <div class="slide-content">
+                        <h2>خدمات النقل المميزة</h2>
+                        <p>توصيل الأطفال للمدارس والموظفين للعمل</p>
+                        <a href="#contact" class="btn">احجز خدمتك</a>
+                    </div>
+                    <div class="slide-overlay"></div>
+                </div>
+            </div>
+            
+            <!-- عناصر التحكم في السلايدر -->
+            <div class="slider-controls">
+                <button class="slider-btn prev-slide" aria-label="الشريحة السابقة">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <div class="slider-dots">
+                    <button class="slider-dot active" data-slide="0" aria-label="الشريحة الأولى"></button>
+                    <button class="slider-dot" data-slide="1" aria-label="الشريحة الثانية"></button>
+                    <button class="slider-dot" data-slide="2" aria-label="الشريحة الثالثة"></button>
+                </div>
+                <button class="slider-btn next-slide" aria-label="الشريحة التالية">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم من نحن -->
+    <section id="about" class="about section-padding">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">من نحن</h2>
+                <p class="section-subtitle">نحن فريق من السائقين المستقلين المتخصصين في خدمات النقل والتوصيل</p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>رسالتنا وهدفنا</h3>
+                    <p>نقدم خدمات توصيل محلية داخل تونس وقطر، بالإضافة إلى توصيل الأغراض بين البلدين عبر نظام يدًا بيد مع المسافرين الموثوقين. نحن وسيط موثوق بين العملاء والسائقين المستقلين.</p>
+                    
+                    <div class="values">
+                        <div class="value-item">
+                            <div class="value-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <h4>ملتزم بالمواعيد</h4>
+                            <p>نحن ندرك أهمية الوقت ونلتزم بمواعيد التسليم بدقة</p>
+                        </div>
+                        
+                        <div class="value-item">
+                            <div class="value-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h4>موثوق وآمن</h4>
+                            <p>جميع خدماتنا موثقة ومعتمدة مع ضمان سلامة الأغراض</p>
+                        </div>
+                        
+                        <div class="value-item">
+                            <div class="value-icon">
+                                <i class="fas fa-hard-hat"></i>
+                            </div>
+                            <h4>مجتهدون</h4>
+                            <p>فريق عمل مجتهد يقدم أفضل خدمة بتفانٍ والتزام</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-image">
+                    <div class="image-frame">
+                        <div class="frame-content">
+                            <i class="fas fa-car-side"></i>
+                            <h3>Transporteur</h3>
+                            <p>خدمات نقل وتوصيل احترافية</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الخدمات -->
+    <section id="services" class="services section-padding">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">خدماتنا</h2>
+                <p class="section-subtitle">نقدم ثلاث خدمات رئيسية تغطي جميع احتياجات النقل والتوصيل</p>
+            </div>
+            
+            <div class="cards">
+                <!-- الخدمة 1 -->
+                <div class="card service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h3>التوصيل المحلي المستقل</h3>
+                    <p class="service-description">خدمات توصيل داخل المدن التونسية والقطرية عبر سائقين مستقلين</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> <span>توصيل أغراض ومشتريات</span></li>
+                        <li><i class="fas fa-check"></i> <span>توصيل مطاعم ومحلات</span></li>
+                        <li><i class="fas fa-check"></i> <span>توصيل تلاميذ للمدارس</span></li>
+                        <li><i class="fas fa-check"></i> <span>توصيل موظفين للعمل</span></li>
+                        <li><i class="fas fa-check"></i> <span>خدمة سيارات الأجرة</span></li>
+                    </ul>
+                    <a href="#contact" class="service-btn">اطلب الخدمة</a>
+                </div>
+                
+                <!-- الخدمة 2 -->
+                <div class="card service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <h3>توصيل قطر-تونس</h3>
+                    <p class="service-description">نظام يدًا بيد عبر المسافرين لنقل الأغراض بين البلدين</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> <span>شراء/بيع ميزان الحقائب</span></li>
+                        <li><i class="fas fa-check"></i> <span>استقبال المسافرين في المطارات</span></li>
+                        <li><i class="fas fa-check"></i> <span>توزيع الأمانات للمستلمين</span></li>
+                        <li><i class="fas fa-check"></i> <span>توثيق وتسليم شخصي</span></li>
+                        <li><i class="fas fa-check"></i> <span>خدمة في الاتجاهين</span></li>
+                    </ul>
+                    <a href="#contact" class="service-btn">اطلب الخدمة</a>
+                </div>
+                
+                <!-- الخدمة 3 -->
+                <div class="card service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>التحويل المالي الوسيط</h3>
+                    <p class="service-description">وسيط موثق بين الأشخاص للتحويلات المالية الآمنة</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> <span>توثيق بالهوية الشخصية</span></li>
+                        <li><i class="fas fa-check"></i> <span>تحويل يدًا بيد</span></li>
+                        <li><i class="fas fa-check"></i> <span>ضمان وتأمين كامل</span></li>
+                        <li><i class="fas fa-check"></i> <span>خدمة خارج النظام المصرفي</span></li>
+                        <li><i class="fas fa-check"></i> <span>مرحلة التطوير قريباً</span></li>
+                    </ul>
+                    <a href="#contact" class="service-btn">اطلب الخدمة</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم كيف يعمل -->
+    <section id="how-it-works" class="how-it-works section-padding">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">كيف تعمل خدماتنا</h2>
+                <p class="section-subtitle">خطوات بسيطة للحصول على خدمتنا بكل سهولة</p>
+            </div>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>التواصل معنا</h3>
+                    <p>اتصل بنا أو راسلنا عبر واتساب لتقديم طلبك</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <h3>تأكيد الطلب</h3>
+                    <p>نتواصل معك لتأكيد التفاصيل والموعد والسعر</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    <h3>التوثيق</h3>
+                    <p>نوثق الطلب بالهوية ونحدد مكان التسليم</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <h3>التنفيذ</h3>
+                    <p>نسلم الطلب لك في الوقت والمكان المحدد</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم التواصل -->
+    <section id="contact" class="contact section-padding">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">تواصل معنا</h2>
+                <p class="section-subtitle">نحن هنا لخدمتك على مدار الساعة عبر قنوات التواصل التالية</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="info-text">
+                            <h3>واتساب</h3>
+                            <p>قناة التواصل الرئيسية</p>
+                            <a href="https://wa.me/21612345678" class="contact-link">+216 12 345 678</a>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="info-text">
+                            <h3>هاتف</h3>
+                            <p>للأمور العاجلة</p>
+                            <a href="tel:+21612345678" class="contact-link">+216 12 345 678</a>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="info-text">
+                            <h3>بريد إلكتروني</h3>
+                            <p>للطلبات الرسمية</p>
+                            <a href="mailto:info@driver-available.com" class="contact-link">info@driver-available.com</a>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="info-text">
+                            <h3>الموقع</h3>
+                            <p>تونس وقطر</p>
+                            <span class="contact-text">خدماتنا متاحة في كلا البلدين</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3>أرسل لنا رسالة</h3>
+                    <p>سنرد عليك في أسرع وقت ممكن</p>
+                    
+                    <form id="messageForm">
+                        <div class="form-group">
+                            <input type="text" placeholder="الاسم الكامل" required class="form-input">
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="tel" placeholder="رقم الهاتف" required class="form-input">
+                        </div>
+                        
+                        <div class="form-group">
+                            <select required class="form-select">
+                                <option value="" disabled selected>اختر الخدمة المطلوبة</option>
+                                <option value="local">التوصيل المحلي</option>
+                                <option value="qatar-tunisia">توصيل قطر-تونس</option>
+                                <option value="money-transfer">التحويل المالي</option>
+                                <option value="other">خدمة أخرى</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea placeholder="تفاصيل الطلب" rows="4" required class="form-textarea"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">
+                            <i class="fab fa-whatsapp"></i> <span>أرسل عبر واتساب</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <div class="logo-text">
+                            <h2>Driver Available</h2>
+                            <p>سائق متوفر</p>
+                        </div>
+                    </div>
+                    <p class="footer-desc">خدمات توصيل ونقل موثوقة بين تونس وقطر</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h3 class="footer-title">روابط سريعة</h3>
+                    <ul class="footer-list">
+                        <li><a href="#home" class="footer-link">الرئيسية</a></li>
+                        <li><a href="#about" class="footer-link">من نحن</a></li>
+                        <li><a href="#services" class="footer-link">الخدمات</a></li>
+                        <li><a href="#how-it-works" class="footer-link">كيف يعمل</a></li>
+                        <li><a href="#contact" class="footer-link">التواصل</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-services">
+                    <h3 class="footer-title">خدماتنا</h3>
+                    <ul class="footer-list">
+                        <li><a href="#services" class="footer-link">التوصيل المحلي</a></li>
+                        <li><a href="#services" class="footer-link">توصيل قطر-تونس</a></li>
+                        <li><a href="#services" class="footer-link">التحويل المالي</a></li>
+                        <li><a href="#services" class="footer-link">توصيل المدارس</a></li>
+                        <li><a href="#services" class="footer-link">توصيل العمل</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3 class="footer-title">تابعنا</h3>
+                    <div class="social-icons">
+                        <a href="https://wa.me/21612345678" class="social-icon" aria-label="واتساب">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="فيسبوك">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="إنستجرام">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="تويتر">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                    <p class="copyright">© <span id="currentYear"></span> Driver Available. جميع الحقوق محفوظة</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- زر الواتساب العائم -->
+    <a href="https://wa.me/21612345678" class="float-whatsapp" aria-label="تواصل معنا عبر واتساب">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
