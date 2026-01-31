@@ -1,229 +1,261 @@
-/* =============================
-   DRIVER AVAILABLE - MAIN SCRIPT
-   Enhanced & Optimized Version
-   ============================= */
+// =============================
+// ASAP Qatar - Main Script (Enhanced)
+// =============================
 
 document.addEventListener("DOMContentLoaded", () => {
     
-    /* ================= SLIDER WITH CONTROLS ================= */
-    const slides = document.querySelectorAll(".slide");
-    const sliderDots = document.querySelectorAll(".slider-dot");
-    const prevBtn = document.querySelector(".prev-slide");
-    const nextBtn = document.querySelector(".next-slide");
+    /* ================= SET CURRENT YEAR IN FOOTER ================= */
+    const currentYearElement = document.getElementById('currentYear');
+    if (currentYearElement) {
+        currentYearElement.textContent = new Date().getFullYear();
+    }
     
-    if (slides.length > 1) {
-        let currentSlide = 0;
-        let slideInterval;
-        const slideDuration = 5000;
+    /* ================= SMOOTH NAVBAR HIDE/SHOW ================= */
+    let lastScrollTop = 0;
+    const header = document.getElementById("mainHeader");
+    const navbarHeight = header?.offsetHeight || 80;
+    
+    function handleNavbarScroll() {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
-        function showSlide(index) {
-            // Validate index
-            if (index < 0) index = slides.length - 1;
-            if (index >= slides.length) index = 0;
-            
-            // Remove active from all
-            slides.forEach(slide => slide.classList.remove("active"));
-            sliderDots.forEach(dot => dot.classList.remove("active"));
-            
-            // Add active to current
-            slides[index].classList.add("active");
-            sliderDots[index].classList.add("active");
-            
-            currentSlide = index;
-        }
-        
-        function nextSlide() {
-            let nextIndex = (currentSlide + 1) % slides.length;
-            showSlide(nextIndex);
-        }
-        
-        function prevSlide() {
-            let prevIndex = (currentSlide - 1 + slides.length) % slides.length;
-            showSlide(prevIndex);
-        }
-        
-        function startAutoSlide() {
-            slideInterval = setInterval(nextSlide, slideDuration);
-        }
-        
-        function stopAutoSlide() {
-            if (slideInterval) {
-                clearInterval(slideInterval);
+        if (scrollTop > navbarHeight) {
+            if (scrollTop > lastScrollTop) {
+                // Scroll down - hide navbar
+                header.classList.add('hidden');
+            } else {
+                // Scroll up - show navbar
+                header.classList.remove('hidden');
+                header.classList.add('scrolled');
             }
+        } else {
+            // At top - show navbar without scrolled class
+            header.classList.remove('hidden');
+            header.classList.remove('scrolled');
         }
         
-        function resetAutoSlide() {
-            stopAutoSlide();
-            startAutoSlide();
+        lastScrollTop = scrollTop;
+    }
+    
+    // Throttle scroll events
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+        if (!scrollTimeout) {
+            scrollTimeout = setTimeout(() => {
+                handleNavbarScroll();
+                scrollTimeout = null;
+            }, 80);
         }
+    });
+    
+    /* ================= CREATE SCROLL TO TOP BUTTON ================= */
+    function createScrollToTopButton() {
+        const scrollToTopBtn = document.createElement('div');
+        scrollToTopBtn.className = 'scroll-to-top';
+        scrollToTopBtn.innerHTML = '<i class="fas fa-chevron-up"></i>';
+        scrollToTopBtn.title = 'العودة للأعلى';
+        document.body.appendChild(scrollToTopBtn);
         
-        // Initialize slider
-        showSlide(0);
-        startAutoSlide();
-        
-        // Event listeners for controls
-        if (nextBtn) {
-            nextBtn.addEventListener("click", () => {
-                nextSlide();
-                resetAutoSlide();
-            });
-        }
-        
-        if (prevBtn) {
-            prevBtn.addEventListener("click", () => {
-                prevSlide();
-                resetAutoSlide();
-            });
-        }
-        
-        // Event listeners for dots
-        sliderDots.forEach((dot, index) => {
-            dot.addEventListener("click", () => {
-                showSlide(index);
-                resetAutoSlide();
-            });
+        // Show/hide button based on scroll position
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
         });
         
-        // Pause on hover/touch
-        const sliderContainer = document.querySelector(".slider-container");
-        if (sliderContainer) {
-            sliderContainer.addEventListener("mouseenter", stopAutoSlide);
-            sliderContainer.addEventListener("mouseleave", startAutoSlide);
-            
-            // Touch support for mobile
-            sliderContainer.addEventListener("touchstart", stopAutoSlide);
-            sliderContainer.addEventListener("touchend", () => {
-                setTimeout(startAutoSlide, 3000);
+        // Scroll to top when clicked
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
             });
-        }
-        
-        // Keyboard navigation
-        document.addEventListener("keydown", (e) => {
-            if (e.key === "ArrowRight") {
-                nextSlide();
-                resetAutoSlide();
-            } else if (e.key === "ArrowLeft") {
-                prevSlide();
-                resetAutoSlide();
-            }
         });
     }
     
+    createScrollToTopButton();
     
-    /* ================= NAVBAR ELEMENTS ================= */
-    const header = document.getElementById("mainHeader");
+    /* ================= SMOOTH ANIMATIONS FOR SECTIONS ================= */
+    function initScrollAnimations() {
+        const elements = document.querySelectorAll('.service-card, .feature, .contact-method, .form-group');
+        
+        // Set animation delays for service cards
+        document.querySelectorAll('.service-card').forEach((card, index) => {
+            card.style.setProperty('--animation-order', index);
+        });
+        
+        // Set animation delays for form groups
+        document.querySelectorAll('.form-group').forEach((group, index) => {
+            group.style.setProperty('--form-order', index);
+        });
+        
+        // Intersection Observer for smooth scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                    
+                    // Add staggered animation for children elements
+                    if (entry.target.classList.contains('services-grid')) {
+                        const cards = entry.target.querySelectorAll('.service-card');
+                        cards.forEach((card, index) => {
+                            setTimeout(() => {
+                                card.style.animationDelay = `${index * 0.1}s`;
+                            }, 100);
+                        });
+                    }
+                    
+                    if (entry.target.classList.contains('about-features')) {
+                        const features = entry.target.querySelectorAll('.feature');
+                        features.forEach((feature, index) => {
+                            setTimeout(() => {
+                                feature.style.animationDelay = `${index * 0.1}s`;
+                            }, 100);
+                        });
+                    }
+                    
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all animate-on-scroll elements
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Observe sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    }
+    
+    // Initialize animations
+    setTimeout(initScrollAnimations, 500);
+    
+    /* ================= NAVBAR FUNCTIONALITY ================= */
     const navLinks = document.querySelectorAll(".nav-link");
     const indicator = document.getElementById("indicator");
     const burger = document.getElementById("burger");
     const navMenu = document.getElementById("navLinks");
     
-    const headerHeight = header?.offsetHeight || 75;
+    // Function to move indicator
+    function moveIndicator(element) {
+        if (!indicator || !element) return;
+        
+        const rect = element.getBoundingClientRect();
+        const parent = element.parentElement.getBoundingClientRect();
+        
+        const left = rect.left - parent.left;
+        const width = rect.width;
+        
+        indicator.style.left = left + "px";
+        indicator.style.width = width + "px";
+        indicator.style.opacity = "1";
+    }
     
+    // Set initial indicator position
+    const activeLink = document.querySelector(".nav-link.active");
+    if (activeLink && indicator) {
+        moveIndicator(activeLink);
+    }
     
-    /* ================= NAV INDICATOR ================= */
-    if (navLinks.length && indicator) {
-        
-        function moveIndicator(el) {
-            if (!el) return;
+    // Handle nav link clicks with smooth animation
+    navLinks.forEach(link => {
+        link.addEventListener("click", function(e) {
+            e.preventDefault();
             
-            const rect = el.getBoundingClientRect();
-            const parent = el.parentElement.getBoundingClientRect();
+            // Update active class
+            navLinks.forEach(l => l.classList.remove("active"));
+            this.classList.add("active");
             
-            const left = rect.left - parent.left;
-            const width = rect.width;
+            // Move indicator
+            moveIndicator(this);
             
-            indicator.style.left = left + "px";
-            indicator.style.width = width + "px";
-            indicator.style.opacity = "1";
-        }
-        
-        /* Set Initial Indicator Position */
-        const activeLink = document.querySelector(".nav-link.active");
-        if (activeLink) {
-            moveIndicator(activeLink);
-        }
-        
-        
-        /* Handle Nav Link Clicks */
-        navLinks.forEach(link => {
-            link.addEventListener("click", function(e) {
-                e.preventDefault();
-                
-                // Update active class
-                navLinks.forEach(l => l.classList.remove("active"));
-                this.classList.add("active");
-                
-                // Move indicator
-                moveIndicator(this);
-                
-                // Close mobile menu if open
-                if (navMenu && navMenu.classList.contains("open")) {
-                    navMenu.classList.remove("open");
-                    burger.classList.remove("active");
-                    document.body.style.overflow = "auto";
-                }
-                
-                // Smooth scroll to section
-                const targetID = this.getAttribute("href");
-                const target = document.querySelector(targetID);
-                
-                if (target) {
-                    const offset = target.offsetTop - headerHeight + 10;
-                    
-                    window.scrollTo({
-                        top: offset,
-                        behavior: "smooth"
-                    });
-                }
-            });
-        });
-        
-        
-        /* ================= SCROLL SPY ================= */
-        let scrollTimeout;
-        
-        function updateActiveNavOnScroll() {
-            const scrollPos = window.scrollY + headerHeight + 100;
-            
-            let currentActive = null;
-            
-            navLinks.forEach(link => {
-                const section = document.querySelector(link.getAttribute("href"));
-                if (!section) return;
-                
-                const sectionTop = section.offsetTop;
-                const sectionBottom = sectionTop + section.offsetHeight;
-                
-                if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
-                    currentActive = link;
-                }
-            });
-            
-            if (currentActive) {
-                navLinks.forEach(l => l.classList.remove("active"));
-                currentActive.classList.add("active");
-                moveIndicator(currentActive);
+            // Close mobile menu if open
+            if (navMenu && navMenu.classList.contains("open")) {
+                navMenu.classList.remove("open");
+                burger.classList.remove("active");
+                document.body.style.overflow = "auto";
             }
-        }
+            
+            // Get target section
+            const targetID = this.getAttribute("href");
+            const target = document.querySelector(targetID);
+            
+            if (target) {
+                const targetPosition = target.offsetTop - navbarHeight + 10;
+                const startPosition = window.pageYOffset;
+                const distance = targetPosition - startPosition;
+                const duration = 800; // milliseconds
+                let start = null;
+                
+                // Smooth scroll animation
+                function step(timestamp) {
+                    if (!start) start = timestamp;
+                    const progress = timestamp - start;
+                    const percentage = Math.min(progress / duration, 1);
+                    
+                    // Easing function for smooth animation
+                    const easeInOutCubic = t => {
+                        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+                    };
+                    
+                    const easePercentage = easeInOutCubic(percentage);
+                    
+                    window.scrollTo(0, startPosition + (distance * easePercentage));
+                    
+                    if (progress < duration) {
+                        window.requestAnimationFrame(step);
+                    }
+                }
+                
+                window.requestAnimationFrame(step);
+            }
+        });
+    });
+    
+    // Scroll spy for navbar
+    let scrollSpyTimeout;
+    
+    function updateActiveNavOnScroll() {
+        const scrollPos = window.scrollY + navbarHeight + 100;
         
-        // Throttle scroll events for performance
-        window.addEventListener("scroll", () => {
-            if (!scrollTimeout) {
-                scrollTimeout = setTimeout(() => {
-                    updateActiveNavOnScroll();
-                    scrollTimeout = null;
-                }, 50);
+        navLinks.forEach(link => {
+            const section = document.querySelector(link.getAttribute("href"));
+            if (!section) return;
+            
+            const sectionTop = section.offsetTop;
+            const sectionBottom = sectionTop + section.offsetHeight;
+            
+            if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
+                navLinks.forEach(l => l.classList.remove("active"));
+                link.classList.add("active");
+                moveIndicator(link);
             }
         });
     }
     
+    // Throttle scroll events for scroll spy
+    window.addEventListener("scroll", () => {
+        if (!scrollSpyTimeout) {
+            scrollSpyTimeout = setTimeout(() => {
+                updateActiveNavOnScroll();
+                scrollSpyTimeout = null;
+            }, 50);
+        }
+    });
     
-    /* ================= BURGER MENU TOGGLE ================= */
+    // Burger menu toggle
     if (burger && navMenu) {
-        
-        function toggleMenu() {
+        burger.addEventListener("click", function() {
+            this.classList.toggle("active");
             navMenu.classList.toggle("open");
-            burger.classList.toggle("active");
             
             // Toggle body scroll
             if (navMenu.classList.contains("open")) {
@@ -231,123 +263,39 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 document.body.style.overflow = "auto";
             }
-            
-            // Animate burger icon
-            const spans = burger.querySelectorAll("span");
-            if (navMenu.classList.contains("open")) {
-                spans[0].style.transform = "rotate(45deg) translate(5px, 5px)";
-                spans[1].style.opacity = "0";
-                spans[2].style.transform = "rotate(-45deg) translate(7px, -6px)";
-            } else {
-                spans[0].style.transform = "none";
-                spans[1].style.opacity = "1";
-                spans[2].style.transform = "none";
-            }
-        }
-        
-        burger.addEventListener("click", toggleMenu);
+        });
         
         // Close menu when clicking outside
         document.addEventListener("click", (e) => {
             if (navMenu.classList.contains("open") &&
                 !navMenu.contains(e.target) &&
                 !burger.contains(e.target)) {
-                toggleMenu();
+                burger.classList.remove("active");
+                navMenu.classList.remove("open");
+                document.body.style.overflow = "auto";
             }
         });
         
         // Close menu on Escape key
         document.addEventListener("keydown", (e) => {
             if (e.key === "Escape" && navMenu.classList.contains("open")) {
-                toggleMenu();
+                burger.classList.remove("active");
+                navMenu.classList.remove("open");
+                document.body.style.overflow = "auto";
             }
         });
         
-        // Close menu on window resize (for mobile landscape/portrait changes)
+        // Close menu on window resize
         window.addEventListener("resize", () => {
             if (window.innerWidth > 767 && navMenu.classList.contains("open")) {
-                toggleMenu();
+                burger.classList.remove("active");
+                navMenu.classList.remove("open");
+                document.body.style.overflow = "auto";
             }
         });
     }
     
-    
-    /* ================= NAVBAR SMART SCROLL EFFECTS ================= */
-    if (header) {
-        let lastScroll = 0;
-        let scrollTimeout;
-        
-        function handleHeaderScroll() {
-            const currentScroll = window.pageYOffset;
-            
-            /* Add/Remove Scrolled Class */
-            if (currentScroll > 50) {
-                header.classList.add("scrolled");
-            } else {
-                header.classList.remove("scrolled");
-            }
-            
-            /* Hide/Show On Scroll Direction */
-            if (currentScroll <= 0) {
-                header.classList.remove("hide");
-            } else if (currentScroll > lastScroll && currentScroll > headerHeight + 80) {
-                // Scrolling down - hide header
-                header.classList.add("hide");
-            } else {
-                // Scrolling up - show header
-                header.classList.remove("hide");
-            }
-            
-            lastScroll = currentScroll;
-        }
-        
-        // Throttle scroll for performance
-        window.addEventListener("scroll", () => {
-            if (!scrollTimeout) {
-                scrollTimeout = setTimeout(() => {
-                    handleHeaderScroll();
-                    scrollTimeout = null;
-                }, 25);
-            }
-        });
-    }
-    
-    
-    /* ================= ANIMATE ON SCROLL ================= */
-    function initScrollAnimations() {
-        const elements = document.querySelectorAll(".card, .value-item, .step, .info-item");
-        
-        // Set initial styles
-        elements.forEach(element => {
-            element.style.opacity = "0";
-            element.style.transform = "translateY(30px)";
-            element.style.transition = "opacity 0.6s ease, transform 0.6s ease";
-        });
-        
-        function checkScroll() {
-            elements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 150;
-                
-                if (elementTop < window.innerHeight - elementVisible) {
-                    element.style.opacity = "1";
-                    element.style.transform = "translateY(0)";
-                }
-            });
-        }
-        
-        // Check on load and scroll
-        window.addEventListener("load", checkScroll);
-        window.addEventListener("scroll", checkScroll);
-        
-        // Initial check
-        checkScroll();
-    }
-    
-    initScrollAnimations();
-    
-    
-    /* ================= CONTACT FORM ENHANCED ================= */
+    /* ================= CONTACT FORM ================= */
     const contactForm = document.getElementById("messageForm");
     
     if (contactForm) {
@@ -355,55 +303,41 @@ document.addEventListener("DOMContentLoaded", () => {
         function validateForm() {
             const name = contactForm.querySelector('input[type="text"]').value.trim();
             const phone = contactForm.querySelector('input[type="tel"]').value.trim();
-            const service = contactForm.querySelector('select').value;
+            const email = contactForm.querySelector('input[type="email"]').value.trim();
             const message = contactForm.querySelector('textarea').value.trim();
             
             if (!name) {
-                alert("يرجى إدخال الاسم الكامل");
+                alert(localStorage.getItem('preferredLang') === 'en' ? "Please enter your full name" : "يرجى إدخال الاسم الكامل");
                 return false;
             }
             
             if (!phone) {
-                alert("يرجى إدخال رقم الهاتف");
+                alert(localStorage.getItem('preferredLang') === 'en' ? "Please enter your phone number" : "يرجى إدخال رقم الهاتف");
                 return false;
             }
             
-            // Simple phone validation (Tunisian numbers)
-            const phoneRegex = /^(\+216|216)?\s?[2-9][0-9]{7}$/;
-            if (!phoneRegex.test(phone.replace(/\s/g, ''))) {
-                alert("يرجى إدخال رقم هاتف تونسي صحيح");
+            // Phone validation
+            const phoneRegex = /^[\+]?[0-9\s\-\(\)]{8,}$/;
+            if (!phoneRegex.test(phone)) {
+                alert(localStorage.getItem('preferredLang') === 'en' ? "Please enter a valid phone number" : "يرجى إدخال رقم هاتف صحيح");
                 return false;
             }
             
-            if (!service) {
-                alert("يرجى اختيار الخدمة المطلوبة");
-                return false;
+            // Email validation (optional)
+            if (email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    alert(localStorage.getItem('preferredLang') === 'en' ? "Please enter a valid email address" : "يرجى إدخال بريد إلكتروني صحيح");
+                    return false;
+                }
             }
             
-            if (!message || message.length < 10) {
-                alert("يرجى إدخال تفاصيل الطلب (10 أحرف على الأقل)");
+            if (!message || message.length < 5) {
+                alert(localStorage.getItem('preferredLang') === 'en' ? "Please enter your message (at least 5 characters)" : "يرجى إدخال الرسالة (5 أحرف على الأقل)");
                 return false;
             }
             
             return true;
-        }
-        
-        // Format phone number
-        function formatPhoneNumber(phone) {
-            // Remove all non-digit characters
-            let cleaned = phone.replace(/\D/g, '');
-            
-            // If it starts with 216, keep it
-            if (cleaned.startsWith('216')) {
-                cleaned = cleaned.substring(3);
-            }
-            
-            // Format as Tunisian number
-            if (cleaned.length === 8) {
-                return `+216${cleaned}`;
-            }
-            
-            return `+216${cleaned}`;
         }
         
         contactForm.addEventListener("submit", function(e) {
@@ -416,63 +350,108 @@ document.addEventListener("DOMContentLoaded", () => {
             // Collect form data
             const name = this.querySelector('input[type="text"]').value.trim();
             const phone = this.querySelector('input[type="tel"]').value.trim();
-            const serviceText = this.querySelector('select option:checked').textContent;
+            const email = this.querySelector('input[type="email"]').value.trim();
             const message = this.querySelector('textarea').value.trim();
             
-            // Format phone number
-            const formattedPhone = formatPhoneNumber(phone);
+            // Detect current language
+            const currentLang = localStorage.getItem('preferredLang') || 'ar';
             
-            // Create WhatsApp message
-            const whatsappMessage = `🚗 طلب خدمة جديدة من Driver Available%0A%0A`
-                + `👤 *الاسم:* ${name}%0A`
-                + `📞 *رقم الهاتف:* ${formattedPhone}%0A`
-                + `📦 *الخدمة المطلوبة:* ${serviceText}%0A%0A`
-                + `📝 *تفاصيل الطلب:*%0A${message}%0A%0A`
-                + `📍 *المصدر:* موقع Driver Available`;
+            // Create WhatsApp message based on language
+            let whatsappMessage;
             
-            // WhatsApp number (replace with your actual number)
-            const whatsappNumber = "21612345678";
+            if (currentLang === 'en') {
+                whatsappMessage = `🚗 New Service Request from ASAP Qatar%0A%0A`
+                    + `👤 *Name:* ${name}%0A`
+                    + `📞 *Phone:* ${phone}%0A`
+                    + (email ? `📧 *Email:* ${email}%0A` : '')
+                    + `%0A📝 *Message:*%0A${message}%0A%0A`
+                    + `📍 *Source:* ASAP Qatar Website`;
+            } else {
+                whatsappMessage = `🚗 طلب خدمة جديدة من ASAP Qatar%0A%0A`
+                    + `👤 *الاسم:* ${name}%0A`
+                    + `📞 *رقم الهاتف:* ${phone}%0A`
+                    + (email ? `📧 *البريد الإلكتروني:* ${email}%0A` : '')
+                    + `%0A📝 *الرسالة:*%0A${message}%0A%0A`
+                    + `📍 *المصدر:* موقع ASAP Qatar`;
+            }
+            
+            // WhatsApp number
+            const whatsappNumber = "97471375390";
             const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
             
             // Open WhatsApp in new tab
             window.open(whatsappUrl, '_blank');
             
-            // Show success feedback
+            // Show success feedback with animation
             const submitBtn = this.querySelector('.submit-btn');
             const originalHTML = submitBtn.innerHTML;
-            const originalBg = submitBtn.style.backgroundColor;
             
-            submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> تم إرسال الطلب بنجاح';
-            submitBtn.style.backgroundColor = "#28a745";
+            if (currentLang === 'en') {
+                submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Message Sent Successfully';
+            } else {
+                submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> تم إرسال الرسالة بنجاح';
+            }
+            
+            submitBtn.style.background = "linear-gradient(135deg, #28a745, #20c997)";
             submitBtn.disabled = true;
+            
+            // Add success animation
+            submitBtn.style.animation = 'none';
+            setTimeout(() => {
+                submitBtn.style.animation = 'pulse 0.6s ease';
+            }, 10);
             
             // Reset form after 3 seconds
             setTimeout(() => {
                 this.reset();
                 submitBtn.innerHTML = originalHTML;
-                submitBtn.style.backgroundColor = originalBg;
+                submitBtn.style.background = "";
                 submitBtn.disabled = false;
+                submitBtn.style.animation = '';
             }, 3000);
         });
         
-        // Auto-format phone number as user types
+        // Auto-format phone number
         const phoneInput = contactForm.querySelector('input[type="tel"]');
         if (phoneInput) {
             phoneInput.addEventListener('input', function(e) {
                 let value = this.value.replace(/\D/g, '');
                 
                 if (value.length > 0) {
-                    // Format as Tunisian number: XX XXX XXX
                     let formatted = '';
                     
-                    if (value.length <= 2) {
-                        formatted = value;
-                    } else if (value.length <= 5) {
-                        formatted = `${value.substring(0, 2)} ${value.substring(2)}`;
-                    } else if (value.length <= 8) {
-                        formatted = `${value.substring(0, 2)} ${value.substring(2, 5)} ${value.substring(5)}`;
+                    // Detect Qatar or Tunisia number
+                    if (value.startsWith('974')) {
+                        // Qatar number formatting
+                        if (value.length <= 3) {
+                            formatted = value;
+                        } else if (value.length <= 6) {
+                            formatted = `${value.substring(0, 3)} ${value.substring(3)}`;
+                        } else if (value.length <= 8) {
+                            formatted = `${value.substring(0, 3)} ${value.substring(3, 6)} ${value.substring(6)}`;
+                        } else {
+                            formatted = `${value.substring(0, 3)} ${value.substring(3, 6)} ${value.substring(6, 8)}`;
+                        }
+                    } else if (value.startsWith('216')) {
+                        // Tunisia number formatting
+                        if (value.length <= 3) {
+                            formatted = value;
+                        } else if (value.length <= 6) {
+                            formatted = `${value.substring(0, 3)} ${value.substring(3)}`;
+                        } else if (value.length <= 8) {
+                            formatted = `${value.substring(0, 3)} ${value.substring(3, 6)} ${value.substring(6)}`;
+                        } else {
+                            formatted = `${value.substring(0, 3)} ${value.substring(3, 6)} ${value.substring(6, 8)}`;
+                        }
                     } else {
-                        formatted = `${value.substring(0, 2)} ${value.substring(2, 5)} ${value.substring(5, 8)}`;
+                        // Default formatting
+                        if (value.length <= 3) {
+                            formatted = value;
+                        } else if (value.length <= 6) {
+                            formatted = `${value.substring(0, 3)} ${value.substring(3)}`;
+                        } else {
+                            formatted = `${value.substring(0, 3)} ${value.substring(3, 6)} ${value.substring(6, 8)}`;
+                        }
                     }
                     
                     this.value = formatted;
@@ -481,105 +460,57 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
     
-    
-    /* ================= SET CURRENT YEAR IN FOOTER ================= */
-    const currentYearElement = document.querySelector('#currentYear');
-    if (currentYearElement) {
-        currentYearElement.textContent = new Date().getFullYear();
-    }
-    
-    
-    /* ================= ENHANCE FORM INPUTS ================= */
-    // Add focus effects to all form inputs
-    const formInputs = document.querySelectorAll('.form-input, .form-select, .form-textarea');
-    formInputs.forEach(input => {
-        input.addEventListener('focus', function() {
-            this.parentElement.classList.add('focused');
-        });
+    /* ================= IMAGE LAZY LOADING ================= */
+    function initLazyLoading() {
+        const images = document.querySelectorAll('img[loading="lazy"]');
         
-        input.addEventListener('blur', function() {
-            if (!this.value) {
-                this.parentElement.classList.remove('focused');
-            }
-        });
-    });
-    
-    
-    /* ================= LOADING STATE FOR BUTTONS ================= */
-    // Handle loading states for all buttons with async actions
-    const actionButtons = document.querySelectorAll('.btn, .service-btn, .submit-btn, .nav-cta');
-    actionButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            // Only add loading if it's a form submission or external link
-            if (this.type === 'submit' || this.href.includes('wa.me')) {
-                const originalText = this.innerHTML;
-                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري التحميل...';
-                this.disabled = true;
-                
-                // Reset after 5 seconds if something goes wrong
-                setTimeout(() => {
-                    this.innerHTML = originalText;
-                    this.disabled = false;
-                }, 5000);
-            }
-        });
-    });
-    
-    
-    /* ================= TOUCH SWIPE FOR SLIDER (MOBILE) ================= */
-    let touchStartX = 0;
-    let touchEndX = 0;
-    const sliderContainer = document.querySelector('.slider-container');
-    
-    if (sliderContainer && slides.length > 1) {
-        sliderContainer.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-        
-        sliderContainer.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipeGesture();
-        });
-        
-        function handleSwipeGesture() {
-            const swipeThreshold = 50;
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        if (img.dataset.src) {
+                            img.src = img.dataset.src;
+                        }
+                        img.classList.add('loaded');
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
             
-            if (touchEndX < touchStartX - swipeThreshold) {
-                // Swipe left - next slide
-                nextSlide();
-                resetAutoSlide && resetAutoSlide();
-            }
-            
-            if (touchEndX > touchStartX + swipeThreshold) {
-                // Swipe right - previous slide
-                prevSlide();
-                resetAutoSlide && resetAutoSlide();
-            }
+            images.forEach(img => {
+                imageObserver.observe(img);
+            });
         }
     }
     
+    // Initialize lazy loading
+    initLazyLoading();
     
     /* ================= RESPONSIVE ADJUSTMENTS ================= */
     function handleResponsiveAdjustments() {
         const width = window.innerWidth;
         
-        // Hide/show CTA text based on screen size
-        const ctaText = document.querySelector('.cta-text');
-        if (ctaText) {
-            if (width <= 767) {
-                ctaText.style.display = 'none';
-            } else {
-                ctaText.style.display = 'inline';
-            }
-        }
-        
         // Adjust hero height for mobile
         const hero = document.querySelector('.hero');
         if (hero) {
             if (width <= 767) {
-                hero.style.minHeight = '400px';
+                hero.style.minHeight = '500px';
             } else {
-                hero.style.minHeight = '600px';
+                hero.style.minHeight = '700px';
+            }
+        }
+        
+        // Adjust language switcher position for RTL/LTR
+        const langSwitcher = document.querySelector('.language-switcher');
+        if (langSwitcher) {
+            const isRTL = document.documentElement.dir === 'rtl';
+            if (isRTL) {
+                langSwitcher.style.left = '30px';
+                langSwitcher.style.right = 'auto';
+            } else {
+                langSwitcher.style.right = '30px';
+                langSwitcher.style.left = 'auto';
             }
         }
     }
@@ -587,29 +518,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // Run on load and resize
     window.addEventListener('load', handleResponsiveAdjustments);
     window.addEventListener('resize', handleResponsiveAdjustments);
-    
-    
-    /* ================= SMOOTH SCROLL FOR ANCHOR LINKS ================= */
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            
-            if (href === '#') return;
-            
-            const target = document.querySelector(href);
-            if (target) {
-                e.preventDefault();
-                
-                const offset = target.offsetTop - headerHeight + 10;
-                
-                window.scrollTo({
-                    top: offset,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-    
     
     /* ================= PERFORMANCE OPTIMIZATIONS ================= */
     // Debounce resize events
@@ -620,11 +528,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     
     // Preload important images
-    function preloadCriticalImages() {
+    function preloadImages() {
         const images = [
-            'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-            'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-            'https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+            'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+            'https://images.pexels.com/photos/4482900/pexels-photo-4482900.jpeg?auto=compress&cs=tinysrgb&w=600'
         ];
         
         images.forEach(src => {
@@ -635,71 +542,115 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // Start preloading after page load
     window.addEventListener('load', () => {
-        setTimeout(preloadCriticalImages, 1000);
+        setTimeout(preloadImages, 1000);
     });
     
-    
-    /* ================= ACCESSIBILITY IMPROVEMENTS ================= */
-    // Add aria-labels to icons without text
-    document.querySelectorAll('.fas, .fab').forEach(icon => {
-        if (!icon.parentElement.textContent.trim() && !icon.getAttribute('aria-label')) {
-            const iconClass = Array.from(icon.classList).find(cls => cls.startsWith('fa-'));
-            if (iconClass) {
-                const label = iconClass.replace('fa-', '').replace('-', ' ');
-                icon.setAttribute('aria-label', label);
-            }
-        }
-    });
-    
-    // Focus trap for mobile menu
-    if (navMenu) {
-        const focusableElements = 'a[href], button, input, select, textarea, [tabindex]:not([tabindex="-1"])';
-        const firstFocusableElement = navMenu.querySelectorAll(focusableElements)[0];
-        const focusableContent = navMenu.querySelectorAll(focusableElements);
-        const lastFocusableElement = focusableContent[focusableContent.length - 1];
+    /* ================= HOVER EFFECTS ENHANCEMENT ================= */
+    function enhanceHoverEffects() {
+        // Add hover effects to service cards
+        const serviceCards = document.querySelectorAll('.service-card');
+        serviceCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-15px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
+            });
+        });
         
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Tab') {
-                if (e.shiftKey) {
-                    // Shift + Tab
-                    if (document.activeElement === firstFocusableElement) {
-                        lastFocusableElement.focus();
-                        e.preventDefault();
-                    }
-                } else {
-                    // Tab
-                    if (document.activeElement === lastFocusableElement) {
-                        firstFocusableElement.focus();
-                        e.preventDefault();
-                    }
-                }
-            }
+        // Add hover effects to buttons
+        const buttons = document.querySelectorAll('.btn, .method-btn, .service-btn');
+        buttons.forEach(btn => {
+            btn.addEventListener('mouseenter', () => {
+                btn.style.transform = 'translateY(-3px) scale(1.05)';
+            });
+            
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+        
+        // Add hover effects to features
+        const features = document.querySelectorAll('.feature');
+        features.forEach(feature => {
+            feature.addEventListener('mouseenter', () => {
+                feature.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            feature.addEventListener('mouseleave', () => {
+                feature.style.transform = 'translateY(0) scale(1)';
+            });
         });
     }
     
+    // Initialize hover effects
+    enhanceHoverEffects();
     
-    /* ================= ERROR HANDLING ================= */
-    // Global error handler
-    window.addEventListener('error', function(e) {
-        console.error('خطأ في التطبيق:', e.error);
-        // You can add error reporting here
+    /* ================= ENHANCED SMOOTH SCROLL ================= */
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            
+            if (href === '#') return;
+            
+            const target = document.querySelector(href);
+            if (target) {
+                e.preventDefault();
+                
+                const targetPosition = target.offsetTop - navbarHeight + 10;
+                const startPosition = window.pageYOffset;
+                const distance = targetPosition - startPosition;
+                const duration = 800;
+                let start = null;
+                
+                function step(timestamp) {
+                    if (!start) start = timestamp;
+                    const progress = timestamp - start;
+                    const percentage = Math.min(progress / duration, 1);
+                    
+                    // Easing function for smooth animation
+                    const easeInOutCubic = t => {
+                        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+                    };
+                    
+                    const easePercentage = easeInOutCubic(percentage);
+                    
+                    window.scrollTo(0, startPosition + (distance * easePercentage));
+                    
+                    if (progress < duration) {
+                        window.requestAnimationFrame(step);
+                    }
+                }
+                
+                window.requestAnimationFrame(step);
+            }
+        });
     });
     
-    // Handle offline/online status
-    window.addEventListener('offline', () => {
-        console.log('أنت غير متصل بالإنترنت');
-        // Could show a notification to user
-    });
+    /* ================= GOOGLE MAPS ENHANCEMENT ================= */
+    function enhanceGoogleMaps() {
+        const mapIframe = document.querySelector('.map-wrapper iframe');
+        if (mapIframe) {
+            // Add loading animation to map
+            mapIframe.addEventListener('load', () => {
+                const mapContainer = document.querySelector('.map-container');
+                mapContainer.classList.add('loaded');
+            });
+            
+            // Prevent map from stealing focus on scroll
+            mapIframe.addEventListener('mouseenter', () => {
+                document.body.style.overflow = 'hidden';
+            });
+            
+            mapIframe.addEventListener('mouseleave', () => {
+                document.body.style.overflow = 'auto';
+            });
+        }
+    }
     
-    window.addEventListener('online', () => {
-        console.log('أنت متصل بالإنترنت مرة أخرى');
-    });
-    
+    enhanceGoogleMaps();
     
     /* ================= INITIALIZATION COMPLETE ================= */
-    console.log('✅ Driver Available - Script loaded successfully');
-    
-    // Dispatch custom event for any other scripts
-    document.dispatchEvent(new CustomEvent('driverAvailable:loaded'));
-    
+    console.log('✅ ASAP Qatar - Enhanced Script loaded successfully');
 });
