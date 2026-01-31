@@ -1,14 +1,15 @@
 "use strict";
 
-// ملف دعم اللغتين (العربية والإنجليزية)
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+// Language Switcher JavaScript
 document.addEventListener('DOMContentLoaded', function () {
-  // بيانات اللغات (JSON Format) - محدثة ببيانات التواصل
+  // Language data
   var translations = {
     ar: {
-      // النصوص العامة
-      companyName: "ASAP Qatar",
+      companyName: "HELA Express Tn-QA",
       companySlogan: "خدمة توصيل سريعة وآمنة",
-      // شريط التنقل
+      // Navigation
       nav: {
         home: "الرئيسية",
         about: "من نحن",
@@ -17,16 +18,22 @@ document.addEventListener('DOMContentLoaded', function () {
         whatsapp: "تواصل عبر واتساب",
         call: "اتصل الآن"
       },
-      // القسم الرئيسي
+      // Hero Section
       hero: {
-        title: "خدمة توصيل سريعة وآمنة داخل قطر وتونس وبين الدول",
-        subtitle: "نقدم خدمات توصيل موثوقة للأفراد والمتاجر داخل المدن، إضافة إلى توصيل الأغراض بين تونس وقطر، مع إمكانية توثيق تسليم الأموال يدًا بيد بطريقة واضحة وآمنة، وبأسلوب بسيط وسريع.",
+        title1: "خدمة توصيل سريعة وآمنة داخل قطر وتونس",
+        subtitle1: "نوفر حلول نقل وتوصيل مرنة تناسب الأفراد والمتاجر والشركات، مع التركيز على السرعة، الأمان، وسهولة التواصل.",
+        title2: "توصيل أغراض بين تونس وقطر",
+        subtitle2: "توصيل الأغراض بين تونس وقطر عبر مسافرين موثوقين، بطريقة آمنة ومنسقة مع توثيق كامل.",
+        title3: "توثيق تسليم الأموال يدًا بيد",
+        subtitle3: "نقدم خدمة توثيق موثوقة لتسليم الأموال بين الأطراف، مع الحفاظ على الشفافية والأمان الكامل.",
         whatsappBtn: "تواصل عبر واتساب",
         qatarPhone: "رقم هاتف قطري",
         tunisiaPhone: "رقم هاتف تونسي",
-        callNow: "اتصل الآن"
+        callNow: "اتصل الآن",
+        servicesBtn: "عرض الخدمات",
+        contactBtn: "اتصل بنا الآن"
       },
-      // قسم من نحن
+      // About Section
       about: {
         title: "من نحن",
         subtitle: "خدمة توصيل مستقلة توفر حلول نقل وتوصيل مرنة",
@@ -49,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
         imageTitle: "خدمات موثوقة",
         imageSubtitle: "بين قطر وتونس"
       },
-      // قسم الخدمات
+      // Services Section
       services: {
         title: "خدماتنا",
         subtitle: "نقدم مجموعة متكاملة من خدمات التوصيل والنقل",
@@ -87,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         contactBtn: "تواصل الآن"
       },
-      // قسم التواصل
+      // Contact Section
       contact: {
         title: "تواصل معنا",
         subtitle: "نحن جاهزون لخدمتك في أي وقت",
@@ -124,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function () {
           submitBtn: "إرسال الرسالة"
         }
       },
-      // الفوتر
+      // Footer
       footer: {
         desc: "خدمات توصيل ونقل موثوقة بين تونس وقطر",
         linksTitle: "روابط سريعة",
@@ -138,9 +145,8 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     },
     en: {
-      // General Texts
-      companyName: "ASAP Qatar",
-      companySlogan: "Fast & Secure Delivery Service",
+      companyName: "HELA Express Tn-QA",
+      companySlogan: "Fast and Secure Delivery Service",
       // Navigation
       nav: {
         home: "Home",
@@ -152,71 +158,77 @@ document.addEventListener('DOMContentLoaded', function () {
       },
       // Hero Section
       hero: {
-        title: "Fast & Secure Delivery Services in Qatar, Tunisia & Between Countries",
-        subtitle: "We provide reliable delivery services for individuals and stores within cities, in addition to delivering items between Tunisia and Qatar, with the possibility of documenting hand-to-hand cash delivery in a clear and secure manner, with a simple and fast approach.",
+        title1: "Fast and Secure Delivery Service in Qatar and Tunisia",
+        subtitle1: "We provide flexible transportation and delivery solutions for individuals, stores, and companies, focusing on speed, security, and ease of communication.",
+        title2: "Delivery of Goods Between Tunisia and Qatar",
+        subtitle2: "Delivery of goods between Tunisia and Qatar through trusted travelers, in a safe and coordinated manner with full documentation.",
+        title3: "Hand-to-Hand Money Delivery Documentation",
+        subtitle3: "We provide reliable documentation services for money delivery between parties, maintaining full transparency and security.",
         whatsappBtn: "Contact via WhatsApp",
         qatarPhone: "Qatar Phone Number",
         tunisiaPhone: "Tunisia Phone Number",
-        callNow: "Call Now"
+        callNow: "Call Now",
+        servicesBtn: "View Services",
+        contactBtn: "Contact Us Now"
       },
       // About Section
       about: {
         title: "About Us",
-        subtitle: "Independent delivery service providing flexible transport solutions",
-        heading: "We are an independent delivery service",
-        desc1: "We provide flexible transport and delivery solutions suitable for individuals, stores, and companies, focusing on speed, safety, and ease of communication.",
-        desc2: "We also provide documentation service only for hand-to-hand cash delivery operations between parties, without any direct financial dealings through the website.",
+        subtitle: "Independent delivery service providing flexible transportation solutions",
+        heading: "We are an Independent Delivery Service",
+        desc1: "We provide flexible transportation and delivery solutions for individuals, stores, and companies, focusing on speed, security, and ease of communication.",
+        desc2: "We also provide documentation services only for hand-to-hand money delivery between parties, without any direct financial transactions through the website.",
         feature1: {
           title: "Fast Execution",
-          desc: "Fast delivery within specified time"
+          desc: "Fast delivery on time"
         },
         feature2: {
-          title: "Complete Safety",
-          desc: "Protection for items and information"
+          title: "Complete Security",
+          desc: "Protection for goods and information"
         },
         feature3: {
           title: "Reliable Documentation",
-          desc: "Hand-to-hand certified delivery"
+          desc: "Hand-to-hand documented delivery"
         },
         servicesBtn: "View All Services",
         imageTitle: "Reliable Services",
-        imageSubtitle: "Between Qatar & Tunisia"
+        imageSubtitle: "Between Qatar and Tunisia"
       },
       // Services Section
       services: {
         title: "Our Services",
-        subtitle: "We provide a complete range of delivery and transport services",
+        subtitle: "We provide a comprehensive range of delivery and transportation services",
         service1: {
-          title: "Local Delivery within Qatar",
-          desc: "Delivery of items and purchases within cities quickly and securely, with direct coordination as requested."
+          title: "Local Delivery in Qatar",
+          desc: "Delivery of goods and purchases within cities quickly and safely, with direct coordination on demand."
         },
         service2: {
-          title: "Local Delivery within Tunisia",
+          title: "Local Delivery in Tunisia",
           desc: "Flexible local delivery services suitable for individuals and stores."
         },
         service3: {
-          title: "Delivery of Items & Purchases",
-          desc: "Transport and delivery of various items and purchases in a secure and organized manner."
+          title: "Delivery of Goods and Purchases",
+          desc: "Transport and delivery of various goods and purchases in a safe and organized manner."
         },
         service4: {
-          title: "Employee & Student Transport",
+          title: "Employee and Student Delivery",
           desc: "On-demand delivery service for employees and students within the city."
         },
         service5: {
-          title: "Private Errands Transport",
-          desc: "Private transportation and errands as needed with complete flexibility."
+          title: "Special Errands Delivery",
+          desc: "Special transportation and errands as needed with full flexibility."
         },
         service6: {
-          title: "Item Delivery Between Tunisia & Qatar (Hand-to-hand)",
-          desc: "Delivery of items between Tunisia and Qatar via trusted travelers, in a secure and coordinated manner."
+          title: "Delivery of Goods Between Tunisia and Qatar (Hand-to-Hand)",
+          desc: "Delivery of goods between Tunisia and Qatar through trusted travelers, in a safe and coordinated manner."
         },
         service7: {
-          title: "Cash Delivery Documentation (Hand-to-hand)",
-          desc: "We provide documentation service only for cash delivery operations between sender and recipient, where delivery is made directly between the parties."
+          title: "Money Delivery Documentation (Hand-to-Hand)",
+          desc: "We provide documentation services only for money delivery between sender and recipient, where delivery is made directly between the parties."
         },
         warning: {
           title: "Important Notice:",
-          desc: "The website is an informational and coordination platform only, and does not perform any electronic payment or money collection operations."
+          desc: "The website is only an informational and coordination platform and does not conduct any electronic payment or money collection operations."
         },
         contactBtn: "Contact Now"
       },
@@ -226,7 +238,7 @@ document.addEventListener('DOMContentLoaded', function () {
         subtitle: "We are ready to serve you anytime",
         whatsapp: {
           title: "Direct WhatsApp",
-          desc: "For immediate communication and quick response",
+          desc: "For instant communication and quick response",
           btn: "Start Chat"
         },
         phone: {
@@ -248,8 +260,8 @@ document.addEventListener('DOMContentLoaded', function () {
           tunisia: "Tunisia: Tunis"
         },
         form: {
-          title: "Send us a Message",
-          subtitle: "We will respond as soon as possible",
+          title: "Send Us a Message",
+          subtitle: "We will respond to you as soon as possible",
           namePlaceholder: "Full Name",
           phonePlaceholder: "Phone Number",
           emailPlaceholder: "Email Address",
@@ -259,35 +271,66 @@ document.addEventListener('DOMContentLoaded', function () {
       },
       // Footer
       footer: {
-        desc: "Reliable delivery and transport services between Tunisia and Qatar",
+        desc: "Reliable delivery and transportation services between Tunisia and Qatar",
         linksTitle: "Quick Links",
         servicesTitle: "Our Services",
         contactTitle: "Contact Us",
         whatsapp: "WhatsApp: +974 71 375 390",
         qatarPhone: "Qatar: +974 71 375 390",
         tunisiaPhone: "Tunisia: +216 56 471 550",
-        legal: "The website is an informational and coordination platform only, and does not perform any electronic payment or money collection operations.",
+        legal: "The website is only an informational and coordination platform and does not conduct any electronic payment or money collection operations.",
         copyright: "All Rights Reserved"
       }
     }
-  }; // عناصر التحكم في اللغة
+  }; // Add CSS for language switching
+
+  function addLanguageStyles() {
+    var style = document.createElement('style');
+    style.textContent = "\n            /* Language-specific styles */\n            [dir=\"ltr\"] .logo {\n                flex-direction: row;\n            }\n            \n           \n            \n            [dir=\"ltr\"] .about-content {\n                flex-direction: row;\n            }\n            \n            [dir=\"ltr\"] .contact-content {\n                grid-template-columns: 1fr 1fr;\n            }\n            \n            [dir=\"ltr\"] .footer-content {\n                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));\n            }\n            \n            [dir=\"ltr\"] .nav-link::after {\n                right: auto;\n                left: 0;\n            }\n            \n            [dir=\"ltr\"] .nav-link:hover::after,\n            [dir=\"ltr\"] .nav-link.active::after {\n                right: auto;\n                left: 0;\n            }\n            \n            [dir=\"ltr\"] .section-title::after {\n                right: auto;\n                left: 50%;\n                transform: translateX(-50%);\n            }\n            \n            [dir=\"ltr\"] .footer-title::after {\n                right: auto;\n                left: 0;\n            }\n            \n            [dir=\"ltr\"] .footer-link:hover {\n                padding-right: 0;\n                padding-left: 10px;\n                transform: translateX(5px);\n            }\n            \n            [dir=\"ltr\"] .slider-prev {\n                right: auto;\n                left: 30px;\n            }\n            \n            [dir=\"ltr\"] .slider-next {\n                left: auto;\n                right: 30px;\n            }\n            \n            /* Smooth transition for language change */\n            .language-transition {\n                transition: opacity 0.3s ease, transform 0.3s ease;\n            }\n        ";
+    document.head.appendChild(style);
+  } // Language switcher elements
+
 
   var langBtn = document.getElementById('langBtn');
   var currentLangSpan = document.getElementById('currentLang');
-  var langDropdown = document.getElementById('langDropdown');
-  var langOptions = document.querySelectorAll('.lang-option'); // الحصول على اللغة المحفوظة أو الافتراضية
+  var langOptions = document.querySelectorAll('.lang-option-nav');
+  var currentLang = localStorage.getItem('language') || 'ar'; // Initialize language
 
-  var currentLang = localStorage.getItem('preferredLang') || 'ar'; // تطبيق اللغة الحالية
+  function initLanguage() {
+    // Add transition class
+    document.body.classList.add('language-transition'); // Set HTML direction
 
-  function applyLanguage(lang) {
-    // تحديث اتجاه الصفحة
-    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-    document.documentElement.lang = lang; // تحديث جميع العناصر مع data-i18n
+    document.documentElement.lang = currentLang;
+    document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr'; // Update button text
+
+    if (currentLangSpan) {
+      currentLangSpan.textContent = currentLang === 'ar' ? 'العربية' : 'English';
+    } // Update active option
+
+
+    langOptions.forEach(function (option) {
+      option.classList.remove('active');
+
+      if (option.getAttribute('data-lang') === currentLang) {
+        option.classList.add('active');
+      }
+    }); // Apply translations
+
+    applyTranslations(currentLang); // Remove transition class after animation
+
+    setTimeout(function () {
+      document.body.classList.remove('language-transition');
+    }, 300);
+  } // Apply translations
+
+
+  function applyTranslations(lang) {
+    var langData = translations[lang];
+    if (!langData) return; // Translate elements with data-i18n attribute
 
     document.querySelectorAll('[data-i18n]').forEach(function (element) {
-      var key = element.getAttribute('data-i18n');
-      var keys = key.split('.');
-      var value = translations[lang]; // البحث عن القيمة في كائن الترجمة
+      var keys = element.getAttribute('data-i18n').split('.');
+      var value = langData; // Navigate through nested object
 
       var _iteratorNormalCompletion = true;
       var _didIteratorError = false;
@@ -295,13 +338,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
       try {
         for (var _iterator = keys[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var k = _step.value;
+          var key = _step.value;
 
-          if (value && value[k]) {
-            value = value[k];
+          if (value && _typeof(value) === 'object' && key in value) {
+            value = value[key];
           } else {
-            value = key; // العودة للنص الأصلي إذا لم يوجد ترجمة
-
+            value = null;
             break;
           }
         }
@@ -320,15 +362,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       }
 
-      if (value && typeof value === 'string') {
+      if (typeof value === 'string') {
         element.textContent = value;
       }
-    }); // تحديث العناصر مع data-i18n-placeholder
+    }); // Translate placeholders
 
     document.querySelectorAll('[data-i18n-placeholder]').forEach(function (element) {
-      var key = element.getAttribute('data-i18n-placeholder');
-      var keys = key.split('.');
-      var value = translations[lang]; // البحث عن القيمة في كائن الترجمة
+      var keys = element.getAttribute('data-i18n-placeholder').split('.');
+      var value = langData; // Navigate through nested object
 
       var _iteratorNormalCompletion2 = true;
       var _didIteratorError2 = false;
@@ -336,13 +377,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
       try {
         for (var _iterator2 = keys[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-          var k = _step2.value;
+          var key = _step2.value;
 
-          if (value && value[k]) {
-            value = value[k];
+          if (value && _typeof(value) === 'object' && key in value) {
+            value = value[key];
           } else {
-            value = key; // العودة للنص الأصلي إذا لم يوجد ترجمة
-
+            value = null;
             break;
           }
         }
@@ -361,92 +401,64 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       }
 
-      if (value && typeof value === 'string') {
+      if (typeof value === 'string') {
         element.placeholder = value;
       }
-    }); // تحديث نص زر اللغة
+    });
+  } // Change language
 
-    currentLangSpan.textContent = lang === 'ar' ? 'العربية' : 'English'; // تحديث الحالة النشطة في القائمة المنسدلة
 
-    langOptions.forEach(function (option) {
-      option.classList.remove('active');
-
-      if (option.getAttribute('data-lang') === lang) {
-        option.classList.add('active');
-      }
-    }); // حفظ اللغة المفضلة
-
-    localStorage.setItem('preferredLang', lang);
+  function changeLanguage(lang) {
+    if (lang === currentLang) return;
     currentLang = lang;
-  } // تبديل اللغة
+    localStorage.setItem('language', lang); // Add smooth transition
 
-
-  function toggleLanguage(lang) {
-    applyLanguage(lang); // إغلاق القائمة المنسدلة
-
-    if (langDropdown) {
-      langDropdown.style.opacity = '0';
-      langDropdown.style.visibility = 'hidden';
-      langDropdown.style.transform = 'translateY(-10px)';
-    }
-  } // أحداث النقر على خيارات اللغة
+    document.body.style.opacity = '0.8';
+    document.body.style.transform = 'scale(0.98)';
+    setTimeout(function () {
+      initLanguage();
+      document.body.style.opacity = '1';
+      document.body.style.transform = 'scale(1)';
+    }, 150);
+  } // Event listeners for language options
 
 
   langOptions.forEach(function (option) {
     option.addEventListener('click', function (e) {
       e.preventDefault();
-      var lang = option.getAttribute('data-lang');
-      toggleLanguage(lang);
+      var lang = this.getAttribute('data-lang');
+
+      if (lang) {
+        changeLanguage(lang);
+      }
     });
-  }); // حدث النقر على زر اللغة
+  }); // Event listener for language button
 
   if (langBtn) {
     langBtn.addEventListener('click', function (e) {
       e.stopPropagation();
-
-      if (langDropdown) {
-        var isVisible = langDropdown.style.visibility === 'visible';
-        langDropdown.style.opacity = isVisible ? '0' : '1';
-        langDropdown.style.visibility = isVisible ? 'hidden' : 'visible';
-        langDropdown.style.transform = isVisible ? 'translateY(-10px)' : 'translateY(0)';
-      }
     });
-  } // إغلاق القائمة المنسدلة عند النقر خارجها
+  } // Close language dropdown when clicking outside
 
 
-  document.addEventListener('click', function (e) {
-    if (!langBtn.contains(e.target) && !langDropdown.contains(e.target)) {
-      if (langDropdown) {
-        langDropdown.style.opacity = '0';
-        langDropdown.style.visibility = 'hidden';
-        langDropdown.style.transform = 'translateY(-10px)';
-      }
+  document.addEventListener('click', function () {
+    var dropdown = document.querySelector('.lang-dropdown-nav');
+
+    if (dropdown && dropdown.style.display === 'block') {
+      dropdown.style.display = 'none';
     }
-  }); // تطبيق اللغة الحالية عند تحميل الصفحة
+  }); // Initialize on page load
 
-  applyLanguage(currentLang); // الكشف التلقائي عن لغة المتصفح (اختياري)
+  addLanguageStyles();
+  initLanguage(); // Make language switcher accessible
 
-  function detectBrowserLanguage() {
-    var browserLang = navigator.language || navigator.userLanguage;
+  document.addEventListener('keydown', function (e) {
+    var dropdown = document.querySelector('.lang-dropdown-nav');
 
-    if (browserLang.startsWith('ar')) {
-      return 'ar';
-    } else if (browserLang.startsWith('en')) {
-      return 'en';
+    if (e.key === 'Escape' && dropdown && dropdown.style.display === 'block') {
+      dropdown.style.display = 'none';
     }
-
-    return 'ar'; // اللغة الافتراضية
-  } // إذا لم تكن هناك لغة محفوظة، اكتشف لغة المتصفح
-
-
-  if (!localStorage.getItem('preferredLang')) {
-    var detectedLang = detectBrowserLanguage();
-
-    if (detectedLang !== currentLang) {
-      setTimeout(function () {
-        toggleLanguage(detectedLang);
-      }, 500);
-    }
-  }
+  });
+  console.log('✅ Language switcher initialized successfully');
 });
 //# sourceMappingURL=language.dev.js.map

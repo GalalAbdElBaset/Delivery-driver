@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASAP Qatar - خدمات التوصيل السريع بين قطر وتونس</title>
+    <title>HELA Express Tn-QA - خدمات التوصيل السريع بين قطر وتونس</title>
     <meta name="description" content="خدمات توصيل سريعة وآمنة داخل قطر وتونس وبين الدول - توصيل أغراض، توثيق تسليم أموال، توصيل موظفين">
     <meta name="keywords" content="توصيل, قطر, تونس, توصيل سريع, توصيل أموال, نقل, توصيل مشتريات">
-    <meta name="author" content="ASAP Qatar">
+    <meta name="author" content="HELA Express Tn-QA">
     
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="ASAP Qatar - خدمات التوصيل السريع">
+    <meta property="og:title" content="HELA Express Tn-QA - خدمات التوصيل السريع">
     <meta property="og:description" content="خدمات توصيل سريعة وآمنة داخل قطر وتونس وبين الدول">
     <meta property="og:image" content="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
     <meta property="og:url" content="https://asapqatar.com">
@@ -27,7 +27,7 @@
     {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
-        "name": "ASAP Qatar",
+        "name": "HELA Express Tn-QA",
         "image": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d",
         "description": "خدمات توصيل سريعة وآمنة داخل قطر وتونس وبين الدول",
         "address": {
@@ -47,27 +47,16 @@
     </script>
 </head>
 <body>
-    <!-- زر تبديل اللغة -->
-    <div class="language-switcher">
-        <button id="langBtn" class="lang-btn">
-            <i class="fas fa-globe"></i>
-            <span id="currentLang">العربية</span>
-        </button>
-        <div class="lang-dropdown" id="langDropdown">
-            <a href="#" data-lang="ar" class="lang-option active">العربية</a>
-            <a href="#" data-lang="en" class="lang-option">English</a>
-        </div>
-    </div>
-
     <!-- شريط التنقل -->
     <header id="mainHeader" class="glass-header">
         <div class="nav-wrap container">
             <div class="logo">
                 <div class="logo-icon">
-                    <i class="fas fa-bolt gold-text"></i>
+                    <img src="https://iili.io/fLgS9wP.md.jpg" alt="HELA Express Tn-QA Logo" 
+                         onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-bolt gold-text\'></i>';">
                 </div>
                 <div class="logo-text">
-                    <h1 data-i18n="companyName" class="gold-text">ASAP Qatar</h1>
+                    <h1 data-i18n="companyName" class="gold-text">HELA Express Tn-QA</h1>
                     <p data-i18n="companySlogan">خدمة توصيل سريعة وآمنة</p>
                 </div>
             </div>
@@ -77,6 +66,19 @@
                 <a href="#about" class="nav-link" data-i18n="nav.about">من نحن</a>
                 <a href="#services" class="nav-link" data-i18n="nav.services">الخدمات</a>
                 <a href="#contact" class="nav-link" data-i18n="nav.contact">التواصل</a>
+                
+                <!-- زر تبديل اللغة داخل التنقل -->
+                <div class="language-switcher-nav">
+                    <button id="langBtn" class="lang-btn-nav">
+                        <i class="fas fa-globe"></i>
+                        <span id="currentLang">العربية</span>
+                    </button>
+                    <div class="lang-dropdown-nav" id="langDropdown">
+                        <a href="#" data-lang="ar" class="lang-option-nav active">العربية</a>
+                        <a href="#" data-lang="en" class="lang-option-nav">English</a>
+                    </div>
+                </div>
+                
                 <div class="nav-indicator" id="indicator"></div>
             </nav>
             
@@ -97,17 +99,91 @@
         </div>
     </header>
 
-    <!-- القسم الرئيسي -->
+    <!-- القسم الرئيسي مع السلايدر -->
     <section id="home" class="hero">
-        <div class="hero-overlay"></div>
-        <div class="container">
-            <div class="hero-content">
-                <h1 data-i18n="hero.title" class="gold-text">خدمة توصيل سريعة وآمنة داخل قطر وتونس وبين الدول</h1>
-                <p class="hero-subtitle" data-i18n="hero.subtitle">
-                    نقدم خدمات توصيل موثوقة للأفراد والمتاجر داخل المدن،
-                    إضافة إلى توصيل الأغراض بين تونس وقطر، مع إمكانية توثيق تسليم الأموال يدًا بيد بطريقة واضحة وآمنة، وبأسلوب بسيط وسريع.
-                </p>
-                
+        <!-- السلايدر -->
+        <div class="hero-slider">
+            <!-- شريحة 1 -->
+            <div class="slide active" data-slide="1">
+                <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')"></div>
+                <div class="slide-overlay"></div>
+                <div class="container">
+                    <div class="slide-content">
+                        <h1 class="gold-text" data-i18n="hero.title1">خدمة توصيل سريعة وآمنة داخل قطر وتونس</h1>
+                        <p class="slide-subtitle" data-i18n="hero.subtitle1">
+                            نوفر حلول نقل وتوصيل مرنة تناسب الأفراد والمتاجر والشركات، مع التركيز على السرعة، الأمان، وسهولة التواصل.
+                        </p>
+                        <div class="slide-buttons">
+                            <a href="https://wa.me/97471375390" class="btn whatsapp-btn" data-i18n="hero.whatsappBtn">
+                                <i class="fab fa-whatsapp"></i> تواصل عبر واتساب
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- شريحة 2 -->
+            <div class="slide" data-slide="2">
+                <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1578575437130-527eed3abbec?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')"></div>
+                <div class="slide-overlay"></div>
+                <div class="container">
+                    <div class="slide-content">
+                        <h1 class="gold-text" data-i18n="hero.title2">توصيل أغراض بين تونس وقطر</h1>
+                        <p class="slide-subtitle" data-i18n="hero.subtitle2">
+                            توصيل الأغراض بين تونس وقطر عبر مسافرين موثوقين، بطريقة آمنة ومنسقة مع توثيق كامل.
+                        </p>
+                        <div class="slide-buttons">
+                            <a href="#services" class="btn primary-btn gold-bg" data-i18n="hero.servicesBtn">
+                                <i class="fas fa-list"></i> عرض الخدمات
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- شريحة 3 -->
+            <div class="slide" data-slide="3">
+                <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')"></div>
+                <div class="slide-overlay"></div>
+                <div class="container">
+                    <div class="slide-content">
+                        <h1 class="gold-text" data-i18n="hero.title3">توثيق تسليم الأموال يدًا بيد</h1>
+                        <p class="slide-subtitle" data-i18n="hero.subtitle3">
+                            نقدم خدمة توثيق موثوقة لتسليم الأموال بين الأطراف، مع الحفاظ على الشفافية والأمان الكامل.
+                        </p>
+                        <div class="slide-buttons">
+                            <a href="#contact" class="btn outline-btn" data-i18n="hero.contactBtn">
+                                <i class="fas fa-phone-alt"></i> اتصل بنا الآن
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- أزرار التحكم بالسلايدر -->
+            <button class="slider-prev" aria-label="الشريحة السابقة">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <button class="slider-next" aria-label="الشريحة التالية">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            
+            <!-- نقاط التنقل -->
+            <div class="slider-dots">
+                <button class="dot active" data-slide="1" aria-label="انتقل إلى الشريحة 1"></button>
+                <button class="dot" data-slide="2" aria-label="انتقل إلى الشريحة 2"></button>
+                <button class="dot" data-slide="3" aria-label="انتقل إلى الشريحة 3"></button>
+            </div>
+            
+            <!-- مؤشر التقدم -->
+            <div class="slider-progress">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+        
+        <!-- الأزرار الإضافية -->
+        <div class="hero-buttons-container">
+            <div class="container">
                 <div class="hero-buttons">
                     <a href="https://wa.me/97471375390" class="btn whatsapp-btn" data-i18n="hero.whatsappBtn">
                         <i class="fab fa-whatsapp"></i> تواصل عبر واتساب
@@ -165,7 +241,7 @@
                 
                 <div class="about-image">
                     <div class="image-frame">
-                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                        <img src="https://iili.io/fLglDPe.md.png" 
                              alt="خدمات التوصيل"
                              loading="lazy">
                         <div class="frame-overlay">
@@ -344,7 +420,7 @@
                                     allowfullscreen="" 
                                     loading="lazy" 
                                     referrerpolicy="no-referrer-when-downgrade"
-                                    title="خريطة موقع ASAP Qatar">
+                                    title="خريطة موقع HELA Express Tn-QA">
                                 </iframe>
                             </div>
                         </div>
@@ -398,10 +474,10 @@
                 <div class="footer-logo">
                     <div class="logo">
                         <div class="logo-icon">
-                            <i class="fas fa-bolt gold-text"></i>
+                            <img src="https://iili.io/fLgS9wP.md.jpg" alt="HELA Express Tn-QA Logo">
                         </div>
                         <div class="logo-text">
-                            <h2 data-i18n="companyName" class="gold-text">ASAP Qatar</h2>
+                            <h2 data-i18n="companyName" class="gold-text">HELA Express Tn-QA</h2>
                             <p data-i18n="companySlogan">خدمة توصيل سريعة وآمنة</p>
                         </div>
                     </div>
@@ -459,7 +535,7 @@
                     <p data-i18n="footer.legal">الموقع منصة تعريفية وتنسيقية فقط، ولا يقوم بأي عمليات دفع إلكتروني أو تحصيل أموال.</p>
                 </div>
                 
-                <p class="copyright">© <span id="currentYear"></span> <span data-i18n="companyName" class="gold-text">ASAP Qatar</span> - <span data-i18n="footer.copyright">جميع الحقوق محفوظة</span></p>
+                <p class="copyright">© <span id="currentYear"></span> <span data-i18n="companyName" class="gold-text">HELA Express Tn-QA</span> - <span data-i18n="footer.copyright">جميع الحقوق محفوظة</span></p>
             </div>
         </div>
     </footer>
@@ -469,8 +545,14 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
+    <!-- زر العودة للأعلى -->
+    <button class="scroll-to-top" id="scrollToTop" aria-label="العودة إلى الأعلى">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
     <!-- ملفات JavaScript -->
     <script src="js/language.js"></script>
+    <!-- <script src="js/slider.js"></script> -->
     <script src="js/main.js"></script>
 </body>
 </html>
