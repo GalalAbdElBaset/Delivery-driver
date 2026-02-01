@@ -1432,4 +1432,7 @@ textarea {
         flex-direction: column;
         text-align: center;
     }
+    .whatsapp-number span {
+        font-size: 10px;
+    }
 }
