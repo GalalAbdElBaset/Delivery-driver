@@ -1,14 +1,20 @@
-// services.js - نظام طلبات الخدمات مع زرين منفصلين
+// services.js - نظام طلبات الخدمات مع زرين منفصلين وتحسينات CSS
 document.addEventListener('DOMContentLoaded', function() {
     // تعريف الأرقام
     const qatarNumber = '+97431691024';
     const tunisiaNumber = '+21656471550';
+    
+    // إضافة أنماط CSS محسنة للقوائم المنسدلة
+    addEnhancedSelectStyles();
     
     // إضافة حقول بيانات العميل لكل بطاقة
     initializeCustomerFields();
     
     // إدارة حالة الأزرار بناء على اختيار الخدمة
     setupButtonStates();
+    
+    // إضافة تأثيرات للقوائم المنسدلة
+    enhanceSelectElements();
     
     // جميع أزرار إرسال واتساب
     const sendWhatsAppBtns = document.querySelectorAll('.send-whatsapp');
@@ -30,21 +36,27 @@ document.addEventListener('DOMContentLoaded', function() {
             // التحقق من اختيار خدمة
             if (!selectedService) {
                 showAlert('الرجاء اختيار خدمة من القائمة أولاً', 'error');
-                serviceSelect.focus();
+                animateSelect(serviceSelect);
                 return;
             }
             
             // التحقق من اسم العميل
             if (!name) {
                 showAlert('الرجاء إدخال اسمك الكامل', 'error');
-                if (customerName) customerName.focus();
+                if (customerName) {
+                    customerName.focus();
+                    animateInput(customerName);
+                }
                 return;
             }
             
             // التحقق من رقم الهاتف
             if (!phone) {
                 showAlert('الرجاء إدخال رقم هاتفك', 'error');
-                if (customerPhone) customerPhone.focus();
+                if (customerPhone) {
+                    customerPhone.focus();
+                    animateInput(customerPhone);
+                }
                 return;
             }
             
@@ -52,12 +64,15 @@ document.addEventListener('DOMContentLoaded', function() {
             const phoneRegex = /^[\+]?[0-9\s\-\(\)]{8,}$/;
             if (!phoneRegex.test(phone.replace(/\s/g, ''))) {
                 showAlert('يرجى إدخال رقم هاتف صحيح', 'error');
-                if (customerPhone) customerPhone.focus();
+                if (customerPhone) {
+                    customerPhone.focus();
+                    animateInput(customerPhone);
+                }
                 return;
             }
             
             // التحقق من توافق الخدمة مع البلد المختار
-            if (!isServiceCountryCompatible(selectedService, country)) {
+            if (!isServiceCountryCompatible(selectedService, country, serviceCard)) {
                 showAlert('هذه الخدمة غير متاحة للبلد المحدد', 'error');
                 return;
             }
@@ -79,45 +94,47 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // دالة التحقق من توافق الخدمة مع البلد
-    function isServiceCountryCompatible(service, country) {
-        // قائمة الخدمات التي تتطلب تحقق خاص
-        const qatarOnlyServices = [
-            'حجز ميزان من تونس الي قطر',
-            'توصيل محلي داخل قطر',
-            'توصيل أغراض ومشتريات في قطر',
-            'توصيل موظفين وتلاميذ في قطر',
-            'توصيل مشاوير خاصة في قطر',
-            'توصيل هدايا في قطر',
-            'توصيل مواد استهلاكية في قطر',
-            'اشتراك شهري في قطر'
-        ];
+    function isServiceCountryCompatible(service, country, serviceCard) {
+        // إذا كانت البطاقة تحتوي على زرين (قطر وتونس)
+        const hasDoubleButtons = serviceCard.querySelector('.service-contact-double');
         
-        const tunisiaOnlyServices = [
-            'حجز ميزان من قطر الي تونس',
-            'توصيل محلي داخل تونس',
-            'توصيل أغراض ومشتريات في تونس',
-            'توصيل موظفين وتلاميذ في تونس',
-            'توصيل مشاوير خاصة في تونس',
-            'توصيل هدايا في تونس',
-            'توصيل مواد استهلاكية في تونس',
-            'اشتراك شهري في تونس'
-        ];
+        // إذا كانت البطاقة تحتوي على زر واحد فقط
+        const singleButton = serviceCard.querySelector('.service-btn:not(.qatar-btn):not(.tunisia-btn)');
         
-        const bothCountriesServices = [
-            'تريد بيع ميزان',
-            'توثيق تسليم الأموال',
-            'تحويل ريال قطري إلى دينار تونسي',
-            'تحويل دينار تونسي إلى ريال قطري'
-        ];
-        
-        // التحقق من توافق الخدمة مع البلد
-        if (country === 'قطر') {
-            return qatarOnlyServices.includes(service) || bothCountriesServices.includes(service);
-        } else if (country === 'تونس') {
-            return tunisiaOnlyServices.includes(service) || bothCountriesServices.includes(service);
+        // حالة 1: بطاقة بها زرين (توصيل دولي)
+        if (hasDoubleButtons) {
+            // حجز ميزان من تونس إلى قطر: فقط زر قطر يعمل
+            if (service === 'حجز ميزان من تونس الي قطر') {
+                return country === 'قطر';
+            }
+            // حجز ميزان من قطر إلى تونس: فقط زر تونس يعمل
+            else if (service === 'حجز ميزان من قطر الي تونس') {
+                return country === 'تونس';
+            }
+            // تريد بيع ميزان: كلا الزرين يعملان
+            else if (service === 'تريد بيع ميزان') {
+                return country === 'قطر' || country === 'تونس';
+            }
+        }
+        // حالة 2: بطاقة بها زر واحد
+        else if (singleButton) {
+            const buttonCountry = singleButton.getAttribute('data-country');
+            
+            // إذا كان الزر لقطر فقط
+            if (buttonCountry === 'قطر') {
+                return country === 'قطر';
+            }
+            // إذا كان الزر لتونس فقط
+            else if (buttonCountry === 'تونس') {
+                return country === 'تونس';
+            }
+            // إذا كان الزر مشترك (لتوثيق الأموال)
+            else if (buttonCountry === 'مشترك') {
+                return true;
+            }
         }
         
-        return true;
+        return false;
     }
     
     // دالة إدارة حالة الأزرار
@@ -127,11 +144,18 @@ document.addEventListener('DOMContentLoaded', function() {
             select.addEventListener('change', function() {
                 const serviceCard = this.closest('.service-card');
                 updateButtonStates(serviceCard, this.value);
+                
+                // إضافة تأثير عند التغيير
+                animateSelect(this);
+                
+                // تحديث لون البطاقة بناء على الاختيار
+                updateCardAppearance(serviceCard, this.value);
             });
             
             // تحديث الحالة الأولية
             const serviceCard = select.closest('.service-card');
             updateButtonStates(serviceCard, select.value);
+            updateCardAppearance(serviceCard, select.value);
         });
     }
     
@@ -142,46 +166,52 @@ document.addEventListener('DOMContentLoaded', function() {
         const qatarBtn = serviceCard.querySelector('.qatar-btn');
         const tunisiaBtn = serviceCard.querySelector('.tunisia-btn');
         
+        // إذا لم يكن هناك زرين (قطر وتونس)، تخطي
         if (!qatarBtn || !tunisiaBtn) return;
         
         if (!selectedService) {
             // لا يوجد اختيار - تعطيل كلا الزرين
-            qatarBtn.classList.add('inactive');
-            qatarBtn.classList.remove('active');
-            tunisiaBtn.classList.add('inactive');
-            tunisiaBtn.classList.remove('active');
-            
             qatarBtn.disabled = true;
             tunisiaBtn.disabled = true;
+            qatarBtn.classList.add('inactive');
+            tunisiaBtn.classList.add('inactive');
+            qatarBtn.classList.remove('active');
+            tunisiaBtn.classList.remove('active');
         } else {
             // التحقق من توافق الخدمة مع كل بلد
-            const isQatarCompatible = isServiceCountryCompatible(selectedService, 'قطر');
-            const isTunisiaCompatible = isServiceCountryCompatible(selectedService, 'تونس');
+            const isQatarCompatible = isServiceCountryCompatible(selectedService, 'قطر', serviceCard);
+            const isTunisiaCompatible = isServiceCountryCompatible(selectedService, 'تونس', serviceCard);
             
             // تحديث زر قطر
+            qatarBtn.disabled = !isQatarCompatible;
             if (isQatarCompatible) {
                 qatarBtn.classList.remove('inactive');
                 qatarBtn.classList.add('active');
-                qatarBtn.disabled = false;
             } else {
                 qatarBtn.classList.add('inactive');
                 qatarBtn.classList.remove('active');
-                qatarBtn.disabled = true;
             }
             
             // تحديث زر تونس
+            tunisiaBtn.disabled = !isTunisiaCompatible;
             if (isTunisiaCompatible) {
                 tunisiaBtn.classList.remove('inactive');
                 tunisiaBtn.classList.add('active');
-                tunisiaBtn.disabled = false;
             } else {
                 tunisiaBtn.classList.add('inactive');
                 tunisiaBtn.classList.remove('active');
-                tunisiaBtn.disabled = true;
             }
             
             // تحديث نص الأزرار بناء على الخدمة
             updateButtonText(serviceCard, selectedService);
+            
+            // إضافة تأثير للأزرار النشطة
+            if (isQatarCompatible) {
+                animateButton(qatarBtn);
+            }
+            if (isTunisiaCompatible) {
+                animateButton(tunisiaBtn);
+            }
         }
     }
     
@@ -197,21 +227,15 @@ document.addEventListener('DOMContentLoaded', function() {
         let tunisiaText = 'طلب من تونس';
         
         // تحديد النص المناسب بناء على الخدمة
-        if (selectedService.includes('حجز ميزان من تونس الي قطر')) {
+        if (selectedService === 'حجز ميزان من تونس الي قطر') {
             qatarText = 'حجز من تونس لقطر';
             tunisiaText = 'غير متاح';
-        } else if (selectedService.includes('حجز ميزان من قطر الي تونس')) {
+        } else if (selectedService === 'حجز ميزان من قطر الي تونس') {
             qatarText = 'غير متاح';
             tunisiaText = 'حجز من قطر لتونس';
-        } else if (selectedService.includes('تريد بيع ميزان')) {
+        } else if (selectedService === 'تريد بيع ميزان') {
             qatarText = 'طلب بيع ميزان';
             tunisiaText = 'طلب بيع ميزان';
-        } else if (selectedService.includes('توصيل محلي')) {
-            qatarText = 'طلب توصيل محلي';
-            tunisiaText = 'طلب توصيل محلي';
-        } else if (selectedService.includes('توثيق تسليم الأموال')) {
-            qatarText = 'طلب توثيق أموال';
-            tunisiaText = 'طلب توثيق أموال';
         }
         
         // تحديث نص الأزرار مع الحفاظ على الأيقونة
@@ -219,14 +243,41 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (!qatarBtn.disabled) {
             qatarBtn.innerHTML = whatsappIcon + qatarText;
+        } else {
+            qatarBtn.innerHTML = whatsappIcon + 'غير متاح';
         }
         
         if (!tunisiaBtn.disabled) {
             tunisiaBtn.innerHTML = whatsappIcon + tunisiaText;
+        } else {
+            tunisiaBtn.innerHTML = whatsappIcon + 'غير متاح';
         }
     }
     
-    // باقي الدوال تبقى كما هي...
+    // دالة تحديث مظهر البطاقة بناء على الخدمة المختارة
+    function updateCardAppearance(card, selectedService) {
+        if (!selectedService) {
+            card.classList.remove('has-selection');
+            card.classList.remove('international-selected');
+            card.classList.remove('local-selected');
+            card.classList.remove('money-selected');
+        } else {
+            card.classList.add('has-selection');
+            
+            // إزالة جميع الفئات أولاً
+            card.classList.remove('international-selected', 'local-selected', 'money-selected');
+            
+            // إضافة فئة حسب نوع الخدمة
+            if (selectedService.includes('ميزان')) {
+                card.classList.add('international-selected');
+            } else if (selectedService.includes('توصيل محلي') || selectedService.includes('توصيل داخل')) {
+                card.classList.add('local-selected');
+            } else if (selectedService.includes('أموال') || selectedService.includes('تحويل')) {
+                card.classList.add('money-selected');
+            }
+        }
+    }
+    
     // دالة إضافة حقول بيانات العميل
     function initializeCustomerFields() {
         const serviceCards = document.querySelectorAll('.service-card');
@@ -234,6 +285,9 @@ document.addEventListener('DOMContentLoaded', function() {
         serviceCards.forEach(card => {
             // لا نضيف حقول لبطاقة الإعلانات
             if (card.classList.contains('advertisement-placeholder')) return;
+            
+            // التحقق إذا كانت الحقول موجودة بالفعل
+            if (card.querySelector('.customer-fields')) return;
             
             // إنشاء حقول بيانات العميل
             const customerFields = document.createElement('div');
@@ -243,23 +297,74 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="customer-input-wrapper">
                         <input type="text" class="customer-name" placeholder="الاسم الكامل" required>
                         <i class="fas fa-user input-icon"></i>
+                        <div class="input-underline"></div>
                     </div>
                     <div class="customer-input-wrapper">
                         <input type="tel" class="customer-phone" placeholder="رقم الهاتف" required>
                         <i class="fas fa-phone input-icon"></i>
+                        <div class="input-underline"></div>
                     </div>
                 </div>
             `;
             
-            // إضافة الحقول قبل قائمة الاختيار
+            // إضافة الحقول بعد قائمة الاختيار
             const serviceSelection = card.querySelector('.service-selection');
-            if (serviceSelection) {
-                serviceSelection.parentNode.insertBefore(customerFields, serviceSelection);
+            const serviceContact = card.querySelector('.service-contact') || card.querySelector('.service-contact-double');
+            
+            if (serviceSelection && serviceContact) {
+                // إدخال الحقول بين قائمة الاختيار وأزرار التواصل
+                serviceSelection.parentNode.insertBefore(customerFields, serviceContact);
+            } else if (serviceSelection) {
+                // إضافة الحقول بعد قائمة الاختيار
+                serviceSelection.parentNode.insertBefore(customerFields, serviceSelection.nextSibling);
             }
+            
+            // إضافة أحداث للحقول
+            const inputs = customerFields.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.classList.add('focused');
+                });
+                
+                input.addEventListener('blur', function() {
+                    if (!this.value) {
+                        this.parentElement.classList.remove('focused');
+                    }
+                });
+                
+                // التحقق عند الكتابة
+                input.addEventListener('input', function() {
+                    if (this.value) {
+                        this.parentElement.classList.add('has-value');
+                    } else {
+                        this.parentElement.classList.remove('has-value');
+                    }
+                });
+            });
         });
-        
-        // إضافة أنماط CSS لحقول العميل
-        addCustomerFieldsStyles();
+    }
+    
+    // دالة تحسين عناصر الـ Select
+    function enhanceSelectElements() {
+        document.querySelectorAll('.service-select').forEach(select => {
+            // إضافة حدث عند الفتح
+            select.addEventListener('focus', function() {
+                this.parentElement.classList.add('select-focused');
+            });
+            
+            select.addEventListener('blur', function() {
+                this.parentElement.classList.remove('select-focused');
+            });
+            
+            // تحديث المظهر عند التغيير
+            select.addEventListener('change', function() {
+                if (this.value) {
+                    this.parentElement.classList.add('has-selection');
+                } else {
+                    this.parentElement.classList.remove('has-selection');
+                }
+            });
+        });
     }
     
     // دالة إنشاء رسالة واتساب مع بيانات العميل
@@ -269,7 +374,10 @@ document.addEventListener('DOMContentLoaded', function() {
         message += `📞 *رقم الهاتف:* ${phone}\n`;
         message += `📋 *الخدمة الرئيسية:* ${mainService}\n`;
         message += `🔧 *الخدمة المطلوبة:* ${selectedService}\n`;
-        message += `🌍 *البلد المطلوب:* ${country}\n`;
+        
+        if (country !== 'مشترك') {
+            message += `🌍 *البلد:* ${country}\n`;
+        }
         
         message += `\n📞 *أرقام التواصل:*\n`;
         message += `🇶🇦 قطر: ${qatarNumber}\n`;
@@ -282,7 +390,8 @@ document.addEventListener('DOMContentLoaded', function() {
             month: 'long', 
             day: 'numeric',
             hour: '2-digit',
-            minute: '2-digit'
+            minute: '2-digit',
+            hour12: true
         })}`;
         
         return encodeURIComponent(message);
@@ -298,11 +407,14 @@ document.addEventListener('DOMContentLoaded', function() {
         // إظهار رسالة نجاح
         showAlert(`شكراً ${customerName}! تم إرسال طلبك إلى ${country}`, 'success');
         
-        // حفظ الطلب (اختياري)
-        saveServiceRequest(customerName, phoneNumber, message, country);
+        // حفظ الطلب
+        saveServiceRequest(customerName, phone, message, country);
+        
+        // إعادة تعيين الحقول
+        resetForm(customerName);
     }
     
-    // دالة حفظ طلب الخدمة (اختياري)
+    // دالة حفظ طلب الخدمة
     function saveServiceRequest(name, phone, message, country) {
         try {
             const request = {
@@ -316,13 +428,24 @@ document.addEventListener('DOMContentLoaded', function() {
             // حفظ في localStorage
             const requests = JSON.parse(localStorage.getItem('serviceRequests') || '[]');
             requests.push(request);
-            if (requests.length > 100) requests.shift(); // حفظ آخر 100 طلب فقط
+            if (requests.length > 100) requests.shift();
             localStorage.setItem('serviceRequests', JSON.stringify(requests));
-            
-            console.log('تم حفظ طلب الخدمة:', request);
         } catch (error) {
             console.error('خطأ في حفظ طلب الخدمة:', error);
         }
+    }
+    
+    // دالة إعادة تعيين النموذج
+    function resetForm(customerName) {
+        setTimeout(() => {
+            const inputs = document.querySelectorAll('.customer-name, .customer-phone');
+            inputs.forEach(input => {
+                if (input.classList.contains('customer-name')) {
+                    input.value = '';
+                    input.parentElement.classList.remove('has-value');
+                }
+            });
+        }, 1000);
     }
     
     // دالة إظهار رسالة تنبيه
@@ -338,38 +461,197 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="alert-message ${type}">
                 <i class="fas ${icon}"></i>
                 <span>${message}</span>
+                <button class="alert-close">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
         `;
         
         document.body.insertAdjacentHTML('beforeend', alertHTML);
+        
+        // إضافة حدث للإغلاق
+        const closeBtn = document.querySelector('.alert-close');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function() {
+                const alert = this.closest('.alert-message');
+                if (alert) {
+                    alert.remove();
+                }
+            });
+        }
         
         // إزالة الرسالة بعد 5 ثواني
         setTimeout(() => {
             const alert = document.querySelector('.alert-message');
             if (alert) {
                 alert.style.animation = 'slideOut 0.3s ease';
-                setTimeout(() => alert.remove(), 300);
+                setTimeout(() => {
+                    if (alert.parentNode) {
+                        alert.parentNode.removeChild(alert);
+                    }
+                }, 300);
             }
         }, 5000);
     }
     
-    // دالة إضافة أنماط حقول العميل
-    function addCustomerFieldsStyles() {
+    // دالة إضافة تأثير للقائمة المنسدلة
+    function animateSelect(select) {
+        select.style.transform = 'scale(1.02)';
+        select.style.boxShadow = '0 0 0 3px rgba(255, 215, 0, 0.3)';
+        
+        setTimeout(() => {
+            select.style.transform = 'scale(1)';
+            select.style.boxShadow = '';
+        }, 300);
+    }
+    
+    // دالة إضافة تأثير للحقل النصي
+    function animateInput(input) {
+        input.style.transform = 'translateX(-5px)';
+        input.style.boxShadow = '0 0 0 3px rgba(220, 53, 69, 0.3)';
+        
+        setTimeout(() => {
+            input.style.transform = 'translateX(0)';
+            input.style.boxShadow = '';
+        }, 500);
+    }
+    
+    // دالة إضافة تأثير للزر
+    function animateButton(button) {
+        button.style.transform = 'scale(1.05)';
+        button.style.boxShadow = '0 0 20px rgba(255, 215, 0, 0.5)';
+        
+        setTimeout(() => {
+            button.style.transform = 'scale(1)';
+            button.style.boxShadow = '';
+        }, 300);
+    }
+    
+    // دالة إضافة أنماط CSS محسنة
+    function addEnhancedSelectStyles() {
         const styles = document.createElement('style');
         styles.textContent = `
+            /* أنماط محسنة للقوائم المنسدلة */
+            .service-selection {
+                position: relative;
+                margin: 15px 0;
+            }
+            
+            .service-select {
+                width: 100%;
+                padding: 15px 45px 15px 20px;
+                background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+                border: 2px solid rgba(255, 215, 0, 0.3);
+                border-radius: 12px;
+                color: #000;
+                font-size: 15px;
+                font-family: 'Cairo', sans-serif;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                appearance: none;
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23ffd700' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+                background-repeat: no-repeat;
+                background-position: left 15px center;
+                background-size: 16px;
+                text-align: right;
+                direction: rtl;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            }
+            
+            .service-select:hover {
+                border-color: #ffd700;
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+            }
+            
+            .service-select:focus {
+                outline: none;
+                border-color: #ffd700;
+                box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3), 0 8px 25px rgba(0, 0, 0, 0.3);
+                transform: translateY(-2px);
+            }
+            
+            .service-select option {
+                background: #1a1a1a;
+                color: #fff;
+                padding: 15px;
+                font-size: 14px;
+            }
+            
+            .service-select option:checked {
+                background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+                color: #000;
+                font-weight: bold;
+            }
+            
+            .service-select option:hover {
+                background: #ffd700;
+                color: #000;
+            }
+            
+            /* مؤشر القائمة المنسدلة */
+            .service-selection::after {
+                content: '';
+                position: absolute;
+                left: 20px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 0;
+                height: 0;
+                pointer-events: none;
+                border-left: 5px solid transparent;
+                border-right: 5px solid transparent;
+                border-top: 5px solid #ffd700;
+            }
+            
+            .select-focused .service-select {
+                border-color: #ffd700;
+                box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3);
+            }
+            
+            .has-selection .service-select {
+                border-color: #4CAF50;
+                background: linear-gradient(135deg, #1a3c1e 0%, #2d5f32 100%);
+                color:#fff;
+            }
+            
+            /* تأثيرات البطاقات عند الاختيار */
+            .service-card.has-selection {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            }
+            
+            .service-card.international-selected {
+                border-left: 5px solid #8A1538;
+                border-right: 5px solid #E70013;
+                background: linear-gradient(135deg, rgba(138, 21, 56, 0.1) 0%, rgba(193, 0, 44, 0.1) 50%, rgba(231, 0, 19, 0.1) 100%);
+            }
+            
+            .service-card.local-selected {
+                border-left: 5px solid #4CAF50;
+                border-right: 5px solid #2196F3;
+                background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(33, 150, 243, 0.1) 100%);
+            }
+            
+            .service-card.money-selected {
+                border-left: 5px solid #FF9800;
+                border-right: 5px solid #9C27B0;
+                background: linear-gradient(135deg, rgba(255, 152, 0, 0.1) 0%, rgba(156, 39, 176, 0.1) 100%);
+            }
+            
             /* أنماط حقول بيانات العميل */
             .customer-fields {
-                margin: 15px 0;
-                padding: 15px;
-                background: rgba(255, 255, 255, 0.05);
-                border-radius: 10px;
-                border: 1px solid rgba(255, 215, 0, 0.2);
+                margin: 20px 0;
+                padding: 20px;
+                background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 215, 0, 0.05) 100%);
+                border-radius: 15px;
+                border: 1px solid rgba(255, 215, 0, 0.1);
+                backdrop-filter: blur(10px);
             }
             
             .customer-field-group {
                 display: flex;
                 flex-direction: column;
-                gap: 12px;
+                gap: 20px;
             }
             
             .customer-input-wrapper {
@@ -379,104 +661,197 @@ document.addEventListener('DOMContentLoaded', function() {
             
             .customer-input-wrapper input {
                 width: 100%;
-                padding: 12px 40px 12px 40px;
-                background: rgba(255, 255, 255, 0.1);
-                border: 1px solid rgba(255, 215, 0, 0.3);
-                border-radius: 8px;
+                padding: 18px 50px 18px 20px;
+                background: rgba(255, 255, 255, 0.95);
+                border: 2px solid rgba(255, 215, 0, 0.3);
+                border-radius: 12px;
                 color: #000;
-                font-size: 14px;
+                font-size: 15px;
                 font-family: 'Cairo', sans-serif;
                 transition: all 0.3s ease;
+                text-align: right;
+                direction: rtl;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             }
             
             .customer-input-wrapper input:focus {
                 outline: none;
                 border-color: #ffd700;
-                box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
-                background: rgba(255, 255, 255, 0.15);
-                text-align:right;
-                padding: 12px 40px 12px 40px;
+                box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3), 0 8px 25px rgba(0, 0, 0, 0.2);
+                background: rgba(255, 255, 255, 1);
+                transform: translateY(-2px);
             }
             
             .customer-input-wrapper input::placeholder {
-                color: rgba(0, 0, 0, 0.71);
-                text-align:right
+                color: rgba(0, 0, 0, 0.6);
+                text-align: right;
+                direction: rtl;
+                transition: all 0.3s ease;
+            }
+            
+            .customer-input-wrapper input:focus::placeholder {
+                color: rgba(0, 0, 0, 0.3);
+                transform: translateY(-10px);
+                font-size: 12px;
             }
             
             .customer-input-wrapper .input-icon {
                 position: absolute;
-                right: 15px;
+                left: 20px;
                 top: 50%;
                 transform: translateY(-50%);
                 color: #ffd700;
-                font-size: 14px;
+                font-size: 18px;
+                transition: all 0.3s ease;
+            }
+            
+            .customer-input-wrapper.focused .input-icon {
+                color: #8A1538;
+                transform: translateY(-50%) scale(1.2);
+            }
+            
+            .input-underline {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background: linear-gradient(90deg, #ffd700, #8A1538);
+                transition: width 0.3s ease;
+            }
+            
+            .customer-input-wrapper.focused .input-underline {
+                width: 100%;
             }
             
             /* أنماط الأزرار المزدوجة */
             .service-contact-double {
-                margin-top: 20px;
+                margin-top: 25px;
             }
             
             .contact-buttons-wrapper {
                 display: flex;
-                gap: 10px;
-                margin-bottom: 15px;
+                gap: 15px;
+                margin-bottom: 20px;
             }
             
             .contact-buttons-wrapper .service-btn {
                 flex: 1;
-                min-width: 120px;
-                padding: 12px 10px;
-                font-size: 14px;
+                min-width: 130px;
+                padding: 16px 15px;
+                font-size: 15px;
                 border: none;
-                border-radius: 8px;
+                border-radius: 12px;
                 cursor: pointer;
-                transition: all 0.3s ease;
+                transition: all 0.4s ease;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                gap: 8px;
-                font-weight: 600;
+                gap: 10px;
+                font-weight: 700;
+                letter-spacing: 0.5px;
+                position: relative;
+                overflow: hidden;
+                z-index: 1;
+            }
+            
+            .contact-buttons-wrapper .service-btn::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+                transition: left 0.6s ease;
+                z-index: -1;
+            }
+            
+            .contact-buttons-wrapper .service-btn:hover::before {
+                left: 100%;
             }
             
             /* أزرار البلدين */
             .qatar-btn {
                 background: linear-gradient(135deg, #8A1538 0%, #C1002C 100%);
                 color: white;
+                box-shadow: 0 6px 20px rgba(138, 21, 56, 0.4);
             }
             
             .qatar-btn:hover:not(:disabled) {
                 background: linear-gradient(135deg, #C1002C 0%, #8A1538 100%);
-                transform: translateY(-2px);
-                box-shadow: 0 5px 15px rgba(193, 0, 44, 0.4);
+                transform: translateY(-3px) scale(1.05);
+                box-shadow: 0 12px 25px rgba(193, 0, 44, 0.5);
             }
             
             .tunisia-btn {
                 background: linear-gradient(135deg, #E70013 0%, #FF1E2E 100%);
                 color: white;
+                box-shadow: 0 6px 20px rgba(231, 0, 19, 0.4);
             }
             
             .tunisia-btn:hover:not(:disabled) {
                 background: linear-gradient(135deg, #FF1E2E 0%, #E70013 100%);
-                transform: translateY(-2px);
-                box-shadow: 0 5px 15px rgba(231, 0, 19, 0.4);
+                transform: translateY(-3px) scale(1.05);
+                box-shadow: 0 12px 25px rgba(255, 30, 46, 0.5);
+            }
+            
+            /* زر الخدمة العادي */
+            .service-btn.whatsapp {
+                background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+                color: white;
+                box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+            }
+            
+            .service-btn.whatsapp:hover:not(:disabled) {
+                background: linear-gradient(135deg, #128C7E 0%, #075E54 100%);
+                transform: translateY(-3px) scale(1.05);
+                box-shadow: 0 12px 25px rgba(18, 140, 126, 0.5);
+            }
+            
+            /* زر توثيق الأموال */
+            .important-card .service-btn {
+                background: linear-gradient(135deg, #FF9800 0%, #FF5722 100%);
+                color: white;
+                box-shadow: 0 6px 20px rgba(255, 152, 0, 0.4);
+            }
+            
+            .important-card .service-btn:hover:not(:disabled) {
+                background: linear-gradient(135deg, #FF5722 0%, #FF9800 100%);
+                transform: translateY(-3px) scale(1.05);
+                box-shadow: 0 12px 25px rgba(255, 87, 34, 0.5);
             }
             
             /* حالة الأزرار */
             .service-btn.inactive {
                 opacity: 0.4;
-                filter: grayscale(50%);
+                filter: grayscale(100%);
                 cursor: not-allowed;
+                transform: none !important;
+                box-shadow: none !important;
             }
             
             .service-btn.active {
                 opacity: 1;
                 filter: none;
                 cursor: pointer;
+                animation: pulse 2s infinite;
+            }
+            
+            @keyframes pulse {
+                0% {
+                    box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7);
+                }
+                70% {
+                    box-shadow: 0 0 0 10px rgba(255, 215, 0, 0);
+                }
+                100% {
+                    box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
+                }
             }
             
             .service-btn:disabled {
-                opacity: 0.4;
+                opacity: 0.3;
                 cursor: not-allowed;
                 transform: none !important;
                 box-shadow: none !important;
@@ -485,78 +860,128 @@ document.addEventListener('DOMContentLoaded', function() {
             /* رسائل التنبيه */
             .alert-message {
                 position: fixed;
-                top: 20px;
-                right: 20px;
-                padding: 15px 20px;
-                border-radius: 10px;
+                top: 25px;
+                right: 25px;
+                padding: 20px 25px;
+                border-radius: 15px;
                 z-index: 10000;
-                animation: slideIn 0.3s ease;
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+                animation: slideIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
                 display: flex;
                 align-items: center;
-                gap: 10px;
-                max-width: 400px;
-                backdrop-filter: blur(10px);
+                gap: 15px;
+                max-width: 450px;
+                backdrop-filter: blur(20px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
             }
             
             .alert-message.error {
-                background: rgba(220, 53, 69, 0.9);
+                background: linear-gradient(135deg, rgba(220, 53, 69, 0.95) 0%, rgba(185, 28, 28, 0.95) 100%);
                 color: white;
-                border-right: 4px solid #dc3545;
+                border-right: 5px solid #dc3545;
             }
             
             .alert-message.success {
-                background: rgba(40, 167, 69, 0.9);
+                background: linear-gradient(135deg, rgba(40, 167, 69, 0.95) 0%, rgba(21, 128, 61, 0.95) 100%);
                 color: white;
-                border-right: 4px solid #28a745;
+                border-right: 5px solid #28a745;
+            }
+            
+            .alert-close {
+                background: transparent;
+                border: none;
+                color: white;
+                cursor: pointer;
+                margin-right: auto;
+                padding: 5px;
+                border-radius: 50%;
+                width: 30px;
+                height: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s ease;
+            }
+            
+            .alert-close:hover {
+                background: rgba(255, 255, 255, 0.2);
+                transform: rotate(90deg);
             }
             
             @keyframes slideIn {
                 from {
-                    transform: translateX(100%);
+                    transform: translateX(100%) translateY(-20px);
                     opacity: 0;
                 }
                 to {
-                    transform: translateX(0);
+                    transform: translateX(0) translateY(0);
                     opacity: 1;
                 }
             }
             
             @keyframes slideOut {
                 from {
-                    transform: translateX(0);
+                    transform: translateX(0) translateY(0);
                     opacity: 1;
                 }
                 to {
-                    transform: translateX(100%);
+                    transform: translateX(100%) translateY(-20px);
                     opacity: 0;
                 }
             }
             
             /* تحسين التنسيق للهواتف */
             @media (max-width: 768px) {
+                .service-select {
+                    padding: 14px 40px 14px 15px;
+                    font-size: 14px;
+                }
+                
                 .customer-field-group {
-                    gap: 10px;
+                    gap: 15px;
                 }
                 
                 .customer-input-wrapper input {
-                    padding: 10px 12px 10px 35px;
-                    font-size: 13px;
+                    padding: 16px 45px 16px 15px;
+                    font-size: 14px;
                 }
                 
                 .contact-buttons-wrapper {
                     flex-direction: column;
+                    gap: 12px;
                 }
                 
                 .contact-buttons-wrapper .service-btn {
                     width: 100%;
+                    padding: 14px;
+                    font-size: 14px;
                 }
                 
                 .alert-message {
-                    top: 10px;
-                    right: 10px;
-                    left: 10px;
+                    top: 15px;
+                    right: 15px;
+                    left: 15px;
                     max-width: none;
+                    padding: 15px 20px;
+                }
+            }
+            
+            /* تأثيرات التحميل */
+            .service-card {
+                transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            
+            /* توهج عند الاختيار */
+            .service-card.has-selection .service-icon {
+                animation: glow 2s ease-in-out infinite alternate;
+            }
+            
+            @keyframes glow {
+                from {
+                    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+                }
+                to {
+                    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.3);
                 }
             }
         `;
