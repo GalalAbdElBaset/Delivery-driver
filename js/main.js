@@ -1,5 +1,5 @@
 // =============================
-// Tn-QA Delivery- Main Script (Optimized)
+// Tn-QA Delivery - Main Script (Optimized)
 // =============================
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -666,7 +666,7 @@ document.addEventListener("DOMContentLoaded", () => {
             this.showLoading();
             
             setTimeout(() => {
-                const whatsappNumber = "97471375390";
+                const whatsappNumber = "97431691024";
                 const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
                 
                 window.open(whatsappUrl, '_blank');
@@ -681,21 +681,21 @@ document.addEventListener("DOMContentLoaded", () => {
         
         createWhatsAppMessage(name, phone, email, service, message, lang) {
             if (lang === 'en') {
-                return `🚗 New Service Request from HELA Express%0A%0A`
+                return `🚗 New Service Request from Tn-QA Delivery%0A%0A`
                     + `👤 *Name:* ${name}%0A`
                     + `📞 *Phone:* ${phone}%0A`
                     + (email ? `📧 *Email:* ${email}%0A` : '')
                     + (service ? `🛠️ *Service:* ${service}%0A` : '')
                     + `%0A📝 *Message:*%0A${message}%0A%0A`
-                    + `📍 *Source:* HELA Express Website`;
+                    + `📍 *Source:* Tn-QA Delivery Website`;
             } else {
-                return `🚗 طلب خدمة جديدة من HELA Express%0A%0A`
+                return `🚗 طلب خدمة جديدة من Tn-QA Delivery%0A%0A`
                     + `👤 *الاسم:* ${name}%0A`
                     + `📞 *رقم الهاتف:* ${phone}%0A`
                     + (email ? `📧 *البريد الإلكتروني:* ${email}%0A` : '')
                     + (service ? `🛠️ *الخدمة المطلوبة:* ${service}%0A` : '')
                     + `%0A📝 *الرسالة:*%0A${message}%0A%0A`
-                    + `📍 *المصدر:* موقع HELA Express`;
+                    + `📍 *المصدر:* موقع Tn-QA Delivery`;
             }
         }
         

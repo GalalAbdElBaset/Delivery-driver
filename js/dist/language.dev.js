@@ -115,11 +115,12 @@ function () {
     key: "getSavedLanguage",
     value: function getSavedLanguage() {
       // Check localStorage first
-      var savedLang = localStorage.getItem('hela_language');
-      if (savedLang) return savedLang; // Check browser language
+      var savedLang = localStorage.getItem('hela_language') || localStorage.getItem('site_language') || localStorage.getItem('language');
+      if (savedLang && (savedLang === 'ar' || savedLang === 'en')) return savedLang; // Check browser language
 
       var browserLang = navigator.language || navigator.userLanguage;
-      if (browserLang.startsWith('ar')) return 'ar'; // Default to Arabic
+      if (browserLang.startsWith('ar')) return 'ar';
+      if (browserLang.startsWith('en')) return 'en'; // Default to Arabic
 
       return 'ar';
     }
@@ -128,6 +129,8 @@ function () {
     value: function saveLanguage(lang) {
       try {
         localStorage.setItem('hela_language', lang);
+        localStorage.setItem('site_language', lang);
+        localStorage.setItem('language', lang);
         console.log('💾 Language saved:', lang); // Update cookie for server-side if needed
 
         document.cookie = "hela_language=".concat(lang, "; path=/; max-age=31536000"); // Dispatch event for other components
@@ -186,7 +189,13 @@ function () {
 
       // Update current language text
       document.querySelectorAll('#currentLang, .current-lang').forEach(function (el) {
-        el.textContent = _this3.currentLang === 'ar' ? 'العربية' : 'English';
+        if (_this3.currentLang === 'ar') {
+          el.textContent = 'العربية';
+          el.style.fontFamily = "'Cairo', sans-serif";
+        } else {
+          el.textContent = 'English';
+          el.style.fontFamily = "'Cairo', sans-serif";
+        }
       }); // Update active states
 
       document.querySelectorAll('[data-lang]').forEach(function (el) {
@@ -222,11 +231,13 @@ function () {
         document.documentElement.lang = 'ar';
         document.body.classList.add('rtl');
         document.body.classList.remove('ltr');
+        document.body.style.fontFamily = "'Cairo', sans-serif";
       } else {
         document.documentElement.dir = 'ltr';
         document.documentElement.lang = 'en';
         document.body.classList.add('ltr');
         document.body.classList.remove('rtl');
+        document.body.style.fontFamily = "'Cairo', sans-serif";
       }
     } // ==================== TRANSLATION SYSTEM ====================
 
@@ -269,7 +280,7 @@ function () {
 
         if (translation) el.title = translation;
       });
-      console.log("\u2705 Applied ".concat(elements.length, " translations"));
+      console.log("\u2705 Applied ".concat(elements.length, " translations for ").concat(this.currentLang));
     }
   }, {
     key: "applyTranslationToElement",
@@ -313,39 +324,76 @@ function () {
   }, {
     key: "getTranslation",
     value: function getTranslation(key) {
-      var keys = key.split('.');
-      var value = this.translations[this.currentLang];
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
-
       try {
-        for (var _iterator = keys[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var k = _step.value;
+        var keys = key.split('.');
+        var value = this.translations[this.currentLang];
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
 
-          if (value && _typeof(value) === 'object' && k in value) {
-            value = value[k];
-          } else {
-            console.warn("Translation key not found: ".concat(key));
-            return null;
-          }
-        }
-      } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-      } finally {
         try {
-          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-            _iterator["return"]();
+          for (var _iterator = keys[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var k = _step.value;
+
+            if (value && _typeof(value) === 'object' && k in value) {
+              value = value[k];
+            } else {
+              // Try fallback to other language
+              var fallbackLang = this.currentLang === 'ar' ? 'en' : 'ar';
+              var fallbackValue = this.translations[fallbackLang];
+              var _iteratorNormalCompletion2 = true;
+              var _didIteratorError2 = false;
+              var _iteratorError2 = undefined;
+
+              try {
+                for (var _iterator2 = keys[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                  var k2 = _step2.value;
+
+                  if (fallbackValue && _typeof(fallbackValue) === 'object' && k2 in fallbackValue) {
+                    fallbackValue = fallbackValue[k2];
+                  } else {
+                    console.warn("Translation key not found: ".concat(key));
+                    return null;
+                  }
+                }
+              } catch (err) {
+                _didIteratorError2 = true;
+                _iteratorError2 = err;
+              } finally {
+                try {
+                  if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+                    _iterator2["return"]();
+                  }
+                } finally {
+                  if (_didIteratorError2) {
+                    throw _iteratorError2;
+                  }
+                }
+              }
+
+              return fallbackValue;
+            }
           }
+        } catch (err) {
+          _didIteratorError = true;
+          _iteratorError = err;
         } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
+          try {
+            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+              _iterator["return"]();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
           }
         }
-      }
 
-      return value;
+        return value;
+      } catch (error) {
+        console.error("Error getting translation for key \"".concat(key, "\":"), error);
+        return null;
+      }
     } // ==================== TRANSLATION DATA ====================
 
   }, {
@@ -967,5 +1015,68 @@ if (typeof module !== 'undefined' && module.exports) {
     languageManager: languageManager,
     initLanguageSystem: initLanguageSystem
   };
-}
+} // ==================== AUTO REINITIALIZATION FIX ====================
+// إصلاح: إعادة تحميل اللغة عند تغيير الصفحات
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  // تأخير للتأكد من تحميل جميع العناصر
+  setTimeout(function () {
+    if (window.languageManager) {
+      console.log('🔄 Re-applying translations on page load...');
+      window.languageManager.loadLanguage();
+    } else {
+      console.log('🌍 Initializing language system...');
+      initLanguageSystem();
+    }
+  }, 300);
+}); // إعادة تطبيق الترجمات عند تحميل المحتوى الديناميكي
+
+document.addEventListener('languageChanged', function () {
+  console.log('Language changed event fired');
+
+  if (window.languageManager) {
+    setTimeout(function () {
+      window.languageManager.applyTranslations();
+    }, 50);
+  }
+}); // إضافة event listener للعناصر التي يتم إضافتها ديناميكياً
+
+if (typeof MutationObserver !== 'undefined') {
+  var observer = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+      if (mutation.addedNodes.length) {
+        setTimeout(function () {
+          if (window.languageManager && window.languageManager.isInitialized) {
+            window.languageManager.applyTranslations();
+          }
+        }, 100);
+      }
+    });
+  });
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+} // دالة مساعدة للترجمة المباشرة
+
+
+window.translateText = function (key) {
+  if (window.languageManager) {
+    return window.languageManager.getTranslation(key) || key;
+  }
+
+  return key;
+}; // إصلاح: إعادة تحميل النظام عند تحميل الصفحة بالكامل
+
+
+window.addEventListener('load', function () {
+  setTimeout(function () {
+    if (window.languageManager) {
+      console.log('📝 Final language check on window load');
+      window.languageManager.updatePageDirection();
+      window.languageManager.applyTranslations();
+    }
+  }, 500);
+});
 //# sourceMappingURL=language.dev.js.map

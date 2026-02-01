@@ -281,22 +281,67 @@
     </section>
 
     <!-- ================= SERVICES SECTION ================= -->
-    <section id="services" class="services section-padding">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-i18n="services.title">خدماتنا</h2>
-                <p class="section-subtitle" data-i18n="services.subtitle">نقدم مجموعة متكاملة من خدمات التوصيل والنقل</p>
-            </div>
-            
-            <div class="services-grid">
-                <!-- Service 1: Local Delivery (Merged Qatar & Tunisia) -->
-                <div class="service-card" data-service="local-delivery">
-                    <div class="service-icon gold-bg">
-                        <i class="fas fa-truck-fast"></i>
+<!-- ================= SERVICES SECTION ================= -->
+<section id="services" class="services section-padding">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title" data-i18n="services.title">خدماتنا</h2>
+            <p class="section-subtitle" data-i18n="services.subtitle">نقدم مجموعة متكاملة من خدمات التوصيل والنقل</p>
+        </div>
+        
+        <div class="services-grid">
+            <!-- Service 1: توصيل دولي -->
+            <div class="service-card" data-service="scale-sales">
+                <div class="service-icon gold-bg">
+                    <i class="fas fa-balance-scale"></i>
+                </div>
+                <h3>توصيل دولي</h3>
+                <div class="service-description">
+                    <p>قسم توصيل موازيين بين قطر وتونس او تونس وقطر</p>
+                </div>
+                <div class="service-description">
+                        <p>قسم توصيل موازييين بين قطر وتونس او تونس وقطر </p>
+                        <ul>
+                            <li><i class="fas fa-handshake"></i> تريد بيع ميزان</li>
+                            <li><i class="fas fa-scale-balanced"></i>   حجز ميزان من قطر الي تونس</li>
+                            <li><i class="fas fa-weight-scale"></i> حجز ميزان من تونس الي قطر   </li>
+                        </ul>
                     </div>
-                    <h3>التوصيل المحلي</h3>
-                    <div class="service-description">
-                        <div class="country-service">
+                <!-- قائمة اختيار الخدمات الفرعية -->
+                <div class="service-selection">
+                    <select class="service-select" data-service="توصيل دولي">
+                        <option value="" selected disabled>-- اختر الخدمة --</option>
+                        <option value="تريد بيع ميزان">تريد بيع ميزان</option>
+                        <option value="حجز ميزان من قطر الي تونس">حجز ميزان من قطر الي تونس</option>
+                        <option value="حجز ميزان من تونس الي قطر">حجز ميزان من تونس الي قطر</option>
+                    </select>
+                </div>
+                
+                <div class="service-contact">
+                    <div class="contact-numbers">
+                        <a href="tel:+97431691024" class="service-phone-btn">
+                            <i class="fas fa-phone"></i> قطر: 31691024
+                        </a>
+                        <a href="tel:+21656471550" class="service-phone-btn">
+                            <i class="fas fa-phone"></i> تونس: 56471550
+                        </a>
+                    </div>
+                    <button class="service-btn send-whatsapp" data-country="مشترك" data-service="توصيل دولي">
+                        <i class="fab fa-whatsapp"></i> طلب ميزان
+                    </button>
+                </div>
+            </div>
+
+            <!-- Service 2: التوصيل المحلي في قطر -->
+            <div class="service-card" data-service="local-delivery-qatar">
+                <div class="service-icon gold-bg">
+                    <i class="fas fa-truck-fast"></i>
+                </div>
+                <h3>التوصيل المحلي في قطر</h3>
+                <div class="service-description">
+                    <p>خدمات توصيل محلية داخل دولة قطر</p>
+                </div>
+                                        <div class="country-service">
                             <h4><i class="fas fa-flag qatar-flag"></i> قطر</h4>
                             <ul>
                                 <li><i class="fas fa-check-circle"></i> توصيل محلي داخل قطر</li>
@@ -308,7 +353,42 @@
                                 <li><i class="fas fa-check-circle"></i> اشتراك شهري</li>
                             </ul>
                         </div>
-                        <div class="country-service">
+                <!-- قائمة اختيار الخدمات الفرعية -->
+                <div class="service-selection">
+                    <select class="service-select" data-service="التوصيل المحلي في قطر">
+                        <option value=""selected disabled>-- اختر الخدمة --</option>
+                        <option value="توصيل محلي داخل قطر">توصيل محلي داخل قطر</option>
+                        <option value="توصيل أغراض ومشتريات">توصيل أغراض ومشتريات</option>
+                        <option value="توصيل موظفين وتلاميذ">توصيل موظفين وتلاميذ</option>
+                        <option value="توصيل مشاوير خاصة">توصيل مشاوير خاصة</option>
+                        <option value="توصيل هدايا">توصيل هدايا</option>
+                        <option value="توصيل مواد استهلاكية">توصيل مواد استهلاكية</option>
+                        <option value="اشتراك شهري">اشتراك شهري</option>
+                    </select>
+                </div>
+                
+                <div class="service-contact">
+                    <div class="contact-numbers">
+                        <a href="tel:+97431691024" class="service-phone-btn">
+                            <i class="fas fa-phone"></i> قطر: 31691024
+                        </a>
+                    </div>
+                    <button class="service-btn whatsapp send-whatsapp" data-country="قطر" data-service="التوصيل المحلي في قطر">
+                        <i class="fab fa-whatsapp"></i> طلب خدمة
+                    </button>
+                </div>
+            </div>
+
+            <!-- Service 3: التوصيل المحلي في تونس -->
+            <div class="service-card" data-service="local-delivery-tunisia">
+                <div class="service-icon gold-bg">
+                    <i class="fas fa-truck-fast"></i>
+                </div>
+                <h3>التوصيل المحلي في تونس</h3>
+                <div class="service-description">
+                    <p>خدمات توصيل محلية داخل تونس</p>
+                </div>
+                                        <div class="country-service">
                             <h4><i class="fas fa-flag tunisia-flag"></i> تونس</h4>
                             <ul>
                                 <li><i class="fas fa-check-circle"></i> توصيل محلي داخل تونس</li>
@@ -320,98 +400,43 @@
                                 <li><i class="fas fa-check-circle"></i> اشتراك شهري</li>
                             </ul>
                         </div>
-                    </div>
-                    <div class="service-contact">
-                        <div class="contact-numbers">
-                            <a href="tel:+97431691024" class="service-phone-btn">
-                                <i class="fas fa-phone"></i> قطر: 31691024
-                            </a>
-                            <a href="tel:+21656471550" class="service-phone-btn">
-                                <i class="fas fa-phone"></i> تونس: 56471550
-                            </a>
-                        </div>
-                        <a href="contact.html?service=local-delivery" class="service-btn whatsapp">
-                            <i class="fab fa-whatsapp"></i> طلب خدمة
-                        </a>
-                    </div>
+                <!-- قائمة اختيار الخدمات الفرعية -->
+                <div class="service-selection">
+                    <select class="service-select" data-service="التوصيل المحلي في تونس">
+                        <option value="" selected disabled>-- اختر الخدمة --</option>
+                        <option value="توصيل محلي داخل تونس">توصيل محلي داخل تونس</option>
+                        <option value="توصيل أغراض ومشتريات">توصيل أغراض ومشتريات</option>
+                        <option value="توصيل موظفين وتلاميذ">توصيل موظفين وتلاميذ</option>
+                        <option value="توصيل مشاوير خاصة">توصيل مشاوير خاصة</option>
+                        <option value="توصيل هدايا">توصيل هدايا</option>
+                        <option value="توصيل مواد استهلاكية">توصيل مواد استهلاكية</option>
+                        <option value="اشتراك شهري">اشتراك شهري</option>
+                    </select>
                 </div>
                 
-                <!-- Service 2: Scale Sales -->
-                <div class="service-card" data-service="scale-sales">
-                    <div class="service-icon gold-bg">
-                        <i class="fas fa-balance-scale"></i>
-                    </div>
-                    <h3>بيع الموازين</h3>
-                    <div class="service-description">
-                        <p>نقدم تشكيلة متنوعة من الموازين والأجهزة بجودة عالية وأسعار تنافسية:</p>
-                        <ul>
-                            <li><i class="fas fa-weight"></i> موازين إلكترونية دقيقة</li>
-                            <li><i class="fas fa-industry"></i> موازين صناعية وتجارية</li>
-                            <li><i class="fas fa-utensils"></i> موازين مطبخ ومنزلية</li>
-                            <li><i class="fas fa-shield-alt"></i> ضمان وجودة عالية</li>
-                        </ul>
-                    </div>
-                    <div class="service-contact">
-                        <div class="contact-numbers">
-                            <a href="tel:+97431691024" class="service-phone-btn">
-                                <i class="fas fa-phone"></i> قطر: 31691024
-                            </a>
-                            <a href="tel:+21656471550" class="service-phone-btn">
-                                <i class="fas fa-phone"></i> تونس: 56471550
-                            </a>
-                        </div>
-                        <a href="tel:+21656471550" class="service-btn">
-                            <i class="fab fa-whatsapp"></i> طلب ميزان
+                <div class="service-contact">
+                    <div class="contact-numbers">
+                        <a href="tel:+21656471550" class="service-phone-btn">
+                            <i class="fas fa-phone"></i> تونس: 56471550
                         </a>
                     </div>
+                    <button class="service-btn whatsapp send-whatsapp" data-country="تونس" data-service="التوصيل المحلي في تونس">
+                        <i class="fab fa-whatsapp"></i> طلب خدمة
+                    </button>
                 </div>
-                
-                <!-- Service 3: Scale Booking & Delivery -->
-                <div class="service-card" data-service="scale-booking">
-                    <div class="service-icon gold-bg">
-                        <i class="fas fa-plane"></i>
-                    </div>
-                    <h3>حجز وتوصيل الموازين بين الدول</h3>
-                    <div class="service-description">
-                        <div class="delivery-direction">
-                            <h4><i class="fas fa-plane-departure"></i> من قطر إلى تونس</h4>
-                            <ul>
-                                <li><i class="fas fa-calendar-check"></i> حجز مسبق للميزان</li>
-                                <li><i class="fas fa-shield-alt"></i> تأمين كامل للشحنة</li>
-                                <li><i class="fas fa-map-marker-alt"></i> تتبع الشحنة</li>
-                            </ul>
-                        </div>
-                        <div class="delivery-direction">
-                            <h4><i class="fas fa-plane-arrival"></i> من تونس إلى قطر</h4>
-                            <ul>
-                                <li><i class="fas fa-calendar-check"></i> حجز مسبق للميزان</li>
-                                <li><i class="fas fa-shield-alt"></i> تأمين كامل للشحنة</li>
-                                <li><i class="fas fa-map-marker-alt"></i> تتبع الشحنة</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="service-contact">
-                        <div class="contact-numbers">
-                            <a href="tel:+97431691024" class="service-phone-btn">
-                                <i class="fas fa-phone"></i> قطر: 31691024
-                            </a>
-                            <a href="tel:+21656471550" class="service-phone-btn">
-                                <i class="fas fa-phone"></i> تونس: 56471550
-                            </a>
-                        </div>
-                        <a href="contact.html?service=scale-booking" class="service-btn">
-                            <i class="fab fa-whatsapp"></i> حجز الآن
-                        </a>
-                    </div>
+            </div>
+
+            
+            <!-- Service 5: توثيق تسليم الأموال -->
+            <div class="service-card important-card" data-service="money-delivery">
+                <div class="service-icon gold-bg">
+                    <i class="fas fa-hand-holding-usd"></i>
                 </div>
-                
-                <!-- Service 4: Money Delivery Documentation -->
-                <div class="service-card important-card" data-service="money-delivery">
-                    <div class="service-icon gold-bg">
-                        <i class="fas fa-hand-holding-usd"></i>
-                    </div>
-                    <h3>توثيق تسليم الأموال (يدًا بيد)</h3>
-                    <div class="service-description">
+                <h3>توثيق تسليم الأموال (يدًا بيد)</h3>
+                <div class="service-description">
+                    <p>خدمة توثيق موثوقة لتسليم الأموال بين الأطراف</p>
+                </div>
+                <div class="service-description">
                         <p>نوفر خدمة توثيق فقط لعمليات تسليم الأموال بين المرسل والمستلم، حيث يتم التسليم مباشرة بين الطرفين.</p>
                         
                         <div class="service-features">
@@ -428,57 +453,48 @@
                                 <span>حماية وخصوصية كاملة</span>
                             </div>
                         </div>
-                        
-                        <div class="service-features">
-                            <div class="feature-item">
-                                <i class="fas fa-exchange-alt gold-text"></i>
-                                <span>تحويل الريال القطري إلى الدينار التونسي</span>
-                            </div>
-                            <div class="feature-item">
-                                <i class="fas fa-exchange-alt gold-text"></i>
-                                <span>تحويل الدينار التونسي إلى الريال القطري</span>
-                            </div>
-                        </div>
-                        
-                        <div class="warning-note">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            <div>
-                                <h4>تنويه مهم:</h4>
-                                <p>الموقع منصة تعريفية وتنسيقية فقط، ولا يقوم بأي عمليات دفع إلكتروني أو تحصيل أموال.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="service-contact">
-                        <div class="contact-numbers">
-                            <a href="tel:+97431691024" class="service-phone-btn">
-                                <i class="fas fa-phone"></i> قطر: 31691024
-                            </a>
-                            <a href="tel:+21656471550" class="service-phone-btn">
-                                <i class="fas fa-phone"></i> تونس: 56471550
-                            </a>
-                        </div>
-                        <a href="contact.html?service=money-delivery" class="service-btn">
-                            <i class="fab fa-whatsapp"></i> تواصل الآن
-                        </a>
-                    </div>
+                <!-- قائمة اختيار الخدمات الفرعية -->
+                <div class="service-selection">
+                    <select class="service-select" data-service="توثيق تسليم الأموال">
+                        <option value="" selected disabled>-- اختر الخدمة --</option>
+                        <option value="توثيق تسليم الأموال">توثيق تسليم الأموال</option>
+                        <option value="تحويل ريال قطري إلى دينار تونسي">تحويل ريال قطري إلى دينار تونسي</option>
+                        <option value="تحويل دينار تونسي إلى ريال قطري">تحويل دينار تونسي إلى ريال قطري</option>
+                    </select>
                 </div>
                 
-                <!-- Space for Future Advertisements -->
-                <div class="service-card advertisement-placeholder">
-                    <div class="ad-icon">
-                        <i class="fas fa-ad gold-text"></i>
-                    </div>
-                    <h3>مساحة للإعلانات</h3>
-                    <p>هذه المساحة محجوزة للإعلانات أو الشراكات المستقبلية.</p>
-                    <div class="ad-contact">
-                        <a href="contact.html?subject=advertisement" class="ad-btn">
-                            <i class="fas fa-bullhorn"></i> للاستفسار عن الإعلان
+                <div class="service-contact">
+                    <div class="contact-numbers">
+                        <a href="tel:+97431691024" class="service-phone-btn">
+                            <i class="fas fa-phone"></i> قطر: 31691024
+                        </a>
+                        <a href="tel:+21656471550" class="service-phone-btn">
+                            <i class="fas fa-phone"></i> تونس: 56471550
                         </a>
                     </div>
+                    <button class="service-btn send-whatsapp" data-country="مشترك" data-service="توثيق تسليم الأموال">
+                        <i class="fab fa-whatsapp"></i> تواصل الآن
+                    </button>
                 </div>
             </div>
+            
+            
         </div>
-    </section>
+        <!-- Space for Future Advertisements -->
+            <div class="service-card advertisement-placeholder">
+                <div class="ad-icon">
+                    <i class="fas fa-ad gold-text"></i>
+                </div>
+                <h3>مساحة للإعلانات</h3>
+                <p>هذه المساحة محجوزة للإعلانات أو الشراكات المستقبلية.</p>
+                <div class="ad-contact">
+                    <a href="contact.html?subject=advertisement" class="ad-btn">
+                        <i class="fas fa-bullhorn"></i> للاستفسار عن الإعلان
+                    </a>
+                </div>
+            </div>
+    </div>
+</section>
 
     <!-- ================= FOOTER ================= -->
     <footer class="main-footer">
@@ -577,7 +593,7 @@
     <script src="js/language.js"></script>
     <script src="js/main.js"></script>
     <script src="js/map.js"></script>
-    
+    <script src="js/services.js"></script>
     <!-- Initialize Current Year -->
     <script>
         document.getElementById('currentYear').textContent = new Date().getFullYear();
