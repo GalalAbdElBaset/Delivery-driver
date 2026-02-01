@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مراجعات العملاء - Tn-QA Delivery</title>
+    <meta name="description" content="مراجعات وتقييمات عملاء HELA Express - شهادات حقيقية عن خدمات التوصيل بين قطر وتونس">
+    
+    <!-- Font Awesome & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/contact.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <!-- Reviews Page CSS -->
+    <style>
+        /* ================= REVIEWS PAGE STYLES ================= */
+        .reviews-hero {
+            background: linear-gradient(135deg, 
+                rgba(212, 175, 55, 0.15) 0%,
+                rgba(212, 175, 55, 0.08) 100%),
+                url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 150px 0 80px;
+            text-align: center;
+            position: relative;
+            margin-top: 100px;
+        }
+
+        .reviews-hero .hero-overlay {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg,
+                rgba(0, 0, 0, 0.7) 0%,
+                rgba(0, 0, 0, 0.8) 100%);
+            z-index: 1;
+        }
+
+        .reviews-hero .hero-content {
+            position: relative;
+            z-index: 2;
+            color: var(--white);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .reviews-hero .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .reviews-hero .hero-subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        /* Review Stats Enhanced */
+        .review-stats-enhanced {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .stat-card-enhanced {
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--shadow-hover);
+            border: 2px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card-enhanced:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
+            border-color: var(--gold);
+        }
+
+        .stat-card-enhanced::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-dark));
+        }
+
+        .stat-number-enhanced {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stars-enhanced {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin: 20px 0;
+        }
+
+        .stars-enhanced i {
+            color: #FFD700;
+            font-size: 1.5rem;
+            text-shadow: 0 2px 5px rgba(255, 215, 0, 0.3);
+        }
+
+        .stat-icon-enhanced {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.2));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .stat-icon-enhanced i {
+            font-size: 2.2rem;
+            color: var(--gold);
+        }
+
+        .stat-card-enhanced h3 {
+            font-size: 1.4rem;
+            color: var(--black);
+            margin: 10px 0 5px;
+        }
+
+        .stat-card-enhanced p {
+            color: var(--gray-dark);
+            font-size: 1rem;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* All Reviews Section */
+        .all-reviews-section {
+            padding: 80px 0;
+            background: var(--light-gray);
+        }
+
+        .reviews-filter {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 12px 25px;
+            background: var(--white);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 30px;
+            color: var(--gold);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--gold);
+            color: var(--white);
+            border-color: var(--gold);
+        }
+
+        .filter-btn i {
+            font-size: 1rem;
+        }
+
+        /* Reviews Grid Enhanced */
+        .reviews-grid-enhanced {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .review-card-enhanced {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 35px 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .review-card-enhanced:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--gold);
+        }
+
+        .review-card-enhanced::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 6rem;
+            color: rgba(212, 175, 55, 0.1);
+            font-family: serif;
+            line-height: 1;
+        }
+
+        .review-header-enhanced {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .review-avatar-enhanced {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--gold);
+        }
+
+        .review-avatar-enhanced img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .reviewer-info-enhanced h4 {
+            margin: 0 0 8px;
+            color: var(--black);
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .reviewer-info-enhanced .reviewer-location {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .reviewer-info-enhanced .reviewer-location i {
+            font-size: 0.8rem;
+        }
+
+        .review-rating-enhanced {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .review-rating-enhanced i {
+            color: #FFD700;
+            font-size: 1rem;
+        }
+
+        .review-date-enhanced {
+            color: var(--gray);
+            font-size: 0.85rem;
+            margin-top: 5px;
+        }
+
+        .review-content-enhanced {
+            margin: 25px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .review-content-enhanced p {
+            color: var(--gray-dark);
+            line-height: 1.8;
+            font-size: 1.05rem;
+            margin: 0;
+        }
+
+        .review-service-enhanced {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--gold);
+            padding: 8px 18px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+
+        .review-service-enhanced i {
+            font-size: 0.9rem;
+        }
+
+        .verified-badge-enhanced {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(37, 211, 102, 0.1);
+            color: var(--whatsapp-green);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .verified-badge-enhanced i {
+            font-size: 0.8rem;
+        }
+
+        /* Pagination */
+        .reviews-pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 60px;
+        }
+
+        .pagination-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            color: var(--gold);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pagination-btn:hover,
+        .pagination-btn.active {
+            background: var(--gold);
+            color: var(--white);
+            border-color: var(--gold);
+        }
+
+        .pagination-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Submit Review Section */
+        .submit-review-section {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .review-form-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 50px;
+            box-shadow: var(--shadow-hover);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .rating-input {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .stars-input {
+            display: flex;
+            gap: 10px;
+            direction: ltr;
+        }
+
+        .star-input {
+            font-size: 2.5rem;
+            color: #ddd;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .star-input:hover,
+        .star-input.active {
+            color: #FFD700;
+        }
+
+        .rating-labels {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .rating-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .reviews-grid-enhanced {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+            
+            .review-form-wrapper {
+                padding: 40px 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .reviews-hero {
+                padding: 120px 0 60px;
+            }
+            
+            .reviews-hero .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .review-stats-enhanced {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .reviews-grid-enhanced {
+                grid-template-columns: 1fr;
+            }
+            
+            .reviews-filter {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .filter-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .review-stats-enhanced {
+                grid-template-columns: 1fr;
+            }
+            
+            .stat-number-enhanced {
+                font-size: 2.8rem;
+            }
+            
+            .review-form-wrapper {
+                padding: 30px 20px;
+            }
+            
+            .review-header-enhanced {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ================= NAVIGATION ================= -->
+    <header id="mainHeader" class="glass-header">
+        <div class="nav-wrap container">
+            <!-- Logo -->
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="https://iili.io/fLgS9wP.md.jpg" alt="HELA Express Logo">
+                </div>
+                <div class="logo-text">
+                    <h1 data-i18n="companyName" class="gold-text">Tn-QA Delivery</h1>
+                    <p data-i18n="companySlogan">خدمة توصيل سريعة وآمنة</p>
+                </div>
+            </div>
+            
+            <!-- Navigation Links -->
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-link">الرئيسية</a>
+                <a href="index.html#about" class="nav-link">من نحن</a>
+                <a href="index.html#services" class="nav-link">الخدمات</a>
+                <a href="contact.html" class="nav-link">التواصل</a>
+                <a href="reviews.html" class="nav-link active">المراجعات</a>
+                
+                <!-- Language Switcher -->
+                <div class="language-switcher-nav">
+                    <button id="langBtn" class="lang-btn-nav">
+                        <i class="fas fa-globe"></i>
+                        <span id="currentLang">العربية</span>
+                    </button>
+                    <div class="lang-dropdown-nav" id="langDropdown">
+                        <a href="#" data-lang="ar" class="lang-option-nav active">العربية</a>
+                        <a href="#" data-lang="en" class="lang-option-nav">English</a>
+                    </div>
+                </div>
+            </nav>
+            
+            <!-- Header Buttons -->
+            <div class="header-buttons">
+                <a href="https://wa.me/97471375390" class="nav-cta whatsapp-btn">
+                    <i class="fab fa-whatsapp"></i> <span class="cta-text">تواصل عبر واتساب</span>
+                </a>
+                <a href="tel:+97471375390" class="nav-cta call-btn">
+                    <i class="fas fa-phone"></i> <span class="cta-text">اتصل الآن</span>
+                </a>
+            </div>
+            
+            <!-- Mobile Menu Burger -->
+            <button class="burger" id="burger" aria-label="قائمة التنقل">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ================= REVIEWS HERO ================= -->
+    <section class="reviews-hero">
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="gold-text">مراجعات وتقييمات العملاء</h1>
+                <p class="hero-subtitle">ثقة أكثر من 500 عميل في خدماتنا هي شهادة نجاحنا. انظر ماذا يقولون عن تجربتهم مع HELA Express</p>
+                
+                <div class="review-stats-enhanced">
+                    <div class="stat-card-enhanced">
+                        <div class="stat-number-enhanced">4.9/5</div>
+                        <div class="stars-enhanced">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <h3>تقييم عام</h3>
+                        <p>بناءً على 500+ مراجعة</p>
+                    </div>
+                    
+                    <div class="stat-card-enhanced">
+                        <div class="stat-icon-enhanced">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                        <div class="stat-number-enhanced">98%</div>
+                        <h3>رضا العملاء</h3>
+                        <p>نسبة الرضا عن الخدمات</p>
+                    </div>
+                    
+                    <div class="stat-card-enhanced">
+                        <div class="stat-icon-enhanced">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="stat-number-enhanced">24h</div>
+                        <h3>سرعة التوصيل</h3>
+                        <p>متوسط وقت التسليم</p>
+                    </div>
+                    
+                    <div class="stat-card-enhanced">
+                        <div class="stat-icon-enhanced">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <div class="stat-number-enhanced">10m</div>
+                        <h3>سرعة الرد</h3>
+                        <p>متوسط وقت رد الدعم</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= ALL REVIEWS SECTION ================= -->
+    <section class="all-reviews-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">جميع المراجعات</h2>
+                <p class="section-subtitle">مراجعات حقيقية من عملائنا الكرام عن جميع خدماتنا</p>
+            </div>
+            
+            <!-- Reviews Filter -->
+            <div class="reviews-filter">
+                <button class="filter-btn active" data-filter="all">
+                    <i class="fas fa-layer-group"></i> الكل
+                </button>
+                <button class="filter-btn" data-filter="5">
+                    <i class="fas fa-star"></i> 5 نجوم
+                </button>
+                <button class="filter-btn" data-filter="4">
+                    <i class="fas fa-star"></i> 4 نجوم فأكثر
+                </button>
+                <button class="filter-btn" data-filter="delivery">
+                    <i class="fas fa-truck"></i> التوصيل
+                </button>
+                <button class="filter-btn" data-filter="scales">
+                    <i class="fas fa-balance-scale"></i> الموازين
+                </button>
+                <button class="filter-btn" data-filter="money">
+                    <i class="fas fa-money-bill-wave"></i> الأموال
+                </button>
+            </div>
+            
+            <!-- Reviews Grid -->
+            <div class="reviews-grid-enhanced" id="reviewsContainer">
+                <!-- Reviews will be loaded here by JavaScript -->
+            </div>
+            
+            <!-- Pagination -->
+            <div class="reviews-pagination">
+                <button class="pagination-btn disabled">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <button class="pagination-btn active">1</button>
+                <button class="pagination-btn">2</button>
+                <button class="pagination-btn">3</button>
+                <button class="pagination-btn">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= SUBMIT REVIEW SECTION ================= -->
+    <section class="submit-review-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">شاركنا تجربتك</h2>
+                <p class="section-subtitle">ساعد الآخرين في اتخاذ القرار من خلال مشاركة تجربتك مع خدماتنا</p>
+            </div>
+            
+            <div class="review-form-wrapper">
+                <div class="rating-input">
+                    <h3>كيف تقيم تجربتك معنا؟</h3>
+                    <div class="stars-input">
+                        <i class="fas fa-star star-input" data-value="1"></i>
+                        <i class="fas fa-star star-input" data-value="2"></i>
+                        <i class="fas fa-star star-input" data-value="3"></i>
+                        <i class="fas fa-star star-input" data-value="4"></i>
+                        <i class="fas fa-star star-input" data-value="5"></i>
+                    </div>
+                    <div class="rating-labels">
+                        <span class="rating-label">سيئة</span>
+                        <span class="rating-label">ممتازة</span>
+                    </div>
+                    <!-- أضف هذا input المخفي -->
+                    <input type="hidden" id="selectedRating" value="0">
+                </div>
+                                
+                <div class="form-group">
+                    <label>عنوان المراجعة</label>
+                    <input type="text" id="reviewTitle" placeholder="اكتب عنواناً موجزاً لمراجعتك" class="form-control">
+                </div>
+                
+                <div class="form-group">
+                    <label>تفاصيل المراجعة</label>
+                    <textarea id="reviewContent" rows="5" placeholder="شاركنا تفاصيل تجربتك مع خدماتنا..." class="form-control"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>اسمك (اختياري)</label>
+                    <input type="text" id="reviewerName" placeholder="يمكنك استخدام اسم مستعار" class="form-control">
+                </div>
+                
+                <div class="form-group">
+                    <label>البلد</label>
+                    <select id="reviewerCountry" class="form-control">
+                        <option value="">اختر بلدك</option>
+                        <option value="qa">قطر 🇶🇦</option>
+                        <option value="tn">تونس 🇹🇳</option>
+                        <option value="sa">السعودية 🇸🇦</option>
+                        <option value="ae">الإمارات 🇦🇪</option>
+                        <option value="other">دولة أخرى</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>نوع الخدمة المستخدمة</label>
+                    <select id="reviewService" class="form-control">
+                        <option value="">اختر الخدمة</option>
+                        <option value="delivery">التوصيل المحلي</option>
+                        <option value="scale_booking">حجز موازين</option>
+                        <option value="scale_sales">بيع موازين</option>
+                        <option value="money_delivery">توثيق تسليم الأموال</option>
+                        <option value="other">خدمة أخرى</option>
+                    </select>
+                </div>
+                
+                <div class="form-actions">
+                    <button class="btn btn-outline" onclick="resetReviewForm()">
+                        <i class="fas fa-redo"></i> مسح النموذج
+                    </button>
+                    <button class="btn btn-primary whatsapp-submit" onclick="submitReviewViaWhatsApp()">
+                        <i class="fab fa-whatsapp"></i> إرسال عبر واتساب
+                    </button>
+                </div>
+                
+                <p class="form-hint" style="text-align: center; margin-top: 20px;">
+                    <i class="fas fa-info-circle"></i> جميع المراجعات تخضع للمراجعة والنشر خلال 24 ساعة
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Footer Logo -->
+                <div class="footer-logo">
+                    <div class="logo">
+                        <div class="logo-icon">
+                            <img src="https://iili.io/fLgS9wP.md.jpg" alt="HELA Express Logo">
+                        </div>
+                        <div class="logo-text">
+                            <h2 class="gold-text">Tn-QA Delivery</h2>
+                            <p>خدمة توصيل سريعة وآمنة</p>
+                        </div>
+                    </div>
+                    <p class="footer-desc">خدمات توصيل ونقل موثوقة بين تونس وقطر</p>
+                </div>
+                
+                <!-- Quick Contact -->
+                <div class="footer-contact">
+                    <h3 class="footer-title gold-text">تواصل سريع</h3>
+                    <div class="quick-contact-buttons">
+                        <a href="https://wa.me/97471375390" class="quick-btn whatsapp">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>واتساب سريع</span>
+                        </a>
+                        <a href="tel:+97471375390" class="quick-btn phone">
+                            <i class="fas fa-phone"></i>
+                            <span>اتصال عاجل</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Contact Info -->
+                <div class="footer-contact-info">
+                    <h3 class="footer-title gold-text">معلومات الاتصال</h3>
+                    <div class="contact-details">
+                        <div class="contact-detail">
+                            <i class="fab fa-whatsapp gold-text"></i>
+                            <div>
+                                <span class="detail-label">واتساب:</span>
+                                <span class="detail-value">+974 71 375 390</span>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <i class="fas fa-phone gold-text"></i>
+                            <div>
+                                <span class="detail-label">قطر:</span>
+                                <span class="detail-value">+974 71 375 390</span>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <i class="fas fa-phone gold-text"></i>
+                            <div>
+                                <span class="detail-label">تونس:</span>
+                                <span class="detail-value">+216 56 471 550</span>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <i class="fas fa-envelope gold-text"></i>
+                            <div>
+                                <span class="detail-label">البريد:</span>
+                                <span class="detail-value">helamishwar@gmail.com</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="legal-notice">
+                    <i class="fas fa-exclamation-circle gold-text"></i>
+                    <p>الموقع منصة تعريفية وتنسيقية فقط، ولا يقوم بأي عمليات دفع إلكتروني أو تحصيل أموال.</p>
+                </div>
+                
+                <div class="footer-actions">
+                    <a href="index.html" class="back-to-home">
+                        <i class="fas fa-home"></i>
+                        العودة للرئيسية
+                    </a>
+                    <p class="copyright">© <span id="currentYear"></span> Tn-QA Delivery - جميع الحقوق محفوظة</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= FLOATING BUTTONS ================= -->
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/97471375390" class="float-whatsapp" aria-label="تواصل معنا عبر واتساب" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+        <span class="float-badge">1</span>
+    </a>
+    
+    <!-- Scroll to Top -->
+    <button class="scroll-to-top" id="scrollToTop" aria-label="العودة إلى الأعلى">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- ================= SCRIPTS ================= -->
+    <!-- Custom JavaScript Files -->
+    <script src="js/language.js"></script>
+    <script src="js/main.js"></script>
+    
+    <!-- Reviews JavaScript -->
+        <script>
+        // Reviews Data
+        const reviews = [
+            {
+                id: 1,
+                name: "محمد أحمد",
+                location: "الدوحة، قطر",
+                avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+                rating: 5,
+                date: "قبل 3 أيام",
+                service: "حجز ميزان",
+                serviceType: "scales",
+                verified: true,
+                content: "خدمة استثنائية! حجزت ميزان من قطر إلى تونس وكانت العملية سلسة جداً. الفريق متجاوب ومحترف، والتوصيل كان في الوقت المحدد. أوصي بشدة بخدماتهم لأي شخص يحتاج نقل بضائع بين قطر وتونس."
+            },
+            {
+                id: 2,
+                name: "سارة القاسمي",
+                location: "أبو ظبي، الإمارات",
+                avatar: "https://randomuser.me/api/portraits/women/44.jpg",
+                rating: 5,
+                date: "قبل أسبوع",
+                service: "توصيل محلي",
+                serviceType: "delivery",
+                verified: true,
+                content: "استخدمت خدمة التوصيل المحلي في قطر وكانت رائعة. السائقون مؤدبون، والخدمة سريعة، والأسعار مناسبة جداً. ما أعجبني أكثر هو المتابعة والتحديث المستمر لحالة الطلب. شكراً فريق HELA Express!"
+            },
+            {
+                id: 3,
+                name: "علي التونسي",
+                location: "تونس العاصمة",
+                avatar: "https://randomuser.me/api/portraits/men/67.jpg",
+                rating: 5,
+                date: "قبل أسبوعين",
+                service: "توثيق أموال",
+                serviceType: "money",
+                verified: true,
+                content: "خدمة توثيق تسليم الأموال كانت آمنة ومضمونة 100%. كنت قلقاً في البداية ولكن الفريق طمأنني وشرح العملية بالتفصيل. كل شيء تم بشكل احترافي ووصلت الأموال بسلام. أنصح الجميع بهذه الخدمة الموثوقة."
+            },
+            {
+                id: 4,
+                name: "نورا السعدي",
+                location: "الرياض، السعودية",
+                avatar: "https://randomuser.me/api/portraits/women/28.jpg",
+                rating: 5,
+                date: "قبل شهر",
+                service: "بيع موازين",
+                serviceType: "scales",
+                verified: true,
+                content: "اشتريت ميزان من خلالهم وكانت الجودة ممتازة والسعر مناسب جداً مقارنة بالسوق. ما يميزهم هو المتابعة بعد البيع والتأكد من رضا العميل. حتى بعد الشراء ظلوا متواجدين للاستفسارات والدعم. شكراً لكم!"
+            },
+            {
+                id: 5,
+                name: "خالد المغربي",
+                location: "الدار البيضاء، المغرب",
+                avatar: "https://randomuser.me/api/portraits/men/52.jpg",
+                rating: 4,
+                date: "قبل أسبوعين",
+                service: "حجز ميزان",
+                serviceType: "scales",
+                verified: true,
+                content: "خدمة جيدة بشكل عام. التوصيل كان في الموعد المحدد، والفريق محترف. الشيء الوحيد الذي يمكن تحسينه هو التواصل خلال عملية النقل. بخلاف ذلك، تجربة ممتازة وسأستخدم الخدمة مرة أخرى."
+            },
+            {
+                id: 6,
+                name: "فاطمة البحرينية",
+                location: "المنامة، البحرين",
+                avatar: "https://randomuser.me/api/portraits/women/65.jpg",
+                rating: 5,
+                date: "قبل 5 أيام",
+                service: "توصيل مستندات",
+                serviceType: "delivery",
+                verified: true,
+                content: "كنت بحاجة لإرسال مستندات مهمة من البحرين إلى قطر عن طريق تونس. الخدمة كانت سريعة وآمنة. المستندات وصلت سليمة وفي الوقت المطلوب. شكراً على الاحترافية والجودة."
+            },
+            {
+                id: 7,
+                name: "ياسين الجزائري",
+                location: "الجزائر العاصمة",
+                avatar: "https://randomuser.me/api/portraits/men/45.jpg",
+                rating: 5,
+                date: "قبل 10 أيام",
+                service: "توثيق أموال",
+                serviceType: "money",
+                verified: true,
+                content: "عملية توثيق وتسليم الأموال كانت سلسة وآمنة. الفريق محترف ويعرف عمله جيداً. أنصح أي شخص يحتاج تحويل أموال بين الدول العربية باستخدام هذه الخدمة الآمنة."
+            },
+            {
+                id: 8,
+                name: "لطيفة العمانية",
+                location: "مسقط، عمان",
+                avatar: "https://randomuser.me/api/portraits/women/33.jpg",
+                rating: 4,
+                date: "قبل 3 أسابيع",
+                service: "توصيل بضائع",
+                serviceType: "delivery",
+                verified: true,
+                content: "خدمة توصيل البضائع كانت جيدة، الأسعار مناسبة والتوصيل في الوقت المحدد. ما أضاف قيمة للتجربة هو التواصل المستمر والتحديثات. شكراً للفريق على المجهود."
+            },
+            {
+                id: 9,
+                name: "محمود المصري",
+                location: "القاهرة، مصر",
+                avatar: "https://randomuser.me/api/portraits/men/22.jpg",
+                rating: 5,
+                date: "قبل شهرين",
+                service: "حجز ميزان",
+                serviceType: "scales",
+                verified: true,
+                content: "أفضل خدمة نقل بضائع استخدمتها. الأسعار شفافة، والخدمة محترفة، والفريق متواجد 24/7 للرد على الاستفسارات. استخدمت الخدمة عدة مرات وكل مرة كانت أفضل من السابقة."
+            },
+            {
+                id: 10,
+                name: "ريم الكويتية",
+                location: "الكويت",
+                avatar: "https://randomuser.me/api/portraits/women/51.jpg",
+                rating: 5,
+                date: "قبل 6 أيام",
+                service: "توصيل محلي",
+                serviceType: "delivery",
+                verified: true,
+                content: "خدمة التوصيل المحلي في تونس كانت ممتازة. السائق محترم والبضاعة وصلت بحالة ممتازة. أنصح أي شخص في تونس يحتاج خدمة توصيل محلي بالتعامل معهم."
+            }
+        ];
+
+        // Global variables
+        let currentFilter = 'all';
+        let currentPage = 1;
+        const reviewsPerPage = 6;
+
+        // Initialize Reviews
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current year
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            
+            // Load reviews
+            loadReviews();
+            
+            // Initialize star rating
+            initStarRating();
+            
+            // Initialize filter buttons
+            initFilterButtons();
+            
+            // Initialize pagination
+            initPagination();
+            
+            console.log('✅ Reviews page initialized successfully');
+        });
+
+        function loadReviews() {
+            const container = document.getElementById('reviewsContainer');
+            let filteredReviews = reviews;
+            
+            // Apply filters
+            if (currentFilter !== 'all') {
+                if (currentFilter === '5') {
+                    filteredReviews = reviews.filter(r => r.rating === 5);
+                } else if (currentFilter === '4') {
+                    filteredReviews = reviews.filter(r => r.rating >= 4);
+                } else if (currentFilter === 'delivery') {
+                    filteredReviews = reviews.filter(r => r.serviceType === 'delivery');
+                } else if (currentFilter === 'scales') {
+                    filteredReviews = reviews.filter(r => r.serviceType === 'scales');
+                } else if (currentFilter === 'money') {
+                    filteredReviews = reviews.filter(r => r.serviceType === 'money');
+                }
+            }
+            
+            // Calculate pagination
+            const startIndex = (currentPage - 1) * reviewsPerPage;
+            const endIndex = startIndex + reviewsPerPage;
+            const paginatedReviews = filteredReviews.slice(startIndex, endIndex);
+            const totalPages = Math.ceil(filteredReviews.length / reviewsPerPage);
+            
+            // Clear container
+            container.innerHTML = '';
+            
+            // Add reviews
+            paginatedReviews.forEach(review => {
+                const starIcons = Array(review.rating).fill('<i class="fas fa-star"></i>').join('') + 
+                                 Array(5 - review.rating).fill('<i class="far fa-star"></i>').join('');
+                
+                const reviewCard = `
+                    <div class="review-card-enhanced">
+                        <div class="review-header-enhanced">
+                            <div class="review-avatar-enhanced">
+                                <img src="${review.avatar}" alt="${review.name}" loading="lazy">
+                            </div>
+                            <div class="reviewer-info-enhanced">
+                                <h4>${review.name}</h4>
+                                <div class="reviewer-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>${review.location}</span>
+                                </div>
+                                <div class="review-rating-enhanced">
+                                    ${starIcons}
+                                </div>
+                                <div class="review-date-enhanced">${review.date}</div>
+                            </div>
+                        </div>
+                        <div class="review-content-enhanced">
+                            <p>${review.content}</p>
+                        </div>
+                        ${review.verified ? '<span class="verified-badge-enhanced"><i class="fas fa-check-circle"></i> عميل موثّق</span>' : ''}
+                        <span class="review-service-enhanced">
+                            <i class="fas fa-tag"></i> ${review.service}
+                        </span>
+                    </div>
+                `;
+                
+                container.innerHTML += reviewCard;
+            });
+            
+            // Update pagination
+            updatePagination(totalPages);
+            
+            // If no reviews found
+            if (paginatedReviews.length === 0) {
+                container.innerHTML = `
+                    <div class="no-reviews" style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+                        <i class="fas fa-comment-slash" style="font-size: 4rem; color: var(--gold); margin-bottom: 20px;"></i>
+                        <h3 style="color: var(--gray-dark); margin-bottom: 10px;">لا توجد مراجعات</h3>
+                        <p style="color: var(--gray);">لا توجد مراجعات تطابق عوامل التصفية المحددة.</p>
+                    </div>
+                `;
+            }
+        }
+
+        function initStarRating() {
+            const stars = document.querySelectorAll('.star-input');
+            const selectedRatingInput = document.getElementById('selectedRating');
+            
+            // Initialize all stars as empty
+            stars.forEach(star => {
+                star.classList.remove('fas', 'active');
+                star.classList.add('far');
+            });
+            
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    const value = parseInt(this.getAttribute('data-value'));
+                    
+                    // Update stars visually
+                    stars.forEach((s, index) => {
+                        if (index < value) {
+                            s.classList.add('active');
+                            s.classList.remove('far');
+                            s.classList.add('fas');
+                        } else {
+                            s.classList.remove('active');
+                            s.classList.remove('fas');
+                            s.classList.add('far');
+                        }
+                    });
+                    
+                    // Store rating value
+                    if (selectedRatingInput) {
+                        selectedRatingInput.value = value;
+                    }
+                    
+                    console.log('Selected rating:', value);
+                });
+                
+                // Add hover effect
+                star.addEventListener('mouseover', function() {
+                    const value = parseInt(this.getAttribute('data-value'));
+                    stars.forEach((s, index) => {
+                        if (index < value) {
+                            s.classList.add('hover');
+                        } else {
+                            s.classList.remove('hover');
+                        }
+                    });
+                });
+                
+                star.addEventListener('mouseout', function() {
+                    stars.forEach(s => s.classList.remove('hover'));
+                });
+            });
+        }
+
+        function initFilterButtons() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Update current filter
+                    currentFilter = this.getAttribute('data-filter');
+                    currentPage = 1; // Reset to first page
+                    
+                    // Load reviews with new filter
+                    loadReviews();
+                    
+                    console.log('Filter changed to:', currentFilter);
+                });
+            });
+        }
+
+        function initPagination() {
+            const paginationBtns = document.querySelectorAll('.pagination-btn');
+            paginationBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (this.classList.contains('disabled')) return;
+                    
+                    const btnText = this.textContent.trim();
+                    
+                    if (btnText.includes('chevron-right')) {
+                        // Previous page
+                        if (currentPage > 1) {
+                            currentPage--;
+                            loadReviews();
+                        }
+                    } else if (btnText.includes('chevron-left')) {
+                        // Next page
+                        currentPage++;
+                        loadReviews();
+                    } else {
+                        // Specific page number
+                        const pageNum = parseInt(btnText);
+                        if (!isNaN(pageNum)) {
+                            currentPage = pageNum;
+                            loadReviews();
+                        }
+                    }
+                });
+            });
+        }
+
+        function updatePagination(totalPages) {
+            const paginationContainer = document.querySelector('.reviews-pagination');
+            if (!paginationContainer) return;
+            
+            // Clear existing buttons (keep first and last if they exist)
+            const existingBtns = paginationContainer.querySelectorAll('.pagination-btn');
+            const firstBtn = existingBtns[0];
+            const lastBtn = existingBtns[existingBtns.length - 1];
+            
+            paginationContainer.innerHTML = '';
+            
+            // Add previous button
+            const prevBtn = document.createElement('button');
+            prevBtn.className = 'pagination-btn';
+            if (currentPage === 1) prevBtn.classList.add('disabled');
+            prevBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            prevBtn.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    loadReviews();
+                }
+            });
+            paginationContainer.appendChild(prevBtn);
+            
+            // Add page numbers
+            for (let i = 1; i <= totalPages; i++) {
+                const pageBtn = document.createElement('button');
+                pageBtn.className = 'pagination-btn';
+                if (i === currentPage) pageBtn.classList.add('active');
+                pageBtn.textContent = i;
+                pageBtn.addEventListener('click', () => {
+                    currentPage = i;
+                    loadReviews();
+                });
+                paginationContainer.appendChild(pageBtn);
+            }
+            
+            // Add next button
+            const nextBtn = document.createElement('button');
+            nextBtn.className = 'pagination-btn';
+            if (currentPage === totalPages) nextBtn.classList.add('disabled');
+            nextBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+            nextBtn.addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    loadReviews();
+                }
+            });
+            paginationContainer.appendChild(nextBtn);
+        }
+
+        function resetReviewForm() {
+            if (confirm('هل تريد مسح النموذج؟')) {
+                // Reset form fields
+                document.getElementById('reviewTitle').value = '';
+                document.getElementById('reviewContent').value = '';
+                document.getElementById('reviewerName').value = '';
+                document.getElementById('reviewerCountry').value = '';
+                document.getElementById('reviewService').value = '';
+                
+                // Reset stars
+                const stars = document.querySelectorAll('.star-input');
+                stars.forEach(star => {
+                    star.classList.remove('active', 'fas');
+                    star.classList.add('far');
+                });
+                
+                // Reset hidden input
+                const selectedRatingInput = document.getElementById('selectedRating');
+                if (selectedRatingInput) {
+                    selectedRatingInput.value = '0';
+                }
+                
+                // Show success message
+                showToast('تم مسح النموذج بنجاح', 'success');
+            }
+        }
+
+        function submitReviewViaWhatsApp() {
+            const ratingInput = document.getElementById('selectedRating');
+            const rating = ratingInput ? parseInt(ratingInput.value) : 0;
+            const title = document.getElementById('reviewTitle').value.trim();
+            const content = document.getElementById('reviewContent').value.trim();
+            const name = document.getElementById('reviewerName').value.trim() || 'مجهول';
+            const country = document.getElementById('reviewerCountry').value;
+            const service = document.getElementById('reviewService').value;
+            
+            // Validation
+            if (rating === 0) {
+                showToast('يرجى اختيار التقييم أولاً', 'error');
+                return;
+            }
+            
+            if (!title || !content) {
+                showToast('يرجى ملء عنوان المراجعة وتفاصيلها', 'error');
+                return;
+            }
+            
+            if (!service) {
+                showToast('يرجى اختيار نوع الخدمة', 'error');
+                return;
+            }
+            
+            // Map values to readable text
+            const countryNames = {
+                'qa': 'قطر 🇶🇦',
+                'tn': 'تونس 🇹🇳',
+                'sa': 'السعودية 🇸🇦',
+                'ae': 'الإمارات 🇦🇪',
+                'other': 'دولة أخرى'
+            };
+            
+            const serviceNames = {
+                'delivery': 'التوصيل المحلي',
+                'scale_booking': 'حجز موازين',
+                'scale_sales': 'بيع موازين',
+                'money_delivery': 'توثيق تسليم الأموال',
+                'other': 'خدمة أخرى'
+            };
+            
+            // Create WhatsApp message
+            const message = `🌟 *مراجعة جديدة لـ HELA Express* 🌟%0A%0A`
+                + `📝 *العنوان:* ${title}%0A`
+                + `⭐ *التقييم:* ${'⭐'.repeat(rating)} (${rating}/5)%0A`
+                + `👤 *المراجع:* ${name}%0A`
+                + `📍 *البلد:* ${countryNames[country] || country}%0A`
+                + `🛠️ *الخدمة:* ${serviceNames[service] || service}%0A%0A`
+                + `💬 *المراجعة:*%0A${content}%0A%0A`
+                + `📱 *المصدر:* نموذج المراجعات - الموقع الرسمي%0A`
+                + `🕒 *التاريخ:* ${new Date().toLocaleString('ar-SA')}`;
+            
+            // Open WhatsApp
+            const whatsappUrl = `https://wa.me/97471375390?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+            
+            // Show success message
+            showToast('سيتم فتح واتساب لإرسال المراجعة', 'success');
+        }
+
+        // Utility function to show toast messages
+        function showToast(message, type = 'info') {
+            // Remove existing toasts
+            const existingToasts = document.querySelectorAll('.toast-message');
+            existingToasts.forEach(toast => toast.remove());
+            
+            // Create toast element
+            const toast = document.createElement('div');
+            toast.className = `toast-message toast-${type}`;
+            toast.textContent = message;
+            
+            // Style the toast
+            toast.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 15px 25px;
+                background: ${type === 'success' ? '#28a745' : 
+                            type === 'error' ? '#dc3545' : 
+                            type === 'info' ? 'var(--gold)' : '#6c757d'};
+                color: white;
+                border-radius: var(--border-radius);
+                box-shadow: var(--shadow-hover);
+                z-index: 9999;
+                animation: toastSlideIn 0.3s ease, toastFadeOut 0.3s ease 2.7s;
+                max-width: 400px;
+                font-weight: 500;
+                font-family: var(--font-family);
+                text-align: center;
+            `;
+            
+            // Add animations
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes toastSlideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+                @keyframes toastFadeOut {
+                    from { opacity: 1; }
+                    to { opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            document.body.appendChild(toast);
+            
+            // Remove toast after 3 seconds
+            setTimeout(() => {
+                if (toast.parentNode) {
+                    toast.remove();
+                }
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

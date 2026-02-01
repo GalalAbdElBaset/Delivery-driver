@@ -1,5 +1,5 @@
 // =============================
-// ASAP Qatar - Main Script (Optimized)
+// Tn-QA Delivery- Main Script (Optimized)
 // =============================
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
             
             this.currentSlide = 0;
             this.slideInterval = null;
-            this.slideDuration = 5000; // 5 seconds per slide
+            this.slideDuration = 5000;
             this.isAnimating = false;
             this.touchStartX = 0;
             this.touchEndX = 0;
@@ -40,7 +40,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         
         setupEventListeners() {
-            // Navigation buttons
             if (this.prevBtn) {
                 this.prevBtn.addEventListener('click', () => this.showPrevSlide());
             }
@@ -49,28 +48,23 @@ document.addEventListener("DOMContentLoaded", () => {
                 this.nextBtn.addEventListener('click', () => this.showNextSlide());
             }
             
-            // Dot navigation
             this.dots.forEach((dot, index) => {
                 dot.addEventListener('click', () => this.goToSlide(index));
             });
             
-            // Pause on hover
             if (this.slider) {
                 this.slider.addEventListener('mouseenter', () => this.pauseSlideShow());
                 this.slider.addEventListener('mouseleave', () => this.startSlideShow());
             }
             
-            // Keyboard navigation
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'ArrowLeft') this.showPrevSlide();
                 if (e.key === 'ArrowRight') this.showNextSlide();
                 if (e.key === 'Escape') this.pauseSlideShow();
             });
             
-            // Touch swipe support
             this.setupTouchEvents();
             
-            // Pause slider when user interacts with page
             document.addEventListener('visibilitychange', () => {
                 if (document.hidden) {
                     this.pauseSlideShow();
@@ -101,10 +95,8 @@ document.addEventListener("DOMContentLoaded", () => {
             
             if (Math.abs(diff) > swipeThreshold) {
                 if (diff > 0) {
-                    // Swipe left - next slide
                     this.showNextSlide();
                 } else {
-                    // Swipe right - previous slide
                     this.showPrevSlide();
                 }
             }
@@ -114,33 +106,24 @@ document.addEventListener("DOMContentLoaded", () => {
             if (this.isAnimating) return;
             
             this.isAnimating = true;
-            
-            // Reset progress bar
             this.resetProgressBar();
             
-            // Hide current slide
             const currentSlideEl = this.slides[this.currentSlide];
             const currentDot = this.dots[this.currentSlide];
             
             if (currentSlideEl) {
                 currentSlideEl.classList.remove('active');
                 currentSlideEl.style.opacity = '0';
-                currentSlideEl.style.transform = 'translateX(0)';
             }
             
             if (currentDot) {
                 currentDot.classList.remove('active');
             }
             
-            // Store previous slide
             this.previousSlide = this.currentSlide;
-            
-            // Update current slide index
             this.currentSlide = (n + this.slides.length) % this.slides.length;
             
-            // Animate slide transition
             this.animateSlideTransition(() => {
-                // Show new slide
                 const newSlide = this.slides[this.currentSlide];
                 const newDot = this.dots[this.currentSlide];
                 
@@ -152,9 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     newDot.classList.add('active');
                 }
                 
-                // Restart progress bar
                 this.startProgressBar();
-                
                 this.isAnimating = false;
             });
         }
@@ -162,50 +143,33 @@ document.addEventListener("DOMContentLoaded", () => {
         animateSlideTransition(callback) {
             const newSlide = this.slides[this.currentSlide];
             const oldSlide = this.slides[this.previousSlide];
-            const direction = this.getSlideDirection();
             
             if (!newSlide) {
                 if (callback) callback();
                 return;
             }
             
-            // Set initial position based on direction
             newSlide.style.transition = 'none';
             newSlide.style.opacity = '0';
-            newSlide.style.transform = `translateX(${direction * 100}%)`;
             
-            // Animate old slide out
             if (oldSlide) {
                 oldSlide.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
                 oldSlide.style.opacity = '0';
-                oldSlide.style.transform = `translateX(${-direction * 100}%)`;
             }
             
-            // Animate new slide in
             setTimeout(() => {
                 newSlide.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
                 newSlide.style.opacity = '1';
-                newSlide.style.transform = 'translateX(0)';
                 
                 setTimeout(() => {
                     if (oldSlide) {
                         oldSlide.style.transition = '';
                         oldSlide.style.opacity = '';
-                        oldSlide.style.transform = '';
                     }
                     newSlide.style.transition = '';
                     if (callback) callback();
                 }, 800);
             }, 50);
-        }
-        
-        getSlideDirection() {
-            if (this.currentSlide > this.previousSlide) {
-                return 1; // Slide from right
-            } else if (this.currentSlide < this.previousSlide) {
-                return -1; // Slide from left
-            }
-            return 1; // Default to slide from right
         }
         
         showNextSlide() {
@@ -243,7 +207,6 @@ document.addEventListener("DOMContentLoaded", () => {
             this.progressBar.style.width = '0%';
             this.progressBar.style.transition = `width ${this.slideDuration}ms linear`;
             
-            // Trigger reflow
             void this.progressBar.offsetWidth;
             
             setTimeout(() => {
@@ -268,7 +231,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         
         preloadSlides() {
-            // Preload slide images for better performance
             this.slides.forEach(slide => {
                 const bgImage = slide.querySelector('.slide-bg');
                 if (bgImage) {
@@ -332,15 +294,12 @@ document.addEventListener("DOMContentLoaded", () => {
             
             if (scrollTop > this.navbarHeight) {
                 if (scrollTop > this.lastScrollTop && scrollTop > 200) {
-                    // Scroll down - hide navbar
                     this.header.classList.add('hidden');
                 } else {
-                    // Scroll up - show navbar
                     this.header.classList.remove('hidden');
                     this.header.classList.add('scrolled');
                 }
             } else {
-                // At top - show navbar without scrolled class
                 this.header.classList.remove('hidden');
                 this.header.classList.remove('scrolled');
             }
@@ -349,36 +308,38 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         
         setupNavigation() {
-            // Set initial indicator position
             const activeLink = document.querySelector(".nav-link.active");
             if (activeLink && this.indicator) {
                 this.moveIndicator(activeLink);
             }
             
-            // Handle nav link clicks
             this.navLinks.forEach(link => {
                 link.addEventListener("click", (e) => this.handleNavClick(e, link));
             });
         }
         
         handleNavClick(e, link) {
+            const href = link.getAttribute("href");
+            
+            // إذا كان الرابط ليس رابطًا داخليًا (ليس بـ #) فلا نمنع السلوك الافتراضي
+            if (!href || !href.startsWith('#')) {
+                // السماح للرابط بالعمل بشكل طبيعي
+                return;
+            }
+            
+            // فقط للروابط الداخلية نمنع السلوك الافتراضي
             e.preventDefault();
             
-            // Update active class
             this.navLinks.forEach(l => l.classList.remove("active"));
             link.classList.add("active");
             
-            // Move indicator
             this.moveIndicator(link);
             
-            // Close mobile menu if open
             if (this.isMobileMenuOpen) {
                 this.closeMobileMenu();
             }
             
-            // Get target section
-            const targetID = link.getAttribute("href");
-            this.scrollToSection(targetID);
+            this.scrollToSection(href);
         }
         
         moveIndicator(element) {
@@ -402,7 +363,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const headerOffset = this.navbarHeight + 10;
             const targetPosition = target.offsetTop - headerOffset;
             
-            // Smooth scroll animation
             window.scrollTo({
                 top: targetPosition,
                 behavior: 'smooth'
@@ -438,7 +398,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 this.toggleMobileMenu();
             });
             
-            // Close menu when clicking on links
             this.navLinks.forEach(link => {
                 link.addEventListener('click', () => {
                     if (this.isMobileMenuOpen) {
@@ -447,7 +406,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             });
             
-            // Close menu when clicking outside
             document.addEventListener("click", (e) => {
                 if (this.isMobileMenuOpen && 
                     !this.navMenu.contains(e.target) && 
@@ -456,14 +414,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
             
-            // Close menu on Escape key
             document.addEventListener("keydown", (e) => {
                 if (e.key === "Escape" && this.isMobileMenuOpen) {
                     this.closeMobileMenu();
                 }
             });
             
-            // Close menu on window resize
             window.addEventListener("resize", () => {
                 if (window.innerWidth > 1024 && this.isMobileMenuOpen) {
                     this.closeMobileMenu();
@@ -496,13 +452,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         
         setupScrollToTopButton() {
-            // تأكد أن زر العودة للأعلى موجود بالفعل في HTML
-            if (!this.scrollToTopBtn) {
-                console.warn("Scroll to top button not found in HTML");
-                return;
-            }
+            if (!this.scrollToTopBtn) return;
             
-            // أضف حدث النقر للزر الموجود في HTML
             this.scrollToTopBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 this.scrollToTop();
@@ -527,7 +478,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         
         setupSmoothScrolling() {
-            // Enhanced smooth scrolling for all anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', (e) => {
                     const href = anchor.getAttribute('href');
@@ -555,6 +505,7 @@ document.addEventListener("DOMContentLoaded", () => {
             
             this.phoneInput = this.form.querySelector('input[type="tel"]');
             this.submitBtn = this.form.querySelector('.submit-btn');
+            this.formMessage = document.getElementById('formMessage');
             
             this.init();
         }
@@ -562,7 +513,6 @@ document.addEventListener("DOMContentLoaded", () => {
         init() {
             if (!this.form) return;
             
-            // Add name attributes to form inputs
             this.setupFormInputs();
             this.setupFormValidation();
             this.setupPhoneFormatting();
@@ -570,8 +520,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         
         setupFormInputs() {
-            // Ensure all form inputs have name attributes
-            const inputs = this.form.querySelectorAll('input, textarea');
+            const inputs = this.form.querySelectorAll('input, textarea, select');
             inputs.forEach((input, index) => {
                 if (!input.name) {
                     const type = input.type || input.tagName.toLowerCase();
@@ -581,7 +530,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         
         setupFormValidation() {
-            const inputs = this.form.querySelectorAll('input, textarea');
+            const inputs = this.form.querySelectorAll('input, textarea, select');
             
             inputs.forEach(input => {
                 input.addEventListener('blur', () => this.validateField(input));
@@ -646,7 +595,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     let formatted = '';
                     
                     if (value.startsWith('974')) {
-                        // Qatar number formatting
                         if (value.length <= 3) {
                             formatted = value;
                         } else if (value.length <= 6) {
@@ -657,7 +605,6 @@ document.addEventListener("DOMContentLoaded", () => {
                             formatted = `${value.substring(0, 3)} ${value.substring(3, 6)} ${value.substring(6, 8)} ${value.substring(8)}`;
                         }
                     } else if (value.startsWith('216')) {
-                        // Tunisia number formatting
                         if (value.length <= 3) {
                             formatted = value;
                         } else if (value.length <= 6) {
@@ -668,7 +615,6 @@ document.addEventListener("DOMContentLoaded", () => {
                             formatted = `${value.substring(0, 3)} ${value.substring(3, 6)} ${value.substring(6, 8)} ${value.substring(8)}`;
                         }
                     } else {
-                        // Default formatting
                         if (value.length <= 4) {
                             formatted = value;
                         } else if (value.length <= 8) {
@@ -690,8 +636,7 @@ document.addEventListener("DOMContentLoaded", () => {
         async handleSubmit(e) {
             e.preventDefault();
             
-            // Validate all fields
-            const inputs = this.form.querySelectorAll('input[required], textarea[required]');
+            const inputs = this.form.querySelectorAll('input[required], textarea[required], select[required]');
             let isValid = true;
             
             inputs.forEach(input => {
@@ -702,7 +647,6 @@ document.addEventListener("DOMContentLoaded", () => {
             
             if (!isValid) return;
             
-            // Get form data
             const formData = new FormData(this.form);
             const formObject = {};
             formData.forEach((value, key) => {
@@ -712,49 +656,46 @@ document.addEventListener("DOMContentLoaded", () => {
             const name = formObject.name || '';
             const phone = formObject.phone || formObject.tel_1 || '';
             const email = formObject.email || '';
-            const message = formObject.message || formObject.textarea_3 || '';
+            const service = formObject.service || '';
+            const message = formObject.message || formObject.textarea_4 || '';
             
-            // Get current language
             const currentLang = localStorage.getItem('language') || 'ar';
             
-            // Create WhatsApp message
-            const whatsappMessage = this.createWhatsAppMessage(name, phone, email, message, currentLang);
+            const whatsappMessage = this.createWhatsAppMessage(name, phone, email, service, message, currentLang);
             
-            // Show loading state
             this.showLoading();
             
-            // Open WhatsApp after a short delay for better UX
             setTimeout(() => {
                 const whatsappNumber = "97471375390";
                 const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
                 
                 window.open(whatsappUrl, '_blank');
                 
-                // Show success animation
                 this.showSuccess();
                 
-                // Reset form after 2 seconds
                 setTimeout(() => {
                     this.resetForm();
-                }, 2000);
+                }, 3000);
             }, 1000);
         }
         
-        createWhatsAppMessage(name, phone, email, message, lang) {
+        createWhatsAppMessage(name, phone, email, service, message, lang) {
             if (lang === 'en') {
-                return `🚗 New Service Request from ASAP Qatar%0A%0A`
+                return `🚗 New Service Request from HELA Express%0A%0A`
                     + `👤 *Name:* ${name}%0A`
                     + `📞 *Phone:* ${phone}%0A`
                     + (email ? `📧 *Email:* ${email}%0A` : '')
+                    + (service ? `🛠️ *Service:* ${service}%0A` : '')
                     + `%0A📝 *Message:*%0A${message}%0A%0A`
-                    + `📍 *Source:* ASAP Qatar Website`;
+                    + `📍 *Source:* HELA Express Website`;
             } else {
-                return `🚗 طلب خدمة جديدة من ASAP Qatar%0A%0A`
+                return `🚗 طلب خدمة جديدة من HELA Express%0A%0A`
                     + `👤 *الاسم:* ${name}%0A`
                     + `📞 *رقم الهاتف:* ${phone}%0A`
                     + (email ? `📧 *البريد الإلكتروني:* ${email}%0A` : '')
+                    + (service ? `🛠️ *الخدمة المطلوبة:* ${service}%0A` : '')
                     + `%0A📝 *الرسالة:*%0A${message}%0A%0A`
-                    + `📍 *المصدر:* موقع ASAP Qatar`;
+                    + `📍 *المصدر:* موقع HELA Express`;
             }
         }
         
@@ -764,22 +705,26 @@ document.addEventListener("DOMContentLoaded", () => {
             const originalHTML = this.submitBtn.innerHTML;
             this.submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
             this.submitBtn.disabled = true;
+            this.submitBtn.classList.add('loading');
             
-            // Store original HTML for later restoration
             this.submitBtn.dataset.originalHtml = originalHTML;
         }
         
         showSuccess() {
-            if (!this.submitBtn) return;
+            if (!this.submitBtn || !this.formMessage) return;
             
             const currentLang = localStorage.getItem('language') || 'ar';
             
             if (currentLang === 'en') {
+                this.formMessage.textContent = 'Message sent successfully! Redirecting to WhatsApp...';
                 this.submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Message Sent Successfully!';
             } else {
+                this.formMessage.textContent = 'تم إرسال الرسالة بنجاح! يتم التوجيه إلى واتساب...';
                 this.submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> تم إرسال الرسالة بنجاح!';
             }
             
+            this.formMessage.className = 'form-message success';
+            this.formMessage.style.display = 'block';
             this.submitBtn.style.background = "linear-gradient(135deg, #28a745, #20c997)";
         }
         
@@ -788,16 +733,20 @@ document.addEventListener("DOMContentLoaded", () => {
             
             this.form.reset();
             
-            // Restore original button state
             const originalHTML = this.submitBtn.dataset.originalHtml;
             if (originalHTML) {
                 this.submitBtn.innerHTML = originalHTML;
             }
             
             this.submitBtn.disabled = false;
+            this.submitBtn.classList.remove('loading');
             this.submitBtn.style.background = "";
             
-            // Clear all error messages
+            if (this.formMessage) {
+                this.formMessage.style.display = 'none';
+                this.formMessage.className = 'form-message';
+            }
+            
             const errors = this.form.querySelectorAll('.error-message');
             errors.forEach(error => error.remove());
             
@@ -809,107 +758,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // Initialize contact form
     const contactForm = new ContactForm();
     
-    /* ================= LANGUAGE SWITCHER ================= */
-    class LanguageSwitcher {
-        constructor() {
-            this.langBtn = document.getElementById('langBtn');
-            this.langDropdown = document.getElementById('langDropdown');
-            this.currentLangSpan = document.getElementById('currentLang');
-            this.langOptions = document.querySelectorAll('.lang-option-nav');
-            
-            this.init();
-        }
-        
-        init() {
-            if (!this.langBtn || !this.langDropdown) return;
-            
-            this.setupEventListeners();
-            this.setInitialLanguage();
-        }
-        
-        setupEventListeners() {
-            // Toggle dropdown on button click
-            this.langBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                this.toggleDropdown();
-            });
-            
-            // Handle language selection
-            this.langOptions.forEach(option => {
-                option.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const lang = option.dataset.lang;
-                    this.switchLanguage(lang);
-                    this.closeDropdown();
-                });
-            });
-            
-            // Close dropdown when clicking outside
-            document.addEventListener('click', () => {
-                this.closeDropdown();
-            });
-            
-            // Prevent dropdown from closing when clicking inside
-            this.langDropdown.addEventListener('click', (e) => {
-                e.stopPropagation();
-            });
-        }
-        
-        toggleDropdown() {
-            this.langDropdown.classList.toggle('show');
-        }
-        
-        closeDropdown() {
-            this.langDropdown.classList.remove('show');
-        }
-        
-        setInitialLanguage() {
-            const savedLang = localStorage.getItem('language') || 'ar';
-            this.updateLanguageDisplay(savedLang);
-        }
-        
-        switchLanguage(lang) {
-            localStorage.setItem('language', lang);
-            this.updateLanguageDisplay(lang);
-            
-            // Here you can add logic to actually change the page content
-            // For now, we'll just update the display
-            this.updatePageContent(lang);
-        }
-        
-        updateLanguageDisplay(lang) {
-            this.langOptions.forEach(option => {
-                option.classList.remove('active');
-                if (option.dataset.lang === lang) {
-                    option.classList.add('active');
-                }
-            });
-            
-            // Update button text
-            if (lang === 'en') {
-                this.currentLangSpan.textContent = 'English';
-                document.documentElement.setAttribute('dir', 'ltr');
-                document.documentElement.setAttribute('lang', 'en');
-            } else {
-                this.currentLangSpan.textContent = 'العربية';
-                document.documentElement.setAttribute('dir', 'rtl');
-                document.documentElement.setAttribute('lang', 'ar');
-            }
-        }
-        
-        updatePageContent(lang) {
-            // This is a simplified version. You should implement full translation
-            // using your language.js file
-            console.log(`Switching to ${lang} language`);
-            
-            // Reload the page to apply language changes from language.js
-            // window.location.reload();
-        }
-    }
-    
-    // Initialize language switcher
-    const languageSwitcher = new LanguageSwitcher();
-    
     /* ================= ADDITIONAL ENHANCEMENTS ================= */
     class AdditionalEnhancements {
         constructor() {
@@ -919,11 +767,10 @@ document.addEventListener("DOMContentLoaded", () => {
         init() {
             this.setupLazyLoading();
             this.setupHoverEffects();
-            this.setupMapLoader();
+            this.setupRippleEffects();
         }
         
         setupLazyLoading() {
-            // Use native lazy loading for images
             const images = document.querySelectorAll('img[loading="lazy"]');
             
             images.forEach(img => {
@@ -934,7 +781,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         
         setupHoverEffects() {
-            // Service card hover effects
             const serviceCards = document.querySelectorAll('.service-card');
             
             serviceCards.forEach(card => {
@@ -952,9 +798,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 });
             });
-            
-            // Button ripple effects
-            const buttons = document.querySelectorAll('.btn, .method-btn, .service-btn, .nav-cta');
+        }
+        
+        setupRippleEffects() {
+            const buttons = document.querySelectorAll('.btn, .method-btn, .service-btn, .nav-cta, .service-phone-btn');
             
             buttons.forEach(btn => {
                 btn.addEventListener('click', (e) => {
@@ -991,18 +838,6 @@ document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => {
                 ripple.remove();
             }, 600);
-        }
-        
-        setupMapLoader() {
-            const mapIframe = document.querySelector('.map-wrapper iframe');
-            if (!mapIframe) return;
-            
-            mapIframe.addEventListener('load', () => {
-                const mapContainer = document.querySelector('.map-container');
-                if (mapContainer) {
-                    mapContainer.classList.add('loaded');
-                }
-            });
         }
     }
     
@@ -1062,11 +897,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const cssAnimations = new CSSAnimations();
     
     /* ================= INITIALIZATION COMPLETE ================= */
-    console.log('✅ ASAP Qatar - Enhanced Script loaded successfully');
+    console.log(' Tn-QA Delivery - Enhanced Script loaded successfully');
     
-    // Add loading screen removal
     window.addEventListener('load', () => {
-        // Trigger initial animations
         setTimeout(() => {
             document.body.classList.add('loaded');
         }, 100);
