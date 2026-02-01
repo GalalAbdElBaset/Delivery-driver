@@ -1,4 +1,4 @@
-// services.js - نظام طلبات الخدمات مع بيانات العميل
+// services.js - نظام طلبات الخدمات مع زرين منفصلين
 document.addEventListener('DOMContentLoaded', function() {
     // تعريف الأرقام
     const qatarNumber = '+97431691024';
@@ -6,6 +6,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // إضافة حقول بيانات العميل لكل بطاقة
     initializeCustomerFields();
+    
+    // إدارة حالة الأزرار بناء على اختيار الخدمة
+    setupButtonStates();
     
     // جميع أزرار إرسال واتساب
     const sendWhatsAppBtns = document.querySelectorAll('.send-whatsapp');
@@ -53,6 +56,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
+            // التحقق من توافق الخدمة مع البلد المختار
+            if (!isServiceCountryCompatible(selectedService, country)) {
+                showAlert('هذه الخدمة غير متاحة للبلد المحدد', 'error');
+                return;
+            }
+            
             // إنشاء رسالة واتساب
             const whatsappMessage = createWhatsAppMessage(mainService, selectedService, country, name, phone);
             
@@ -62,10 +71,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 phoneNumber = qatarNumber;
             } else if (country === 'تونس') {
                 phoneNumber = tunisiaNumber;
-            } else {
-                // للخدمات المشتركة، نسأل المستخدم
-                showCountrySelection(whatsappMessage, mainService, selectedService, name, phone);
-                return;
             }
             
             // إرسال الرسالة
@@ -73,6 +78,155 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
+    // دالة التحقق من توافق الخدمة مع البلد
+    function isServiceCountryCompatible(service, country) {
+        // قائمة الخدمات التي تتطلب تحقق خاص
+        const qatarOnlyServices = [
+            'حجز ميزان من تونس الي قطر',
+            'توصيل محلي داخل قطر',
+            'توصيل أغراض ومشتريات في قطر',
+            'توصيل موظفين وتلاميذ في قطر',
+            'توصيل مشاوير خاصة في قطر',
+            'توصيل هدايا في قطر',
+            'توصيل مواد استهلاكية في قطر',
+            'اشتراك شهري في قطر'
+        ];
+        
+        const tunisiaOnlyServices = [
+            'حجز ميزان من قطر الي تونس',
+            'توصيل محلي داخل تونس',
+            'توصيل أغراض ومشتريات في تونس',
+            'توصيل موظفين وتلاميذ في تونس',
+            'توصيل مشاوير خاصة في تونس',
+            'توصيل هدايا في تونس',
+            'توصيل مواد استهلاكية في تونس',
+            'اشتراك شهري في تونس'
+        ];
+        
+        const bothCountriesServices = [
+            'تريد بيع ميزان',
+            'توثيق تسليم الأموال',
+            'تحويل ريال قطري إلى دينار تونسي',
+            'تحويل دينار تونسي إلى ريال قطري'
+        ];
+        
+        // التحقق من توافق الخدمة مع البلد
+        if (country === 'قطر') {
+            return qatarOnlyServices.includes(service) || bothCountriesServices.includes(service);
+        } else if (country === 'تونس') {
+            return tunisiaOnlyServices.includes(service) || bothCountriesServices.includes(service);
+        }
+        
+        return true;
+    }
+    
+    // دالة إدارة حالة الأزرار
+    function setupButtonStates() {
+        // مراقبة تغييرات القوائم المنسدلة
+        document.querySelectorAll('.service-select').forEach(select => {
+            select.addEventListener('change', function() {
+                const serviceCard = this.closest('.service-card');
+                updateButtonStates(serviceCard, this.value);
+            });
+            
+            // تحديث الحالة الأولية
+            const serviceCard = select.closest('.service-card');
+            updateButtonStates(serviceCard, select.value);
+        });
+    }
+    
+    // دالة تحديث حالة الأزرار
+    function updateButtonStates(serviceCard, selectedService) {
+        if (!serviceCard) return;
+        
+        const qatarBtn = serviceCard.querySelector('.qatar-btn');
+        const tunisiaBtn = serviceCard.querySelector('.tunisia-btn');
+        
+        if (!qatarBtn || !tunisiaBtn) return;
+        
+        if (!selectedService) {
+            // لا يوجد اختيار - تعطيل كلا الزرين
+            qatarBtn.classList.add('inactive');
+            qatarBtn.classList.remove('active');
+            tunisiaBtn.classList.add('inactive');
+            tunisiaBtn.classList.remove('active');
+            
+            qatarBtn.disabled = true;
+            tunisiaBtn.disabled = true;
+        } else {
+            // التحقق من توافق الخدمة مع كل بلد
+            const isQatarCompatible = isServiceCountryCompatible(selectedService, 'قطر');
+            const isTunisiaCompatible = isServiceCountryCompatible(selectedService, 'تونس');
+            
+            // تحديث زر قطر
+            if (isQatarCompatible) {
+                qatarBtn.classList.remove('inactive');
+                qatarBtn.classList.add('active');
+                qatarBtn.disabled = false;
+            } else {
+                qatarBtn.classList.add('inactive');
+                qatarBtn.classList.remove('active');
+                qatarBtn.disabled = true;
+            }
+            
+            // تحديث زر تونس
+            if (isTunisiaCompatible) {
+                tunisiaBtn.classList.remove('inactive');
+                tunisiaBtn.classList.add('active');
+                tunisiaBtn.disabled = false;
+            } else {
+                tunisiaBtn.classList.add('inactive');
+                tunisiaBtn.classList.remove('active');
+                tunisiaBtn.disabled = true;
+            }
+            
+            // تحديث نص الأزرار بناء على الخدمة
+            updateButtonText(serviceCard, selectedService);
+        }
+    }
+    
+    // دالة تحديث نص الأزرار
+    function updateButtonText(serviceCard, selectedService) {
+        const qatarBtn = serviceCard.querySelector('.qatar-btn');
+        const tunisiaBtn = serviceCard.querySelector('.tunisia-btn');
+        
+        if (!qatarBtn || !tunisiaBtn) return;
+        
+        // نص افتراضي
+        let qatarText = 'طلب من قطر';
+        let tunisiaText = 'طلب من تونس';
+        
+        // تحديد النص المناسب بناء على الخدمة
+        if (selectedService.includes('حجز ميزان من تونس الي قطر')) {
+            qatarText = 'حجز من تونس لقطر';
+            tunisiaText = 'غير متاح';
+        } else if (selectedService.includes('حجز ميزان من قطر الي تونس')) {
+            qatarText = 'غير متاح';
+            tunisiaText = 'حجز من قطر لتونس';
+        } else if (selectedService.includes('تريد بيع ميزان')) {
+            qatarText = 'طلب بيع ميزان';
+            tunisiaText = 'طلب بيع ميزان';
+        } else if (selectedService.includes('توصيل محلي')) {
+            qatarText = 'طلب توصيل محلي';
+            tunisiaText = 'طلب توصيل محلي';
+        } else if (selectedService.includes('توثيق تسليم الأموال')) {
+            qatarText = 'طلب توثيق أموال';
+            tunisiaText = 'طلب توثيق أموال';
+        }
+        
+        // تحديث نص الأزرار مع الحفاظ على الأيقونة
+        const whatsappIcon = '<i class="fab fa-whatsapp"></i> ';
+        
+        if (!qatarBtn.disabled) {
+            qatarBtn.innerHTML = whatsappIcon + qatarText;
+        }
+        
+        if (!tunisiaBtn.disabled) {
+            tunisiaBtn.innerHTML = whatsappIcon + tunisiaText;
+        }
+    }
+    
+    // باقي الدوال تبقى كما هي...
     // دالة إضافة حقول بيانات العميل
     function initializeCustomerFields() {
         const serviceCards = document.querySelectorAll('.service-card');
@@ -115,10 +269,7 @@ document.addEventListener('DOMContentLoaded', function() {
         message += `📞 *رقم الهاتف:* ${phone}\n`;
         message += `📋 *الخدمة الرئيسية:* ${mainService}\n`;
         message += `🔧 *الخدمة المطلوبة:* ${selectedService}\n`;
-        
-        if (country !== 'مشترك') {
-            message += `🌍 *البلد:* ${country}\n`;
-        }
+        message += `🌍 *البلد المطلوب:* ${country}\n`;
         
         message += `\n📞 *أرقام التواصل:*\n`;
         message += `🇶🇦 قطر: ${qatarNumber}\n`;
@@ -145,77 +296,10 @@ document.addEventListener('DOMContentLoaded', function() {
         window.open(whatsappUrl, '_blank');
         
         // إظهار رسالة نجاح
-        showAlert(`شكراً ${customerName}! تم فتح واتساب لإرسال طلبك إلى رقم ${country}`, 'success');
+        showAlert(`شكراً ${customerName}! تم إرسال طلبك إلى ${country}`, 'success');
         
         // حفظ الطلب (اختياري)
         saveServiceRequest(customerName, phoneNumber, message, country);
-    }
-    
-    // دالة عرض اختيار البلد للخدمات المشتركة
-    function showCountrySelection(message, mainService, selectedService, name, phone) {
-        // إضافة أنماط الـ modal إذا لم تكن موجودة
-        if (!document.querySelector('#modal-styles')) {
-            addModalStyles();
-        }
-        
-        const selectionHTML = `
-            <div class="country-selection-modal">
-                <div class="modal-content">
-                    <h3><i class="fas fa-globe gold-text"></i> اختر رقم التواصل</h3>
-                    <p><strong>${name}</strong> - ${phone}</p>
-                    <p>خدمة: <strong>${mainService}</strong></p>
-                    <p>الخدمة المطلوبة: <strong>${selectedService}</strong></p>
-                    <p class="modal-subtitle">اختر البلد الذي تريد التواصل معه:</p>
-                    <div class="country-buttons">
-                        <button class="country-btn qatar" data-number="${qatarNumber}">
-                            <i class="fas fa-flag"></i> قطر
-                            <span>${qatarNumber}</span>
-                        </button>
-                        <button class="country-btn tunisia" data-number="${tunisiaNumber}">
-                            <i class="fas fa-flag"></i> تونس
-                            <span>${tunisiaNumber}</span>
-                        </button>
-                    </div>
-                    <button class="close-modal">
-                        <i class="fas fa-times"></i> إلغاء
-                    </button>
-                </div>
-            </div>
-        `;
-        
-        // إضافة الـ modal إلى body
-        document.body.insertAdjacentHTML('beforeend', selectionHTML);
-        
-        // إضافة أحداث الإغلاق
-        const modal = document.querySelector('.country-selection-modal');
-        const closeBtn = modal.querySelector('.close-modal');
-        const qatarBtn = modal.querySelector('.country-btn.qatar');
-        const tunisiaBtn = modal.querySelector('.country-btn.tunisia');
-        
-        closeBtn.addEventListener('click', () => {
-            modal.remove();
-        });
-        
-        qatarBtn.addEventListener('click', () => {
-            const whatsappUrl = `https://wa.me/${qatarNumber}?text=${message}`;
-            window.open(whatsappUrl, '_blank');
-            showAlert(`شكراً ${name}! تم فتح واتساب لإرسال طلبك إلى رقم قطر`, 'success');
-            modal.remove();
-        });
-        
-        tunisiaBtn.addEventListener('click', () => {
-            const whatsappUrl = `https://wa.me/${tunisiaNumber}?text=${message}`;
-            window.open(whatsappUrl, '_blank');
-            showAlert(`شكراً ${name}! تم فتح واتساب لإرسال طلبك إلى رقم تونس`, 'success');
-            modal.remove();
-        });
-        
-        // إغلاق عند النقر خارج الـ modal
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.remove();
-            }
-        });
     }
     
     // دالة حفظ طلب الخدمة (اختياري)
@@ -280,7 +364,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 background: rgba(255, 255, 255, 0.05);
                 border-radius: 10px;
                 border: 1px solid rgba(255, 215, 0, 0.2);
-                
             }
             
             .customer-field-group {
@@ -300,24 +383,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 background: rgba(255, 255, 255, 0.1);
                 border: 1px solid rgba(255, 215, 0, 0.3);
                 border-radius: 8px;
-                color:#000
-                font-size: 16px;
+                color: #000;
+                font-size: 14px;
                 font-family: 'Cairo', sans-serif;
                 transition: all 0.3s ease;
             }
             
             .customer-input-wrapper input:focus {
                 outline: none;
-                padding:12px 40px 12px 40px;
                 border-color: #ffd700;
                 box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
                 background: rgba(255, 255, 255, 0.15);
+                text-align:right;
+                padding: 12px 40px 12px 40px;
             }
             
             .customer-input-wrapper input::placeholder {
-                color: rgba(0, 0, 0, 0.5);
-                text-align:right;
-                
+                color: rgba(0, 0, 0, 0.71);
+                text-align:right
             }
             
             .customer-input-wrapper .input-icon {
@@ -329,40 +412,74 @@ document.addEventListener('DOMContentLoaded', function() {
                 font-size: 14px;
             }
             
-            /* تحسين مظهر القائمة */
-            .service-selection {
-                margin-top: 15px;
+            /* أنماط الأزرار المزدوجة */
+            .service-contact-double {
+                margin-top: 20px;
             }
             
-            .service-select {
-                width: 100%;
-                padding: 12px 15px;
-                background: rgba(255, 255, 255, 0.1);
-                border: 1px solid rgba(255, 215, 0, 0.3);
-                border-radius: 8px;
-                color: #000;
+            .contact-buttons-wrapper {
+                display: flex;
+                gap: 10px;
+                margin-bottom: 15px;
+            }
+            
+            .contact-buttons-wrapper .service-btn {
+                flex: 1;
+                min-width: 120px;
+                padding: 12px 10px;
                 font-size: 14px;
-                font-family: 'Cairo', sans-serif;
+                border: none;
+                border-radius: 8px;
                 cursor: pointer;
                 transition: all 0.3s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                font-weight: 600;
             }
             
-            .service-select:focus {
-                outline: none;
-                border-color: #ffd700;
-                box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
-                background: rgba(255, 255, 255, 0.15);
-            }
-            
-            .service-select option {
-                background: #1a1a1a;
+            /* أزرار البلدين */
+            .qatar-btn {
+                background: linear-gradient(135deg, #8A1538 0%, #C1002C 100%);
                 color: white;
-                padding: 10px;
             }
             
-            /* تحسين مظهر أزرار الاتصال */
-            .service-contact {
-                margin-top: 20px;
+            .qatar-btn:hover:not(:disabled) {
+                background: linear-gradient(135deg, #C1002C 0%, #8A1538 100%);
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(193, 0, 44, 0.4);
+            }
+            
+            .tunisia-btn {
+                background: linear-gradient(135deg, #E70013 0%, #FF1E2E 100%);
+                color: white;
+            }
+            
+            .tunisia-btn:hover:not(:disabled) {
+                background: linear-gradient(135deg, #FF1E2E 0%, #E70013 100%);
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(231, 0, 19, 0.4);
+            }
+            
+            /* حالة الأزرار */
+            .service-btn.inactive {
+                opacity: 0.4;
+                filter: grayscale(50%);
+                cursor: not-allowed;
+            }
+            
+            .service-btn.active {
+                opacity: 1;
+                filter: none;
+                cursor: pointer;
+            }
+            
+            .service-btn:disabled {
+                opacity: 0.4;
+                cursor: not-allowed;
+                transform: none !important;
+                box-shadow: none !important;
             }
             
             /* رسائل التنبيه */
@@ -427,6 +544,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     font-size: 13px;
                 }
                 
+                .contact-buttons-wrapper {
+                    flex-direction: column;
+                }
+                
+                .contact-buttons-wrapper .service-btn {
+                    width: 100%;
+                }
+                
                 .alert-message {
                     top: 10px;
                     right: 10px;
@@ -437,128 +562,5 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
         
         document.head.appendChild(styles);
-    }
-    
-    // دالة إضافة أنماط الـ modal
-    function addModalStyles() {
-        const styles = `
-            <style id="modal-styles">
-                .country-selection-modal {
-                    position: fixed;
-                    top: 0;
-                    right: 0;
-                    width: 100%;
-                    height: 100%;
-                    background: rgba(0, 0, 0, 0.8);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    z-index: 10000;
-                    backdrop-filter: blur(5px);
-                }
-                
-                .country-selection-modal .modal-content {
-                    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(26, 26, 26, 0.95) 100%);
-                    border: 1px solid rgba(255, 215, 0, 0.3);
-                    border-radius: 15px;
-                    padding: 30px;
-                    width: 90%;
-                    max-width: 400px;
-                    text-align: center;
-                    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-                }
-                
-                .country-selection-modal h3 {
-                    color: #ffd700;
-                    margin-bottom: 15px;
-                    font-size: 22px;
-                }
-                
-                .country-selection-modal p {
-                    color: rgba(255, 255, 255, 0.8);
-                    margin-bottom: 10px;
-                    font-size: 14px;
-                    line-height: 1.5;
-                }
-                
-                .country-selection-modal .modal-subtitle {
-                    margin-top: 20px;
-                    margin-bottom: 20px;
-                    font-size: 18px;
-                    color: #ffd700;
-                }
-                
-                .country-buttons {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 15px;
-                    margin: 25px 0;
-                }
-                
-                .country-btn {
-                    padding: 15px;
-                    border: none;
-                    border-radius: 10px;
-                    font-size: 18px;
-                    font-weight: 600;
-                    cursor: pointer;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    gap: 10px;
-                    transition: all 0.3s ease;
-                }
-                
-                .country-btn.qatar {
-                    background: linear-gradient(135deg, #8A1538 0%, #C1002C 100%);
-                    color: white;
-                }
-                
-                .country-btn.tunisia {
-                    background: linear-gradient(135deg, #E70013 0%, #FF1E2E 100%);
-                    color: white;
-                }
-                
-                .country-btn:hover {
-                    transform: translateY(-3px);
-                    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-                }
-                
-                .country-btn span {
-                    font-size: 14px;
-                    opacity: 0.9;
-                }
-                
-                .close-modal {
-                    background: rgba(255, 255, 255, 0.1);
-                    border: 1px solid rgba(255, 255, 255, 0.2);
-                    color: white;
-                    padding: 10px 20px;
-                    border-radius: 8px;
-                    cursor: pointer;
-                    font-size: 16px;
-                    margin-top: 15px;
-                    transition: all 0.3s ease;
-                }
-                
-                .close-modal:hover {
-                    background: rgba(255, 255, 255, 0.2);
-                }
-                
-                @media (max-width: 480px) {
-                    .country-selection-modal .modal-content {
-                        padding: 20px;
-                        width: 95%;
-                    }
-                    
-                    .country-btn {
-                        padding: 12px;
-                        font-size: 16px;
-                    }
-                }
-            </style>
-        `;
-        
-        document.head.insertAdjacentHTML('beforeend', styles);
     }
 });

@@ -291,43 +291,54 @@
         
         <div class="services-grid">
             <!-- Service 1: توصيل دولي -->
-            <div class="service-card" data-service="scale-sales">
-                <div class="service-icon gold-bg">
-                    <i class="fas fa-balance-scale"></i>
-                </div>
-                <h3>توصيل دولي</h3>
-                <div class="service-description">
-                    <p>قسم توصيل موازيين بين قطر وتونس او تونس وقطر</p>
-                        <ul>
-                            <li><i class="fas fa-handshake"></i> تريد بيع ميزان</li>
-                            <li><i class="fas fa-scale-balanced"></i>   حجز ميزان من قطر الي تونس</li>
-                            <li><i class="fas fa-weight-scale"></i> حجز ميزان من تونس الي قطر   </li>
-                        </ul>
-                    </div>
-                <!-- قائمة اختيار الخدمات الفرعية -->
-                <div class="service-selection">
-                    <select class="service-select" data-service="توصيل دولي">
-                        <option value="" selected disabled>-- اختر الخدمة --</option>
-                        <option value="تريد بيع ميزان">تريد بيع ميزان</option>
-                        <option value="حجز ميزان من قطر الي تونس">حجز ميزان من قطر الي تونس</option>
-                        <option value="حجز ميزان من تونس الي قطر">حجز ميزان من تونس الي قطر</option>
-                    </select>
-                </div>
-                
-                <div class="service-contact">
-                    <div class="contact-numbers">
-                        <a href="tel:+97431691024" class="service-phone-btn">
-                            <i class="fas fa-phone"></i> قطر: 31691024
-                        </a>
-                        <a href="tel:+21656471550" class="service-phone-btn">
-                            <i class="fas fa-phone"></i> تونس: 56471550
-                        </a>
-                    </div>
-                    <button class="service-btn send-whatsapp" data-country="مشترك" data-service="توصيل دولي">
-                        <i class="fab fa-whatsapp"></i> طلب ميزان
-                    </button>
-                </div>
-            </div>
+          <!-- Service 1: توصيل دولي -->
+<div class="service-card" data-service="scale-sales">
+    <div class="service-icon gold-bg">
+        <i class="fas fa-balance-scale"></i>
+    </div>
+    <h3>توصيل دولي</h3>
+    <div class="service-description">
+        <p>قسم توصيل موازيين بين قطر وتونس او تونس وقطر</p>
+        <ul>
+            <li><i class="fas fa-handshake"></i> تريد بيع ميزان</li>
+            <li><i class="fas fa-scale-balanced"></i> حجز ميزان من قطر الي تونس</li>
+            <li><i class="fas fa-weight-scale"></i> حجز ميزان من تونس الي قطر</li>
+        </ul>
+    </div>
+    
+    <!-- قائمة اختيار الخدمات الفرعية -->
+    <div class="service-selection">
+        <select class="service-select" data-service="توصيل دولي">
+            <option value="" selected disabled>-- اختر الخدمة --</option>
+            <option value="تريد بيع ميزان">تريد بيع ميزان</option>
+            <option value="حجز ميزان من قطر الي تونس">حجز ميزان من قطر الي تونس</option>
+            <option value="حجز ميزان من تونس الي قطر">حجز ميزان من تونس الي قطر</option>
+        </select>
+    </div>
+    
+    <div class="service-contact-double">
+        
+        <div class="contact-numbers">
+            <a href="tel:+97431691024" class="service-phone-btn">
+                <i class="fas fa-phone"></i> قطر: 31691024
+            </a>
+            <a href="tel:+21656471550" class="service-phone-btn">
+                <i class="fas fa-phone"></i> تونس: 56471550
+            </a>
+        </div>
+        <div class="contact-buttons-wrapper">
+            <!-- زر قطر -->
+            <button class="service-btn qatar-btn send-whatsapp" data-country="قطر" data-service="توصيل دولي" title="قطر">
+                <i class="fab fa-whatsapp"></i> طلب من قطر
+            </button>
+            
+            <!-- زر تونس -->
+            <button class="service-btn tunisia-btn send-whatsapp" data-country="تونس" data-service="توصيل دولي" title="تونس">
+                <i class="fab fa-whatsapp"></i> طلب من تونس
+            </button>
+        </div>
+    </div>
+</div>
 
             <!-- Service 2: التوصيل المحلي في قطر -->
             <div class="service-card" data-service="local-delivery-qatar">

@@ -1266,7 +1266,7 @@ button, input, textarea, select {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    margin-top: auto;
+    margin-top: 30px;
 }
 
 .contact-numbers {
@@ -2389,3 +2389,77 @@ button, input, textarea, select {
 
 
 
+/* أنماط الأزرار المزدوجة */
+.service-contact-double {
+    margin-top: 20px;
+}
+
+.contact-buttons-wrapper {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.contact-buttons-wrapper .service-btn {
+    flex: 1;
+    min-width: 120px;
+    padding: 12px 10px;
+    font-size: 14px;
+}
+
+/* أزرار البلدين */
+.qatar-btn {
+    background: linear-gradient(135deg, #8A1538 0%, #C1002C 100%);
+    border: none;
+    color: white;
+}
+
+.qatar-btn:hover:not(:disabled) {
+    background: linear-gradient(135deg, #C1002C 0%, #8A1538 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(193, 0, 44, 0.4);
+}
+
+.tunisia-btn {
+    background: linear-gradient(135deg, #E70013 0%, #FF1E2E 100%);
+    border: none;
+    color: white;
+}
+
+.tunisia-btn:hover:not(:disabled) {
+    background: linear-gradient(135deg, #FF1E2E 0%, #E70013 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(231, 0, 19, 0.4);
+}
+
+/* حالة الزر المعطل */
+.service-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* حالة الأزرار بناء على الاختيار */
+.service-btn.inactive {
+    opacity: 0.4;
+    filter: grayscale(50%);
+    cursor: not-allowed;
+}
+
+.service-btn.active {
+    opacity: 1;
+    filter: none;
+    cursor: pointer;
+}
+
+/* تنسيق للهواتف */
+@media (max-width: 768px) {
+    .contact-buttons-wrapper {
+        flex-direction: column;
+    }
+    
+    .contact-buttons-wrapper .service-btn {
+        width: 100%;
+    }
+}
