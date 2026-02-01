@@ -207,7 +207,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 10px 20px;
+    padding: 5px 10px;
     background: var(--whatsapp-green);
     color: var(--white);
     border-radius: 30px;
@@ -215,7 +215,9 @@
     font-weight: 600;
     transition: var(--transition);
 }
-
+.whatsapp-btn span {
+    font-size: 10px;
+}
 .whatsapp-btn:hover {
     background: #128C7E;
     transform: translateY(-3px);
@@ -631,7 +633,6 @@
     padding-right: 45px;
     padding-left: 15px;
 }
-
 /* Textarea */
 textarea {
     min-height: 150px;
@@ -1433,6 +1434,12 @@ textarea {
         text-align: center;
     }
     .whatsapp-number span {
+        font-size: 10px;
+    }
+    .whatsapp-btn {
+        padding: 5px 10px;
+    }
+    [dir="rtl"] .whatsapp-number span {
         font-size: 10px;
     }
 }
