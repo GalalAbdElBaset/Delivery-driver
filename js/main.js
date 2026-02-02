@@ -278,33 +278,12 @@ document.addEventListener("DOMContentLoaded", () => {
             window.addEventListener('scroll', () => {
                 if (!scrollTimeout) {
                     scrollTimeout = setTimeout(() => {
-                        this.handleNavbarScroll();
                         this.updateScrollToTopButton();
                         this.updateActiveNavOnScroll();
                         scrollTimeout = null;
                     }, 80);
                 }
             }, { passive: true });
-        }
-        
-        handleNavbarScroll() {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            if (!this.header) return;
-            
-            if (scrollTop > this.navbarHeight) {
-                if (scrollTop > this.lastScrollTop && scrollTop > 200) {
-                    this.header.classList.add('hidden');
-                } else {
-                    this.header.classList.remove('hidden');
-                    this.header.classList.add('scrolled');
-                }
-            } else {
-                this.header.classList.remove('hidden');
-                this.header.classList.remove('scrolled');
-            }
-            
-            this.lastScrollTop = scrollTop;
         }
         
         setupNavigation() {
@@ -896,12 +875,141 @@ document.addEventListener("DOMContentLoaded", () => {
     // Initialize CSS animations
     const cssAnimations = new CSSAnimations();
     
+    /* ================= DARK/LIGHT MODE THEME SYSTEM ================= */
+    class ThemeSystem {
+        constructor() {
+            this.themeToggle = document.getElementById('themeToggle');
+            this.floatThemeToggle = document.getElementById('floatThemeToggle');
+            this.themeText = document.querySelector('.theme-text');
+            
+            this.init();
+        }
+        
+        init() {
+            console.log('Theme system initializing...');
+            
+            // تحقق من السمة المحفوظة
+            const currentTheme = localStorage.getItem('theme');
+            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+            
+            console.log('Current saved theme:', currentTheme);
+            console.log('Prefers dark scheme:', prefersDarkScheme.matches);
+            
+            // تطبيق السمة المحفوظة أو تفضيل النظام
+            if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+                console.log('Setting dark theme on load');
+                this.setDarkTheme();
+            } else {
+                console.log('Setting light theme on load');
+                this.setLightTheme();
+            }
+            
+            // إضافة الأحداث للأزرار
+            if (this.themeToggle) {
+                console.log('Found theme toggle button');
+                this.themeToggle.addEventListener('click', (e) => this.toggleTheme(e));
+            } else {
+                console.log('Theme toggle button NOT FOUND!');
+            }
+            
+            if (this.floatThemeToggle) {
+                console.log('Found float theme toggle button');
+                this.floatThemeToggle.addEventListener('click', (e) => this.toggleTheme(e));
+            } else {
+                console.log('Float theme toggle button NOT FOUND!');
+            }
+            
+            // مراقبة تغييرات تفضيل النظام
+            prefersDarkScheme.addEventListener('change', (e) => {
+                if (!localStorage.getItem('theme')) {
+                    if (e.matches) {
+                        this.setDarkTheme();
+                    } else {
+                        this.setLightTheme();
+                    }
+                }
+            });
+            
+            console.log('Theme system initialized successfully!');
+        }
+        
+        toggleTheme(event) {
+            console.log('Toggle theme clicked!', event.target);
+            
+            if (document.documentElement.getAttribute('data-theme') === 'dark') {
+                this.setLightTheme();
+            } else {
+                this.setDarkTheme();
+            }
+            
+            // إضافة تأثير للزر
+            this.animateButton(event.target.closest('button') || event.target);
+        }
+        
+        setDarkTheme() {
+            console.log('Applying dark theme');
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+            this.updateIcons('dark');
+            
+            if (this.themeText) {
+                this.themeText.textContent = 'مظلم';
+            }
+        }
+        
+        setLightTheme() {
+            console.log('Applying light theme');
+            document.documentElement.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'light');
+            this.updateIcons('light');
+            
+            if (this.themeText) {
+                this.themeText.textContent = 'فاتح';
+            }
+        }
+        
+        updateIcons(theme) {
+            console.log('Updating icons for theme:', theme);
+            
+            // تحديث أيقونة الزر الرئيسي
+            if (this.themeToggle) {
+                const themeIcon = this.themeToggle.querySelector('i');
+                if (themeIcon) {
+                    themeIcon.className = theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+                    console.log('Updated theme button icon');
+                }
+            }
+            
+            // تحديث أيقونة الزر العائم
+            if (this.floatThemeToggle) {
+                const floatIcon = this.floatThemeToggle.querySelector('i');
+                if (floatIcon) {
+                    floatIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+                    console.log('Updated float button icon');
+                }
+            }
+        }
+        
+        animateButton(button) {
+            if (!button) return;
+            
+            button.style.transform = 'scale(1.2) rotate(180deg)';
+            setTimeout(() => {
+                button.style.transform = '';
+            }, 300);
+        }
+    }
+    
+    // Initialize theme system
+    const themeSystem = new ThemeSystem();
+    
     /* ================= INITIALIZATION COMPLETE ================= */
-    console.log(' Tn-QA Delivery - Enhanced Script loaded successfully');
+    console.log('Tn-QA Delivery - Enhanced Script loaded successfully');
     
     window.addEventListener('load', () => {
         setTimeout(() => {
             document.body.classList.add('loaded');
         }, 100);
     });
-});
+    
+}); // إغلاق document.addEventListener

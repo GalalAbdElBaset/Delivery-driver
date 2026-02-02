@@ -1,10 +1,10 @@
-// services.js - نظام طلبات الخدمات مع زرين منفصلين وتحسينات CSS
+// services.js - نظام طلبات الخدمات المحدث مع الألوان الذهبية
 document.addEventListener('DOMContentLoaded', function() {
     // تعريف الأرقام
     const qatarNumber = '+97431691024';
     const tunisiaNumber = '+21656471550';
     
-    // إضافة أنماط CSS محسنة للقوائم المنسدلة
+    // إضافة أنماط CSS محسنة مع الألوان الذهبية
     addEnhancedSelectStyles();
     
     // إضافة حقول بيانات العميل لكل بطاقة
@@ -80,12 +80,21 @@ document.addEventListener('DOMContentLoaded', function() {
             // إنشاء رسالة واتساب
             const whatsappMessage = createWhatsAppMessage(mainService, selectedService, country, name, phone);
             
-            // تحديد الرقم المناسب
+            // تحديد الرقم المناسب بناء على البلد
             let phoneNumber;
             if (country === 'قطر') {
                 phoneNumber = qatarNumber;
             } else if (country === 'تونس') {
                 phoneNumber = tunisiaNumber;
+            } else if (country === 'مشترك') {
+                // اختيار الرقم بناء على الخدمة المختارة
+                if (selectedService === 'تحويل ريال قطري إلى دينار تونسي') {
+                    phoneNumber = tunisiaNumber; // التحويل من قطر لتونس
+                } else if (selectedService === 'تحويل دينار تونسي إلى ريال قطري') {
+                    phoneNumber = qatarNumber; // التحويل من تونس لقطر
+                } else {
+                    phoneNumber = tunisiaNumber; // افتراضي
+                }
             }
             
             // إرسال الرسالة
@@ -95,43 +104,36 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // دالة التحقق من توافق الخدمة مع البلد
     function isServiceCountryCompatible(service, country, serviceCard) {
-        // إذا كانت البطاقة تحتوي على زرين (قطر وتونس)
-        const hasDoubleButtons = serviceCard.querySelector('.service-contact-double');
+        // تحديد نوع البطاقة
+        const cardService = serviceCard.getAttribute('data-service');
+        const buttonCountry = serviceCard.querySelector('.send-whatsapp')?.getAttribute('data-country');
         
-        // إذا كانت البطاقة تحتوي على زر واحد فقط
-        const singleButton = serviceCard.querySelector('.service-btn:not(.qatar-btn):not(.tunisia-btn)');
-        
-        // حالة 1: بطاقة بها زرين (توصيل دولي)
-        if (hasDoubleButtons) {
-            // حجز ميزان من تونس إلى قطر: فقط زر قطر يعمل
+        // إذا كانت البطاقة هي توصيل دولي (الميزان)
+        if (cardService === 'scale-sales') {
+            // حجز ميزان من تونس إلى قطر: يحتاج للتواصل مع قطر
             if (service === 'حجز ميزان من تونس الي قطر') {
                 return country === 'قطر';
             }
-            // حجز ميزان من قطر إلى تونس: فقط زر تونس يعمل
+            // حجز ميزان من قطر إلى تونس: يحتاج للتواصل مع تونس
             else if (service === 'حجز ميزان من قطر الي تونس') {
                 return country === 'تونس';
             }
-            // تريد بيع ميزان: كلا الزرين يعملان
+            // تريد بيع ميزان: يمكن التواصل مع أي منهما
             else if (service === 'تريد بيع ميزان') {
-                return country === 'قطر' || country === 'تونس';
+                return true; // يمكن التواصل مع أي بلد
             }
         }
-        // حالة 2: بطاقة بها زر واحد
-        else if (singleButton) {
-            const buttonCountry = singleButton.getAttribute('data-country');
-            
-            // إذا كان الزر لقطر فقط
-            if (buttonCountry === 'قطر') {
-                return country === 'قطر';
-            }
-            // إذا كان الزر لتونس فقط
-            else if (buttonCountry === 'تونس') {
-                return country === 'تونس';
-            }
-            // إذا كان الزر مشترك (لتوثيق الأموال)
-            else if (buttonCountry === 'مشترك') {
-                return true;
-            }
+        // إذا كانت البطاقة لقطر فقط
+        else if (buttonCountry === 'قطر') {
+            return country === 'قطر';
+        }
+        // إذا كانت البطاقة لتونس فقط
+        else if (buttonCountry === 'تونس') {
+            return country === 'تونس';
+        }
+        // إذا كانت البطاقة مشتركة
+        else if (buttonCountry === 'مشترك') {
+            return true;
         }
         
         return false;
@@ -150,12 +152,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // تحديث لون البطاقة بناء على الاختيار
                 updateCardAppearance(serviceCard, this.value);
+                
+                // تحديث نص الزر بناء على الخدمة
+                updateButtonText(serviceCard, this.value);
             });
             
             // تحديث الحالة الأولية
             const serviceCard = select.closest('.service-card');
             updateButtonStates(serviceCard, select.value);
             updateCardAppearance(serviceCard, select.value);
+            updateButtonText(serviceCard, select.value);
         });
     }
     
@@ -163,95 +169,53 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateButtonStates(serviceCard, selectedService) {
         if (!serviceCard) return;
         
-        const qatarBtn = serviceCard.querySelector('.qatar-btn');
-        const tunisiaBtn = serviceCard.querySelector('.tunisia-btn');
-        
-        // إذا لم يكن هناك زرين (قطر وتونس)، تخطي
-        if (!qatarBtn || !tunisiaBtn) return;
+        const button = serviceCard.querySelector('.send-whatsapp');
+        if (!button) return;
         
         if (!selectedService) {
-            // لا يوجد اختيار - تعطيل كلا الزرين
-            qatarBtn.disabled = true;
-            tunisiaBtn.disabled = true;
-            qatarBtn.classList.add('inactive');
-            tunisiaBtn.classList.add('inactive');
-            qatarBtn.classList.remove('active');
-            tunisiaBtn.classList.remove('active');
+            // لا يوجد اختيار - تعطيل الزر
+            button.disabled = true;
+            button.classList.add('inactive');
+            button.classList.remove('active');
         } else {
-            // التحقق من توافق الخدمة مع كل بلد
-            const isQatarCompatible = isServiceCountryCompatible(selectedService, 'قطر', serviceCard);
-            const isTunisiaCompatible = isServiceCountryCompatible(selectedService, 'تونس', serviceCard);
+            // تفعيل الزر
+            button.disabled = false;
+            button.classList.remove('inactive');
+            button.classList.add('active');
             
-            // تحديث زر قطر
-            qatarBtn.disabled = !isQatarCompatible;
-            if (isQatarCompatible) {
-                qatarBtn.classList.remove('inactive');
-                qatarBtn.classList.add('active');
-            } else {
-                qatarBtn.classList.add('inactive');
-                qatarBtn.classList.remove('active');
-            }
-            
-            // تحديث زر تونس
-            tunisiaBtn.disabled = !isTunisiaCompatible;
-            if (isTunisiaCompatible) {
-                tunisiaBtn.classList.remove('inactive');
-                tunisiaBtn.classList.add('active');
-            } else {
-                tunisiaBtn.classList.add('inactive');
-                tunisiaBtn.classList.remove('active');
-            }
-            
-            // تحديث نص الأزرار بناء على الخدمة
-            updateButtonText(serviceCard, selectedService);
-            
-            // إضافة تأثير للأزرار النشطة
-            if (isQatarCompatible) {
-                animateButton(qatarBtn);
-            }
-            if (isTunisiaCompatible) {
-                animateButton(tunisiaBtn);
-            }
+            // إضافة تأثير للزر
+            animateButton(button);
         }
     }
     
-    // دالة تحديث نص الأزرار
+    // دالة تحديث نص الزر
     function updateButtonText(serviceCard, selectedService) {
-        const qatarBtn = serviceCard.querySelector('.qatar-btn');
-        const tunisiaBtn = serviceCard.querySelector('.tunisia-btn');
+        const button = serviceCard.querySelector('.send-whatsapp');
+        if (!button) return;
         
-        if (!qatarBtn || !tunisiaBtn) return;
-        
-        // نص افتراضي
-        let qatarText = 'طلب من قطر';
-        let tunisiaText = 'طلب من تونس';
+        const cardService = serviceCard.getAttribute('data-service');
+        let buttonText = 'طلب خدمة';
         
         // تحديد النص المناسب بناء على الخدمة
-        if (selectedService === 'حجز ميزان من تونس الي قطر') {
-            qatarText = 'حجز من تونس لقطر';
-            tunisiaText = 'غير متاح';
-        } else if (selectedService === 'حجز ميزان من قطر الي تونس') {
-            qatarText = 'غير متاح';
-            tunisiaText = 'حجز من قطر لتونس';
-        } else if (selectedService === 'تريد بيع ميزان') {
-            qatarText = 'طلب بيع ميزان';
-            tunisiaText = 'طلب بيع ميزان';
+        if (cardService === 'scale-sales') {
+            if (selectedService === 'حجز ميزان من تونس الي قطر') {
+                buttonText = 'حجز من تونس لقطر';
+            } else if (selectedService === 'حجز ميزان من قطر الي تونس') {
+                buttonText = 'حجز من قطر لتونس';
+            } else if (selectedService === 'تريد بيع ميزان') {
+                buttonText = 'طلب بيع ميزان';
+            }
+        } else if (cardService === 'money-delivery') {
+            if (selectedService === 'تحويل ريال قطري إلى دينار تونسي') {
+                buttonText = 'تحويل من قطر لتونس';
+            } else if (selectedService === 'تحويل دينار تونسي إلى ريال قطري') {
+                buttonText = 'تحويل من تونس لقطر';
+            }
         }
         
-        // تحديث نص الأزرار مع الحفاظ على الأيقونة
+        // تحديث نص الزر مع الحفاظ على الأيقونة
         const whatsappIcon = '<i class="fab fa-whatsapp"></i> ';
-        
-        if (!qatarBtn.disabled) {
-            qatarBtn.innerHTML = whatsappIcon + qatarText;
-        } else {
-            qatarBtn.innerHTML = whatsappIcon + 'غير متاح';
-        }
-        
-        if (!tunisiaBtn.disabled) {
-            tunisiaBtn.innerHTML = whatsappIcon + tunisiaText;
-        } else {
-            tunisiaBtn.innerHTML = whatsappIcon + 'غير متاح';
-        }
+        button.innerHTML = whatsappIcon + buttonText;
     }
     
     // دالة تحديث مظهر البطاقة بناء على الخدمة المختارة
@@ -268,11 +232,13 @@ document.addEventListener('DOMContentLoaded', function() {
             card.classList.remove('international-selected', 'local-selected', 'money-selected');
             
             // إضافة فئة حسب نوع الخدمة
-            if (selectedService.includes('ميزان')) {
+            const cardService = card.getAttribute('data-service');
+            
+            if (cardService === 'scale-sales') {
                 card.classList.add('international-selected');
-            } else if (selectedService.includes('توصيل محلي') || selectedService.includes('توصيل داخل')) {
+            } else if (cardService === 'local-delivery-qatar' || cardService === 'local-delivery-tunisia') {
                 card.classList.add('local-selected');
-            } else if (selectedService.includes('أموال') || selectedService.includes('تحويل')) {
+            } else if (cardService === 'money-delivery') {
                 card.classList.add('money-selected');
             }
         }
@@ -379,6 +345,18 @@ document.addEventListener('DOMContentLoaded', function() {
             message += `🌍 *البلد:* ${country}\n`;
         }
         
+        // إضافة تفاصيل إضافية حسب الخدمة
+        if (selectedService.includes('ميزان')) {
+            message += `⚖️ *نوع الخدمة:* توصيل ميزان دولي\n`;
+        } else if (selectedService.includes('تحويل')) {
+            message += `💸 *نوع الخدمة:* تحويل أموال\n`;
+            if (selectedService === 'تحويل ريال قطري إلى دينار تونسي') {
+                message += `🔄 *الاتجاه:* من قطر إلى تونس\n`;
+            } else if (selectedService === 'تحويل دينار تونسي إلى ريال قطري') {
+                message += `🔄 *الاتجاه:* من تونس إلى قطر\n`;
+            }
+        }
+        
         message += `\n📞 *أرقام التواصل:*\n`;
         message += `🇶🇦 قطر: ${qatarNumber}\n`;
         message += `🇹🇳 تونس: ${tunisiaNumber}\n\n`;
@@ -405,10 +383,10 @@ document.addEventListener('DOMContentLoaded', function() {
         window.open(whatsappUrl, '_blank');
         
         // إظهار رسالة نجاح
-        showAlert(`شكراً ${customerName}! تم إرسال طلبك إلى ${country}`, 'success');
+        showAlert(`شكراً ${customerName}! تم إرسال طلبك بنجاح`, 'success');
         
         // حفظ الطلب
-        saveServiceRequest(customerName, phone, message, country);
+        saveServiceRequest(customerName, phoneNumber, message, country);
         
         // إعادة تعيين الحقول
         resetForm(customerName);
@@ -527,11 +505,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 300);
     }
     
-    // دالة إضافة أنماط CSS محسنة
+    // دالة إضافة أنماط CSS محسنة مع الألوان الذهبية
     function addEnhancedSelectStyles() {
         const styles = document.createElement('style');
         styles.textContent = `
-            /* أنماط محسنة للقوائم المنسدلة */
+            /* أنماط محسنة للقوائم المنسدلة مع الألوان الذهبية */
             .service-selection {
                 position: relative;
                 margin: 15px 0;
@@ -568,6 +546,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 border-color: #ffd700;
                 box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3), 0 8px 25px rgba(0, 0, 0, 0.3);
                 transform: translateY(-2px);
+                background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
             }
             
             .service-select option {
@@ -611,13 +590,14 @@ document.addEventListener('DOMContentLoaded', function() {
             .has-selection .service-select {
                 border-color: #4CAF50;
                 background: linear-gradient(135deg, #1a3c1e 0%, #2d5f32 100%);
-                color:#fff;
+                color: #fff;
             }
             
             /* تأثيرات البطاقات عند الاختيار */
             .service-card.has-selection {
                 transform: translateY(-5px);
                 box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+                transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             }
             
             .service-card.international-selected {
@@ -724,8 +704,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 width: 100%;
             }
             
-            /* أنماط الأزرار المزدوجة */
-            .service-contact-double {
+            /* أنماط الأزرار */
+            .service-contact, .service-contact-double {
                 margin-top: 25px;
             }
             
@@ -735,10 +715,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 margin-bottom: 20px;
             }
             
-            .contact-buttons-wrapper .service-btn {
-                flex: 1;
-                min-width: 130px;
-                padding: 16px 15px;
+            .contact-buttons-wrapper .service-btn,
+            .service-contact .service-btn,
+            .service-contact-double .service-btn {
+                width: 100%;
+                padding: 16px 20px;
                 font-size: 15px;
                 border: none;
                 border-radius: 12px;
@@ -753,9 +734,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 position: relative;
                 overflow: hidden;
                 z-index: 1;
+                text-decoration: none;
             }
             
-            .contact-buttons-wrapper .service-btn::before {
+            .service-btn::before {
                 content: '';
                 position: absolute;
                 top: 0;
@@ -767,36 +749,50 @@ document.addEventListener('DOMContentLoaded', function() {
                 z-index: -1;
             }
             
-            .contact-buttons-wrapper .service-btn:hover::before {
+            .service-btn:hover::before {
                 left: 100%;
             }
             
-            /* أزرار البلدين */
-            .qatar-btn {
+            /* زر قطر */
+            .service-btn[data-country="قطر"] {
                 background: linear-gradient(135deg, #8A1538 0%, #C1002C 100%);
                 color: white;
                 box-shadow: 0 6px 20px rgba(138, 21, 56, 0.4);
             }
             
-            .qatar-btn:hover:not(:disabled) {
+            .service-btn[data-country="قطر"]:hover:not(:disabled) {
                 background: linear-gradient(135deg, #C1002C 0%, #8A1538 100%);
-                transform: translateY(-3px) scale(1.05);
+                transform: translateY(-3px) scale(1.03);
                 box-shadow: 0 12px 25px rgba(193, 0, 44, 0.5);
             }
             
-            .tunisia-btn {
+            /* زر تونس */
+            .service-btn[data-country="تونس"] {
                 background: linear-gradient(135deg, #E70013 0%, #FF1E2E 100%);
                 color: white;
                 box-shadow: 0 6px 20px rgba(231, 0, 19, 0.4);
             }
             
-            .tunisia-btn:hover:not(:disabled) {
+            .service-btn[data-country="تونس"]:hover:not(:disabled) {
                 background: linear-gradient(135deg, #FF1E2E 0%, #E70013 100%);
-                transform: translateY(-3px) scale(1.05);
+                transform: translateY(-3px) scale(1.03);
                 box-shadow: 0 12px 25px rgba(255, 30, 46, 0.5);
             }
             
-            /* زر الخدمة العادي */
+            /* زر مشترك (لتوثيق الأموال) */
+            .service-btn[data-country="مشترك"] {
+                background: linear-gradient(135deg, #FF9800 0%, #FF5722 100%);
+                color: white;
+                box-shadow: 0 6px 20px rgba(255, 152, 0, 0.4);
+            }
+            
+            .service-btn[data-country="مشترك"]:hover:not(:disabled) {
+                background: linear-gradient(135deg, #FF5722 0%, #FF9800 100%);
+                transform: translateY(-3px) scale(1.03);
+                box-shadow: 0 12px 25px rgba(255, 87, 34, 0.5);
+            }
+            
+            /* زر واتساب عام */
             .service-btn.whatsapp {
                 background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
                 color: white;
@@ -805,21 +801,8 @@ document.addEventListener('DOMContentLoaded', function() {
             
             .service-btn.whatsapp:hover:not(:disabled) {
                 background: linear-gradient(135deg, #128C7E 0%, #075E54 100%);
-                transform: translateY(-3px) scale(1.05);
+                transform: translateY(-3px) scale(1.03);
                 box-shadow: 0 12px 25px rgba(18, 140, 126, 0.5);
-            }
-            
-            /* زر توثيق الأموال */
-            .important-card .service-btn {
-                background: linear-gradient(135deg, #FF9800 0%, #FF5722 100%);
-                color: white;
-                box-shadow: 0 6px 20px rgba(255, 152, 0, 0.4);
-            }
-            
-            .important-card .service-btn:hover:not(:disabled) {
-                background: linear-gradient(135deg, #FF5722 0%, #FF9800 100%);
-                transform: translateY(-3px) scale(1.05);
-                box-shadow: 0 12px 25px rgba(255, 87, 34, 0.5);
             }
             
             /* حالة الأزرار */
@@ -951,8 +934,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     gap: 12px;
                 }
                 
-                .contact-buttons-wrapper .service-btn {
-                    width: 100%;
+                .service-btn {
                     padding: 14px;
                     font-size: 14px;
                 }
