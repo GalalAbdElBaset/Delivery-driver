@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سليدر خدمات التوصيل والتوثيق</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        
+        .hero-slider {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .slider-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .slide.active {
+            opacity: 1;
+        }
+        
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.6);
+            transform: scale(1.1);
+            transition: transform 10s ease-out;
+        }
+        
+        .slide.active .slide-bg {
+            transform: scale(1);
+        }
+        
+        .slide-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 20px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out 0.3s;
+        }
+        
+        .slide.active .slide-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .slide-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: #fff;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .slide-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 50%;
+            transform: translateX(50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, transparent, #D4AF37, transparent);
+        }
+        
+        .slide-description {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #f0f0f0;
+            line-height: 1.8;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+        }
+        
+        .slide-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #D4AF37, #F4D03F);
+            color: #000;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+            margin-top: 20px;
+        }
+        
+        .slide-btn:hover {
+            background: linear-gradient(45deg, #F4D03F, #D4AF37);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.6);
+        }
+        
+        .slider-controls {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 10;
+        }
+        
+        .slider-control {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(212, 175, 55, 0.5);
+            color: #D4AF37;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .slider-control:hover {
+            background-color: rgba(212, 175, 55, 0.2);
+            border-color: #D4AF37;
+            transform: scale(1.1);
+        }
+        
+        .slider-indicators {
+            position: absolute;
+            bottom: 30px;
+            right: 50%;
+            transform: translateX(50%);
+            display: flex;
+            gap: 12px;
+            z-index: 10;
+        }
+        
+        .slider-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .slider-indicator.active {
+            background-color: #D4AF37;
+            transform: scale(1.3);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+        }
+        
+        .slide-number {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            z-index: 10;
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 5px 15px;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .slide-badge {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: linear-gradient(45deg, #D4AF37, #F4D03F);
+            color: #000;
+            padding: 8px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            z-index: 10;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .logo {
+            position: absolute;
+            top: 30px;
+            right: 50%;
+            transform: translateX(50%);
+            z-index: 10;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #D4AF37;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            color: #F4D03F;
+        }
+        
+        @media (max-width: 768px) {
+            .slide-title {
+                font-size: 2.5rem;
+            }
+            
+            .slide-description {
+                font-size: 1.1rem;
+                padding: 0 10px;
+            }
+            
+            .slider-controls {
+                bottom: 20px;
+            }
+            
+            .slider-control {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .slide-title {
+                font-size: 2rem;
+            }
+            
+            .slide-description {
+                font-size: 1rem;
+            }
+            
+            .slide-btn {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+            
+            .slider-controls {
+                gap: 10px;
+            }
+            
+            .slider-control {
+                width: 35px;
+                height: 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-slider">
+        <!-- شعار -->
+        <div class="logo">
+            <i class="fas fa-shield-alt logo-icon"></i>
+            <span>خدمات قطر</span>
+        </div>
+        
+        <div class="slider-container">
+            <!-- الشريحة الأولى -->
+            <div class="slide active" id="slide1">
+                <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');"></div>
+                <div class="slide-content">
+                    <h1 class="slide-title">خدمة توصيل أغراض داخل قطر</h1>
+                    <p class="slide-description">نقدم لكم خدمة توصيل سريعة وآمنة داخل دولة قطر، مع ضمان وصول أغراضكم في الوقت المحدد وبأعلى معايير الجودة والأمان. فريقنا المدرب جاهز لخدمتكم على مدار الساعة.</p>
+                    <a href="#" class="slide-btn">تصفح الخدمات</a>
+                </div>
+                <div class="slide-number">01 / 03</div>
+                <div class="slide-badge">الخدمة الأكثر طلباً</div>
+            </div>
+            
+            <!-- الشريحة الثانية -->
+            <div class="slide" id="slide2">
+                <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');"></div>
+                <div class="slide-content">
+                    <h1 class="slide-title">خدمة توصيل أغراض داخل قطر</h1>
+                    <p class="slide-description">نسعى دائمًا لتقديم أفضل خدمة توصيل داخل قطر مع فريق متخصص ووسائل نقل حديثة لتلبية جميع متطلباتكم. سرعة، دقة، وأمان في كل عملية توصيل.</p>
+                    <a href="#" class="slide-btn">تصفح الخدمات</a>
+                </div>
+                <div class="slide-number">02 / 03</div>
+                <div class="slide-badge">خدمة مميزة</div>
+            </div>
+            
+            <!-- الشريحة الثالثة -->
+            <div class="slide" id="slide3">
+                <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');"></div>
+                <div class="slide-content">
+                    <h1 class="slide-title">توثيق تسليم الأموال يدًا بيد</h1>
+                    <p class="slide-description">نقدم خدمة توثيق موثوقة لتسليم الأموال بين الأطراف، مع الحفاظ على الشفافية والأمان الكامل في كل عملية. نحن نضمن لكم تسليم آمن وموثق لكل المعاملات المالية.</p>
+                    <a href="#" class="slide-btn">تصفح الخدمات</a>
+                </div>
+                <div class="slide-number">03 / 03</div>
+                <div class="slide-badge">خدمة جديدة</div>
+            </div>
+        </div>
+        
+        <!-- عناصر التحكم -->
+        <div class="slider-controls">
+            <div class="slider-control prev-slide">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="slider-control next-slide">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+        </div>
+        
+        <!-- المؤشرات -->
+        <div class="slider-indicators">
+            <div class="slider-indicator active" data-slide="0"></div>
+            <div class="slider-indicator" data-slide="1"></div>
+            <div class="slider-indicator" data-slide="2"></div>
+        </div>
+    </div>
+
+    <script>
+        // عناصر DOM
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.querySelector('.prev-slide');
+        const nextBtn = document.querySelector('.next-slide');
+        const indicators = document.querySelectorAll('.slider-indicator');
+        let currentSlide = 0;
+        let slideInterval;
+        const slideDuration = 6000; // 6 ثواني لكل شريحة
+        
+        // تهيئة السليدر
+        function initSlider() {
+            // إخفاء جميع الشرائح ما عدا الأولى
+            slides.forEach((slide, index) => {
+                if (index !== 0) {
+                    slide.classList.remove('active');
+                }
+            });
+            
+            // بدء العرض التلقائي
+            startAutoSlide();
+        }
+        
+        // الانتقال إلى شريحة محددة
+        function goToSlide(slideIndex) {
+            // التأكد من أن الفهرس ضمن النطاق الصحيح
+            if (slideIndex < 0) slideIndex = slides.length - 1;
+            if (slideIndex >= slides.length) slideIndex = 0;
+            
+            // إخفاء الشريحة الحالية
+            slides[currentSlide].classList.remove('active');
+            
+            // إظهار الشريحة الجديدة
+            slides[slideIndex].classList.add('active');
+            
+            // تحديث المؤشرات
+            updateIndicators(slideIndex);
+            
+            // تحديث الشريحة الحالية
+            currentSlide = slideIndex;
+            
+            // إعادة تشغيل العرض التلقائي
+            restartAutoSlide();
+        }
+        
+        // الانتقال إلى الشريحة التالية
+        function nextSlide() {
+            goToSlide(currentSlide + 1);
+        }
+        
+        // الانتقال إلى الشريحة السابقة
+        function prevSlide() {
+            goToSlide(currentSlide - 1);
+        }
+        
+        // تحديث المؤشرات
+        function updateIndicators(slideIndex) {
+            indicators.forEach((indicator, index) => {
+                if (index === slideIndex) {
+                    indicator.classList.add('active');
+                } else {
+                    indicator.classList.remove('active');
+                }
+            });
+            
+            // تحديث رقم الشريحة
+            document.querySelectorAll('.slide-number').forEach((num, index) => {
+                if (index === slideIndex) {
+                    num.textContent = `${slideIndex + 1} / ${slides.length}`;
+                }
+            });
+        }
+        
+        // بدء العرض التلقائي
+        function startAutoSlide() {
+            slideInterval = setInterval(nextSlide, slideDuration);
+        }
+        
+        // إيقاف العرض التلقائي
+        function stopAutoSlide() {
+            clearInterval(slideInterval);
+        }
+        
+        // إعادة تشغيل العرض التلقائي
+        function restartAutoSlide() {
+            stopAutoSlide();
+            startAutoSlide();
+        }
+        
+        // إضافة أحداث النقر للأزرار
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+        });
+        
+        // إضافة أحداث النقر للمؤشرات
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                goToSlide(index);
+            });
+        });
+        
+        // إضافة تأثيرات عند تمرير الماوس فوق السليدر
+        const heroSlider = document.querySelector('.hero-slider');
+        heroSlider.addEventListener('mouseenter', stopAutoSlide);
+        heroSlider.addEventListener('mouseleave', startAutoSlide);
+        
+        // إمكانية التنقل باستخدام مفاتيح الأسهم
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'Right') {
+                prevSlide();
+            } else if (e.key === 'ArrowLeft' || e.key === 'Left') {
+                nextSlide();
+            }
+        });
+        
+        // استخدام setTimeout لإضافة تأثير ظهور تدريجي
+        setTimeout(() => {
+            initSlider();
+            
+            // إضافة تأثيرات ظهور للشريحة الأولى
+            const activeSlideContent = document.querySelector('.slide.active .slide-content');
+            if (activeSlideContent) {
+                activeSlideContent.style.opacity = '1';
+                activeSlideContent.style.transform = 'translateY(0)';
+            }
+        }, 300);
+        
+        // إضافة تأثيرات للشريحة النشطة عند التبديل
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                    const slide = mutation.target;
+                    const slideContent = slide.querySelector('.slide-content');
+                    
+                    if (slide.classList.contains('active')) {
+                        // إعادة تعيين الأنميشن للشريحة الجديدة
+                        slideContent.style.opacity = '0';
+                        slideContent.style.transform = 'translateY(50px)';
+                        
+                        setTimeout(() => {
+                            slideContent.style.opacity = '1';
+                            slideContent.style.transform = 'translateY(0)';
+                        }, 50);
+                    }
+                }
+            });
+        });
+        
+        // مراقبة تغييرات الفصول على الشرائح
+        slides.forEach(slide => {
+            observer.observe(slide, { attributes: true });
+        });
+        
+        // تأثيرات إضافية عند التمرير
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+            const parallaxElements = document.querySelectorAll('.slide-bg');
+            
+            parallaxElements.forEach(element => {
+                const speed = 0.5;
+                element.style.transform = `scale(${1.1 - scrolled * 0.0001})`;
+            });
+        });
+    </script>
+</body>
+</html>

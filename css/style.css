@@ -453,6 +453,7 @@ a {
 .nav-cta.whatsapp-btn {
     background: var(--whatsapp-green);
     color: var(--white);
+
 }
 
 .nav-cta.call-btn {
@@ -662,6 +663,7 @@ a {
     background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, rgba(212, 175, 55, 0.02) 100%);
     position: relative;
     overflow: hidden;
+    margin-top: 600px;
 }
 
 .dark-theme .why-choose {

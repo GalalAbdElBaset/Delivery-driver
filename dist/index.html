@@ -22,65 +22,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/home.css">
+    
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    
-    <!-- Structured Data for SEO -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "name": "Tn-QA Delivery",
-        "image": "https://iili.io/fLgS9wP.md.jpg",
-        "description": "خدمات توصيل سريعة وآمنة داخل قطر وتونس وبين الدول",
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "الدوحة",
-            "addressRegion": "قطر"
-        },
-        "telephone": "+97431691024",
-        "openingHours": "Mo-Su 00:00-23:59",
-        "url": "https://tnqa-delivery.com",
-        "priceRange": "$$",
-        "sameAs": [
-            "https://www.facebook.com/share/17ZgZb5UFg/",
-            "https://www.tiktok.com/@twensafiqatar0"
-        ]
-    }
-    </script>
-    
-    <style>
-        /* استايل إضافي للصفحة الرئيسية */
-        .page-transition {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
-        }
-        
-        .page-transition.hidden {
-            transform: translateY(-100%);
-        }
-        
-        .transition-logo {
-            animation: pulse 2s infinite;
-        }
-        
-        body.loaded .hero-slider {
-            animation: fadeIn 1s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+        <style>
+       
     </style>
 </head>
 <body>
@@ -104,7 +50,7 @@
             <div class="logo">
                 <div class="logo-icon">
                     <img src="https://iili.io/fLgS9wP.md.jpg" alt="HELA Express Logo" 
-                         onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-bolt gold-text\'></i>';">
+                        onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-bolt gold-text\'></i>';">
                 </div>
                 <div class="logo-text">
                     <h1 data-i18n="companyName" class="gold-text">Tn-QA Delivery</h1>
@@ -127,7 +73,6 @@
                         <i class="fa-solid fa-moon"></i>
                         <span class="theme-text">فاتح</span>
                     </button>
-
                 </div>
                 
                 <!-- Language Switcher -->
@@ -147,10 +92,10 @@
             
             <!-- Header Buttons -->
             <div class="header-buttons">
-                <a href="https://wa.me/97431691024" class="nav-cta whatsapp-btn" data-i18n="nav.whatsapp">
+                <a href="https://wa.me/+21656471550" class="nav-cta whatsapp-btn" data-i18n="nav.whatsapp">
                     <i class="fab fa-whatsapp"></i> <span class="cta-text">تواصل عبر واتساب</span>
                 </a>
-                <a href="tel:+97431691024" class="nav-cta call-btn" data-i18n="nav.call">
+                <a href="tel:+21656471550" class="nav-cta call-btn" data-i18n="nav.call">
                     <i class="fas fa-phone"></i> <span class="cta-text">اتصل الآن</span>
                 </a>
             </div>
@@ -165,178 +110,68 @@
     </header>
 
     <!-- ================= HERO SECTION ================= -->
-    <section id="home" class="hero">
-        <div class="hero-slider">
-            <!-- الشريحة الجديدة - خدمات داخل قطر -->
-            <div class="slide active" data-slide="1">
-                <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')"></div>
-                <div class="slide-overlay"></div>
-                <div class="container">
-                    <div class="slide-content" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="country-flag">
-                            🇶🇦
-                        </div>
-                        <h1 class="gold-text" data-i18n="hero.title1">خدمات عامة وتوصيل داخل قطر 🇶🇦</h1>
-                        <p class="slide-subtitle" data-i18n="hero.subtitle1">
-                            خدمات توصيل محلية داخل قطر - توصيل أغراض، توثيق تسليم أموال، توصيل مشتريات. خدمة سريعة وآمنة داخل جميع مناطق قطر.
-                        </p>
-                        
-                        <div class="service-features">
-                            <div class="feature-item">
-                                <i class="fas fa-shipping-fast"></i>
-                                <span>توصيل سريع داخل قطر</span>
-                            </div>
-                            <div class="feature-item">
-                                <i class="fas fa-hand-holding-usd"></i>
-                                <span>توثيق تسليم أموال</span>
-                            </div>
-                            <div class="feature-item">
-                                <i class="fas fa-shopping-bag"></i>
-                                <span>توصيل مشتريات</span>
-                            </div>
-                        </div>
-                        
-                        <div class="slide-buttons">
-                            <a href="services.html" class="btn primary-btn gold-bg" data-i18n="hero.servicesBtn">
-                                <i class="fas fa-list"></i> خدمات قطر
-                            </a>
-                            <a href="tel:+97431691024" class="btn outline-btn" data-i18n="hero.callBtn">
-                                <i class="fas fa-phone"></i> اتصل في قطر
-                            </a>
-                        </div>
+        <section class="hero-section">
+
+            <div class="hero-slider " >
+            
+            <div class="slider-container ">
+                <!-- الشريحة الأولى -->
+                <div class="slide active" id="slide1">
+                    <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');"></div>
+                    <div class="slide-content">
+                        <h1 class="slide-title">خدمة توصيل أغراض داخل قطر</h1>
+                        <p class="slide-description">نقدم لكم خدمة توصيل سريعة وآمنة داخل دولة قطر، مع ضمان وصول أغراضكم في الوقت المحدد وبأعلى معايير الجودة والأمان. فريقنا المدرب جاهز لخدمتكم على مدار الساعة.</p>
+                        <a href="#" class="slide-btn">تصفح الخدمات</a>
                     </div>
+                    <div class="slide-number">01 / 03</div>
+                    <div class="slide-badge">الخدمة الأكثر طلباً</div>
+                </div>
+                
+                <!-- الشريحة الثانية -->
+                <div class="slide" id="slide2">
+                    <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');"></div>
+                    <div class="slide-content">
+                        <h1 class="slide-title">خدمة توصيل أغراض داخل قطر</h1>
+                        <p class="slide-description">نسعى دائمًا لتقديم أفضل خدمة توصيل داخل قطر مع فريق متخصص ووسائل نقل حديثة لتلبية جميع متطلباتكم. سرعة، دقة، وأمان في كل عملية توصيل.</p>
+                        <a href="#" class="slide-btn">تصفح الخدمات</a>
+                    </div>
+                    <div class="slide-number">02 / 03</div>
+                    <div class="slide-badge">خدمة مميزة</div>
+                </div>
+                
+                <!-- الشريحة الثالثة -->
+                <div class="slide" id="slide3">
+                    <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');"></div>
+                    <div class="slide-content">
+                        <h1 class="slide-title">توثيق تسليم الأموال يدًا بيد</h1>
+                        <p class="slide-description">نقدم خدمة توثيق موثوقة لتسليم الأموال بين الأطراف، مع الحفاظ على الشفافية والأمان الكامل في كل عملية. نحن نضمن لكم تسليم آمن وموثق لكل المعاملات المالية.</p>
+                        <a href="#" class="slide-btn">تصفح الخدمات</a>
+                    </div>
+                    <div class="slide-number">03 / 03</div>
+                    <div class="slide-badge">خدمة جديدة</div>
                 </div>
             </div>
             
-            <!-- الشريحة الجديدة - خدمات داخل تونس -->
-            <div class="slide" data-slide="2">
-                <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1578575437130-527eed3abbec?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')"></div>
-                <div class="slide-overlay"></div>
-                <div class="container">
-                    <div class="slide-content" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="country-flag">
-                            🇹🇳
-                        </div>
-                        <h1 class="gold-text" data-i18n="hero.title2">خدمات عامة وتوصيل داخل تونس 🇹🇳</h1>
-                        <p class="slide-subtitle" data-i18n="hero.subtitle2">
-                            خدمات توصيل محلية داخل تونس - توصيل أغراض، توثيق تسليم أموال، توصيل مشتريات. خدمة موثوقة في جميع أنحاء تونس.
-                        </p>
-                        
-                        <div class="service-features">
-                            <div class="feature-item">
-                                <i class="fas fa-truck"></i>
-                                <span>توصيل داخل تونس</span>
-                            </div>
-                            <div class="feature-item">
-                                <i class="fas fa-money-bill-wave"></i>
-                                <span>توثيق الأموال</span>
-                            </div>
-                            <div class="feature-item">
-                                <i class="fas fa-box"></i>
-                                <span>توصيل طرود</span>
-                            </div>
-                        </div>
-                        
-                        <div class="slide-buttons">
-                            <a href="services.html" class="btn primary-btn gold-bg" data-i18n="hero.servicesBtn">
-                                <i class="fas fa-list"></i> خدمات تونس
-                            </a>
-                            <a href="tel:+21656471550" class="btn outline-btn" data-i18n="hero.callBtn">
-                                <i class="fas fa-phone"></i> اتصل في تونس
-                            </a>
-                        </div>
-                    </div>
+            <!-- عناصر التحكم -->
+            <div class="slider-controls">
+                <div class="slider-control prev-slide">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                <div class="slider-control next-slide">
+                    <i class="fas fa-chevron-left"></i>
                 </div>
             </div>
             
-            <!-- الشريحة الجديدة - خدمات التوصيل بين الدول -->
-            <div class="slide" data-slide="3">
-                <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')"></div>
-                <div class="slide-overlay"></div>
-                <div class="container">
-                    <div class="slide-content" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="country-flags">
-                            🇹🇳 ↔️ 🇶🇦
-                        </div>
-                        <h1 class="gold-text" data-i18n="hero.title3">توصيل أغراض بين تونس وقطر</h1>
-                        <p class="slide-subtitle" data-i18n="hero.subtitle3">
-                            خدمة توصيل أغراض بين تونس وقطر عبر مسافرين موثوقين، مع توثيق كامل للتسليم وتسليم الأموال يدًا بيد.
-                        </p>
-                        
-                        <div class="service-features">
-                            <div class="feature-item">
-                                <i class="fas fa-plane"></i>
-                                <span>توصيل عبر المسافرين</span>
-                            </div>
-                            <div class="feature-item">
-                                <i class="fas fa-balance-scale"></i>
-                                <span>بيع وحجز موازين</span>
-                            </div>
-                            <div class="feature-item">
-                                <i class="fas fa-handshake"></i>
-                                <span>توثيق التسليم</span>
-                            </div>
-                        </div>
-                        
-                        <div class="slide-buttons">
-                            <a href="services.html" class="btn primary-btn gold-bg" data-i18n="hero.servicesBtn">
-                                <i class="fas fa-list"></i> الخدمات الدولية
-                            </a>
-                            <a href="contact.html" class="btn outline-btn" data-i18n="hero.contactBtn">
-                                <i class="fas fa-phone-alt"></i> تواصل معنا
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Slider Controls -->
-            <button class="slider-prev" aria-label="الشريحة السابقة" data-i18n-title="slider.prev">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-            <button class="slider-next" aria-label="الشريحة التالية" data-i18n-title="slider.next">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            
-            <!-- Slider Dots -->
-            <div class="slider-dots">
-                <button class="dot active" data-slide="1" aria-label="انتقل إلى الشريحة 1">قطر 🇶🇦</button>
-                <button class="dot" data-slide="2" aria-label="انتقل إلى الشريحة 2">تونس 🇹🇳</button>
-                <button class="dot" data-slide="3" aria-label="انتقل إلى الشريحة 3">دولي 🌍</button>
-            </div>
-            
-            <!-- Progress Bar -->
-            <div class="slider-progress">
-                <div class="progress-bar"></div>
+            <!-- المؤشرات -->
+            <div class="slider-indicators">
+                <div class="slider-indicator active" data-slide="0"></div>
+                <div class="slider-indicator" data-slide="1"></div>
+                <div class="slider-indicator" data-slide="2"></div>
             </div>
         </div>
-        
-        <!-- Hero Buttons -->
-        <div class="hero-buttons-container">
-            <div class="container">
-                <div class="hero-buttons">
-                    <div class="country-buttons">
-                        <a href="tel:+97431691024" class="btn outline-btn country-btn qatar-btn" data-i18n="hero.qatarPhone">
-                            <i class="fas fa-phone"></i> قطر: 31691024
-                        </a>
-                        <a href="tel:+21656471550" class="btn outline-btn country-btn tunisia-btn" data-i18n="hero.tunisiaPhone">
-                            <i class="fas fa-phone"></i> تونس: 56471550
-                        </a>
-                    </div>
-                    <a href="services.html" class="btn primary-btn gold-bg" data-i18n="hero.callNow">
-                        <i class="fas fa-bolt"></i> طلب خدمة
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
+ 
 
-    
-
-
-
-
-    
     <!-- ================= WHY CHOOSE US SECTION ================= -->
     <section id="why-choose" class="why-choose section-padding">
         <div class="container">
@@ -631,10 +466,10 @@
             
             <div class="cta-content" data-aos="fade-up" data-aos-delay="100">
                 <div class="cta-buttons">
-                    <a href="https://wa.me/97431691024" class="cta-btn primary ripple" target="_blank" data-i18n="cta.whatsapp">
+                    <a href="https://wa.me/+21656471550" class="cta-btn primary ripple" target="_blank" data-i18n="cta.whatsapp">
                         <i class="fab fa-whatsapp"></i> تواصل عبر واتساب
                     </a>
-                    <a href="tel:+97431691024" class="cta-btn secondary ripple" data-i18n="cta.call">
+                    <a href="tel:+21656471550" class="cta-btn secondary ripple" data-i18n="cta.call">
                         <i class="fas fa-phone"></i> اتصل الآن
                     </a>
                 </div>
@@ -679,7 +514,7 @@
                     
                     <!-- Social Media -->
                     <div class="social-icons">
-                        <a href="https://wa.me/97431691024" class="social-icon whatsapp" aria-label="واتساب" target="_blank">
+                        <a href="https://wa.me/+21656471550" class="social-icon whatsapp" aria-label="واتساب" target="_blank">
                             <i class="fab fa-whatsapp"></i>
                         </a>
                         <a href="https://www.facebook.com/share/17ZgZb5UFg/" class="social-icon facebook" aria-label="فيسبوك" target="_blank">
@@ -707,10 +542,19 @@
                 <div class="footer-services">
                     <h3 class="footer-title gold-text" data-i18n="footer.ourServices">خدماتنا</h3>
                     <ul class="footer-list">
-                        <li><a href="services.html" class="footer-link" data-i18n="services.localQatar.title">خدمات قطر 🇶🇦</a></li>
-                        <li><a href="services.html" class="footer-link" data-i18n="services.localTunisia.title">خدمات تونس 🇹🇳</a></li>
-                        <li><a href="services.html" class="footer-link" data-i18n="services.scaleSales.title">خدمات دولية 🌍</a></li>
-                        <li><a href="services.html" class="footer-link" data-i18n="services.moneyDelivery.title">توثيق الأموال</a></li>
+                        <li><a href="#qatar-services" class="footer-link">خدمات قطر 🇶🇦</a></li>
+                        <li><a href="#tunisia-services" class="footer-link">خدمات تونس 🇹🇳</a></li>
+                        <li><a href="#international-services" class="footer-link">خدمات دولية <i class="fas fa-globe"
+                                    style="
+                                        font-size: 22px;
+                                        color: #d4af37;
+                                        margin-left: 6px;
+                                        vertical-align: middle;
+                                        margin-right: 5px;
+                                    ">
+                                    </i>
+                                    </a></li>
+                        <li><a href="#" class="footer-link">توثيق الأموال</a></li>
                     </ul>
                 </div>
                 
@@ -718,8 +562,8 @@
                 <div class="footer-contact">
                     <h3 class="footer-title gold-text" data-i18n="footer.contactUs">تواصل معنا</h3>
                     <div class="footer-contact-info">
-                        <p><i class="fab fa-whatsapp gold-text"></i> <span data-i18n="nav.whatsapp">واتساب:</span> +974 31 691 024</p>
-                        <p><i class="fas fa-phone gold-text"></i> <span data-i18n="countries.qatar">قطر:</span> +974 31 691 024</p>
+                        <p><i class="fab fa-whatsapp gold-text"></i> <span data-i18n="nav.whatsapp">واتساب:</span> +216 56 471 550</p>
+
                         <p><i class="fas fa-phone gold-text"></i> <span data-i18n="countries.tunisia">تونس:</span> +216 56 471 550</p>
                         <p><i class="fas fa-envelope gold-text"></i> <span data-i18n="contact.emailCard">البريد:</span> helamishwar@gmail.com</p>
                     </div>
@@ -758,31 +602,390 @@
     <!-- ================= SCRIPTS ================= -->
     <script src="js/main.js"></script>
     <script src="js/home.js"></script>
-    <script src="js/theme.js"></script>
+    <!-- <script src="js/theme.js"></script> -->
+    <script>
+        /* ================= Scroll To Top Button ================= */
 
+(() => {
+    const btn = document.getElementById('scrollToTop');
+    if (!btn) return;
 
+    const SHOW_AFTER = 300; // يظهر بعد 300px
+    let isScrolling = false;
+    let scrollTimeout;
 
-<!-- Page Transition -->
-<script>
-    document.getElementById('currentYear').textContent = new Date().getFullYear();
-    document.addEventListener('DOMContentLoaded', function() {
-        setTimeout(function() {
-            const pageTransition = document.querySelector('.page-transition');
-            if (pageTransition) {
-                pageTransition.classList.add('hidden');
-                document.body.classList.add('loaded');
-            }
+    /* -------- Scroll Progress -------- */
+    const progress = document.createElement('div');
+    progress.className = 'scroll-progress';
+    document.body.appendChild(progress);
+
+    /* -------- Helpers -------- */
+    const getScrollPercent = () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        return Math.round((scrollTop / docHeight) * 100);
+    };
+
+    /* -------- Scroll Event -------- */
+    window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+
+        // Show / Hide button
+        if (scrollY > SHOW_AFTER) {
+            btn.classList.add('show', 'pulse');
+            btn.classList.remove('hide');
+
+            progress.classList.add('show');
+            progress.textContent = `${getScrollPercent()}%`;
+        } else {
+            btn.classList.remove('show', 'pulse');
+            btn.classList.add('hide');
+
+            progress.classList.remove('show');
+        }
+
+        // Scrolling animation
+        btn.classList.add('scrolling');
+        isScrolling = true;
+
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            btn.classList.remove('scrolling');
+            isScrolling = false;
+        }, 150);
+    });
+
+    /* -------- Click -------- */
+    btn.addEventListener('click', () => {
+        btn.classList.remove('pulse');
+
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+
+        btn.classList.add('scrolling');
+
+        setTimeout(() => {
+            btn.classList.remove('scrolling');
         }, 800);
     });
+
+})();
+
+    </script>
     
-    window.addEventListener('load', function() {
-        setTimeout(function() {
-            const pageTransition = document.querySelector('.page-transition');
-            if (pageTransition) {
-                pageTransition.style.display = 'none';
+    <script>
+        
+
+
+
+
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                const pageTransition = document.querySelector('.page-transition');
+                if (pageTransition) {
+                    pageTransition.classList.add('hidden');
+                    document.body.classList.add('loaded');
+                }
+            }, 800);
+        });
+        
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const pageTransition = document.querySelector('.page-transition');
+                if (pageTransition) {
+                    pageTransition.style.display = 'none';
+                }
+            }, 1000);
+        });
+    </script>
+   <script>
+        // الانتظار حتى تحميل DOM بالكامل
+document.addEventListener('DOMContentLoaded', function() {
+    // العناصر الرئيسية
+    const sliderContainer = document.querySelector('.slider-container');
+    const slides = document.querySelectorAll('.slide');
+    const prevBtn = document.querySelector('.prev-slide');
+    const nextBtn = document.querySelector('.next-slide');
+    const indicators = document.querySelectorAll('.slider-indicator');
+    
+    // المتغيرات
+    let currentSlide = 0;
+    let slideInterval;
+    const slideDuration = 5000; // 5 ثواني بين كل شريحة
+    
+    // تهيئة السليدر
+    function initSlider() {
+        // تعيين ارتفاع السليدر بناءً على ارتفاع الشريحة الأولى
+        updateSliderHeight();
+        
+        // بدء التمرير التلقائي
+        startAutoSlide();
+        
+        // إضافة مستمعي الأحداث
+        setupEventListeners();
+        
+        // تحديث المؤشرات
+        updateIndicators();
+    }
+    
+    // تحديث ارتفاع السليدر
+    function updateSliderHeight() {
+        const activeSlide = slides[currentSlide];
+        const slideHeight = activeSlide.offsetHeight;
+        sliderContainer.style.height = `${slideHeight}px`;
+    }
+    
+    // الانتقال إلى شريحة محددة
+    function goToSlide(index) {
+        // التأكد من أن الفهرس ضمن النطاق
+        if (index < 0) index = slides.length - 1;
+        if (index >= slides.length) index = 0;
+        
+        // إزالة الفئة النشطة من جميع الشرائح
+        slides.forEach(slide => {
+            slide.classList.remove('active');
+            slide.style.opacity = '0';
+            slide.style.transform = 'translateX(100%)';
+        });
+        
+        // إضافة الفئة النشطة للشريحة المحددة
+        slides[index].classList.add('active');
+        slides[index].style.opacity = '1';
+        slides[index].style.transform = 'translateX(0)';
+        
+        // تحديث الشريحة الحالية
+        currentSlide = index;
+        
+        // تحديث المؤشرات
+        updateIndicators();
+        
+        // تحديث الارتفاع
+        updateSliderHeight();
+    }
+    
+    // الانتقال للشريحة التالية
+    function nextSlide() {
+        goToSlide(currentSlide + 1);
+    }
+    
+    // الانتقال للشريحة السابقة
+    function prevSlide() {
+        goToSlide(currentSlide - 1);
+    }
+    
+    // بدء التمرير التلقائي
+    function startAutoSlide() {
+        clearInterval(slideInterval); // تنظيف أي interval موجود
+        slideInterval = setInterval(nextSlide, slideDuration);
+    }
+    
+    // إيقاف التمرير التلقائي
+    function stopAutoSlide() {
+        clearInterval(slideInterval);
+    }
+    
+    // تحديث المؤشرات
+    function updateIndicators() {
+        indicators.forEach((indicator, index) => {
+            if (index === currentSlide) {
+                indicator.classList.add('active');
+            } else {
+                indicator.classList.remove('active');
             }
-        }, 1000);
+        });
+    }
+    
+    // إعداد مستمعي الأحداث
+    function setupEventListeners() {
+        // أزرار التحكم
+        prevBtn.addEventListener('click', function() {
+            prevSlide();
+            stopAutoSlide(); // إيقاف التلقائي عند التفاعل اليدوي
+            startAutoSlide(); // إعادة التشغيل بعد فترة
+        });
+        
+        nextBtn.addEventListener('click', function() {
+            nextSlide();
+            stopAutoSlide();
+            startAutoSlide();
+        });
+        
+        // المؤشرات
+        indicators.forEach(indicator => {
+            indicator.addEventListener('click', function() {
+                const slideIndex = parseInt(this.getAttribute('data-slide'));
+                goToSlide(slideIndex);
+                stopAutoSlide();
+                startAutoSlide();
+            });
+        });
+        
+        // إيقاف التمرير التلقائي عند التمرير فوق السليدر
+        sliderContainer.addEventListener('mouseenter', stopAutoSlide);
+        sliderContainer.addEventListener('mouseleave', startAutoSlide);
+        
+        // دعم لوحة المفاتيح
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                prevSlide();
+                stopAutoSlide();
+                startAutoSlide();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+                stopAutoSlide();
+                startAutoSlide();
+            }
+        });
+        
+        // إعادة حساب الارتفاع عند تغيير حجم النافذة
+        window.addEventListener('resize', function() {
+            updateSliderHeight();
+        });
+    }
+    
+    // بدء السليدر
+    initSlider();
+});
+        // DarkMood
+        // theme.js - Theme switching functionality
+const themeToggle = document.getElementById('themeToggle');
+const floatThemeToggle = document.getElementById('floatThemeToggle');
+const html = document.documentElement;
+
+// Theme configuration
+const themes = {
+    light: {
+        icon: 'sun',
+        text: {
+            ar: 'فاتح',
+            en: 'Light'
+        }
+    },
+    dark: {
+        icon: 'moon',
+        text: {
+            ar: 'داكن',
+            en: 'Dark'
+        }
+    }
+};
+
+// Initialize theme
+function initTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    // Determine initial theme
+    let theme = savedTheme || (prefersDark ? 'dark' : 'light');
+    
+    // Apply theme
+    applyTheme(theme);
+    
+    return theme;
+}
+
+// Apply theme to the page
+function applyTheme(theme) {
+    // Set HTML attribute
+    html.setAttribute('data-theme', theme);
+    
+    // Save to localStorage
+    localStorage.setItem('theme', theme);
+    
+    // Update UI elements
+    updateThemeUI(theme);
+    
+    // Dispatch event
+    window.dispatchEvent(new CustomEvent('themeChanged', { 
+        detail: { theme } 
+    }));
+}
+
+// Update theme UI elements
+function updateThemeUI(theme) {
+    const currentTheme = themes[theme];
+    const currentLang = localStorage.getItem('language') || 'ar';
+    
+    // Update theme button text
+    const themeTextElements = document.querySelectorAll('.theme-text');
+    themeTextElements.forEach(element => {
+        element.textContent = currentTheme.text[currentLang];
     });
-</script>
+    
+    // Update floating theme button
+    if (floatThemeToggle) {
+        const icon = floatThemeToggle.querySelector('i');
+        if (icon) {
+            icon.className = `fas fa-${currentTheme.icon}`;
+        }
+    }
+}
+
+// Toggle theme
+function toggleTheme() {
+    const currentTheme = html.getAttribute('data-theme') || 'light';
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    
+    applyTheme(newTheme);
+}
+
+// Event Listeners
+if (themeToggle) {
+    themeToggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        toggleTheme();
+    });
+}
+
+if (floatThemeToggle) {
+    floatThemeToggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        toggleTheme();
+    });
+}
+
+// Listen for system theme changes
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    const savedTheme = localStorage.getItem('theme');
+    if (!savedTheme) {
+        applyTheme(e.matches ? 'dark' : 'light');
+    }
+});
+
+// Listen for language changes
+window.addEventListener('languageChanged', () => {
+    const currentTheme = html.getAttribute('data-theme') || 'light';
+    updateThemeUI(currentTheme);
+});
+
+// Initialize on load
+document.addEventListener('DOMContentLoaded', () => {
+    initTheme();
+    
+    // Add theme transition styles
+    const style = document.createElement('style');
+    style.textContent = `
+        * {
+            transition: background-color 0.3s ease, border-color 0.3s ease !important;
+        }
+        
+        .theme-btn i {
+            transition: transform 0.3s ease !important;
+        }
+        
+        .theme-btn:hover i {
+            transform: rotate(20deg);
+        }
+    `;
+    document.head.appendChild(style);
+});
+
+// Make functions available globally
+window.toggleTheme = toggleTheme;
+window.getCurrentTheme = () => html.getAttribute('data-theme') || 'light';
+    </script> 
 </body>
 </html>
