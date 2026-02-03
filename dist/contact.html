@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="contact.heroTitle">تواصل معنا - Tn-QA Delivery</title>
+    <title data-i18n="contact.pageTitle">تواصل معنا - Tn-QA Delivery</title>
     <meta name="description" content="تواصل مع HELA Express - خدمات التوصيل السريع بين قطر وتونس عبر الهاتف، واتساب، البريد الإلكتروني أو النموذج">
     
     <!-- Font Awesome & Google Fonts -->
@@ -17,258 +17,365 @@
           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
           crossorigin="" />
     
+    <!-- AOS Animation Library -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+    
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/contact.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     
-    <!-- Reviews CSS -->
     <style>
-        /* ================= REVIEWS SECTION ================= */
-        .reviews-section {
-            background: var(--white);
-            padding: 80px 0;
+        /* استايلات إضافية لتحسين التصميم */
+        .toast-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            background: #28a745;
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            z-index: 9999;
+            animation: slideInRight 0.3s ease, fadeOut 0.3s ease 2.7s;
+            max-width: 350px;
+            font-weight: 500;
+            font-family: 'Cairo', sans-serif;
         }
         
-        .review-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 25px;
-            margin: 40px 0 60px;
+        .toast-message.error {
+            background: #dc3545;
         }
         
-        .stat-card {
-            background: var(--white);
-            padding: 30px 20px;
-            border-radius: var(--border-radius);
-            text-align: center;
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(212, 175, 55, 0.1);
-            transition: var(--transition);
+        .toast-message.warning {
+            background: #ffc107;
+            color: #000;
         }
         
-        .stat-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-hover);
-            border-color: var(--gold);
+        .toast-message.info {
+            background: #17a2b8;
         }
         
-        .stat-number {
-            font-size: 2.8rem;
-            font-weight: 800;
-            margin-bottom: 10px;
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
         
-        .stars {
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+        
+        /* تحسينات الأداء */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        /* تحسين الطباعة */
+        @media print {
+            .quick-contact-widget,
+            .float-whatsapp,
+            .float-theme,
+            .scroll-to-top {
+                display: none !important;
+            }
+            
+            body {
+                color: black !important;
+                background: white !important;
+            }
+            
+            a {
+                color: black !important;
+                text-decoration: underline !important;
+            }
+        }
+        
+        /* تحسين الوصول */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        
+        /* إصلاحات الخريطة */
+        .map-error-container {
+            height: 500px;
             display: flex;
+            flex-direction: column;
             justify-content: center;
-            gap: 3px;
-            margin: 15px 0;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05));
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
         }
         
-        .stars i {
-            color: #FFD700;
-            font-size: 1.2rem;
-        }
-        
-        .stat-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.2));
+        .map-error-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(212, 175, 55, 0.2);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 15px;
-        }
-        
-        .stat-icon i {
-            font-size: 1.8rem;
-            color: var(--gold);
-        }
-        
-        .stat-card p {
-            color: var(--gray-dark);
-            font-weight: 500;
-            margin: 0;
-        }
-        
-        .reviews-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .review-card {
-            background: var(--white);
-            border-radius: var(--border-radius);
-            padding: 30px;
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(212, 175, 55, 0.1);
-            transition: var(--transition);
-        }
-        
-        .review-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
-            border-color: var(--gold);
-        }
-        
-        .review-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
             margin-bottom: 20px;
         }
         
-        .review-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            overflow: hidden;
+        .map-error-icon i {
+            font-size: 40px;
+            color: #D4AF37;
         }
         
-        .review-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        /* Leaflet map custom styles */
+        .leaflet-container {
+            font-family: 'Cairo', sans-serif;
+            font-size: 14px;
         }
         
-        .reviewer-info h4 {
-            margin: 0 0 5px;
-            color: var(--black);
-            font-size: 1.1rem;
+        .map-popup {
+            min-width: 200px;
         }
         
-        .reviewer-info p {
-            margin: 0;
-            color: var(--gray);
-            font-size: 0.9rem;
+        .map-popup h3 {
+            color: #D4AF37;
+            margin: 0 0 10px 0;
+            font-size: 16px;
         }
         
-        .review-rating {
+        .map-popup p {
+            margin: 5px 0;
+            color: #333;
+        }
+        
+        .map-popup i {
+            color: #D4AF37;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .map-legend {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            font-size: 14px;
+        }
+        
+        .map-legend h4 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        
+        /* Page transition removed - using AOS instead */
+        
+        /* Emergency Services Alert */
+        .emergency-alert {
+            background: linear-gradient(135deg, #ff4757, #ff3838);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin: 20px 0;
             display: flex;
             align-items: center;
-            gap: 5px;
-            margin: 10px 0;
+            gap: 15px;
+            animation: pulseWarning 2s infinite;
         }
         
-        .review-rating i {
-            color: #FFD700;
-            font-size: 0.9rem;
+        @keyframes pulseWarning {
+            0% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 71, 87, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0); }
         }
         
-        .review-date {
-            color: var(--gray);
-            font-size: 0.85rem;
-        }
-        
-        .review-content {
-            margin-top: 15px;
-        }
-        
-        .review-content p {
-            color: var(--gray-dark);
-            line-height: 1.7;
-            margin: 0;
-        }
-        
-        .review-service {
-            display: inline-block;
-            background: rgba(212, 175, 55, 0.1);
-            color: var(--gold);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            margin-top: 15px;
-            font-weight: 500;
-        }
-        
-        .verified-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            background: rgba(37, 211, 102, 0.1);
-            color: var(--whatsapp-green);
-            padding: 3px 10px;
+        /* WhatsApp QR Code Section */
+        .whatsapp-qr-section {
+            text-align: center;
+            padding: 40px;
+            background: rgba(37, 211, 102, 0.05);
             border-radius: 15px;
-            font-size: 0.75rem;
-            margin-right: 10px;
+            margin: 30px 0;
         }
         
-        .verified-badge i {
-            font-size: 0.7rem;
+        .whatsapp-qr-section h3 {
+            color: #25D366;
+            margin-bottom: 20px;
         }
         
-        /* Review Controls */
-        .review-controls {
+        .qr-code-container {
+            max-width: 300px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .qr-code-container img {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            display: block;
+        }
+        
+        /* Social Media Integration */
+        .social-contact {
             display: flex;
             justify-content: center;
             gap: 15px;
-            margin-top: 40px;
-            flex-wrap: wrap;
+            margin-top: 20px;
         }
         
-        .review-btn {
-            padding: 12px 30px;
-            border: 2px solid var(--gold);
-            background: transparent;
-            color: var(--gold);
-            border-radius: 30px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
+        .social-contact a {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            gap: 8px;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: transform 0.3s;
         }
         
-        .review-btn:hover {
-            background: var(--gold);
-            color: var(--white);
+        .social-contact a:hover {
+            transform: translateY(-5px);
         }
         
-        .review-btn.primary {
-            background: var(--gold);
-            color: var(--white);
+        .social-contact .whatsapp {
+            background: #25D366;
         }
         
-        .review-btn.primary:hover {
-            background: var(--gold-dark);
+        .social-contact .facebook {
+            background: #1877F2;
         }
         
-        @media (max-width: 768px) {
-            .review-stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .reviews-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .review-card {
-                padding: 25px 20px;
-            }
+        .social-contact .instagram {
+            background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
         }
         
-        @media (max-width: 480px) {
-            .review-stats {
-                grid-template-columns: 1fr;
-            }
-            
-            .stat-number {
-                font-size: 2.2rem;
-            }
-            
-            .review-controls {
-                flex-direction: column;
-            }
-            
-            .review-btn {
-                width: 100%;
-                justify-content: center;
-            }
+        /* Live Chat Widget */
+        .live-chat-widget {
+            position: fixed;
+            bottom: 200px;
+            left: 30px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            padding: 20px;
+            z-index: 999;
+            transform: translateX(-150%);
+            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            max-width: 300px;
+        }
+        
+        .live-chat-widget.active {
+            transform: translateX(0);
+        }
+        
+        .chat-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            color: #25D366;
+        }
+        
+        .chat-header i {
+            font-size: 1.5rem;
+        }
+        
+        .chat-bubble {
+            background: #f0f0f0;
+            padding: 10px 15px;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .chat-bubble.agent {
+            background: #25D366;
+            color: white;
+            margin-left: 20px;
+        }
+        
+        .chat-input {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        .chat-input button {
+            background: #25D366;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        /* Emergency Numbers */
+        .emergency-numbers {
+            background: linear-gradient(135deg, #ff3838, #ff4757);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .emergency-numbers h3 {
+            color: white;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .emergency-numbers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .emergency-number {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .emergency-number i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        /* Loading Animation */
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #D4AF37;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
@@ -279,21 +386,21 @@
             <!-- Logo -->
             <div class="logo">
                 <div class="logo-icon">
-                    <img src="https://iili.io/fLgS9wP.md.jpg" alt="HELA Express Logo" data-i18n-alt="companyName">
+                    <img src="https://iili.io/fLgS9wP.md.jpg" alt="Tn-QA Delivery Logo">
                 </div>
                 <div class="logo-text">
-                    <h1 data-i18n="companyName" class="gold-text">Tn-QA Delivery</h1>
-                    <p data-i18n="companySlogan">خدمة توصيل سريعة وآمنة</p>
+                    <h1 class="gold-text">Tn-QA Delivery</h1>
+                    <p>خدمة توصيل سريعة وآمنة</p>
                 </div>
             </div>
             
             <!-- Navigation Links -->
             <nav class="nav-links" id="navLinks">
-                <a href="index.html" class="nav-link" data-i18n="nav.home">الرئيسية</a>
-                <a href="index.html#about" class="nav-link" data-i18n="nav.about">من نحن</a>
-                <a href="index.html#services" class="nav-link" data-i18n="nav.services">الخدمات</a>
-                <a href="contact.html" class="nav-link active" data-i18n="nav.contact">التواصل</a>
-                <a href="reviews.html" class="nav-link" data-i18n="reviews.allReviews">المراجعات</a>
+                <a href="index.html" class="nav-link">الرئيسية</a>
+                <a href="index.html#about" class="nav-link">من نحن</a>
+                <a href="services.html" class="nav-link">الخدمات</a>
+                <a href="contact.html" class="nav-link active">التواصل</a>
+                <a href="reviews.html" class="nav-link">المراجعات</a>
 
                 <!-- Language Switcher -->
                 <div class="language-switcher-nav">
@@ -306,20 +413,28 @@
                         <a href="#" data-lang="en" class="lang-option-nav">English</a>
                     </div>
                 </div>
+                
+                <!-- Theme Switcher -->
+                <div class="theme-switcher">
+                    <button id="themeToggle" class="theme-btn" aria-label="تبديل وضع السطوع">
+                        <i class="fas fa-sun"></i>
+                        <span class="theme-text">فاتح</span>
+                    </button>
+                </div>
             </nav>
             
             <!-- Header Buttons -->
             <div class="header-buttons">
                 <a href="https://wa.me/97471375390" class="nav-cta whatsapp-btn">
-                    <i class="fab fa-whatsapp"></i> <span class="cta-text" data-i18n="nav.whatsapp">تواصل عبر واتساب</span>
+                    <i class="fab fa-whatsapp"></i> <span class="cta-text">تواصل عبر واتساب</span>
                 </a>
                 <a href="tel:+97471375390" class="nav-cta call-btn">
-                    <i class="fas fa-phone"></i> <span class="cta-text" data-i18n="nav.call">اتصل الآن</span>
+                    <i class="fas fa-phone"></i> <span class="cta-text">اتصل الآن</span>
                 </a>
             </div>
             
             <!-- Mobile Menu Burger -->
-            <button class="burger" id="burger" aria-label="قائمة التنقل" data-i18n-title="common.close">
+            <button class="burger" id="burger" aria-label="قائمة التنقل">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -331,29 +446,42 @@
     <section class="contact-hero">
         <div class="hero-overlay"></div>
         <div class="container">
-            <div class="hero-content">
-                <h1 class="gold-text" data-i18n="contact.heroTitle">تواصل معنا</h1>
-                <p class="hero-subtitle" data-i18n="contact.heroSubtitle">نحن هنا لمساعدتك على مدار الساعة، تواصل معنا بأي طريقة تفضلها</p>
-                <div class="hero-stats">
+            <div class="hero-content" data-aos="fade-up">
+                <h1 class="gold-text">تواصل معنا</h1>
+                <p class="hero-subtitle">نحن هنا لمساعدتك على مدار الساعة، تواصل معنا بأي طريقة تفضلها</p>
+                
+                <!-- Emergency Alert -->
+                <div class="emergency-alert" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-ambulance fa-2x"></i>
+                    <div>
+                        <h3>خدمة الطوارئ 24/7</h3>
+                        <p>للطلبات العاجلة والاستفسارات الفورية</p>
+                    </div>
+                    <a href="tel:+97471375390" class="btn call-btn" style="margin-right: auto;">
+                        <i class="fas fa-phone"></i> اتصل الآن
+                    </a>
+                </div>
+                
+                <div class="hero-stats" data-aos="fade-up" data-aos-delay="200">
                     <div class="stat-item">
                         <i class="fas fa-headset"></i>
                         <div>
-                            <h3 data-i18n="status.available">دعم فوري</h3>
-                            <p data-i18n="time.minutes">رد خلال دقائق</p>
+                            <h3>دعم فوري</h3>
+                            <p>رد خلال دقائق</p>
                         </div>
                     </div>
                     <div class="stat-item">
                         <i class="fas fa-clock"></i>
                         <div>
-                            <h3 data-i18n="time.hours">متاح 24/7</h3>
-                            <p data-i18n="common.all">على مدار الساعة</p>
+                            <h3>متاح 24/7</h3>
+                            <p>على مدار الساعة</p>
                         </div>
                     </div>
                     <div class="stat-item">
                         <i class="fas fa-check-circle"></i>
                         <div>
-                            <h3 data-i18n="common.verified">ضمان الرد</h3>
-                            <p data-i18n="time.hours">ضمن 4 ساعات كحد أقصى</p>
+                            <h3>ضمان الرد</h3>
+                            <p>ضمن 4 ساعات كحد أقصى</p>
                         </div>
                     </div>
                 </div>
@@ -364,76 +492,101 @@
     <!-- ================= CONTACT METHODS ================= -->
     <section class="contact-methods-section section-padding">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-i18n="contact.directMethods">طرق التواصل المباشرة</h2>
-                <p class="section-subtitle" data-i18n="contact.methodsSubtitle">اختر الطريقة المناسبة لك للتواصل معنا مباشرة</p>
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">طرق التواصل المباشرة</h2>
+                <p class="section-subtitle">اختر الطريقة المناسبة لك للتواصل معنا مباشرة</p>
             </div>
             
             <div class="contact-cards">
                 <!-- WhatsApp Card -->
-                <div class="contact-card whatsapp-card">
+                <div class="contact-card whatsapp-card" data-aos="fade-up" data-aos-delay="100">
                     <div class="card-icon">
                         <i class="fab fa-whatsapp"></i>
                     </div>
-                    <h3 data-i18n="contact.whatsappCard">واتساب مباشر</h3>
-                    <p class="card-description" data-i18n="contact.whatsappDesc">للتواصل الفوري والرد السريع خلال دقائق</p>
+                    <h3>واتساب مباشر</h3>
+                    <p class="card-description">للتواصل الفوري والرد السريع خلال دقائق</p>
                     
                     <div class="whatsapp-numbers">
                         <div class="whatsapp-number">
                             <div class="country-flag">
-                                <img src="https://flagcdn.com/w40/qa.png" alt="علم قطر" data-i18n-alt="countries.qatar">
-                                <span data-i18n="countries.qatar">قطر</span>
+                                <img src="https://flagcdn.com/w40/qa.png" alt="علم قطر">
+                                <span>قطر</span>
                             </div>
                             <a href="https://wa.me/97471375390" class="whatsapp-btn">
                                 <i class="fab fa-whatsapp"></i>
                                 <span>+974 71 375 390</span>
-                                <span class="status-badge active" data-i18n="status.connected">متصل الآن</span>
+                                <span class="status-badge active">متصل الآن</span>
                             </a>
                         </div>
                         
                         <div class="whatsapp-number">
                             <div class="country-flag">
-                                <img src="https://flagcdn.com/w40/tn.png" alt="علم تونس" data-i18n-alt="countries.tunisia">
-                                <span data-i18n="countries.tunisia">تونس</span>
+                                <img src="https://flagcdn.com/w40/tn.png" alt="علم تونس">
+                                <span>تونس</span>
                             </div>
                             <a href="https://wa.me/21656471550" class="whatsapp-btn">
                                 <i class="fab fa-whatsapp"></i>
                                 <span>+216 56 471 550</span>
-                                <span class="status-badge active" data-i18n="status.connected">متصل الآن</span>
+                                <span class="status-badge active">متصل الآن</span>
                             </a>
                         </div>
+                    </div>
+                    
+                    <!-- WhatsApp QR Code Section -->
+                    <div class="whatsapp-qr-section" data-aos="zoom-in" data-aos-delay="150">
+                        <h3><i class="fab fa-whatsapp"></i> مسح QR Code</h3>
+                        <div class="qr-code-container">
+                            <div class="qr-code-placeholder">
+                                <i class="fab fa-whatsapp fa-5x" style="color: #25D366;"></i>
+                                <p style="margin-top: 15px; color: #666;">QR Code سيتم إضافته قريباً</p>
+                            </div>
+                        </div>
+                        <p style="margin-top: 15px; color: #666;">استخدم كاميرا هاتفك لمسح الرمز والاتصال مباشرة</p>
                     </div>
                     
                     <div class="card-features">
                         <div class="feature">
                             <i class="fas fa-bolt"></i>
-                            <span data-i18n="time.minutes">رد فوري خلال دقائق</span>
+                            <span>رد فوري خلال دقائق</span>
                         </div>
                         <div class="feature">
                             <i class="fas fa-paperclip"></i>
-                            <span data-i18n="form.attachments">إرسال صور ومستندات</span>
+                            <span>إرسال صور ومستندات</span>
                         </div>
                         <div class="feature">
                             <i class="fas fa-history"></i>
-                            <span data-i18n="common.verified">سجل محادثات محفوظ</span>
+                            <span>سجل محادثات محفوظ</span>
                         </div>
+                    </div>
+                    
+                    <!-- Social Media Integration -->
+                    <div class="social-contact" data-aos="fade-up" data-aos-delay="200">
+                        <a href="https://wa.me/97471375390" class="whatsapp" title="واتساب">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="https://facebook.com" class="facebook" title="فيسبوك">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://instagram.com" class="instagram" title="إنستجرام">
+                            <i class="fab fa-instagram"></i>
+                        </a>
                     </div>
                 </div>
                 
                 <!-- Phone Card -->
-                <div class="contact-card phone-card">
+                <div class="contact-card phone-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="card-icon">
                         <i class="fas fa-phone-alt"></i>
                     </div>
-                    <h3 data-i18n="contact.phoneCard">اتصال هاتفي</h3>
-                    <p class="card-description" data-i18n="contact.phoneDesc">للأمور العاجلة والاستفسارات المباشرة</p>
+                    <h3>اتصال هاتفي</h3>
+                    <p class="card-description">للأمور العاجلة والاستفسارات المباشرة</p>
                     
                     <div class="phone-numbers">
                         <div class="phone-number">
                             <div class="country-info">
                                 <div class="country-flag">
-                                    <img src="https://flagcdn.com/w40/qa.png" alt="علم قطر" data-i18n-alt="countries.qatar">
-                                    <span data-i18n="countries.qatar">قطر</span>
+                                    <img src="https://flagcdn.com/w40/qa.png" alt="علم قطر">
+                                    <span>قطر</span>
                                 </div>
                                 <span class="country-code">+974</span>
                             </div>
@@ -442,7 +595,7 @@
                                     <i class="fas fa-phone"></i>
                                     <span>71375390</span>
                                 </a>
-                                <button class="copy-btn" data-number="+97471375390" data-i18n-title="common.copy">
+                                <button class="copy-btn" data-number="+97471375390" title="نسخ الرقم">
                                     <i class="far fa-copy"></i>
                                 </button>
                             </div>
@@ -451,8 +604,8 @@
                         <div class="phone-number">
                             <div class="country-info">
                                 <div class="country-flag">
-                                    <img src="https://flagcdn.com/w40/tn.png" alt="علم تونس" data-i18n-alt="countries.tunisia">
-                                    <span data-i18n="countries.tunisia">تونس</span>
+                                    <img src="https://flagcdn.com/w40/tn.png" alt="علم تونس">
+                                    <span>تونس</span>
                                 </div>
                                 <span class="country-code">+216</span>
                             </div>
@@ -461,51 +614,74 @@
                                     <i class="fas fa-phone"></i>
                                     <span>56471550</span>
                                 </a>
-                                <button class="copy-btn" data-number="+21656471550" data-i18n-title="common.copy">
+                                <button class="copy-btn" data-number="+21656471550" title="نسخ الرقم">
                                     <i class="far fa-copy"></i>
                                 </button>
                             </div>
                         </div>
                     </div>
                     
+                    <!-- Emergency Numbers -->
+                    <div class="emergency-numbers" data-aos="fade-up" data-aos-delay="150">
+                        <h3><i class="fas fa-ambulance"></i> أرقام الطوارئ</h3>
+                        <div class="emergency-numbers-grid">
+                            <div class="emergency-number">
+                                <i class="fas fa-clock"></i>
+                                <h4>خدمة 24 ساعة</h4>
+                                <p>متاح على مدار الساعة</p>
+                                <a href="tel:+97471375390" class="btn call-btn" style="margin-top: 10px;">
+                                    <i class="fas fa-phone"></i> اتصال عاجل
+                                </a>
+                            </div>
+                            <div class="emergency-number">
+                                <i class="fas fa-shipping-fast"></i>
+                                <h4>توصيل عاجل</h4>
+                                <p>للطلبات المستعجلة</p>
+                                <a href="https://wa.me/97471375390" class="btn whatsapp-btn" style="margin-top: 10px;">
+                                    <i class="fab fa-whatsapp"></i> واتساب عاجل
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="working-hours">
-                        <h4><i class="fas fa-clock"></i> <span data-i18n="time.hours">أوقات العمل</span></h4>
+                        <h4><i class="fas fa-clock"></i> أوقات العمل</h4>
                         <div class="hours-list">
                             <div class="hour-item">
-                                <span data-i18n="common.days">الأحد - الخميس</span>
-                                <span class="time" data-i18n="time.hours">24 ساعة</span>
+                                <span>الأحد - الخميس</span>
+                                <span class="time">24 ساعة</span>
                             </div>
                             <div class="hour-item">
-                                <span data-i18n="common.days">الجمعة - السبت</span>
-                                <span class="time" data-i18n="time.hours">24 ساعة</span>
+                                <span>الجمعة - السبت</span>
+                                <span class="time">24 ساعة</span>
                             </div>
                             <div class="hour-item emergency">
-                                <span><i class="fas fa-bolt"></i> <span data-i18n="time.emergency">خدمة الطوارئ</span></span>
-                                <span class="time" data-i18n="time.hours">متاحة 24/7</span>
+                                <span><i class="fas fa-bolt"></i> خدمة الطوارئ</span>
+                                <span class="time">متاحة 24/7</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Email Card -->
-                <div class="contact-card email-card">
+                <div class="contact-card email-card" data-aos="fade-up" data-aos-delay="300">
                     <div class="card-icon">
                         <i class="fas fa-envelope"></i>
                     </div>
-                    <h3 data-i18n="contact.emailCard">البريد الإلكتروني</h3>
-                    <p class="card-description" data-i18n="contact.emailDesc">للرسائل الرسمية، الاستفسارات التفصيلية والمستندات</p>
+                    <h3>البريد الإلكتروني</h3>
+                    <p class="card-description">للرسائل الرسمية، الاستفسارات التفصيلية والمستندات</p>
                     
                     <div class="email-addresses">
                         <div class="email-address">
                             <div class="email-type">
                                 <i class="fas fa-envelope-open-text"></i>
-                                <span data-i18n="common.primary">البريد الرئيسي</span>
+                                <span>البريد الرئيسي</span>
                             </div>
                             <div class="email-actions">
                                 <a href="mailto:helamishwar@gmail.com" class="email-link">
                                     helamishwar@gmail.com
                                 </a>
-                                <button class="copy-btn" data-text="helamishwar@gmail.com" data-i18n-title="common.copy">
+                                <button class="copy-btn" data-text="helamishwar@gmail.com" title="نسخ الإيميل">
                                     <i class="far fa-copy"></i>
                                 </button>
                             </div>
@@ -514,13 +690,13 @@
                         <div class="email-address">
                             <div class="email-type">
                                 <i class="fas fa-briefcase"></i>
-                                <span data-i18n="common.business">للشؤون التجارية</span>
+                                <span>للشؤون التجارية</span>
                             </div>
                             <div class="email-actions">
-                                <a href="mailto:business@helaexpress.com" class="email-link">
-                                    business@helaexpress.com
+                                <a href="mailto:business@tnqadelivery.com" class="email-link">
+                                    business@tnqadelivery.com
                                 </a>
-                                <button class="copy-btn" data-text="business@helaexpress.com" data-i18n-title="common.copy">
+                                <button class="copy-btn" data-text="business@tnqadelivery.com" title="نسخ الإيميل">
                                     <i class="far fa-copy"></i>
                                 </button>
                             </div>
@@ -528,21 +704,32 @@
                     </div>
                     
                     <div class="response-time">
-                        <h4><i class="fas fa-stopwatch"></i> <span data-i18n="time.hours">وقت الرد المتوقع</span></h4>
+                        <h4><i class="fas fa-stopwatch"></i> وقت الرد المتوقع</h4>
                         <div class="time-info">
                             <div class="time-item">
-                                <span data-i18n="common.general">الاستفسارات العامة</span>
-                                <span class="time-badge" data-i18n="time.hours">4-6 ساعات</span>
+                                <span>الاستفسارات العامة</span>
+                                <span class="time-badge">4-6 ساعات</span>
                             </div>
                             <div class="time-item">
-                                <span data-i18n="time.urgent">الطلبات العاجلة</span>
-                                <span class="time-badge urgent" data-i18n="time.hours">1-2 ساعة</span>
+                                <span>الطلبات العاجلة</span>
+                                <span class="time-badge urgent">1-2 ساعة</span>
                             </div>
                             <div class="time-item">
-                                <span data-i18n="common.business">الشؤون التجارية</span>
-                                <span class="time-badge" data-i18n="time.hours">24 ساعة</span>
+                                <span>الشؤون التجارية</span>
+                                <span class="time-badge">24 ساعة</span>
                             </div>
                         </div>
+                    </div>
+                    
+                    <!-- Email Form Section -->
+                    <div class="email-form-section" data-aos="fade-up" data-aos-delay="150">
+                        <h4><i class="fas fa-paper-plane"></i> إرسال بريد مباشر</h4>
+                        <a href="#contactFormSection"  class="btn primary-btn" style="width: 100%; margin-top: 15px;">
+                            <i class="fas fa-envelope"></i> فتح نموذج البريد
+                        </a>
+                        <p style="margin-top: 10px; font-size: 0.9rem; color: #666;">
+                            سنقوم بفتح بريدك الإلكتروني مع بيانات مسبقة التعبئة
+                        </p>
                     </div>
                 </div>
             </div>
@@ -550,24 +737,24 @@
     </section>
 
     <!-- ================= CONTACT FORM SECTION ================= -->
-    <section class="contact-form-section section-padding">
+    <section class="contact-form-section section-padding" id="contactFormSection">
         <div class="container">
-            <div class="form-wrapper">
+            <div class="form-wrapper" data-aos="fade-up">
                 <div class="form-header">
-                    <h2 class="gold-text" data-i18n="contact.formTitle">أرسل لنا رسالة مباشرة</h2>
-                    <p data-i18n="contact.formSubtitle">املأ النموذج وسنقوم بالرد عليك في أسرع وقت ممكن</p>
+                    <h2 class="gold-text">أرسل لنا رسالة مباشرة</h2>
+                    <p>املأ النموذج وسنقوم بالرد عليك في أسرع وقت ممكن</p>
                     <div class="form-stats">
                         <div class="form-stat">
                             <i class="fas fa-check-circle"></i>
-                            <span data-i18n="time.hours">متوسط وقت الرد: 2-4 ساعات</span>
+                            <span>متوسط وقت الرد: 2-4 ساعات</span>
                         </div>
                         <div class="form-stat">
                             <i class="fas fa-users"></i>
-                            <span data-i18n="common.customers">تمت خدمة +500 عميل</span>
+                            <span>تمت خدمة +500 عميل</span>
                         </div>
                         <div class="form-stat">
                             <i class="fas fa-star"></i>
-                            <span data-i18n="common.satisfaction">رضا عملاء 98%</span>
+                            <span>رضا عملاء 98%</span>
                         </div>
                     </div>
                 </div>
@@ -575,34 +762,34 @@
                 <form id="contactForm" class="contact-form">
                     <!-- Personal Info -->
                     <div class="form-section">
-                        <h3><i class="fas fa-user"></i> <span data-i18n="form.personalInfo">المعلومات الشخصية</span></h3>
+                        <h3><i class="fas fa-user"></i> المعلومات الشخصية</h3>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="fullName">
                                     <i class="fas fa-user-circle"></i>
-                                    <span data-i18n="form.fullName">الاسم الكامل</span>
+                                    <span>الاسم الكامل</span>
                                 </label>
-                                <input type="text" id="fullName" name="fullName" data-i18n-placeholder="form.fullName" placeholder="أدخل اسمك الكامل" required>
-                                <div class="form-hint" data-i18n="form.hintName">الرجاء إدخال الاسم الثلاثي</div>
+                                <input type="text" id="fullName" name="fullName" placeholder="أدخل اسمك الكامل" required>
+                                <div class="form-hint">الرجاء إدخال الاسم الثلاثي</div>
                             </div>
                             
                             <div class="form-group">
                                 <label for="phoneNumber">
                                     <i class="fas fa-mobile-alt"></i>
-                                    <span data-i18n="form.phoneNumber">رقم الهاتف</span>
+                                    <span>رقم الهاتف</span>
                                 </label>
                                 <div class="phone-input-wrapper">
                                     <select id="countryCode" name="countryCode" class="country-code-select">
-                                        <option value="+974">🇶🇦 +974 <span data-i18n="countries.qatar">(قطر)</span></option>
-                                        <option value="+216">🇹🇳 +216 <span data-i18n="countries.tunisia">(تونس)</span></option>
-                                        <option value="+966">🇸🇦 +966 <span data-i18n="countries.saudi">(السعودية)</span></option>
-                                        <option value="+971">🇦🇪 +971 <span data-i18n="countries.uae">(الإمارات)</span></option>
-                                        <option value="+20">🇪🇬 +20 <span data-i18n="countries.egypt">(مصر)</span></option>
-                                        <option value="+212">🇲🇦 +212 <span data-i18n="countries.morocco">(المغرب)</span></option>
+                                        <option value="+974">🇶🇦 +974 (قطر)</option>
+                                        <option value="+216">🇹🇳 +216 (تونس)</option>
+                                        <option value="+966">🇸🇦 +966 (السعودية)</option>
+                                        <option value="+971">🇦🇪 +971 (الإمارات)</option>
+                                        <option value="+20">🇪🇬 +20 (مصر)</option>
+                                        <option value="+212">🇲🇦 +212 (المغرب)</option>
                                     </select>
-                                    <input type="tel" id="phoneNumber" name="phoneNumber" data-i18n-placeholder="form.phonePlaceholder" placeholder="رقم الهاتف بدون مفتاح الدولة" required>
+                                    <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="رقم الهاتف بدون مفتاح الدولة" required>
                                 </div>
-                                <div class="form-hint" data-i18n="form.hintPhone">سنتصل على هذا الرقم للرد على استفسارك</div>
+                                <div class="form-hint">سنتصل على هذا الرقم للرد على استفسارك</div>
                             </div>
                         </div>
                         
@@ -610,22 +797,22 @@
                             <div class="form-group">
                                 <label for="email">
                                     <i class="fas fa-envelope"></i>
-                                    <span data-i18n="form.email">البريد الإلكتروني</span>
+                                    <span>البريد الإلكتروني</span>
                                 </label>
-                                <input type="email" id="email" name="email" data-i18n-placeholder="form.emailPlaceholder" placeholder="example@email.com">
-                                <div class="form-hint" data-i18n="form.hintEmail">اختياري - للرد الرسمي والمستندات</div>
+                                <input type="email" id="email" name="email" placeholder="example@email.com">
+                                <div class="form-hint">اختياري - للرد الرسمي والمستندات</div>
                             </div>
                             
                             <div class="form-group">
                                 <label for="preferredContact">
                                     <i class="fas fa-comment-dots"></i>
-                                    <span data-i18n="form.preferredContact">طريقة التواصل المفضلة</span>
+                                    <span>طريقة التواصل المفضلة</span>
                                 </label>
                                 <select id="preferredContact" name="preferredContact" class="form-select">
-                                    <option value="whatsapp" data-i18n="nav.whatsapp">واتساب</option>
-                                    <option value="phone" data-i18n="contact.phoneCard">مكالمة هاتفية</option>
-                                    <option value="email" data-i18n="contact.emailCard">بريد إلكتروني</option>
-                                    <option value="any" data-i18n="common.any">أي طريقة</option>
+                                    <option value="whatsapp">واتساب</option>
+                                    <option value="phone">مكالمة هاتفية</option>
+                                    <option value="email">بريد إلكتروني</option>
+                                    <option value="any">أي طريقة</option>
                                 </select>
                             </div>
                         </div>
@@ -633,34 +820,34 @@
                     
                     <!-- Service Information -->
                     <div class="form-section">
-                        <h3><i class="fas fa-cogs"></i> <span data-i18n="form.serviceInfo">معلومات الخدمة</span></h3>
+                        <h3><i class="fas fa-cogs"></i> معلومات الخدمة</h3>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="serviceType">
                                     <i class="fas fa-tasks"></i>
-                                    <span data-i18n="form.serviceType">نوع الخدمة المطلوبة</span>
+                                    <span>نوع الخدمة المطلوبة</span>
                                 </label>
                                 <select id="serviceType" name="serviceType" class="form-select" required>
-                                    <option value="" selected disabled data-i18n="form.selectService">اختر الخدمة المطلوبة</option>
-                                    <option value="local-delivery-qatar" data-i18n="servicesList.localDelivery">التوصيل المحلي في قطر</option>
-                                    <option value="local-delivery-tunisia" data-i18n="servicesList.localDelivery">التوصيل المحلي في تونس</option>
-                                    <option value="scale-sales" data-i18n="servicesList.scaleSales">بيع موازين</option>
-                                    <option value="scale-booking-qa-tn" data-i18n="servicesList.scaleBooking">حجز ميزان من قطر إلى تونس</option>
-                                    <option value="scale-booking-tn-qa" data-i18n="servicesList.scaleBooking">حجز ميزان من تونس إلى قطر</option>
-                                    <option value="money-delivery" data-i18n="servicesList.moneyDelivery">توثيق تسليم الأموال</option>
-                                    <option value="other" data-i18n="common.other">استفسار عام / خدمة أخرى</option>
+                                    <option value="" selected disabled>اختر الخدمة المطلوبة</option>
+                                    <option value="local-delivery-qatar">التوصيل المحلي في قطر</option>
+                                    <option value="local-delivery-tunisia">التوصيل المحلي في تونس</option>
+                                    <option value="scale-sales">بيع موازين</option>
+                                    <option value="scale-booking-qa-tn">حجز ميزان من قطر إلى تونس</option>
+                                    <option value="scale-booking-tn-qa">حجز ميزان من تونس إلى قطر</option>
+                                    <option value="money-delivery">توثيق تسليم الأموال</option>
+                                    <option value="other">استفسار عام / خدمة أخرى</option>
                                 </select>
                             </div>
                             
                             <div class="form-group">
                                 <label for="urgency">
                                     <i class="fas fa-exclamation-triangle"></i>
-                                    <span data-i18n="form.urgency">درجة الاستعجال</span>
+                                    <span>درجة الاستعجال</span>
                                 </label>
                                 <select id="urgency" name="urgency" class="form-select">
-                                    <option value="normal" data-i18n="time.normal">عادي (الرد خلال 24 ساعة)</option>
-                                    <option value="urgent" data-i18n="time.urgent">عاجل (الرد خلال 4 ساعات)</option>
-                                    <option value="emergency" data-i18n="time.emergency">طارئ (الرد خلال ساعة)</option>
+                                    <option value="normal">عادي (الرد خلال 24 ساعة)</option>
+                                    <option value="urgent">عاجل (الرد خلال 4 ساعات)</option>
+                                    <option value="emergency">طارئ (الرد خلال ساعة)</option>
                                 </select>
                             </div>
                         </div>
@@ -668,26 +855,26 @@
                         <div class="form-group full-width">
                             <label for="messageSubject">
                                 <i class="fas fa-heading"></i>
-                                <span data-i18n="form.messageSubject">موضوع الرسالة</span>
+                                <span>موضوع الرسالة</span>
                             </label>
-                            <input type="text" id="messageSubject" name="messageSubject" data-i18n-placeholder="form.messageSubjectPlaceholder" placeholder="عنوان مختصر لطلبك" required>
+                            <input type="text" id="messageSubject" name="messageSubject" placeholder="عنوان مختصر لطلبك" required>
                         </div>
                     </div>
                     
                     <!-- Message Content -->
                     <div class="form-section">
-                        <h3><i class="fas fa-edit"></i> <span data-i18n="form.messageContent">محتوى الرسالة</span></h3>
+                        <h3><i class="fas fa-edit"></i> محتوى الرسالة</h3>
                         <div class="form-group full-width">
                             <label for="message">
                                 <i class="fas fa-comment-alt"></i>
-                                <span data-i18n="form.message">تفاصيل الطلب أو الاستفسار</span>
+                                <span>تفاصيل الطلب أو الاستفسار</span>
                             </label>
                             <textarea id="message" name="message" rows="6" 
-                                      data-i18n-placeholder="form.messagePlaceholder"
-                                      placeholder="يرجى وصف طلبك أو استفسارك بالتفصيل..." required></textarea>
+                                      placeholder="يرجى وصف طلبك أو استفسارك بالتفصيل..." 
+                                      required></textarea>
                             <div class="textarea-info">
-                                <span class="char-count">0/2000 <span data-i18n="common.characters">حرف</span></span>
-                                <span class="form-hint" data-i18n="form.hintMessage">كلما كانت التفاصيل أكثر، كان الرد أفضل وأسرع</span>
+                                <span class="char-count">0/2000 حرف</span>
+                                <span class="form-hint">كلما كانت التفاصيل أكثر، كان الرد أفضل وأسرع</span>
                             </div>
                         </div>
                         
@@ -695,12 +882,12 @@
                         <div class="form-group full-width">
                             <label for="fileUpload">
                                 <i class="fas fa-paperclip"></i>
-                                <span data-i18n="form.attachments">إرفاق ملفات (اختياري)</span>
+                                <span>إرفاق ملفات (اختياري)</span>
                             </label>
                             <div class="file-upload-area" id="fileUploadArea">
                                 <i class="fas fa-cloud-upload-alt"></i>
-                                <p><span data-i18n="form.uploadDrag">اسحب وأفلت الملفات هنا أو</span> <span class="browse-link" data-i18n="form.uploadBrowse">تصفح</span></p>
-                                <p class="file-hint" data-i18n="form.uploadHint">يمكنك رفع الصور، PDF، مستندات Word (حتى 10MB)</p>
+                                <p><span>اسحب وأفلت الملفات هنا أو</span> <span class="browse-link">تصفح</span></p>
+                                <p class="file-hint">يمكنك رفع الصور، PDF، مستندات Word (حتى 10MB)</p>
                                 <input type="file" id="fileUpload" name="fileUpload" multiple accept=".jpg,.jpeg,.png,.pdf,.doc,.docx" hidden>
                             </div>
                             <div id="fileList" class="file-list"></div>
@@ -711,20 +898,35 @@
                     <div class="form-actions">
                         <div class="form-agreement">
                             <input type="checkbox" id="privacyPolicy" name="privacyPolicy" required>
-                            <label for="privacyPolicy" data-i18n="form.privacyPolicy">
+                            <label for="privacyPolicy">
                                 أوافق على سياسة الخصوصية وشروط الخدمة
                             </label>
                         </div>
                         
                         <div class="action-buttons">
                             <button type="button" class="btn btn-outline" id="clearForm">
-                                <i class="fas fa-redo"></i> <span data-i18n="form.clear">مسح النموذج</span>
+                                <i class="fas fa-redo"></i> <span>مسح النموذج</span>
                             </button>
                             <button type="submit" class="btn btn-primary whatsapp-submit" id="submitForm">
                                 <i class="fab fa-whatsapp"></i>
-                                <span data-i18n="form.submit">إرسال عبر واتساب</span>
+                                <span>إرسال عبر واتساب</span>
                                 <div class="loader" id="formLoader"></div>
                             </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Email Submit Button (NEW) -->
+                    <div class="form-section" style="margin-top: 30px; border-top: 2px dashed #D4AF37; padding-top: 20px;">
+                        <h3><i class="fas fa-envelope"></i> إرسال عبر البريد الإلكتروني</h3>
+                        <p style="margin-bottom: 15px; color: #666;">
+                            يمكنك إرسال النموذج مباشرة إلى بريدنا الإلكتروني
+                        </p>
+                        <button type="button" class="btn email-submit" id="emailSubmit" style="background: linear-gradient(135deg, #4285F4, #34A853); color: white; width: 100%; padding: 15px;">
+                            <i class="fas fa-paper-plane"></i>
+                            <span>إرسال عبر البريد الإلكتروني</span>
+                        </button>
+                        <div class="form-hint" style="margin-top: 10px;">
+                            سيتم فتح بريدك الإلكتروني مع بيانات النموذج مسبقة التعبئة
                         </div>
                     </div>
                     
@@ -733,15 +935,15 @@
                         <div class="status-message success" id="successMessage">
                             <i class="fas fa-check-circle"></i>
                             <div>
-                                <h4 data-i18n="form.success">تم إرسال رسالتك بنجاح!</h4>
-                                <p data-i18n="form.successMessage">سنقوم بالرد عليك خلال 2-4 ساعات. يمكنك تتبع حالة طلبك عبر الرابط الذي تم إرساله إلى بريدك الإلكتروني.</p>
+                                <h4>تم إرسال رسالتك بنجاح!</h4>
+                                <p>سنقوم بالرد عليك خلال 2-4 ساعات. يمكنك تتبع حالة طلبك عبر الرابط الذي تم إرساله إلى بريدك الإلكتروني.</p>
                             </div>
                         </div>
                         <div class="status-message error" id="errorMessage">
                             <i class="fas fa-exclamation-circle"></i>
                             <div>
-                                <h4 data-i18n="form.error">حدث خطأ أثناء الإرسال</h4>
-                                <p id="errorText" data-i18n="form.errorMessage">يرجى المحاولة مرة أخرى أو التواصل معنا مباشرة عبر الواتساب.</p>
+                                <h4>حدث خطأ أثناء الإرسال</h4>
+                                <p id="errorText">يرجى المحاولة مرة أخرى أو التواصل معنا مباشرة عبر الواتساب.</p>
                             </div>
                         </div>
                     </div>
@@ -753,41 +955,41 @@
     <!-- ================= LOCATION MAP ================= -->
     <section class="location-map-section section-padding">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-i18n="contact.mapTitle">موقعنا على الخريطة</h2>
-                <p class="section-subtitle" data-i18n="contact.mapSubtitle">خدمة التوصيل متاحة في قطر وتونس مع تغطية شاملة لكافة المناطق</p>
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">موقعنا على الخريطة</h2>
+                <p class="section-subtitle">خدمة التوصيل متاحة في قطر وتونس مع تغطية شاملة لكافة المناطق</p>
             </div>
             
-            <div class="map-container">
+            <div class="map-container" data-aos="fade-up">
                 <div id="contactMap" class="map-wrapper"></div>
                 
                 <div class="map-overlay">
                     <div class="location-info">
-                        <h3 class="gold-text" data-i18n="contact.coverageAreas">مناطق التغطية</h3>
+                        <h3 class="gold-text">مناطق التغطية</h3>
                         <div class="coverage-areas">
                             <div class="coverage-country">
                                 <div class="country-header">
-                                    <img src="https://flagcdn.com/w40/qa.png" alt="قطر" class="country-flag-small" data-i18n-alt="countries.qatar">
-                                    <h4 data-i18n="countries.qatar">قطر</h4>
+                                    <img src="https://flagcdn.com/w40/qa.png" alt="قطر" class="country-flag-small">
+                                    <h4>قطر</h4>
                                 </div>
                                 <ul class="coverage-list">
-                                    <li><i class="fas fa-check-circle"></i> <span data-i18n="coverage.doha">الدوحة وجميع مناطقها</span></li>
-                                    <li><i class="fas fa-check-circle"></i> <span data-i18n="coverage.rayyan">الريان والوكرة</span></li>
-                                    <li><i class="fas fa-check-circle"></i> <span data-i18n="coverage.khor">الخور والذخيرة</span></li>
-                                    <li><i class="fas fa-check-circle"></i> <span data-i18n="coverage.allQatar">جميع مناطق قطر</span></li>
+                                    <li><i class="fas fa-check-circle"></i> الدوحة وجميع مناطقها</li>
+                                    <li><i class="fas fa-check-circle"></i> الريان والوكرة</li>
+                                    <li><i class="fas fa-check-circle"></i> الخور والذخيرة</li>
+                                    <li><i class="fas fa-check-circle"></i> جميع مناطق قطر</li>
                                 </ul>
                             </div>
                             
                             <div class="coverage-country">
                                 <div class="country-header">
-                                    <img src="https://flagcdn.com/w40/tn.png" alt="تونس" class="country-flag-small" data-i18n-alt="countries.tunisia">
-                                    <h4 data-i18n="countries.tunisia">تونس</h4>
+                                    <img src="https://flagcdn.com/w40/tn.png" alt="تونس" class="country-flag-small">
+                                    <h4>تونس</h4>
                                 </div>
                                 <ul class="coverage-list">
-                                    <li><i class="fas fa-check-circle"></i> <span data-i18n="coverage.tunis">تونس العاصمة</span></li>
-                                    <li><i class="fas fa-check-circle"></i> <span data-i18n="coverage.sfax">صفاقس وسوسة</span></li>
-                                    <li><i class="fas fa-check-circle"></i> <span data-i18n="coverage.nabeul">نابل والمنستير</span></li>
-                                    <li><i class="fas fa-check-circle"></i> <span data-i18n="coverage.allTunisia">جميع مناطق تونس</span></li>
+                                    <li><i class="fas fa-check-circle"></i> تونس العاصمة</li>
+                                    <li><i class="fas fa-check-circle"></i> صفاقس وسوسة</li>
+                                    <li><i class="fas fa-check-circle"></i> نابل والمنستير</li>
+                                    <li><i class="fas fa-check-circle"></i> جميع مناطق تونس</li>
                                 </ul>
                             </div>
                         </div>
@@ -795,18 +997,18 @@
                 </div>
             </div>
             
-            <div class="map-legend">
+            <div class="map-legend" data-aos="fade-up" data-aos-delay="100">
                 <div class="legend-item">
                     <div class="legend-color qatar-color"></div>
-                    <span data-i18n="coverage.qatar">مناطق الخدمة في قطر</span>
+                    <span>مناطق الخدمة في قطر</span>
                 </div>
                 <div class="legend-item">
                     <div class="legend-color tunisia-color"></div>
-                    <span data-i18n="coverage.tunisia">مناطق الخدمة في تونس</span>
+                    <span>مناطق الخدمة في تونس</span>
                 </div>
                 <div class="legend-item">
                     <div class="legend-color gold-color"></div>
-                    <span data-i18n="coverage.mainOffices">المكاتب الرئيسية</span>
+                    <span>المكاتب الرئيسية</span>
                 </div>
             </div>
         </div>
@@ -815,241 +1017,88 @@
     <!-- ================= FAQ SECTION ================= -->
     <section class="faq-section section-padding">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-i18n="contact.faqTitle">أسئلة متكررة</h2>
-                <p class="section-subtitle" data-i18n="contact.faqSubtitle">إجابات عن الأسئلة الأكثر شيوعاً فيما يتعلق بالتواصل والخدمات</p>
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">أسئلة متكررة</h2>
+                <p class="section-subtitle">إجابات عن الأسئلة الأكثر شيوعاً فيما يتعلق بالتواصل والخدمات</p>
             </div>
             
             <div class="faq-container">
-                <div class="faq-item active">
+                <div class="faq-item active" data-aos="fade-up">
                     <div class="faq-question">
-                        <h3 data-i18n="faq.question1">ما هي أسرع طريقة للتواصل معكم؟</h3>
+                        <h3>ما هي أسرع طريقة للتواصل معكم؟</h3>
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p data-i18n="faq.answer1">أسرع طريقة للتواصل هي عبر الواتساب حيث يتم الرد خلال دقائق خلال أوقات العمل. للاستفسارات العاجلة يمكنك الاتصال مباشرة على الأرقام المذكورة.</p>
+                        <p>أسرع طريقة للتواصل هي عبر الواتساب حيث يتم الرد خلال دقائق خلال أوقات العمل. للاستفسارات العاجلة يمكنك الاتصال مباشرة على الأرقام المذكورة.</p>
                     </div>
                 </div>
                 
-                <div class="faq-item">
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
                     <div class="faq-question">
-                        <h3 data-i18n="faq.question2">ما هي أوقات العمل الرسمية؟</h3>
+                        <h3>ما هي أوقات العمل الرسمية؟</h3>
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p data-i18n="faq.answer2">نحن نعمل 24 ساعة طوال أيام الأسبوع، بما في ذلك العطل الرسمية والإجازات. خدمة الطوارئ متاحة على مدار الساعة.</p>
+                        <p>نحن نعمل 24 ساعة طوال أيام الأسبوع، بما في ذلك العطل الرسمية والإجازات. خدمة الطوارئ متاحة على مدار الساعة.</p>
                     </div>
                 </div>
                 
-                <div class="faq-item">
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
                     <div class="faq-question">
-                        <h3 data-i18n="faq.question3">كيف يمكنني تتبع حالة طلبي؟</h3>
+                        <h3>كيف يمكنني تتبع حالة طلبي؟</h3>
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p data-i18n="faq.answer3">بعد تقديم طلبك، سنقوم بإرسال رقم تتبع فريد عبر الواتساب والبريد الإلكتروني. يمكنك استخدام هذا الرقم لمتابعة حالة طلبك.</p>
+                        <p>بعد تقديم طلبك، سنقوم بإرسال رقم تتبع فريد عبر الواتساب والبريد الإلكتروني. يمكنك استخدام هذا الرقم لمتابعة حالة طلبك.</p>
                     </div>
                 </div>
                 
-                <div class="faq-item">
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
                     <div class="faq-question">
-                        <h3 data-i18n="faq.question4">هل الخدمات متاحة في جميع مناطق قطر وتونس؟</h3>
+                        <h3>هل الخدمات متاحة في جميع مناطق قطر وتونس؟</h3>
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p data-i18n="faq.answer4">نعم، نقدم خدماتنا في جميع مناطق قطر وتونس. بعض المناطق النائية قد تحتاج إلى ترتيب مسبق. يمكنك التواصل معنا للتحقق من تغطية منطقتك.</p>
+                        <p>نعم، نقدم خدماتنا في جميع مناطق قطر وتونس. بعض المناطق النائية قد تحتاج إلى ترتيب مسبق. يمكنك التواصل معنا للتحقق من تغطية منطقتك.</p>
                     </div>
                 </div>
                 
-                <div class="faq-item">
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="400">
                     <div class="faq-question">
-                        <h3 data-i18n="faq.question5">ما هي مدة الرد على النموذج الإلكتروني؟</h3>
+                        <h3>ما هي مدة الرد على النموذج الإلكتروني؟</h3>
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p data-i18n="faq.answer5">متوسط وقت الرد على النماذج الإلكترونية هو 2-4 ساعات خلال أوقات العمل. للطلبات العاجلة يرجى استخدام الواتساب أو الهاتف.</p>
+                        <p>متوسط وقت الرد على النماذج الإلكترونية هو 2-4 ساعات خلال أوقات العمل. للطلبات العاجلة يرجى استخدام الواتساب أو الهاتف.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ================= REVIEWS SECTION ================= -->
-    <section class="reviews-section section-padding">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-i18n="reviews.heroTitle">آراء عملائنا</h2>
-                <p class="section-subtitle" data-i18n="reviews.heroSubtitle">ثقة العملاء هي شهادة نجاحنا، انظر ماذا يقولون عن خدماتنا</p>
-            </div>
-            
-            <!-- Review Stats -->
-            <div class="review-stats">
-                <div class="stat-card">
-                    <div class="stat-number gold-text">4.9/5</div>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                    <p data-i18n="reviews.averageRating">متوسط التقييم</p>
-                </div>
-                
-                <div class="stat-card">
-                    <div class="stat-number gold-text">98%</div>
-                    <div class="stat-icon">
-                        <i class="fas fa-user-check"></i>
-                    </div>
-                    <p data-i18n="reviews.customerSatisfaction">رضا العملاء</p>
-                </div>
-                
-                <div class="stat-card">
-                    <div class="stat-number gold-text">500+</div>
-                    <div class="stat-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <p data-i18n="reviews.satisfiedCustomers">عميل راضٍ</p>
-                </div>
-                
-                <div class="stat-card">
-                    <div class="stat-number gold-text">24h</div>
-                    <div class="stat-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <p data-i18n="reviews.deliveryTime">متوسط وقت التسليم</p>
-                </div>
-            </div>
-            
-            <!-- Reviews Grid -->
-            <div class="reviews-grid">
-                <!-- Review 1 -->
-                <div class="review-card">
-                    <div class="review-header">
-                        <div class="review-avatar">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="محمد أحمد" data-i18n-alt="reviews.reviewer1">
-                        </div>
-                        <div class="reviewer-info">
-                            <h4 data-i18n="reviews.reviewer1">محمد أحمد</h4>
-                            <p data-i18n="reviews.reviewer1Title">مستثمر من قطر</p>
-                            <div class="review-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <span class="review-date" data-i18n="reviews.daysAgo">قبل 3 أيام</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="review-content">
-                        <span class="verified-badge">
-                            <i class="fas fa-check-circle"></i> <span data-i18n="common.verified">عميل موثّق</span>
-                        </span>
-                        <span class="review-service" data-i18n="servicesList.scaleBooking">حجز ميزان</span>
-                        <p data-i18n="reviews.review1">"خدمة استثنائية! حجزت ميزان من قطر إلى تونس وكانت العملية سلسة جداً. الفريق متجاوب ومحترف. أوصي بشدة بخدماتهم."</p>
-                    </div>
-                </div>
-                
-                <!-- Review 2 -->
-                <div class="review-card">
-                    <div class="review-header">
-                        <div class="review-avatar">
-                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="سارة القاسمي" data-i18n-alt="reviews.reviewer2">
-                        </div>
-                        <div class="reviewer-info">
-                            <h4 data-i18n="reviews.reviewer2">سارة القاسمي</h4>
-                            <p data-i18n="reviews.reviewer2Title">ربة منزل من الإمارات</p>
-                            <div class="review-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <span class="review-date" data-i18n="reviews.weekAgo">قبل أسبوع</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="review-content">
-                        <span class="verified-badge">
-                            <i class="fas fa-check-circle"></i> <span data-i18n="common.verified">عميل موثّق</span>
-                        </span>
-                        <span class="review-service" data-i18n="servicesList.localDelivery">توصيل محلي</span>
-                        <p data-i18n="reviews.review2">"استخدمت خدمة التوصيل المحلي في قطر وكانت رائعة. السائقون مؤدبون، والخدمة سريعة، والأسعار مناسبة. شكراً فريق HELA Express!"</p>
-                    </div>
-                </div>
-                
-                <!-- Review 3 -->
-                <div class="review-card">
-                    <div class="review-header">
-                        <div class="review-avatar">
-                            <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="علي التونسي" data-i18n-alt="reviews.reviewer3">
-                        </div>
-                        <div class="reviewer-info">
-                            <h4 data-i18n="reviews.reviewer3">علي التونسي</h4>
-                            <p data-i18n="reviews.reviewer3Title">تاجر من تونس</p>
-                            <div class="review-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <span class="review-date" data-i18n="reviews.weeksAgo">قبل أسبوعين</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="review-content">
-                        <span class="verified-badge">
-                            <i class="fas fa-check-circle"></i> <span data-i18n="common.verified">عميل موثّق</span>
-                        </span>
-                        <span class="review-service" data-i18n="servicesList.moneyDelivery">توثيق أموال</span>
-                        <p data-i18n="reviews.review3">"خدمة توثيق تسليم الأموال كانت آمنة ومضمونة 100%. الفريق محترف ويضمن وصول أموالك بأمان. أنصح الجميع بهذه الخدمة الموثوقة."</p>
-                    </div>
-                </div>
-                
-                <!-- Review 4 -->
-                <div class="review-card">
-                    <div class="review-header">
-                        <div class="review-avatar">
-                            <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="نورا السعدي" data-i18n-alt="reviews.reviewer4">
-                        </div>
-                        <div class="reviewer-info">
-                            <h4 data-i18n="reviews.reviewer4">نورا السعدي</h4>
-                            <p data-i18n="reviews.reviewer4Title">موظفة من السعودية</p>
-                            <div class="review-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <span class="review-date" data-i18n="reviews.monthAgo">قبل شهر</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="review-content">
-                        <span class="verified-badge">
-                            <i class="fas fa-check-circle"></i> <span data-i18n="common.verified">عميل موثّق</span>
-                        </span>
-                        <span class="review-service" data-i18n="servicesList.scaleSales">بيع موازين</span>
-                        <p data-i18n="reviews.review4">"اشتريت ميزان من خلالهم وكانت الجودة ممتازة والسعر مناسب. ما يميزهم هو المتابعة بعد البيع والتأكد من رضا العميل. شكراً لكم!"</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Review Controls -->
-            <div class="review-controls">
-                <button class="review-btn" onclick="showMoreReviews()">
-                    <i class="fas fa-eye"></i> <span data-i18n="common.more">عرض المزيد</span>
-                </button>
-                <button class="review-btn primary" onclick="submitReview()">
-                    <i class="fas fa-pen"></i> <span data-i18n="reviews.writeReview">اكتب مراجعة</span>
-                </button>
-                <a href="https://wa.me/97471375390?text=أريد%20كتابة%20مراجعة%20عن%20خدماتكم%20المميزة" class="review-btn" target="_blank">
-                    <i class="fab fa-whatsapp"></i> <span data-i18n="reviews.whatsappReview">مراجعة عبر واتساب</span>
-                </a>
-            </div>
+    <!-- ================= QUICK CONTACT WIDGET ================= -->
+    <div class="quick-contact-widget">
+        <div class="widget-header">
+            <h4>تواصل الآن</h4>
+            <button class="widget-close" title="إغلاق">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
-    </section>
+        <div class="widget-options">
+            <a href="https://wa.me/97471375390" class="widget-option whatsapp">
+                <i class="fab fa-whatsapp"></i>
+                <span>واتساب</span>
+            </a>
+            <a href="tel:+97471375390" class="widget-option phone">
+                <i class="fas fa-phone"></i>
+                <span>اتصال</span>
+            </a>
+            <a href="#contactFormSection" class="widget-option form">
+                <i class="fas fa-envelope"></i>
+                <span>نموذج</span>
+            </a>
+        </div>
+    </div>
 
     <!-- ================= FOOTER ================= -->
     <footer class="main-footer">
@@ -1059,60 +1108,60 @@
                 <div class="footer-logo">
                     <div class="logo">
                         <div class="logo-icon">
-                            <img src="https://iili.io/fLgS9wP.md.jpg" alt="HELA Express Logo" data-i18n-alt="companyName">
+                            <img src="https://iili.io/fLgS9wP.md.jpg" alt="Tn-QA Delivery Logo">
                         </div>
                         <div class="logo-text">
-                            <h2 class="gold-text" data-i18n="companyName">Tn-QA Delivery</h2>
-                            <p data-i18n="companySlogan">خدمة توصيل سريعة وآمنة</p>
+                            <h2 class="gold-text">Tn-QA Delivery</h2>
+                            <p>خدمة توصيل سريعة وآمنة</p>
                         </div>
                     </div>
-                    <p class="footer-desc" data-i18n="footer.description">خدمات توصيل ونقل موثوقة بين تونس وقطر</p>
+                    <p class="footer-desc">خدمات توصيل ونقل موثوقة بين تونس وقطر</p>
                 </div>
                 
                 <!-- Quick Contact -->
                 <div class="footer-contact">
-                    <h3 class="footer-title gold-text" data-i18n="footer.quickContact">تواصل سريع</h3>
+                    <h3 class="footer-title gold-text">تواصل سريع</h3>
                     <div class="quick-contact-buttons">
                         <a href="https://wa.me/97471375390" class="quick-btn whatsapp">
                             <i class="fab fa-whatsapp"></i>
-                            <span data-i18n="nav.whatsapp">واتساب سريع</span>
+                            <span>واتساب سريع</span>
                         </a>
                         <a href="tel:+97471375390" class="quick-btn phone">
                             <i class="fas fa-phone"></i>
-                            <span data-i18n="footer.emergencyCall">اتصال عاجل</span>
+                            <span>اتصال عاجل</span>
                         </a>
                     </div>
                 </div>
                 
                 <!-- Contact Info -->
                 <div class="footer-contact-info">
-                    <h3 class="footer-title gold-text" data-i18n="footer.contactUs">معلومات الاتصال</h3>
+                    <h3 class="footer-title gold-text">معلومات الاتصال</h3>
                     <div class="contact-details">
                         <div class="contact-detail">
                             <i class="fab fa-whatsapp gold-text"></i>
                             <div>
-                                <span class="detail-label" data-i18n="nav.whatsapp">واتساب:</span>
+                                <span class="detail-label">واتساب:</span>
                                 <span class="detail-value">+974 71 375 390</span>
                             </div>
                         </div>
                         <div class="contact-detail">
                             <i class="fas fa-phone gold-text"></i>
                             <div>
-                                <span class="detail-label" data-i18n="countries.qatar">قطر:</span>
+                                <span class="detail-label">قطر:</span>
                                 <span class="detail-value">+974 71 375 390</span>
                             </div>
                         </div>
                         <div class="contact-detail">
                             <i class="fas fa-phone gold-text"></i>
                             <div>
-                                <span class="detail-label" data-i18n="countries.tunisia">تونس:</span>
+                                <span class="detail-label">تونس:</span>
                                 <span class="detail-value">+216 56 471 550</span>
                             </div>
                         </div>
                         <div class="contact-detail">
                             <i class="fas fa-envelope gold-text"></i>
                             <div>
-                                <span class="detail-label" data-i18n="contact.emailCard">البريد:</span>
+                                <span class="detail-label">البريد:</span>
                                 <span class="detail-value">helamishwar@gmail.com</span>
                             </div>
                         </div>
@@ -1124,15 +1173,15 @@
             <div class="footer-bottom">
                 <div class="legal-notice">
                     <i class="fas fa-exclamation-circle gold-text"></i>
-                    <p data-i18n="footer.legalNotice">الموقع منصة تعريفية وتنسيقية فقط، ولا يقوم بأي عمليات دفع إلكتروني أو تحصيل أموال.</p>
+                    <p>الموقع منصة تعريفية وتنسيقية فقط، ولا يقوم بأي عمليات دفع إلكتروني أو تحصيل أموال.</p>
                 </div>
                 
                 <div class="footer-actions">
                     <a href="index.html" class="back-to-home">
                         <i class="fas fa-home"></i>
-                        <span data-i18n="footer.backToHome">العودة للرئيسية</span>
+                        <span>العودة للرئيسية</span>
                     </a>
-                    <p class="copyright">© <span id="currentYear"></span> <span data-i18n="companyName">Tn-QA Delivery</span> - <span data-i18n="footer.copyright">جميع الحقوق محفوظة</span></p>
+                    <p class="copyright">© <span id="currentYear"></span> Tn-QA Delivery - جميع الحقوق محفوظة</p>
                 </div>
             </div>
         </div>
@@ -1140,201 +1189,52 @@
 
     <!-- ================= FLOATING BUTTONS ================= -->
     <!-- Floating WhatsApp -->
-    <a href="https://wa.me/97471375390" class="float-whatsapp" aria-label="تواصل معنا عبر واتساب" target="_blank" data-i18n-title="nav.whatsapp">
+    <a href="https://wa.me/97471375390" class="float-whatsapp" aria-label="تواصل معنا عبر واتساب" target="_blank" title="واتساب">
         <i class="fab fa-whatsapp"></i>
         <span class="float-badge">1</span>
     </a>
     
+    <!-- Floating Theme Toggle -->
+    <button class="float-theme" id="floatThemeToggle" aria-label="تبديل وضع السطوع" title="تبديل السطوع">
+        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun"></i>
+    </button>
+    
     <!-- Scroll to Top -->
-    <button class="scroll-to-top" id="scrollToTop" aria-label="العودة إلى الأعلى" data-i18n-title="common.backToTop">
+    <button class="scroll-to-top" id="scrollToTop" aria-label="العودة إلى الأعلى" title="للأعلى">
         <i class="fas fa-chevron-up"></i>
     </button>
 
-    <!-- Quick Contact Widget -->
-    <div class="quick-contact-widget">
-        <div class="widget-header">
-            <h4 data-i18n="contact.quickWidget">تواصل الآن</h4>
-            <button class="widget-close" data-i18n-title="common.close">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <div class="widget-options">
-            <a href="https://wa.me/97471375390" class="widget-option whatsapp">
-                <i class="fab fa-whatsapp"></i>
-                <span data-i18n="nav.whatsapp">واتساب</span>
-            </a>
-            <a href="tel:+97471375390" class="widget-option phone">
-                <i class="fas fa-phone"></i>
-                <span data-i18n="nav.call">اتصال</span>
-            </a>
-            <a href="#contactForm" class="widget-option form">
-                <i class="fas fa-envelope"></i>
-                <span data-i18n="contact.formTitle">نموذج</span>
-            </a>
-        </div>
-    </div>
-
     <!-- ================= SCRIPTS ================= -->
-     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-            crossorigin=""></script>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+    
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     
     <!-- Custom JavaScript Files -->
-    <script src="js/language.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/theme.js"></script>
     <script src="js/contact.js"></script>
-    <script src="js/map.js"></script>
     
-    <!-- Reviews JavaScript -->
     <script>
-        function showMoreReviews() {
-            alert(languageManager.getTranslation('reviews.redirectMessage'));
-            window.location.href = 'reviews.html';
-        }
-        
-        function submitReview() {
-            const message = languageManager.getTranslation('reviews.reviewMessage');
-            const whatsappUrl = `https://wa.me/97471375390?text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, '_blank');
-        }
-        
-        // Update language in map error message
-        function showMapError() {
-            const mapElement = document.getElementById('contactMap');
-            if (mapElement) {
-                const errorTitle = languageManager.getTranslation('map.errorTitle');
-                const errorMessage = languageManager.getTranslation('map.errorMessage');
-                const qatarBranch = languageManager.getTranslation('map.qatarBranch');
-                const tunisiaBranch = languageManager.getTranslation('map.tunisiaBranch');
-                
-                mapElement.innerHTML = `
-                    <div style="height: 500px; display: flex; flex-direction: column; justify-content: center; align-items: center; background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05)); border-radius: 12px; padding: 40px; text-align: center;">
-                        <div style="width: 80px; height: 80px; background: rgba(212, 175, 55, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
-                            <i class="fas fa-map-marked-alt" style="font-size: 40px; color: #D4AF37;"></i>
-                        </div>
-                        <h3 style="color: #333; margin-bottom: 15px; font-size: 1.5rem;">${errorTitle}</h3>
-                        <p style="color: #666; margin-bottom: 25px; max-width: 500px; line-height: 1.6;">
-                            ${errorMessage}
-                        </p>
-                        
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; width: 100%; max-width: 600px; margin-bottom: 30px;">
-                            <div style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); border-top: 4px solid #8A1538;">
-                                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
-                                    <img src="https://flagcdn.com/w40/qa.png" alt="${languageManager.getTranslation('countries.qatar')}" style="width: 40px; height: 26px; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
-                                    <div>
-                                        <h4 style="color: #8A1538; margin: 0; font-size: 1.2rem;">${qatarBranch}</h4>
-                                        <p style="color: #888; margin: 5px 0 0; font-size: 0.9rem;">${languageManager.getTranslation('coverage.allQatar')}</p>
-                                    </div>
-                                </div>
-                                <div style="display: flex; flex-direction: column; gap: 12px;">
-                                    <a href="https://wa.me/97471375390" 
-                                       style="display: flex; align-items: center; gap: 10px; background: linear-gradient(135deg, #25D366, #128C7E); color: white; padding: 12px 20px; border-radius: 8px; text-decoration: none; transition: transform 0.3s;">
-                                        <i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i>
-                                        <span style="flex: 1; text-align: center;">${languageManager.getTranslation('nav.whatsapp')}: +974 71 375 390</span>
-                                    </a>
-                                    <a href="tel:+97471375390" 
-                                       style="display: flex; align-items: center; gap: 10px; background: #8A1538; color: white; padding: 12px 20px; border-radius: 8px; text-decoration: none; transition: transform 0.3s;">
-                                        <i class="fas fa-phone" style="font-size: 1.2rem;"></i>
-                                        <span style="flex: 1; text-align: center;">${languageManager.getTranslation('nav.call')}</span>
-                                    </a>
-                                </div>
-                            </div>
-                            
-                            <div style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); border-top: 4px solid #E70013;">
-                                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
-                                    <img src="https://flagcdn.com/w40/tn.png" alt="${languageManager.getTranslation('countries.tunisia')}" style="width: 40px; height: 26px; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
-                                    <div>
-                                        <h4 style="color: #E70013; margin: 0; font-size: 1.2rem;">${tunisiaBranch}</h4>
-                                        <p style="color: #888; margin: 5px 0 0; font-size: 0.9rem;">${languageManager.getTranslation('coverage.allTunisia')}</p>
-                                    </div>
-                                </div>
-                                <div style="display: flex; flex-direction: column; gap: 12px;">
-                                    <a href="https://wa.me/21656471550" 
-                                       style="display: flex; align-items: center; gap: 10px; background: linear-gradient(135deg, #25D366, #128C7E); color: white; padding: 12px 20px; border-radius: 8px; text-decoration: none; transition: transform 0.3s;">
-                                        <i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i>
-                                        <span style="flex: 1; text-align: center;">${languageManager.getTranslation('nav.whatsapp')}: +216 56 471 550</span>
-                                    </a>
-                                    <a href="tel:+21656471550" 
-                                       style="display: flex; align-items: center; gap: 10px; background: #E70013; color: white; padding: 12px 20px; border-radius: 8px; text-decoration: none; transition: transform 0.3s;">
-                                        <i class="fas fa-phone" style="font-size: 1.2rem;"></i>
-                                        <span style="flex: 1; text-align: center;">${languageManager.getTranslation('nav.call')}</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <p style="color: #888; font-size: 0.9rem; border-top: 1px solid #eee; padding-top: 20px; margin-top: 10px;">
-                            <i class="fas fa-envelope" style="margin-left: 5px; color: #D4AF37;"></i>
-                            ${languageManager.getTranslation('common.alsoContact')}
-                            <a href="mailto:helamishwar@gmail.com" style="color: #D4AF37; text-decoration: none; font-weight: 600;">
-                                helamishwar@gmail.com
-                            </a>
-                        </p>
-                    </div>
-                `;
-                
-                // Add hover effects
-                const links = mapElement.querySelectorAll('a');
-                links.forEach(link => {
-                    link.addEventListener('mouseenter', function() {
-                        this.style.transform = 'translateY(-3px)';
-                        this.style.boxShadow = '0 8px 25px rgba(0,0,0,0.2)';
-                    });
-                    link.addEventListener('mouseleave', function() {
-                        this.style.transform = 'translateY(0)';
-                        this.style.boxShadow = 'none';
-                    });
-                });
-            }
-        }
+        // Initialize AOS
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 800,
+                once: true,
+                offset: 100,
+                easing: 'ease-in-out',
+                delay: 100,
+                disable: function() {
+                    return window.innerWidth < 768;
+                }
+            });
+            
+            // Set current year in footer
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+        });
     </script>
-    
-    <!-- Initialize -->
-   <script>
-   document.addEventListener('DOMContentLoaded', function() {
-        // Set current year
-        const currentYearElement = document.getElementById('currentYear');
-        if (currentYearElement) {
-            currentYearElement.textContent = new Date().getFullYear();
-        }
-        
-        // Initialize map with error handling
-        const initMapWithRetry = (retryCount = 0) => {
-            const maxRetries = 3;
-            
-            if (typeof L === 'undefined') {
-                console.error('Leaflet library not loaded yet, retrying...');
-                
-                if (retryCount < maxRetries) {
-                    setTimeout(() => {
-                        initMapWithRetry(retryCount + 1);
-                    }, 1000 * (retryCount + 1));
-                } else {
-                    console.error('Failed to load Leaflet after', maxRetries, 'retries');
-                    showMapError();
-                }
-                return;
-            }
-            
-            if (typeof initContactMap === 'function') {
-                try {
-                    console.log('Initializing Leaflet map...');
-                    initContactMap();
-                } catch (error) {
-                    console.error('Error initializing map:', error);
-                    showMapError();
-                }
-            } else {
-                console.error('initContactMap function not found');
-                showMapError();
-            }
-        };
-        
-        // Start map initialization
-        setTimeout(() => {
-            initMapWithRetry();
-        }, 500);
-    });
-</script>
 </body>
 </html>

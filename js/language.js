@@ -1,1089 +1,634 @@
 /**
- * ملف language.js - إدارة اللغة للموقع
- * Tn-QA Delivery - خدمة التوصيل بين قطر وتونس
+ * language.js - Language switching functionality
  */
 
 class LanguageManager {
     constructor() {
-        this.currentLang = this.getSavedLanguage();
-        this.translations = {
-            ar: this.getArabicTranslations(),
-            en: this.getEnglishTranslations()
-        };
-        this.isInitialized = false;
-        
-        console.log('🌍 Language Manager: Initialized with', this.currentLang);
+        this.currentLang = localStorage.getItem('language') || 'ar';
+        this.translations = {};
+        this.init();
     }
 
-    // ==================== INITIALIZATION ====================
-    init() {
-        if (this.isInitialized) return;
-        
+    async init() {
+        await this.loadTranslations();
         this.setupLanguageSwitcher();
-        this.loadLanguage();
-        this.updatePageDirection();
-        this.setupStorageListener();
-        
-        this.isInitialized = true;
-        console.log('✅ Language Manager: Setup complete');
+        this.applyLanguage();
+        this.setupDirection();
     }
 
-    // ==================== LANGUAGE SWITCHER ====================
+    /**
+     * Load translation files
+     */
+    async loadTranslations() {
+        try {
+            const response = await fetch(`/translations/${this.currentLang}.json`);
+            this.translations = await response.json();
+        } catch (error) {
+            console.error('Error loading translations:', error);
+            // Fallback to embedded translations
+            this.translations = this.getFallbackTranslations();
+        }
+    }
+
+    /**
+     * Get fallback translations
+     */
+    getFallbackTranslations() {
+        // Basic fallback translations
+        return {
+            ar: {
+                // Navigation
+                "nav.home": "الرئيسية",
+                "nav.about": "من نحن",
+                "nav.services": "الخدمات",
+                "nav.contact": "التواصل",
+                "nav.reviews": "المراجعات",
+                "nav.whatsapp": "تواصل عبر واتساب",
+                "nav.call": "اتصل الآن",
+                "nav.menu": "قائمة التنقل",
+                
+                // Contact Page
+                "contact.pageTitle": "تواصل معنا - Tn-QA Delivery",
+                "contact.heroTitle": "تواصل معنا",
+                "contact.heroSubtitle": "نحن هنا لمساعدتك على مدار الساعة، تواصل معنا بأي طريقة تفضلها",
+                "contact.directMethods": "طرق التواصل المباشرة",
+                "contact.methodsSubtitle": "اختر الطريقة المناسبة لك للتواصل معنا مباشرة",
+                "contact.whatsappCard": "واتساب مباشر",
+                "contact.whatsappDesc": "للتواصل الفوري والرد السريع خلال دقائق",
+                "contact.phoneCard": "اتصال هاتفي",
+                "contact.phoneDesc": "للأمور العاجلة والاستفسارات المباشرة",
+                "contact.emailCard": "البريد الإلكتروني",
+                "contact.emailDesc": "للرسائل الرسمية، الاستفسارات التفصيلية والمستندات",
+                "contact.formTitle": "أرسل لنا رسالة مباشرة",
+                "contact.formSubtitle": "املأ النموذج وسنقوم بالرد عليك في أسرع وقت ممكن",
+                "contact.mapTitle": "موقعنا على الخريطة",
+                "contact.mapSubtitle": "خدمة التوصيل متاحة في قطر وتونس مع تغطية شاملة لكافة المناطق",
+                "contact.coverageAreas": "مناطق التغطية",
+                "contact.faqTitle": "أسئلة متكررة",
+                "contact.faqSubtitle": "إجابات عن الأسئلة الأكثر شيوعاً فيما يتعلق بالتواصل والخدمات",
+                "contact.quickWidget": "تواصل الآن",
+                
+                // Form
+                "form.personalInfo": "المعلومات الشخصية",
+                "form.fullName": "الاسم الكامل",
+                "form.phoneNumber": "رقم الهاتف",
+                "form.email": "البريد الإلكتروني",
+                "form.preferredContact": "طريقة التواصل المفضلة",
+                "form.serviceInfo": "معلومات الخدمة",
+                "form.serviceType": "نوع الخدمة المطلوبة",
+                "form.urgency": "درجة الاستعجال",
+                "form.messageSubject": "موضوع الرسالة",
+                "form.messageContent": "محتوى الرسالة",
+                "form.message": "تفاصيل الطلب أو الاستفسار",
+                "form.attachments": "إرفاق ملفات (اختياري)",
+                "form.privacyPolicy": "أوافق على سياسة الخصوصية وشروط الخدمة",
+                "form.clear": "مسح النموذج",
+                "form.submit": "إرسال عبر واتساب",
+                "form.success": "تم إرسال رسالتك بنجاح!",
+                "form.successMessage": "سنقوم بالرد عليك خلال 2-4 ساعات. يمكنك تتبع حالة طلبك عبر الرابط الذي تم إرساله إلى بريدك الإلكتروني.",
+                "form.error": "حدث خطأ أثناء الإرسال",
+                "form.errorMessage": "يرجى المحاولة مرة أخرى أو التواصل معنا مباشرة عبر الواتساب.",
+                "form.selectService": "اختر الخدمة المطلوبة",
+                "form.hintName": "الرجاء إدخال الاسم الثلاثي",
+                "form.hintPhone": "سنتصل على هذا الرقم للرد على استفسارك",
+                "form.hintEmail": "اختياري - للرد الرسمي والمستندات",
+                "form.hintMessage": "كلما كانت التفاصيل أكثر، كان الرد أفضل وأسرع",
+                "form.phonePlaceholder": "رقم الهاتف بدون مفتاح الدولة",
+                "form.emailPlaceholder": "example@email.com",
+                "form.messageSubjectPlaceholder": "عنوان مختصر لطلبك",
+                "form.messagePlaceholder": "يرجى وصف طلبك أو استفسارك بالتفصيل...",
+                "form.uploadDrag": "اسحب وأفلت الملفات هنا أو",
+                "form.uploadBrowse": "تصفح",
+                "form.uploadHint": "يمكنك رفع الصور، PDF، مستندات Word (حتى 10MB)",
+                
+                // Common
+                "common.any": "أي طريقة",
+                "common.general": "الاستفسارات العامة",
+                "common.business": "الشؤون التجارية",
+                "common.other": "استفسار عام / خدمة أخرى",
+                "common.primary": "البريد الرئيسي",
+                "common.customers": "تمت خدمة +500 عميل",
+                "common.satisfaction": "رضا عملاء 98%",
+                "common.characters": "حرف",
+                "common.copy": "نسخ",
+                "common.close": "إغلاق",
+                "common.backToTop": "العودة إلى الأعلى",
+                "common.verified": "ضمان الرد",
+                "common.days": "الأحد - الخميس",
+                
+                // Status
+                "status.available": "دعم فوري",
+                "status.connected": "متصل الآن",
+                "status.online": "أنت متصل بالإنترنت الآن",
+                "status.offline": "أنت غير متصل بالإنترنت",
+                
+                // Time
+                "time.minutes": "رد خلال دقائق",
+                "time.hours": "24 ساعة",
+                "time.normal": "عادي (الرد خلال 24 ساعة)",
+                "time.urgent": "عاجل (الرد خلال 4 ساعات)",
+                "time.emergency": "طارئ (الرد خلال ساعة)",
+                
+                // Countries
+                "countries.qatar": "قطر",
+                "countries.tunisia": "تونس",
+                "countries.saudi": "السعودية",
+                "countries.uae": "الإمارات",
+                "countries.egypt": "مصر",
+                "countries.morocco": "المغرب",
+                
+                // Services
+                "servicesList.localDelivery": "التوصيل المحلي",
+                "servicesList.scaleSales": "بيع موازين",
+                "servicesList.scaleBooking": "حجز ميزان",
+                "servicesList.moneyDelivery": "توثيق تسليم الأموال",
+                
+                // Coverage
+                "coverage.doha": "الدوحة وجميع مناطقها",
+                "coverage.rayyan": "الريان والوكرة",
+                "coverage.khor": "الخور والذخيرة",
+                "coverage.allQatar": "جميع مناطق قطر",
+                "coverage.tunis": "تونس العاصمة",
+                "coverage.sfax": "صفاقس وسوسة",
+                "coverage.nabeul": "نابل والمنستير",
+                "coverage.allTunisia": "جميع مناطق تونس",
+                "coverage.qatar": "مناطق الخدمة في قطر",
+                "coverage.tunisia": "مناطق الخدمة في تونس",
+                "coverage.mainOffices": "المكاتب الرئيسية",
+                
+                // FAQ
+                "faq.question1": "ما هي أسرع طريقة للتواصل معكم؟",
+                "faq.answer1": "أسرع طريقة للتواصل هي عبر الواتساب حيث يتم الرد خلال دقائق خلال أوقات العمل. للاستفسارات العاجلة يمكنك الاتصال مباشرة على الأرقام المذكورة.",
+                "faq.question2": "ما هي أوقات العمل الرسمية؟",
+                "faq.answer2": "نحن نعمل 24 ساعة طوال أيام الأسبوع، بما في ذلك العطل الرسمية والإجازات. خدمة الطوارئ متاحة على مدار الساعة.",
+                "faq.question3": "كيف يمكنني تتبع حالة طلبي؟",
+                "faq.answer3": "بعد تقديم طلبك، سنقوم بإرسال رقم تتبع فريد عبر الواتساب والبريد الإلكتروني. يمكنك استخدام هذا الرقم لمتابعة حالة طلبك.",
+                "faq.question4": "هل الخدمات متاحة في جميع مناطق قطر وتونس؟",
+                "faq.answer4": "نعم، نقدم خدماتنا في جميع مناطق قطر وتونس. بعض المناطق النائية قد تحتاج إلى ترتيب مسبق. يمكنك التواصل معنا للتحقق من تغطية منطقتك.",
+                "faq.question5": "ما هي مدة الرد على النموذج الإلكتروني؟",
+                "faq.answer5": "متوسط وقت الرد على النماذج الإلكترونية هو 2-4 ساعات خلال أوقات العمل. للطلبات العاجلة يرجى استخدام الواتساب أو الهاتف.",
+                
+                // Footer
+                "footer.quickContact": "تواصل سريع",
+                "footer.emergencyCall": "اتصال عاجل",
+                "footer.contactUs": "معلومات الاتصال",
+                "footer.description": "خدمات توصيل ونقل موثوقة بين تونس وقطر",
+                "footer.legalNotice": "الموقع منصة تعريفية وتنسيقية فقط، ولا يقوم بأي عمليات دفع إلكتروني أو تحصيل أموال.",
+                "footer.backToHome": "العودة للرئيسية",
+                "footer.copyright": "جميع الحقوق محفوظة",
+                
+                // Theme
+                "theme.toggle": "تبديل وضع السطوع",
+                
+                // Accessibility
+                "accessibility.skipToContent": "تخطي إلى المحتوى الرئيسي",
+                
+                // Company
+                "companyName": "Tn-QA Delivery",
+                "companySlogan": "خدمة توصيل سريعة وآمنة"
+            },
+            en: {
+                // Navigation
+                "nav.home": "Home",
+                "nav.about": "About Us",
+                "nav.services": "Services",
+                "nav.contact": "Contact",
+                "nav.reviews": "Reviews",
+                "nav.whatsapp": "Contact via WhatsApp",
+                "nav.call": "Call Now",
+                "nav.menu": "Navigation Menu",
+                
+                // Contact Page
+                "contact.pageTitle": "Contact Us - Tn-QA Delivery",
+                "contact.heroTitle": "Contact Us",
+                "contact.heroSubtitle": "We're here to help you 24/7, contact us using any method you prefer",
+                "contact.directMethods": "Direct Contact Methods",
+                "contact.methodsSubtitle": "Choose the most convenient method to contact us directly",
+                "contact.whatsappCard": "Direct WhatsApp",
+                "contact.whatsappDesc": "For instant communication and quick response within minutes",
+                "contact.phoneCard": "Phone Call",
+                "contact.phoneDesc": "For urgent matters and direct inquiries",
+                "contact.emailCard": "Email",
+                "contact.emailDesc": "For official correspondence, detailed inquiries and documents",
+                "contact.formTitle": "Send Us a Direct Message",
+                "contact.formSubtitle": "Fill out the form and we'll get back to you as soon as possible",
+                "contact.mapTitle": "Our Location on Map",
+                "contact.mapSubtitle": "Delivery service available in Qatar and Tunisia with comprehensive coverage of all areas",
+                "contact.coverageAreas": "Coverage Areas",
+                "contact.faqTitle": "Frequently Asked Questions",
+                "contact.faqSubtitle": "Answers to the most common questions regarding communication and services",
+                "contact.quickWidget": "Contact Now",
+                
+                // Form
+                "form.personalInfo": "Personal Information",
+                "form.fullName": "Full Name",
+                "form.phoneNumber": "Phone Number",
+                "form.email": "Email",
+                "form.preferredContact": "Preferred Contact Method",
+                "form.serviceInfo": "Service Information",
+                "form.serviceType": "Required Service Type",
+                "form.urgency": "Urgency Level",
+                "form.messageSubject": "Message Subject",
+                "form.messageContent": "Message Content",
+                "form.message": "Order or Inquiry Details",
+                "form.attachments": "Attach Files (Optional)",
+                "form.privacyPolicy": "I agree to the privacy policy and terms of service",
+                "form.clear": "Clear Form",
+                "form.submit": "Send via WhatsApp",
+                "form.success": "Your message has been sent successfully!",
+                "form.successMessage": "We will respond within 2-4 hours. You can track your request status via the link sent to your email.",
+                "form.error": "An error occurred while sending",
+                "form.errorMessage": "Please try again or contact us directly via WhatsApp.",
+                "form.selectService": "Select required service",
+                "form.hintName": "Please enter your full three-part name",
+                "form.hintPhone": "We will call this number to respond to your inquiry",
+                "form.hintEmail": "Optional - for official response and documents",
+                "form.hintMessage": "More details lead to better and faster response",
+                "form.phonePlaceholder": "Phone number without country code",
+                "form.emailPlaceholder": "example@email.com",
+                "form.messageSubjectPlaceholder": "Brief title for your request",
+                "form.messagePlaceholder": "Please describe your request or inquiry in detail...",
+                "form.uploadDrag": "Drag and drop files here or",
+                "form.uploadBrowse": "Browse",
+                "form.uploadHint": "You can upload images, PDF, Word documents (up to 10MB)",
+                
+                // Common
+                "common.any": "Any method",
+                "common.general": "General inquiries",
+                "common.business": "Business affairs",
+                "common.other": "General inquiry / Other service",
+                "common.primary": "Primary Email",
+                "common.customers": "+500 customers served",
+                "common.satisfaction": "98% customer satisfaction",
+                "common.characters": "characters",
+                "common.copy": "Copy",
+                "common.close": "Close",
+                "common.backToTop": "Back to top",
+                "common.verified": "Response guarantee",
+                "common.days": "Sunday - Thursday",
+                
+                // Status
+                "status.available": "Instant support",
+                "status.connected": "Connected now",
+                "status.online": "You are now online",
+                "status.offline": "You are offline",
+                
+                // Time
+                "time.minutes": "Response within minutes",
+                "time.hours": "24 hours",
+                "time.normal": "Normal (response within 24 hours)",
+                "time.urgent": "Urgent (response within 4 hours)",
+                "time.emergency": "Emergency (response within 1 hour)",
+                
+                // Countries
+                "countries.qatar": "Qatar",
+                "countries.tunisia": "Tunisia",
+                "countries.saudi": "Saudi Arabia",
+                "countries.uae": "UAE",
+                "countries.egypt": "Egypt",
+                "countries.morocco": "Morocco",
+                
+                // Services
+                "servicesList.localDelivery": "Local Delivery",
+                "servicesList.scaleSales": "Scale Sales",
+                "servicesList.scaleBooking": "Scale Booking",
+                "servicesList.moneyDelivery": "Money Delivery Documentation",
+                
+                // Coverage
+                "coverage.doha": "Doha and all its areas",
+                "coverage.rayyan": "Al Rayyan and Al Wakra",
+                "coverage.khor": "Al Khor and Al Dhakhira",
+                "coverage.allQatar": "All Qatar areas",
+                "coverage.tunis": "Tunis Capital",
+                "coverage.sfax": "Sfax and Sousse",
+                "coverage.nabeul": "Nabeul and Monastir",
+                "coverage.allTunisia": "All Tunisia areas",
+                "coverage.qatar": "Service areas in Qatar",
+                "coverage.tunisia": "Service areas in Tunisia",
+                "coverage.mainOffices": "Main Offices",
+                
+                // FAQ
+                "faq.question1": "What's the fastest way to contact you?",
+                "faq.answer1": "The fastest way to contact us is via WhatsApp where we respond within minutes during working hours. For urgent inquiries, you can call directly on the numbers mentioned.",
+                "faq.question2": "What are the official working hours?",
+                "faq.answer2": "We work 24 hours a day, 7 days a week, including official holidays and vacations. Emergency service is available 24/7.",
+                "faq.question3": "How can I track my order status?",
+                "faq.answer3": "After submitting your order, we will send a unique tracking number via WhatsApp and email. You can use this number to follow up on your order status.",
+                "faq.question4": "Are services available in all areas of Qatar and Tunisia?",
+                "faq.answer4": "Yes, we provide our services in all areas of Qatar and Tunisia. Some remote areas may require prior arrangement. You can contact us to verify coverage in your area.",
+                "faq.question5": "What is the response time for the electronic form?",
+                "faq.answer5": "The average response time for electronic forms is 2-4 hours during working hours. For urgent requests, please use WhatsApp or phone.",
+                
+                // Footer
+                "footer.quickContact": "Quick Contact",
+                "footer.emergencyCall": "Emergency Call",
+                "footer.contactUs": "Contact Information",
+                "footer.description": "Reliable delivery and transportation services between Tunisia and Qatar",
+                "footer.legalNotice": "This website is only an informational and coordination platform, and does not perform any electronic payment or money collection operations.",
+                "footer.backToHome": "Back to Home",
+                "footer.copyright": "All rights reserved",
+                
+                // Theme
+                "theme.toggle": "Toggle brightness mode",
+                
+                // Accessibility
+                "accessibility.skipToContent": "Skip to main content",
+                
+                // Company
+                "companyName": "Tn-QA Delivery",
+                "companySlogan": "Fast and Secure Delivery Service"
+            }
+        }[this.currentLang];
+    }
+
+    /**
+     * Setup language switcher
+     */
     setupLanguageSwitcher() {
-        const langButtons = document.querySelectorAll('.lang-option-nav, .lang-option');
-        const langDropdowns = document.querySelectorAll('.lang-dropdown-nav, .lang-dropdown');
-        const langBtns = document.querySelectorAll('#langBtn, .lang-btn-nav, .lang-btn');
-        
-        // Handle language option clicks
-        langButtons.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
+        // Desktop language switcher
+        const langBtn = document.getElementById('langBtn');
+        const langDropdown = document.getElementById('langDropdown');
+        const currentLangSpan = document.getElementById('currentLang');
+
+        if (langBtn && langDropdown) {
+            // Toggle dropdown
+            langBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                
-                const selectedLang = btn.getAttribute('data-lang');
-                if (selectedLang && selectedLang !== this.currentLang) {
-                    this.switchLanguage(selectedLang);
-                    this.closeAllDropdowns();
-                }
+                langDropdown.classList.toggle('active');
             });
-        });
-        
-        // Toggle dropdown menus
-        langBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                // Find the corresponding dropdown
-                let dropdown;
-                if (btn.classList.contains('lang-btn-nav')) {
-                    dropdown = btn.nextElementSibling;
-                } else {
-                    dropdown = btn.parentElement.querySelector('.lang-dropdown');
-                }
-                
-                if (dropdown) {
-                    dropdown.classList.toggle('show');
-                }
-                
-                // Close other dropdowns
-                langDropdowns.forEach(d => {
-                    if (d !== dropdown) {
-                        d.classList.remove('show');
-                    }
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', () => {
+                langDropdown.classList.remove('active');
+            });
+
+            // Handle language selection
+            langDropdown.querySelectorAll('.lang-option-nav').forEach(option => {
+                option.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const selectedLang = option.dataset.lang;
+                    this.switchLanguage(selectedLang);
+                    langDropdown.classList.remove('active');
                 });
             });
-        });
-        
-        // Close dropdowns when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.language-switcher-nav') && 
-                !e.target.closest('.language-switcher')) {
-                this.closeAllDropdowns();
-            }
-        });
-        
-        // Close dropdowns on escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                this.closeAllDropdowns();
-            }
-        });
-    }
-    
-    closeAllDropdowns() {
-        document.querySelectorAll('.lang-dropdown-nav, .lang-dropdown').forEach(dropdown => {
-            dropdown.classList.remove('show');
-        });
-    }
 
-    // ==================== LANGUAGE MANAGEMENT ====================
-    getSavedLanguage() {
-        // Check localStorage first
-        const savedLang = localStorage.getItem('hela_language') || localStorage.getItem('site_language') || localStorage.getItem('language');
-        if (savedLang && (savedLang === 'ar' || savedLang === 'en')) return savedLang;
-        
-        // Check browser language
-        const browserLang = navigator.language || navigator.userLanguage;
-        if (browserLang.startsWith('ar')) return 'ar';
-        if (browserLang.startsWith('en')) return 'en';
-        
-        // Default to Arabic
-        return 'ar';
-    }
-    
-    saveLanguage(lang) {
-        try {
-            localStorage.setItem('hela_language', lang);
-            localStorage.setItem('site_language', lang);
-            localStorage.setItem('language', lang);
-            console.log('💾 Language saved:', lang);
-            
-            // Update cookie for server-side if needed
-            document.cookie = `hela_language=${lang}; path=/; max-age=31536000`;
-            
-            // Dispatch event for other components
-            window.dispatchEvent(new CustomEvent('languageChanged', {
-                detail: { language: lang }
-            }));
-        } catch (error) {
-            console.error('Error saving language:', error);
+            // Update current language display
+            if (currentLangSpan) {
+                currentLangSpan.textContent = this.currentLang === 'ar' ? 'العربية' : 'English';
+            }
+        }
+
+        // Mobile language switcher (if exists)
+        const mobileLangSwitcher = document.querySelector('.mobile-language-switcher');
+        if (mobileLangSwitcher) {
+            mobileLangSwitcher.addEventListener('change', (e) => {
+                this.switchLanguage(e.target.value);
+            });
         }
     }
-    
-    switchLanguage(lang) {
+
+    /**
+     * Switch language
+     */
+    async switchLanguage(lang) {
         if (lang === this.currentLang) return;
-        
-        console.log('🔄 Switching language to:', lang);
-        
-        // Update current language
+
+        // Save language preference
+        localStorage.setItem('language', lang);
         this.currentLang = lang;
-        
-        // Save to storage
-        this.saveLanguage(lang);
-        
-        // Update UI
-        this.updateLanguageSwitcherUI();
-        this.updatePageDirection();
-        
-        // Apply translations
-        this.applyTranslations();
-        
-        // Show notification
-        this.showLanguageChangeNotification(lang);
-    }
-    
-    loadLanguage() {
-        console.log('📖 Loading language:', this.currentLang);
-        
-        // Update switcher UI
-        this.updateLanguageSwitcherUI();
-        
-        // Update page direction
-        this.updatePageDirection();
-        
-        // Apply translations
-        this.applyTranslations();
-        
-        // Trigger initial language event
-        setTimeout(() => {
-            window.dispatchEvent(new CustomEvent('languageLoaded', {
-                detail: { language: this.currentLang }
-            }));
-        }, 100);
-    }
-    
-    updateLanguageSwitcherUI() {
-        // Update current language text
-        document.querySelectorAll('#currentLang, .current-lang').forEach(el => {
-            if (this.currentLang === 'ar') {
-                el.textContent = 'العربية';
-                el.style.fontFamily = "'Cairo', sans-serif";
-            } else {
-                el.textContent = 'English';
-                el.style.fontFamily = "'Cairo', sans-serif";
-            }
-        });
-        
-        // Update active states
-        document.querySelectorAll('[data-lang]').forEach(el => {
-            const lang = el.getAttribute('data-lang');
-            if (lang === this.currentLang) {
-                el.classList.add('active');
-            } else {
-                el.classList.remove('active');
-            }
-        });
-        
-        // Update button icons/text
-        const langBtn = document.querySelector('#langBtn, .lang-btn');
-        if (langBtn) {
-            const icon = langBtn.querySelector('i') || langBtn;
-            const text = langBtn.querySelector('span');
-            
-            if (icon) {
-                icon.className = this.currentLang === 'ar' ? 
-                    'fas fa-language' : 'fas fa-globe-americas';
-            }
-            
-            if (text) {
-                text.textContent = this.currentLang === 'ar' ? 'العربية' : 'English';
-            }
+
+        // Update UI immediately with fallback
+        this.translations = this.getFallbackTranslations();
+        this.applyLanguage();
+        this.setupDirection();
+
+        // Load full translations
+        await this.loadTranslations();
+        this.applyLanguage();
+
+        // Dispatch event for other components
+        this.dispatchLanguageChangeEvent();
+
+        // Update current language display
+        const currentLangSpan = document.getElementById('currentLang');
+        if (currentLangSpan) {
+            currentLangSpan.textContent = lang === 'ar' ? 'العربية' : 'English';
         }
-    }
-    
-    updatePageDirection() {
-        if (this.currentLang === 'ar') {
-            document.documentElement.dir = 'rtl';
-            document.documentElement.lang = 'ar';
-            document.body.classList.add('rtl');
-            document.body.classList.remove('ltr');
-            document.body.style.fontFamily = "'Cairo', sans-serif";
-        } else {
-            document.documentElement.dir = 'ltr';
-            document.documentElement.lang = 'en';
-            document.body.classList.add('ltr');
-            document.body.classList.remove('rtl');
-            document.body.style.fontFamily = "'Cairo', sans-serif";
-        }
+
+        // Show confirmation
+        this.showLanguageChangeToast(lang);
     }
 
-    // ==================== TRANSLATION SYSTEM ====================
-    applyTranslations() {
-        const elements = document.querySelectorAll('[data-i18n]');
-        
-        elements.forEach(element => {
+    /**
+     * Apply language to page elements
+     */
+    applyLanguage() {
+        // Update all elements with data-i18n attribute
+        document.querySelectorAll('[data-i18n]').forEach(element => {
             const key = element.getAttribute('data-i18n');
-            const translation = this.getTranslation(key);
+            const translation = this.translations[key];
             
             if (translation) {
-                this.applyTranslationToElement(element, translation);
-            }
-        });
-        
-        // Special handling for input placeholders
-        document.querySelectorAll('[data-i18n-placeholder]').forEach(input => {
-            const key = input.getAttribute('data-i18n-placeholder');
-            const translation = this.getTranslation(key);
-            if (translation) input.placeholder = translation;
-        });
-        
-        // Special handling for image alt text
-        document.querySelectorAll('[data-i18n-alt]').forEach(img => {
-            const key = img.getAttribute('data-i18n-alt');
-            const translation = this.getTranslation(key);
-            if (translation) img.alt = translation;
-        });
-        
-        // Special handling for title attributes
-        document.querySelectorAll('[data-i18n-title]').forEach(el => {
-            const key = el.getAttribute('data-i18n-title');
-            const translation = this.getTranslation(key);
-            if (translation) el.title = translation;
-        });
-        
-        console.log(`✅ Applied ${elements.length} translations for ${this.currentLang}`);
-    }
-    
-    applyTranslationToElement(element, translation) {
-        const tagName = element.tagName.toLowerCase();
-        
-        switch(tagName) {
-            case 'input':
-                if (element.type === 'button' || element.type === 'submit') {
-                    element.value = translation;
-                } else {
+                if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
                     element.placeholder = translation;
-                }
-                break;
-                
-            case 'textarea':
-                element.placeholder = translation;
-                break;
-                
-            case 'img':
-                element.alt = translation;
-                break;
-                
-            case 'option':
-                element.textContent = translation;
-                break;
-                
-            default:
-                // Check if element has specific translation type
-                const translationType = element.getAttribute('data-i18n-type');
-                if (translationType === 'html') {
-                    element.innerHTML = translation;
+                } else if (element.tagName === 'IMG') {
+                    element.alt = translation;
+                } else if (element.hasAttribute('title')) {
+                    element.title = translation;
                 } else {
                     element.textContent = translation;
                 }
-        }
-    }
-    
-    getTranslation(key) {
-        try {
-            const keys = key.split('.');
-            let value = this.translations[this.currentLang];
-            
-            for (const k of keys) {
-                if (value && typeof value === 'object' && k in value) {
-                    value = value[k];
-                } else {
-                    // Try fallback to other language
-                    const fallbackLang = this.currentLang === 'ar' ? 'en' : 'ar';
-                    let fallbackValue = this.translations[fallbackLang];
-                    
-                    for (const k2 of keys) {
-                        if (fallbackValue && typeof fallbackValue === 'object' && k2 in fallbackValue) {
-                            fallbackValue = fallbackValue[k2];
-                        } else {
-                            console.warn(`Translation key not found: ${key}`);
-                            return null;
-                        }
-                    }
-                    return fallbackValue;
-                }
             }
-            
-            return value;
-        } catch (error) {
-            console.error(`Error getting translation for key "${key}":`, error);
-            return null;
+        });
+
+        // Update page title
+        const pageTitle = document.querySelector('title[data-i18n]');
+        if (pageTitle) {
+            const key = pageTitle.getAttribute('data-i18n');
+            const translation = this.translations[key];
+            if (translation) {
+                document.title = translation;
+            }
+        }
+
+        // Update meta description
+        const metaDescription = document.querySelector('meta[name="description"][data-i18n]');
+        if (metaDescription) {
+            const key = metaDescription.getAttribute('data-i18n');
+            const translation = this.translations[key];
+            if (translation) {
+                metaDescription.content = translation;
+            }
         }
     }
 
-    // ==================== TRANSLATION DATA ====================
-    getArabicTranslations() {
-        return {
-            // Company Info
-            companyName: "Tn-QA Delivery",
-            companySlogan: "خدمة توصيل سريعة وآمنة",
-            
-            // Navigation
-            nav: {
-                home: "الرئيسية",
-                about: "من نحن",
-                services: "الخدمات",
-                contact: "التواصل",
-                whatsapp: "تواصل عبر واتساب",
-                call: "اتصل الآن"
-            },
-            
-            // Hero Section
-            hero: {
-                title1: "خدمة توصيل سريعة وآمنة داخل قطر وتونس",
-                subtitle1: "نوفر حلول نقل وتوصيل مرنة تناسب الأفراد والمتاجر والشركات، مع التركيز على السرعة، الأمان، وسهولة التواصل.",
-                title2: "توصيل أغراض بين تونس وقطر",
-                subtitle2: "توصيل الأغراض بين تونس وقطر عبر مسافرين موثوقين، بطريقة آمنة ومنسقة مع توثيق كامل.",
-                title3: "توثيق تسليم الأموال يدًا بيد",
-                subtitle3: "نقدم خدمة توثيق موثوقة لتسليم الأموال بين الأطراف، مع الحفاظ على الشفافية والأمان الكامل.",
-                servicesBtn: "عرض الخدمات",
-                whatsappBtn: "تواصل الآن",
-                contactBtn: "اتصل بنا الآن",
-                qatarPhone: "قطر: 31691024",
-                tunisiaPhone: "تونس: 56471550",
-                callNow: "طلب خدمة"
-            },
-            
-            // About Section
-            about: {
-                title: "من نحن",
-                subtitle: "خدمة توصيل مستقلة توفر حلول نقل وتوصيل مرنة",
-                heading: "Tn-QA Delivery",
-                desc1: "نحن خدمة توصيل مستقلة ومتخصصة في تقديم حلول النقل والتوصيل بين قطر وتونس. نهدف إلى توفير خدمات توصيل سريعة وآمنة ومهنية تلبي احتياجات الأفراد والشركات.",
-                desc2: "نركز في عملنا على ثلاثة مبادئ أساسية: السرعة في التنفيذ، الأمان في التعامل، والموثوقية في الأداء.",
-                feature1: {
-                    title: "سرعة في التنفيذ",
-                    desc: "توصيل سريع في الوقت المحدد"
-                },
-                feature2: {
-                    title: "أمان تام",
-                    desc: "حماية للأغراض والمعلومات"
-                },
-                feature3: {
-                    title: "توثيق موثوق",
-                    desc: "تسليم موثق يدًا بيد"
-                }
-            },
-            
-            // Services Section
-            services: {
-                title: "خدماتنا",
-                subtitle: "نقدم مجموعة متكاملة من خدمات التوصيل والنقل"
-            },
-            
-            // Contact Page
-            contact: {
-                heroTitle: "تواصل معنا",
-                heroSubtitle: "نحن هنا لمساعدتك على مدار الساعة، تواصل معنا بأي طريقة تفضلها",
-                directMethods: "طرق التواصل المباشرة",
-                methodsSubtitle: "اختر الطريقة المناسبة لك للتواصل معنا مباشرة",
-                whatsappCard: "واتساب مباشر",
-                whatsappDesc: "للتواصل الفوري والرد السريع خلال دقائق",
-                phoneCard: "اتصال هاتفي",
-                phoneDesc: "للأمور العاجلة والاستفسارات المباشرة",
-                emailCard: "البريد الإلكتروني",
-                emailDesc: "للرسائل الرسمية، الاستفسارات التفصيلية والمستندات",
-                formTitle: "أرسل لنا رسالة مباشرة",
-                formSubtitle: "املأ النموذج وسنقوم بالرد عليك في أسرع وقت ممكن",
-                mapTitle: "موقعنا على الخريطة",
-                mapSubtitle: "خدمة التوصيل متاحة في قطر وتونس مع تغطية شاملة لكافة المناطق",
-                faqTitle: "أسئلة متكررة",
-                faqSubtitle: "إجابات عن الأسئلة الأكثر شيوعاً فيما يتعلق بالتواصل والخدمات",
-                coverageAreas: "مناطق التغطية",
-                quickWidget: "تواصل الآن"
-            },
-            
-            // Reviews Page
-            reviews: {
-                heroTitle: "مراجعات وتقييمات العملاء",
-                heroSubtitle: "ثقة أكثر من 500 عميل في خدماتنا هي شهادة نجاحنا",
-                allReviews: "جميع المراجعات",
-                allReviewsSub: "مراجعات حقيقية من عملائنا الكرام عن جميع خدماتنا",
-                submitReview: "شاركنا تجربتك",
-                submitReviewSub: "ساعد الآخرين في اتخاذ القرار من خلال مشاركة تجربتك مع خدماتنا",
-                averageRating: "متوسط التقييم",
-                customerSatisfaction: "رضا العملاء",
-                satisfiedCustomers: "عميل راضٍ",
-                deliveryTime: "متوسط وقت التسليم",
-                reviewer1: "محمد أحمد",
-                reviewer1Title: "مستثمر من قطر",
-                reviewer2: "سارة القاسمي",
-                reviewer2Title: "ربة منزل من الإمارات",
-                reviewer3: "علي التونسي",
-                reviewer3Title: "تاجر من تونس",
-                reviewer4: "نورا السعدي",
-                reviewer4Title: "موظفة من السعودية",
-                daysAgo: "قبل 3 أيام",
-                weekAgo: "قبل أسبوع",
-                weeksAgo: "قبل أسبوعين",
-                monthAgo: "قبل شهر",
-                review1: "\"خدمة استثنائية! حجزت ميزان من قطر إلى تونس وكانت العملية سلسة جداً. الفريق متجاوب ومحترف. أوصي بشدة بخدماتهم.\"",
-                review2: "\"استخدمت خدمة التوصيل المحلي في قطر وكانت رائعة. السائقون مؤدبون، والخدمة سريعة، والأسعار مناسبة. شكراً فريق HELA Express!\"",
-                review3: "\"خدمة توثيق تسليم الأموال كانت آمنة ومضمونة 100%. الفريق محترف ويضمن وصول أموالك بأمان. أنصح الجميع بهذه الخدمة الموثوقة.\"",
-                review4: "\"اشتريت ميزان من خلالهم وكانت الجودة ممتازة والسعر مناسب. ما يميزهم هو المتابعة بعد البيع والتأكد من رضا العميل. شكراً لكم!\"",
-                writeReview: "اكتب مراجعة",
-                whatsappReview: "مراجعة عبر واتساب",
-                redirectMessage: "سيتم تحويلك إلى صفحة المراجعات الكاملة",
-                reviewMessage: "أريد كتابة مراجعة عن خدماتكم المميزة"
-            },
-            
-            // Form Labels
-            form: {
-                fullName: "الاسم الكامل",
-                phoneNumber: "رقم الهاتف",
-                email: "البريد الإلكتروني",
-                preferredContact: "طريقة التواصل المفضلة",
-                serviceType: "نوع الخدمة المطلوبة",
-                urgency: "درجة الاستعجال",
-                messageSubject: "عنوان الرسالة",
-                message: "تفاصيل الطلب أو الاستفسار",
-                attachments: "إرفاق ملفات",
-                privacyPolicy: "أوافق على سياسة الخصوصية وشروط الخدمة",
-                submit: "إرسال عبر واتساب",
-                clear: "مسح النموذج",
-                success: "تم إرسال رسالتك بنجاح!",
-                error: "حدث خطأ أثناء الإرسال",
-                successMessage: "سنقوم بالرد عليك خلال 2-4 ساعات. يمكنك تتبع حالة طلبك عبر الرابط الذي تم إرساله إلى بريدك الإلكتروني.",
-                errorMessage: "يرجى المحاولة مرة أخرى أو التواصل معنا مباشرة عبر الواتساب.",
-                hintName: "الرجاء إدخال الاسم الثلاثي",
-                phonePlaceholder: "رقم الهاتف بدون مفتاح الدولة",
-                hintPhone: "سنتصل على هذا الرقم للرد على استفسارك",
-                emailPlaceholder: "example@email.com",
-                hintEmail: "اختياري - للرد الرسمي والمستندات",
-                selectService: "اختر الخدمة المطلوبة",
-                messageSubjectPlaceholder: "عنوان مختصر لطلبك",
-                messagePlaceholder: "يرجى وصف طلبك أو استفسارك بالتفصيل...",
-                hintMessage: "كلما كانت التفاصيل أكثر، كان الرد أفضل وأسرع",
-                uploadDrag: "اسحب وأفلت الملفات هنا أو",
-                uploadBrowse: "تصفح",
-                uploadHint: "يمكنك رفع الصور، PDF، مستندات Word (حتى 10MB)",
-                personalInfo: "المعلومات الشخصية",
-                serviceInfo: "معلومات الخدمة",
-                messageContent: "محتوى الرسالة"
-            },
-            
-            // Footer
-            footer: {
-                quickLinks: "روابط سريعة",
-                ourServices: "خدماتنا",
-                contactUs: "تواصل معنا",
-                quickContact: "تواصل سريع",
-                legalNotice: "الموقع منصة تعريفية وتنسيقية فقط، ولا يقوم بأي عمليات دفع إلكتروني أو تحصيل أموال",
-                copyright: "جميع الحقوق محفوظة",
-                backToHome: "العودة للرئيسية",
-                description: "خدمات توصيل ونقل موثوقة بين تونس وقطر",
-                emergencyCall: "اتصال عاجل"
-            },
-            
-            // Common
-            common: {
-                loading: "جاري التحميل...",
-                sending: "جاري الإرسال...",
-                sent: "تم الإرسال",
-                success: "تم بنجاح",
-                error: "خطأ",
-                close: "إغلاق",
-                more: "المزيد",
-                less: "أقل",
-                readMore: "اقرأ المزيد",
-                showLess: "عرض أقل",
-                all: "الكل",
-                filter: "تصفية",
-                search: "بحث",
-                submit: "إرسال",
-                cancel: "إلغاء",
-                confirm: "تأكيد",
-                optional: "اختياري",
-                required: "مطلوب",
-                verified: "موثّق",
-                active: "نشط",
-                inactive: "غير نشط",
-                customers: "تمت خدمة +500 عميل",
-                satisfaction: "رضا عملاء 98%",
-                characters: "حرف",
-                days: "الأحد - الخميس",
-                daysWeekend: "الجمعة - السبت",
-                emergency: "خدمة الطوارئ",
-                primary: "البريد الرئيسي",
-                business: "للشؤون التجارية",
-                general: "الاستفسارات العامة",
-                alsoContact: "يمكنك أيضاً التواصل عبر البريد الإلكتروني:",
-                copy: "نسخ",
-                backToTop: "العودة إلى الأعلى",
-                all: "على مدار الساعة",
-                any: "أي طريقة",
-                other: "استفسار عام / خدمة أخرى",
-                available: "دعم فوري",
-                minutes: "رد خلال دقائق",
-                hours: "متاح 24/7",
-                verified: "ضمان الرد"
-            },
-            
-            // Services Names
-            servicesList: {
-                localDelivery: "التوصيل المحلي",
-                localDeliveryQatar: "التوصيل المحلي في قطر",
-                localDeliveryTunisia: "التوصيل المحلي في تونس",
-                scaleSales: "بيع موازين",
-                scaleBooking: "حجز ميزان",
-                scaleBookingQaTn: "حجز ميزان من قطر إلى تونس",
-                scaleBookingTnQa: "حجز ميزان من تونس إلى قطر",
-                moneyDelivery: "توثيق تسليم الأموال"
-            },
-            
-            // Countries
-            countries: {
-                qatar: "قطر",
-                tunisia: "تونس",
-                saudi: "السعودية",
-                uae: "الإمارات",
-                egypt: "مصر",
-                morocco: "المغرب"
-            },
-            
-            // Time
-            time: {
-                immediate: "فوري",
-                urgent: "عاجل",
-                emergency: "طارئ",
-                normal: "عادي",
-                minutes: "دقائق",
-                hours: "ساعات",
-                days: "أيام"
-            },
-            
-            // Status
-            status: {
-                connected: "متصل الآن",
-                offline: "غير متصل",
-                available: "متاح",
-                busy: "مشغول"
-            },
-            
-            // Map
-            map: {
-                errorTitle: "عذراً، تعذر تحميل الخريطة",
-                errorMessage: "هناك مشكلة فنية في تحميل خريطة المواقع. يمكنك التواصل معنا مباشرة عبر وسائل التواصل التالية:",
-                qatarBranch: "فرع قطر 🇶🇦",
-                tunisiaBranch: "فرع تونس 🇹🇳"
-            },
-            
-            // Coverage
-            coverage: {
-                doha: "الدوحة وجميع مناطقها",
-                rayyan: "الريان والوكرة",
-                khor: "الخور والذخيرة",
-                allQatar: "جميع مناطق قطر",
-                tunis: "تونس العاصمة",
-                sfax: "صفاقس وسوسة",
-                nabeul: "نابل والمنستير",
-                allTunisia: "جميع مناطق تونس",
-                qatar: "مناطق الخدمة في قطر",
-                tunisia: "مناطق الخدمة في تونس",
-                mainOffices: "المكاتب الرئيسية"
-            },
-            
-            // FAQ
-            faq: {
-                question1: "ما هي أسرع طريقة للتواصل معكم؟",
-                answer1: "أسرع طريقة للتواصل هي عبر الواتساب حيث يتم الرد خلال دقائق خلال أوقات العمل. للاستفسارات العاجلة يمكنك الاتصال مباشرة على الأرقام المذكورة.",
-                question2: "ما هي أوقات العمل الرسمية؟",
-                answer2: "نحن نعمل 24 ساعة طوال أيام الأسبوع، بما في ذلك العطل الرسمية والإجازات. خدمة الطوارئ متاحة على مدار الساعة.",
-                question3: "كيف يمكنني تتبع حالة طلبي؟",
-                answer3: "بعد تقديم طلبك، سنقوم بإرسال رقم تتبع فريد عبر الواتساب والبريد الإلكتروني. يمكنك استخدام هذا الرقم لمتابعة حالة طلبك.",
-                question4: "هل الخدمات متاحة في جميع مناطق قطر وتونس؟",
-                answer4: "نعم، نقدم خدماتنا في جميع مناطق قطر وتونس. بعض المناطق النائية قد تحتاج إلى ترتيب مسبق. يمكنك التواصل معنا للتحقق من تغطية منطقتك.",
-                question5: "ما هي مدة الرد على النموذج الإلكتروني؟",
-                answer5: "متوسط وقت الرد على النماذج الإلكترونية هو 2-4 ساعات خلال أوقات العمل. للطلبات العاجلة يرجى استخدام الواتساب أو الهاتف."
-            }
-        };
-    }
-    
-    getEnglishTranslations() {
-        return {
-            // Company Info
-            companyName: "Tn-QA Delivery",
-            companySlogan: "Fast and Secure Delivery Service",
-            
-            // Navigation
-            nav: {
-                home: "Home",
-                about: "About Us",
-                services: "Services",
-                contact: "Contact",
-                whatsapp: "Contact via WhatsApp",
-                call: "Call Now"
-            },
-            
-            // Hero Section
-            hero: {
-                title1: "Fast and Secure Delivery Service in Qatar and Tunisia",
-                subtitle1: "We provide flexible transportation and delivery solutions suitable for individuals, shops, and companies, focusing on speed, safety, and ease of communication.",
-                title2: "Package Delivery between Tunisia and Qatar",
-                subtitle2: "Delivery of items between Tunisia and Qatar through trusted travelers, in a safe and coordinated manner with full documentation.",
-                title3: "Hand-to-Hand Money Delivery Documentation",
-                subtitle3: "We provide reliable documentation service for money delivery between parties, while maintaining full transparency and security.",
-                servicesBtn: "View Services",
-                whatsappBtn: "Contact Now",
-                contactBtn: "Contact Us Now",
-                qatarPhone: "Qatar: 31691024",
-                tunisiaPhone: "Tunisia: 56471550",
-                callNow: "Request Service"
-            },
-            
-            // About Section
-            about: {
-                title: "About Us",
-                subtitle: "Independent delivery service providing flexible transportation solutions",
-                heading: "Tn-QA Delivery",
-                desc1: "We are an independent delivery service specialized in providing transportation and delivery solutions between Qatar and Tunisia. We aim to provide fast, safe, and professional delivery services that meet the needs of individuals and companies.",
-                desc2: "We focus on three main principles in our work: Speed in execution, Safety in handling, and Reliability in performance.",
-                feature1: {
-                    title: "Fast Execution",
-                    desc: "Fast delivery on time"
-                },
-                feature2: {
-                    title: "Complete Safety",
-                    desc: "Protection of items and information"
-                },
-                feature3: {
-                    title: "Reliable Documentation",
-                    desc: "Hand-to-hand documented delivery"
-                }
-            },
-            
-            // Services Section
-            services: {
-                title: "Our Services",
-                subtitle: "We provide a comprehensive range of delivery and transportation services"
-            },
-            
-            // Contact Page
-            contact: {
-                heroTitle: "Contact Us",
-                heroSubtitle: "We are here to help you 24/7, contact us using your preferred method",
-                directMethods: "Direct Contact Methods",
-                methodsSubtitle: "Choose the appropriate method to contact us directly",
-                whatsappCard: "Direct WhatsApp",
-                whatsappDesc: "For instant communication and quick response within minutes",
-                phoneCard: "Phone Call",
-                phoneDesc: "For urgent matters and direct inquiries",
-                emailCard: "Email",
-                emailDesc: "For official messages, detailed inquiries and documents",
-                formTitle: "Send us a Direct Message",
-                formSubtitle: "Fill out the form and we will respond to you as soon as possible",
-                mapTitle: "Our Location on Map",
-                mapSubtitle: "Delivery service is available in Qatar and Tunisia with comprehensive coverage of all areas",
-                faqTitle: "Frequently Asked Questions",
-                faqSubtitle: "Answers to the most common questions regarding communication and services",
-                coverageAreas: "Coverage Areas",
-                quickWidget: "Contact Now"
-            },
-            
-            // Reviews Page
-            reviews: {
-                heroTitle: "Customer Reviews and Ratings",
-                heroSubtitle: "Trust of more than 500 customers in our services is our success certificate",
-                allReviews: "All Reviews",
-                allReviewsSub: "Real reviews from our valued customers about all our services",
-                submitReview: "Share Your Experience",
-                submitReviewSub: "Help others make decisions by sharing your experience with our services",
-                averageRating: "Average Rating",
-                customerSatisfaction: "Customer Satisfaction",
-                satisfiedCustomers: "Satisfied Customers",
-                deliveryTime: "Average Delivery Time",
-                reviewer1: "Mohammed Ahmed",
-                reviewer1Title: "Investor from Qatar",
-                reviewer2: "Sarah Al-Qasimi",
-                reviewer2Title: "Housewife from UAE",
-                reviewer3: "Ali Al-Tounsi",
-                reviewer3Title: "Merchant from Tunisia",
-                reviewer4: "Nora Al-Saadi",
-                reviewer4Title: "Employee from Saudi Arabia",
-                daysAgo: "3 days ago",
-                weekAgo: "1 week ago",
-                weeksAgo: "2 weeks ago",
-                monthAgo: "1 month ago",
-                review1: "\"Exceptional service! I booked a scale from Qatar to Tunisia and the process was very smooth. The team is responsive and professional. I highly recommend their services.\"",
-                review2: "\"I used the local delivery service in Qatar and it was excellent. The drivers are polite, the service is fast, and the prices are reasonable. Thank you HELA Express team!\"",
-                review3: "\"The money delivery documentation service was 100% safe and guaranteed. The team is professional and ensures your money arrives safely. I recommend this reliable service to everyone.\"",
-                review4: "\"I bought a scale through them and the quality was excellent and the price was reasonable. What distinguishes them is the follow-up after the sale and ensuring customer satisfaction. Thank you!\"",
-                writeReview: "Write a Review",
-                whatsappReview: "Review via WhatsApp",
-                redirectMessage: "You will be redirected to the full reviews page",
-                reviewMessage: "I want to write a review about your excellent services"
-            },
-            
-            // Form Labels
-            form: {
-                fullName: "Full Name",
-                phoneNumber: "Phone Number",
-                email: "Email Address",
-                preferredContact: "Preferred Contact Method",
-                serviceType: "Required Service Type",
-                urgency: "Urgency Level",
-                messageSubject: "Message Subject",
-                message: "Order or Inquiry Details",
-                attachments: "Attach Files",
-                privacyPolicy: "I agree to the Privacy Policy and Terms of Service",
-                submit: "Send via WhatsApp",
-                clear: "Clear Form",
-                success: "Your message has been sent successfully!",
-                error: "An error occurred while sending",
-                successMessage: "We will respond to you within 2-4 hours. You can track your order status via the link sent to your email.",
-                errorMessage: "Please try again or contact us directly via WhatsApp.",
-                hintName: "Please enter your full name",
-                phonePlaceholder: "Phone number without country code",
-                hintPhone: "We will call this number to respond to your inquiry",
-                emailPlaceholder: "example@email.com",
-                hintEmail: "Optional - for official response and documents",
-                selectService: "Select required service",
-                messageSubjectPlaceholder: "Brief title of your request",
-                messagePlaceholder: "Please describe your request or inquiry in detail...",
-                hintMessage: "The more details, the better and faster the response",
-                uploadDrag: "Drag and drop files here or",
-                uploadBrowse: "Browse",
-                uploadHint: "You can upload images, PDF, Word documents (up to 10MB)",
-                personalInfo: "Personal Information",
-                serviceInfo: "Service Information",
-                messageContent: "Message Content"
-            },
-            
-            // Footer
-            footer: {
-                quickLinks: "Quick Links",
-                ourServices: "Our Services",
-                contactUs: "Contact Us",
-                quickContact: "Quick Contact",
-                legalNotice: "The site is only an introductory and coordination platform, and does not perform any electronic payment or money collection operations",
-                copyright: "All Rights Reserved",
-                backToHome: "Back to Home",
-                description: "Reliable delivery and transportation services between Tunisia and Qatar",
-                emergencyCall: "Emergency Call"
-            },
-            
-            // Common
-            common: {
-                loading: "Loading...",
-                sending: "Sending...",
-                sent: "Sent",
-                success: "Success",
-                error: "Error",
-                close: "Close",
-                more: "More",
-                less: "Less",
-                readMore: "Read More",
-                showLess: "Show Less",
-                all: "All",
-                filter: "Filter",
-                search: "Search",
-                submit: "Submit",
-                cancel: "Cancel",
-                confirm: "Confirm",
-                optional: "Optional",
-                required: "Required",
-                verified: "Verified",
-                active: "Active",
-                inactive: "Inactive",
-                customers: "Served +500 customers",
-                satisfaction: "98% customer satisfaction",
-                characters: "characters",
-                days: "Sunday - Thursday",
-                daysWeekend: "Friday - Saturday",
-                emergency: "Emergency Service",
-                primary: "Primary Email",
-                business: "For Business Affairs",
-                general: "General Inquiries",
-                alsoContact: "You can also contact via email:",
-                copy: "Copy",
-                backToTop: "Back to top",
-                all: "24/7",
-                any: "Any method",
-                other: "General inquiry / Other service",
-                available: "Immediate Support",
-                minutes: "Response within minutes",
-                hours: "Available 24/7",
-                verified: "Response Guarantee"
-            },
-            
-            // Services Names
-            servicesList: {
-                localDelivery: "Local Delivery",
-                localDeliveryQatar: "Local Delivery in Qatar",
-                localDeliveryTunisia: "Local Delivery in Tunisia",
-                scaleSales: "Scale Sales",
-                scaleBooking: "Scale Booking",
-                scaleBookingQaTn: "Scale booking from Qatar to Tunisia",
-                scaleBookingTnQa: "Scale booking from Tunisia to Qatar",
-                moneyDelivery: "Money Delivery Documentation"
-            },
-            
-            // Countries
-            countries: {
-                qatar: "Qatar",
-                tunisia: "Tunisia",
-                saudi: "Saudi Arabia",
-                uae: "United Arab Emirates",
-                egypt: "Egypt",
-                morocco: "Morocco"
-            },
-            
-            // Time
-            time: {
-                immediate: "Immediate",
-                urgent: "Urgent",
-                emergency: "Emergency",
-                normal: "Normal",
-                minutes: "Minutes",
-                hours: "Hours",
-                days: "Days"
-            },
-            
-            // Status
-            status: {
-                connected: "Connected Now",
-                offline: "Offline",
-                available: "Available",
-                busy: "Busy"
-            },
-            
-            // Map
-            map: {
-                errorTitle: "Sorry, unable to load the map",
-                errorMessage: "There is a technical problem loading the map. You can contact us directly through the following means:",
-                qatarBranch: "Qatar Branch 🇶🇦",
-                tunisiaBranch: "Tunisia Branch 🇹🇳"
-            },
-            
-            // Coverage
-            coverage: {
-                doha: "Doha and all its areas",
-                rayyan: "Rayyan and Al Wakra",
-                khor: "Al Khor and Al Dhakhira",
-                allQatar: "All areas of Qatar",
-                tunis: "Tunis Capital",
-                sfax: "Sfax and Sousse",
-                nabeul: "Nabeul and Monastir",
-                allTunisia: "All areas of Tunisia",
-                qatar: "Service areas in Qatar",
-                tunisia: "Service areas in Tunisia",
-                mainOffices: "Main offices"
-            },
-            
-            // FAQ
-            faq: {
-                question1: "What is the fastest way to contact you?",
-                answer1: "The fastest way to contact is via WhatsApp where you get a response within minutes during working hours. For urgent inquiries, you can call directly on the numbers mentioned.",
-                question2: "What are the official working hours?",
-                answer2: "We work 24 hours a day, seven days a week, including official holidays. Emergency service is available 24/7.",
-                question3: "How can I track my order status?",
-                answer3: "After submitting your order, we will send a unique tracking number via WhatsApp and email. You can use this number to track your order status.",
-                question4: "Are services available in all areas of Qatar and Tunisia?",
-                answer4: "Yes, we provide our services in all areas of Qatar and Tunisia. Some remote areas may require prior arrangement. You can contact us to check coverage in your area.",
-                question5: "What is the response time for the electronic form?",
-                answer5: "The average response time for electronic forms is 2-4 hours during working hours. For urgent requests, please use WhatsApp or phone."
-            }
-        };
+    /**
+     * Setup text direction based on language
+     */
+    setupDirection() {
+        const html = document.documentElement;
+        const body = document.body;
+        
+        if (this.currentLang === 'ar') {
+            html.dir = 'rtl';
+            html.lang = 'ar';
+            body.classList.add('rtl');
+            body.classList.remove('ltr');
+        } else {
+            html.dir = 'ltr';
+            html.lang = 'en';
+            body.classList.add('ltr');
+            body.classList.remove('rtl');
+        }
+
+        // Update CSS variables for direction
+        document.documentElement.style.setProperty('--direction', this.currentLang === 'ar' ? 'rtl' : 'ltr');
+        document.documentElement.style.setProperty('--text-align', this.currentLang === 'ar' ? 'right' : 'left');
+        document.documentElement.style.setProperty('--float-start', this.currentLang === 'ar' ? 'right' : 'left');
+        document.documentElement.style.setProperty('--float-end', this.currentLang === 'ar' ? 'left' : 'right');
     }
 
-    // ==================== NOTIFICATION SYSTEM ====================
-    showLanguageChangeNotification(lang) {
-        const message = lang === 'ar' ? 
-            'تم تغيير اللغة إلى العربية' : 
-            'Language changed to English';
+    /**
+     * Dispatch language change event
+     */
+    dispatchLanguageChangeEvent() {
+        const event = new CustomEvent('languageChanged', {
+            detail: { language: this.currentLang }
+        });
+        document.dispatchEvent(event);
+    }
+
+    /**
+     * Show language change toast
+     */
+    showLanguageChangeToast(lang) {
+        const messages = {
+            ar: {
+                ar: 'تم التغيير إلى العربية',
+                en: 'Changed to English'
+            },
+            en: {
+                ar: 'تم التغيير إلى العربية',
+                en: 'Changed to English'
+            }
+        };
+
+        const message = messages[this.currentLang][lang] || `Language changed to ${lang}`;
         
-        const notification = document.createElement('div');
-        notification.className = 'language-notification';
-        notification.innerHTML = `
-            <div class="notification-content">
-                <i class="fas fa-language"></i>
-                <span>${message}</span>
-            </div>
-        `;
-        
-        // Add styles
-        const style = document.createElement('style');
-        style.textContent = `
-            .language-notification {
+        // Use existing toast function or create one
+        if (typeof showToast === 'function') {
+            showToast(message, 'success');
+        } else {
+            // Create simple toast
+            const toast = document.createElement('div');
+            toast.className = 'language-toast';
+            toast.textContent = message;
+            toast.style.cssText = `
                 position: fixed;
                 top: 20px;
-                right: 20px;
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                left: 50%;
+                transform: translateX(-50%);
+                background: var(--success);
                 color: white;
-                padding: 15px 25px;
-                border-radius: 10px;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-                z-index: 10000;
-                animation: slideInRight 0.3s ease, fadeOut 0.3s ease 2.7s;
-                animation-fill-mode: forwards;
-                font-family: 'Cairo', sans-serif;
-            }
+                padding: 10px 20px;
+                border-radius: 5px;
+                z-index: 9999;
+                animation: fadeInOut 3s ease;
+            `;
             
-            .notification-content {
-                display: flex;
-                align-items: center;
-                gap: 12px;
-            }
+            document.body.appendChild(toast);
             
-            .notification-content i {
-                font-size: 1.3rem;
-            }
-            
-            @keyframes slideInRight {
-                from { transform: translateX(100%); opacity: 0; }
-                to { transform: translateX(0); opacity: 1; }
-            }
-            
-            @keyframes fadeOut {
-                from { opacity: 1; }
-                to { opacity: 0; }
-            }
-        `;
-        
-        document.head.appendChild(style);
-        document.body.appendChild(notification);
-        
-        // Remove after 3 seconds
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.remove();
-            }
-        }, 3000);
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
     }
 
-    // ==================== STORAGE LISTENER ====================
-    setupStorageListener() {
-        window.addEventListener('storage', (e) => {
-            if (e.key === 'hela_language' && e.newValue !== this.currentLang) {
-                console.log('🔄 Language changed from another tab:', e.newValue);
-                this.switchLanguage(e.newValue);
+    /**
+     * Get translation for a specific key
+     */
+    getTranslation(key, fallback = '') {
+        return this.translations[key] || fallback || key;
+    }
+
+    /**
+     * Format date based on language
+     */
+    formatDate(date, options = {}) {
+        const defaultOptions = {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        };
+        
+        const finalOptions = { ...defaultOptions, ...options };
+        
+        return new Intl.DateTimeFormat(this.currentLang === 'ar' ? 'ar-SA' : 'en-US', finalOptions)
+            .format(new Date(date));
+    }
+
+    /**
+     * Format number based on language
+     */
+    formatNumber(number, options = {}) {
+        const defaultOptions = {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 2
+        };
+        
+        const finalOptions = { ...defaultOptions, ...options };
+        
+        return new Intl.NumberFormat(this.currentLang === 'ar' ? 'ar-SA' : 'en-US', finalOptions)
+            .format(number);
+    }
+
+    /**
+     * Format currency based on language
+     */
+    formatCurrency(amount, currency = 'QAR') {
+        return new Intl.NumberFormat(this.currentLang === 'ar' ? 'ar-SA' : 'en-US', {
+            style: 'currency',
+            currency: currency
+        }).format(amount);
+    }
+
+    /**
+     * Get localized phone number format
+     */
+    formatPhoneNumber(phone, country = 'qa') {
+        const formats = {
+            qa: {
+                ar: '+٩٧٤ XX XXX XXX',
+                en: '+974 XX XXX XXX'
+            },
+            tn: {
+                ar: '+٢١٦ XX XXX XXX',
+                en: '+216 XX XXX XXX'
             }
+        };
+        
+        const format = formats[country]?.[this.currentLang] || '+XXX XX XXX XXX';
+        
+        // Remove non-digits and format
+        const digits = phone.replace(/\D/g, '');
+        let formatted = format;
+        
+        // Replace X's with digits
+        let digitIndex = 0;
+        formatted = formatted.replace(/X/g, () => {
+            return digits[digitIndex++] || 'X';
         });
-    }
-
-    // ==================== PUBLIC METHODS ====================
-    getCurrentLanguage() {
-        return this.currentLang;
-    }
-    
-    setLanguage(lang) {
-        this.switchLanguage(lang);
-    }
-    
-    refreshTranslations() {
-        this.applyTranslations();
+        
+        return formatted;
     }
 }
 
-// ==================== GLOBAL INITIALIZATION ====================
-let languageManager;
+// Initialize language manager
+document.addEventListener('DOMContentLoaded', () => {
+    window.languageManager = new LanguageManager();
+});
 
-function initLanguageSystem() {
-    if (!languageManager) {
-        languageManager = new LanguageManager();
-        languageManager.init();
-    }
-    return languageManager;
-}
-
-// Initialize when DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initLanguageSystem);
-} else {
-    initLanguageSystem();
-}
-
-// Make available globally
-window.LanguageManager = LanguageManager;
-window.languageManager = languageManager;
-window.initLanguageSystem = initLanguageSystem;
-
-// Export for module systems
+// Export for module usage
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { LanguageManager, languageManager, initLanguageSystem };
+    module.exports = LanguageManager;
 }
-
-// ==================== AUTO REINITIALIZATION FIX ====================
-// إصلاح: إعادة تحميل اللغة عند تغيير الصفحات
-document.addEventListener('DOMContentLoaded', function() {
-    // تأخير للتأكد من تحميل جميع العناصر
-    setTimeout(function() {
-        if (window.languageManager) {
-            console.log('🔄 Re-applying translations on page load...');
-            window.languageManager.loadLanguage();
-        } else {
-            console.log('🌍 Initializing language system...');
-            initLanguageSystem();
-        }
-    }, 300);
-});
-
-// إعادة تطبيق الترجمات عند تحميل المحتوى الديناميكي
-document.addEventListener('languageChanged', function() {
-    console.log('Language changed event fired');
-    if (window.languageManager) {
-        setTimeout(function() {
-            window.languageManager.applyTranslations();
-        }, 50);
-    }
-});
-
-// إضافة event listener للعناصر التي يتم إضافتها ديناميكياً
-if (typeof MutationObserver !== 'undefined') {
-    const observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-            if (mutation.addedNodes.length) {
-                setTimeout(function() {
-                    if (window.languageManager && window.languageManager.isInitialized) {
-                        window.languageManager.applyTranslations();
-                    }
-                }, 100);
-            }
-        });
-    });
-    
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true
-    });
-}
-
-// دالة مساعدة للترجمة المباشرة
-window.translateText = function(key) {
-    if (window.languageManager) {
-        return window.languageManager.getTranslation(key) || key;
-    }
-    return key;
-};
-
-// إصلاح: إعادة تحميل النظام عند تحميل الصفحة بالكامل
-window.addEventListener('load', function() {
-    setTimeout(function() {
-        if (window.languageManager) {
-            console.log('📝 Final language check on window load');
-            window.languageManager.updatePageDirection();
-            window.languageManager.applyTranslations();
-        }
-    }, 500);
-});

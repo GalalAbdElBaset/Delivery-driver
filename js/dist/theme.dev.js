@@ -1,231 +1,329 @@
 "use strict";
 
-// main.js - الملف الرئيسي مع تحديثات السمة
-document.addEventListener('DOMContentLoaded', function () {
-  // ================= NAVIGATION =================
-  var burger = document.getElementById('burger');
-  var navLinks = document.getElementById('navLinks');
-  var navLinksList = document.querySelectorAll('.nav-link');
-  var indicator = document.getElementById('indicator'); // فتح/إغلاق القائمة على الجوال
+// theme.js - Theme switching functionality with colored FontAwesome icons
+var themeToggle = document.getElementById('themeToggle');
+var floatThemeToggle = document.getElementById('floatThemeToggle'); // Colors configuration
 
-  if (burger && navLinks) {
-    burger.addEventListener('click', function () {
-      burger.classList.toggle('active');
-      navLinks.classList.toggle('active');
-      document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
-    });
-  } // إغلاق القائمة عند النقر على رابط
+var themeColors = {
+  light: {
+    sun: '#d4af37',
+    // ذهبي للشمس في الوضع الفاتح
+    moon: '#666666' // رمادي للقمر في الوضع الفاتح
 
+  },
+  dark: {
+    sun: '#666666',
+    // رمادي للشمس في الوضع الداكن
+    moon: '#f0f0f0' // رمادي فاتح/أبيض للقمر في الوضع الداكن
 
-  navLinksList.forEach(function (link) {
-    link.addEventListener('click', function () {
-      if (navLinks.classList.contains('active')) {
-        burger.classList.remove('active');
-        navLinks.classList.remove('active');
-        document.body.style.overflow = '';
-      }
-    });
-  }); // ================= HERO SLIDER =================
+  }
+}; // Initialize theme
 
-  var slides = document.querySelectorAll('.slide');
-  var dots = document.querySelectorAll('.dot');
-  var prevBtn = document.querySelector('.slider-prev');
-  var nextBtn = document.querySelector('.slider-next');
-  var progressBar = document.querySelector('.progress-bar');
-  var currentSlide = 0;
-  var slideInterval;
-  var slideDuration = 5000; // 5 ثواني لكل شريحة
-  // تهيئة السلايدر
+function initTheme() {
+  var savedTheme = localStorage.getItem('theme') || 'light';
+  var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches; // Use saved theme, or system preference, or default to light
 
-  function initSlider() {
-    if (slides.length === 0) return; // عرض الشريحة الأولى
+  var currentTheme;
 
-    showSlide(currentSlide); // بدء التلقائي
-
-    startSlideShow(); // أحداث الأزرار
-
-    if (prevBtn) {
-      prevBtn.addEventListener('click', showPrevSlide);
-    }
-
-    if (nextBtn) {
-      nextBtn.addEventListener('click', showNextSlide);
-    } // أحداث النقاط
+  if (savedTheme === 'system') {
+    currentTheme = prefersDark ? 'dark' : 'light';
+  } else {
+    currentTheme = savedTheme;
+  } // Apply theme
 
 
-    dots.forEach(function (dot, index) {
-      dot.addEventListener('click', function () {
-        return showSlide(index);
-      });
-    }); // إيقاف التلقائي عند التمرير
-
-    document.addEventListener('visibilitychange', function () {
-      if (document.hidden) {
-        stopSlideShow();
-      } else {
-        startSlideShow();
-      }
-    });
-  } // عرض شريحة محددة
+  if (currentTheme === 'dark') {
+    document.body.classList.add('dark-theme');
+    updateThemeIcons(true);
+    updateIconColors(true);
+  } else {
+    document.body.classList.remove('dark-theme');
+    updateThemeIcons(false);
+    updateIconColors(false);
+  } // Update theme button text based on current language
 
 
-  function showSlide(index) {
-    // إعادة تعيين التقدم
-    if (progressBar) {
-      progressBar.style.transition = 'none';
-      progressBar.style.width = '0';
-      void progressBar.offsetWidth; // إعادة تدفق
-
-      progressBar.style.transition = "width ".concat(slideDuration, "ms linear");
-      progressBar.style.width = '100%';
-    } // تحديث الشريحة الحالية
+  updateThemeButtonText();
+  return currentTheme;
+} // Update theme icons visibility - FIXED VERSION
 
 
-    slides.forEach(function (slide) {
-      return slide.classList.remove('active');
-    });
-    dots.forEach(function (dot) {
-      return dot.classList.remove('active');
-    }); // حساب الفهرس الصحيح مع التعامل مع النهايات
+function updateThemeIcons(isDark) {
+  console.log('Updating theme icons. Is dark?', isDark); // FIRST: Always show both icons initially, then hide/show based on theme
 
-    currentSlide = (index + slides.length) % slides.length; // عرض الشريحة الجديدة
+  var sunIcons = document.querySelectorAll('.fa-sun');
+  var moonIcons = document.querySelectorAll('.fa-moon');
+  console.log("Found ".concat(sunIcons.length, " sun icons and ").concat(moonIcons.length, " moon icons")); // SIMPLE APPROACH: Just toggle visibility
 
-    slides[currentSlide].classList.add('active');
-    dots[currentSlide].classList.add('active'); // إعادة تشغيل التلقائي
-
-    stopSlideShow();
-    startSlideShow();
-  } // الشريحة التالية
-
-
-  function showNextSlide() {
-    showSlide(currentSlide + 1);
-  } // الشريحة السابقة
-
-
-  function showPrevSlide() {
-    showSlide(currentSlide - 1);
-  } // بدء العرض التلقائي
-
-
-  function startSlideShow() {
-    if (slideInterval) clearInterval(slideInterval);
-    slideInterval = setInterval(showNextSlide, slideDuration);
-  } // إيقاف العرض التلقائي
-
-
-  function stopSlideShow() {
-    if (slideInterval) clearInterval(slideInterval);
-  } // تشغيل السلايدر
-
-
-  initSlider(); // ================= SCROLL TO TOP =================
-
-  var scrollToTopBtn = document.getElementById('scrollToTop');
-  window.addEventListener('scroll', function () {
-    if (scrollToTopBtn) {
-      if (window.pageYOffset > 300) {
-        scrollToTopBtn.classList.add('visible');
-      } else {
-        scrollToTopBtn.classList.remove('visible');
-      }
+  sunIcons.forEach(function (icon) {
+    if (isDark) {
+      icon.style.display = 'none';
+      icon.style.visibility = 'hidden';
+      icon.style.opacity = '0';
+    } else {
+      icon.style.display = 'inline-block';
+      icon.style.visibility = 'visible';
+      icon.style.opacity = '1';
     }
   });
-
-  if (scrollToTopBtn) {
-    scrollToTopBtn.addEventListener('click', function () {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    });
-  } // ================= NAVIGATION INDICATOR =================
-
-
-  function updateNavIndicator() {
-    if (!indicator) return;
-    var activeLink = document.querySelector('.nav-link.active');
-
-    if (activeLink) {
-      var linkRect = activeLink.getBoundingClientRect();
-      var navRect = navLinks.getBoundingClientRect();
-      indicator.style.width = linkRect.width + 'px';
-      indicator.style.right = linkRect.right - navRect.right + 'px';
-      indicator.style.opacity = '1';
+  moonIcons.forEach(function (icon) {
+    if (isDark) {
+      icon.style.display = 'inline-block';
+      icon.style.visibility = 'visible';
+      icon.style.opacity = '1';
+    } else {
+      icon.style.display = 'none';
+      icon.style.visibility = 'hidden';
+      icon.style.opacity = '0';
     }
-  } // تحديث المؤشر عند التحميل والتغيير
+  }); // BETTER APPROACH: Use data attributes
+
+  sunIcons.forEach(function (icon) {
+    icon.setAttribute('data-theme', isDark ? 'hidden' : 'visible');
+  });
+  moonIcons.forEach(function (icon) {
+    icon.setAttribute('data-theme', isDark ? 'visible' : 'hidden');
+  });
+} // Update icon colors based on theme
 
 
-  window.addEventListener('load', updateNavIndicator);
-  window.addEventListener('resize', updateNavIndicator); // تحديث المؤشر عند النقر على الروابط
+function updateIconColors(isDark) {
+  var colors = isDark ? themeColors.dark : themeColors.light; // Update sun icons color - always update even if hidden
 
-  navLinksList.forEach(function (link) {
-    link.addEventListener('click', function () {
-      navLinksList.forEach(function (l) {
-        return l.classList.remove('active');
-      });
-      this.classList.add('active');
-      updateNavIndicator();
-    });
-  }); // تحديث المؤشر عند التمرير
+  document.querySelectorAll('.fa-sun').forEach(function (icon) {
+    icon.style.color = colors.sun;
+    icon.style.transition = 'color 0.3s ease, opacity 0.3s ease';
+  }); // Update moon icons color - always update even if hidden
 
-  var sections = document.querySelectorAll('section[id]');
-  window.addEventListener('scroll', function () {
-    var current = '';
-    sections.forEach(function (section) {
-      var sectionTop = section.offsetTop;
-      var sectionHeight = section.clientHeight;
+  document.querySelectorAll('.fa-moon').forEach(function (icon) {
+    icon.style.color = colors.moon;
+    icon.style.transition = 'color 0.3s ease, opacity 0.3s ease';
+  }); // Update theme toggle button colors
 
-      if (scrollY >= sectionTop - 200) {
-        current = section.getAttribute('id');
-      }
-    });
-    navLinksList.forEach(function (link) {
-      link.classList.remove('active');
+  var themeButtons = document.querySelectorAll('.theme-btn, .float-theme');
+  themeButtons.forEach(function (btn) {
+    btn.style.transition = 'all 0.3s ease';
 
-      if (link.getAttribute('href') === "#".concat(current)) {
-        link.classList.add('active');
-      }
-    });
-    updateNavIndicator();
-  }); // ================= SMOOTH SCROLL =================
+    if (isDark) {
+      // Dark theme button styling
+      btn.style.color = colors.moon;
+      btn.style.borderColor = colors.moon;
+    } else {
+      // Light theme button styling
+      btn.style.color = colors.sun;
+      btn.style.borderColor = colors.sun;
+    }
+  });
+} // Update theme button text
 
-  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
-    anchor.addEventListener('click', function (e) {
-      var href = this.getAttribute('href');
-      if (href === '#') return;
-      var target = document.querySelector(href);
 
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }
-    });
-  }); // ================= ANIMATIONS ON SCROLL =================
+function updateThemeButtonText() {
+  var themeTextElements = document.querySelectorAll('.theme-text');
+  if (themeTextElements.length === 0) return;
+  var isDark = document.body.classList.contains('dark-theme');
+  var currentLang = localStorage.getItem('language') || 'ar';
+  themeTextElements.forEach(function (themeText) {
+    // Update text
+    if (currentLang === 'ar') {
+      themeText.textContent = isDark ? 'داكن' : 'فاتح';
+    } else {
+      themeText.textContent = isDark ? 'Dark' : 'Light';
+    } // Update text color based on theme
 
-  var observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  };
-  var observer = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animated');
-      }
-    });
-  }, observerOptions); // مراقبة العناصر لإضافة الأنيميشن
 
-  document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in').forEach(function (el) {
-    observer.observe(el);
-  }); // ================= INITIALIZE =================
+    if (isDark) {
+      themeText.style.color = themeColors.dark.moon;
+    } else {
+      themeText.style.color = themeColors.light.sun;
+    }
+  });
+} // Toggle theme
 
-  updateNavIndicator(); // إضافة فئة محملة للجسم
+
+function toggleTheme() {
+  var wasDark = document.body.classList.contains('dark-theme');
+  var isNowDark = !wasDark;
+  console.log("Toggling theme from ".concat(wasDark ? 'dark' : 'light', " to ").concat(isNowDark ? 'dark' : 'light'));
+
+  if (isNowDark) {
+    // Switch to dark theme
+    document.body.classList.add('dark-theme');
+    localStorage.setItem('theme', 'dark');
+    console.log('Switched to dark theme - should show moon, hide sun');
+  } else {
+    // Switch to light theme
+    document.body.classList.remove('dark-theme');
+    localStorage.setItem('theme', 'light');
+    console.log('Switched to light theme - should show sun, hide moon');
+  } // Update UI elements
+
+
+  updateThemeIcons(isNowDark);
+  updateIconColors(isNowDark);
+  updateThemeButtonText(); // Log icon status for debugging
 
   setTimeout(function () {
-    document.body.classList.add('loaded');
-  }, 500);
-});
+    var sunIcons = document.querySelectorAll('.fa-sun');
+    var moonIcons = document.querySelectorAll('.fa-moon');
+    console.log("After toggle: Sun icons visible: ".concat(Array.from(sunIcons).filter(function (i) {
+      return i.style.display !== 'none';
+    }).length));
+    console.log("After toggle: Moon icons visible: ".concat(Array.from(moonIcons).filter(function (i) {
+      return i.style.display !== 'none';
+    }).length));
+  }, 100); // Trigger custom event for theme change
+
+  window.dispatchEvent(new CustomEvent('themeChanged', {
+    detail: {
+      isDark: isNowDark,
+      theme: isNowDark ? 'dark' : 'light'
+    }
+  }));
+} // Add CSS styles for theme icons - SIMPLIFIED VERSION
+
+
+function addThemeStyles() {
+  if (!document.getElementById('theme-icon-styles')) {
+    var style = document.createElement('style');
+    style.id = 'theme-icon-styles';
+    style.textContent = "\n            /* Theme icon base styles */\n            .theme-btn i, .float-theme i {\n                transition: all 0.3s ease !important;\n                font-size: 1.2rem !important;\n                display: inline-block !important;\n            }\n            \n            /* Ensure proper icon display */\n            .fa-sun, .fa-moon {\n                display: inline-block !important;\n                transition: opacity 0.3s ease, visibility 0.3s ease !important;\n            }\n            \n            /* Light theme - show sun, hide moon */\n            body:not(.dark-theme) .fa-sun {\n                display: inline-block !important;\n                visibility: visible !important;\n                opacity: 1 !important;\n                color: ".concat(themeColors.light.sun, " !important;\n            }\n            \n            body:not(.dark-theme) .fa-moon {\n                display: none !important;\n                visibility: hidden !important;\n                opacity: 0 !important;\n                color: ").concat(themeColors.light.moon, " !important;\n            }\n            \n            /* Dark theme - show moon, hide sun */\n            body.dark-theme .fa-sun {\n                display: none !important;\n                visibility: hidden !important;\n                opacity: 0 !important;\n                color: ").concat(themeColors.dark.sun, " !important;\n            }\n            \n            body.dark-theme .fa-moon {\n                display: inline-block !important;\n                visibility: visible !important;\n                opacity: 1 !important;\n                color: ").concat(themeColors.dark.moon, " !important;\n            }\n            \n            /* Theme text styling */\n            .theme-text {\n                transition: color 0.3s ease;\n                font-weight: 500;\n                margin-right: 8px;\n            }\n            \n            /* Theme button hover effects */\n            .theme-btn:hover i, .float-theme:hover i {\n                transform: scale(1.1);\n            }\n            \n            /* Floating theme button */\n            .float-theme {\n                background: var(--card-bg) !important;\n                border: 2px solid !important;\n                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;\n                transition: all 0.3s ease !important;\n            }\n            \n            body:not(.dark-theme) .float-theme {\n                border-color: ").concat(themeColors.light.sun, " !important;\n                color: ").concat(themeColors.light.sun, " !important;\n            }\n            \n            body.dark-theme .float-theme {\n                border-color: ").concat(themeColors.dark.moon, " !important;\n                color: ").concat(themeColors.dark.moon, " !important;\n            }\n        ");
+    document.head.appendChild(style);
+    console.log('Added theme icon styles');
+  }
+} // Emergency fix for icon visibility
+
+
+function forceIconVisibility() {
+  var isDark = document.body.classList.contains('dark-theme');
+  console.log('Force fixing icon visibility. Current theme:', isDark ? 'dark' : 'light'); // Remove all inline styles that might be hiding icons
+
+  document.querySelectorAll('.fa-sun, .fa-moon').forEach(function (icon) {
+    icon.style.cssText = ''; // Clear all inline styles
+  }); // Re-apply theme
+
+  updateThemeIcons(isDark);
+  updateIconColors(isDark);
+} // Initialize on DOM loaded
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  console.log('Initializing theme system...'); // Add theme styles
+
+  addThemeStyles(); // Initialize theme
+
+  initTheme(); // Emergency fix after a short delay
+
+  setTimeout(forceIconVisibility, 500); // Add event listeners to theme toggles
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      console.log('Main theme button clicked');
+      toggleTheme(); // Force fix after toggle
+
+      setTimeout(forceIconVisibility, 100);
+    });
+    console.log('Main theme toggle button initialized');
+  } else {
+    console.warn('Main theme toggle button not found');
+  }
+
+  if (floatThemeToggle) {
+    floatThemeToggle.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      console.log('Floating theme button clicked');
+      toggleTheme(); // Force fix after toggle
+
+      setTimeout(forceIconVisibility, 100);
+    });
+    console.log('Floating theme toggle button initialized');
+  } else {
+    console.warn('Floating theme toggle button not found');
+  } // Listen for system theme changes
+
+
+  var darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+  darkModeMediaQuery.addEventListener('change', function (e) {
+    var savedTheme = localStorage.getItem('theme');
+
+    if (savedTheme === 'system') {
+      console.log('System theme changed to:', e.matches ? 'dark' : 'light');
+      initTheme();
+      forceIconVisibility();
+    }
+  }); // Listen for language changes to update button text
+
+  window.addEventListener('languageChanged', function () {
+    console.log('Language changed, updating theme button...');
+    updateThemeButtonText();
+  });
+}); // Make functions available globally
+
+window.initTheme = initTheme;
+window.toggleTheme = toggleTheme;
+window.updateThemeButtonText = updateThemeButtonText;
+window.updateIconColors = updateIconColors;
+window.forceIconVisibility = forceIconVisibility; // Debug function
+
+window.themeDebug = {
+  getCurrentTheme: function getCurrentTheme() {
+    var isDark = document.body.classList.contains('dark-theme');
+    return {
+      theme: isDark ? 'dark' : 'light',
+      colors: isDark ? themeColors.dark : themeColors.light,
+      saved: localStorage.getItem('theme') || 'light'
+    };
+  },
+  forceTheme: function forceTheme(theme) {
+    console.log('Debug: Forcing theme to', theme);
+
+    if (theme === 'dark') {
+      document.body.classList.add('dark-theme');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.body.classList.remove('dark-theme');
+      localStorage.setItem('theme', 'light');
+    }
+
+    forceIconVisibility();
+    updateThemeButtonText();
+  },
+  checkIcons: function checkIcons() {
+    var sunIcons = document.querySelectorAll('.fa-sun');
+    var moonIcons = document.querySelectorAll('.fa-moon');
+    var visibleSun = Array.from(sunIcons).filter(function (i) {
+      return i.style.display !== 'none' && i.style.visibility !== 'hidden' && i.style.opacity !== '0';
+    }).length;
+    var visibleMoon = Array.from(moonIcons).filter(function (i) {
+      return i.style.display !== 'none' && i.style.visibility !== 'hidden' && i.style.opacity !== '0';
+    }).length;
+    console.log("Sun icons: ".concat(sunIcons.length, " total, ").concat(visibleSun, " visible"));
+    console.log("Moon icons: ".concat(moonIcons.length, " total, ").concat(visibleMoon, " visible"));
+    sunIcons.forEach(function (icon, i) {
+      console.log("Sun ".concat(i + 1, ": display=").concat(icon.style.display, ", visibility=").concat(icon.style.visibility, ", opacity=").concat(icon.style.opacity));
+    });
+    moonIcons.forEach(function (icon, i) {
+      console.log("Moon ".concat(i + 1, ": display=").concat(icon.style.display, ", visibility=").concat(icon.style.visibility, ", opacity=").concat(icon.style.opacity));
+    });
+    return {
+      sun: {
+        total: sunIcons.length,
+        visible: visibleSun
+      },
+      moon: {
+        total: moonIcons.length,
+        visible: visibleMoon
+      }
+    };
+  },
+  resetIcons: function resetIcons() {
+    console.log('Debug: Resetting all icon styles');
+    document.querySelectorAll('.fa-sun, .fa-moon').forEach(function (icon) {
+      icon.style.cssText = '';
+    });
+    forceIconVisibility();
+  }
+};
 //# sourceMappingURL=theme.dev.js.map

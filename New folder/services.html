@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="services.pageTitle">خدماتنا - Tn-QA Delivery</title>
+    <meta name="description" content="استكشف خدماتنا المتكاملة في التوصيل المحلي والدولي، نقل الأموال الموثوق، وتوصيل الموازين بين قطر وتونس">
+    <meta name="keywords" content="خدمات توصيل, توصيل قطر, توصيل تونس, توصيل دولي, نقل أموال, توصيل موازين">
+    
+    <!-- Font Awesome & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/services.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <style>
+        /* Page Transition Styles */
+        .page-transition {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+        
+        .page-transition.hidden {
+            transform: translateY(-100%);
+        }
+        
+        .page-transition .logo {
+            text-align: center;
+            color: white;
+        }
+        
+        .page-transition .logo-icon {
+            margin-bottom: 20px;
+        }
+        
+        .page-transition .logo-text h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .page-transition .logo-text p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+        
+        /* Progress Bar Styles */
+        .progress-container {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 10000;
+            display: none;
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background: linear-gradient(90deg, #d4af37, #f4d03f);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        /* Burger Menu Fix */
+        .burger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1000;
+        }
+        
+        .burger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+            margin: 5px 0;
+            transition: 0.3s;
+            border-radius: 3px;
+        }
+        
+        .burger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        
+        .burger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .burger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+        
+        /* AOS Fix */
+        [data-aos] {
+            opacity: 1 !important;
+            transform: none !important;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        [data-aos].aos-animate {
+            opacity: 1 !important;
+        }
+        
+        /* RTL Fix for AOS */
+        .aos-init[data-aos][data-aos][data-aos-duration="800"],
+        .aos-animate[data-aos][data-aos][data-aos-duration="800"] {
+            transition-duration: 0.8s;
+        }
+        
+        /* Ensure AOS works with RTL */
+        html[dir="rtl"] [data-aos^="fade"][data-aos^="fade"] {
+            transform: none;
+        }
+        
+        @media (max-width: 768px) {
+            .burger {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                height: 100vh;
+                background: white;
+                flex-direction: column;
+                padding: 80px 20px 20px;
+                transition: 0.3s;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                right: 0;
+            }
+            
+            .nav-link {
+                width: 100%;
+                text-align: center;
+                padding: 15px;
+                margin: 5px 0;
+                border-bottom: 1px solid #eee;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Page Transition -->
+    <div class="page-transition">
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-cogs" style="font-size: 3rem;"></i>
+            </div>
+            <div class="logo-text">
+                <h1>Tn-QA Delivery</h1>
+                <p>جار تحميل الخدمات...</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    
+    <!-- ================= NAVIGATION ================= -->
+    <header id="mainHeader" class="glass-header">
+        <div class="nav-wrap container">
+            <!-- Logo -->
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="https://iili.io/fLgS9wP.md.jpg" alt="HELA Express Logo" 
+                         onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-bolt gold-text\'></i>';">
+                </div>
+                <div class="logo-text">
+                    <h1 data-i18n="companyName" class="gold-text">Tn-QA Delivery</h1>
+                    <p data-i18n="companySlogan">خدمة توصيل سريعة وآمنة</p>
+                </div>
+            </div>
+            
+            <!-- Navigation Links -->
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-link" data-i18n="nav.home">الرئيسية</a>
+                <a href="index.html#about" class="nav-link" data-i18n="nav.about">من نحن</a>
+                <a href="services.html" class="nav-link active" data-i18n="nav.services">الخدمات</a>
+                <a href="contact.html" class="nav-link" data-i18n="nav.contact">التواصل</a>
+                <a href="reviews.html" class="nav-link" data-i18n="nav.reviews">المراجعات</a>
+                
+                <!-- Theme Switcher -->
+                <div class="theme-switcher">
+                    <button id="themeToggle" class="theme-btn" aria-label="تبديل وضع السطوع" data-i18n-title="theme.toggle">
+                        <i class="fas fa-sun"></i>
+                        <span class="theme-text">فاتح</span>
+                    </button>
+                </div>
+                
+                <!-- Language Switcher -->
+                <div class="language-switcher-nav">
+                    <button id="langBtn" class="lang-btn-nav">
+                        <i class="fas fa-globe"></i>
+                        <span id="currentLang">العربية</span>
+                    </button>
+                    <div class="lang-dropdown-nav" id="langDropdown">
+                        <a href="#" data-lang="ar" class="lang-option-nav active">العربية</a>
+                        <a href="#" data-lang="en" class="lang-option-nav">English</a>
+                    </div>
+                </div>
+            </nav>
+            
+            <!-- Header Buttons -->
+            <div class="header-buttons">
+                <a href="https://wa.me/97431691024" class="nav-cta whatsapp-btn ripple" data-i18n="nav.whatsapp" target="_blank">
+                    <i class="fab fa-whatsapp"></i> <span class="cta-text">تواصل عبر واتساب</span>
+                </a>
+                <a href="tel:+97431691024" class="nav-cta call-btn ripple" data-i18n="nav.call">
+                    <i class="fas fa-phone"></i> <span class="cta-text">اتصل الآن</span>
+                </a>
+            </div>
+            
+            <!-- Mobile Menu Burger -->
+            <button class="burger" id="burger" aria-label="قائمة التنقل" data-i18n-title="nav.menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ================= SERVICES HERO ================= -->
+    <section class="services-hero" data-aos="fade-up" data-aos-duration="800">
+        <div class="container">
+            <h1 class="gold-text" data-i18n="services.heroTitle">خدماتنا المتكاملة</h1>
+            <p data-i18n="services.heroSubtitle">نقدم مجموعة شاملة من خدمات التوصيل والنقل المميزة بين قطر وتونس</p>
+            
+            <div class="hero-stats">
+                <div class="hero-stat" data-aos="fade-up" data-aos-delay="100">
+                    <span class="number">4</span>
+                    <span class="label" data-i18n="services.servicesCount">خدمات رئيسية</span>
+                </div>
+                <div class="hero-stat" data-aos="fade-up" data-aos-delay="200">
+                    <span class="number">24/7</span>
+                    <span class="label" data-i18n="services.availability">متاح على مدار الساعة</span>
+                </div>
+                <div class="hero-stat" data-aos="fade-up" data-aos-delay="300">
+                    <span class="number">100+</span>
+                    <span class="label" data-i18n="services.clientsServed">عميل راضٍ</span>
+                </div>
+                <div class="hero-stat" data-aos="fade-up" data-aos-delay="400">
+                    <span class="number">2</span>
+                    <span class="label" data-i18n="services.countries">دول نشاط</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= PROCESS STEPS ================= -->
+    <section class="process-steps section-padding" id="process">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="services.process.title">كيف تعمل خدماتنا</h2>
+                <p class="section-subtitle" data-i18n="services.process.subtitle">ثلاث خطوات بسيطة للحصول على خدمة مميزة</p>
+            </div>
+            
+            <div class="process-container">
+                <div class="process-step" data-aos="fade-up" data-aos-delay="100">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <div class="step-icon">
+                            <i class="fas fa-comments gold-text"></i>
+                        </div>
+                        <h3 data-i18n="services.process.step1.title">طلب الخدمة</h3>
+                        <p data-i18n="services.process.step1.desc">اتصل بنا عبر الواتساب أو الهاتف واختر الخدمة التي تحتاجها</p>
+                    </div>
+                </div>
+                
+                <div class="process-step" data-aos="fade-up" data-aos-delay="200">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <div class="step-icon">
+                            <i class="fas fa-truck gold-text"></i>
+                        </div>
+                        <h3 data-i18n="services.process.step2.title">التنفيذ والتوصيل</h3>
+                        <p data-i18n="services.process.step2.desc">نقوم بتنفيذ طلبك بدقة عالية مع تحديثات مستمرة</p>
+                    </div>
+                </div>
+                
+                <div class="process-step" data-aos="fade-up" data-aos-delay="300">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <div class="step-icon">
+                            <i class="fas fa-handshake gold-text"></i>
+                        </div>
+                        <h3 data-i18n="services.process.step3.title">التوثيق والتسليم</h3>
+                        <p data-i18n="services.process.step3.desc">نوثق عملية التسليم يداً بيد مع إثباتات كاملة</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= SERVICES SECTION ================= -->
+    <section id="services" class="services section-padding">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="services.title">خدماتنا</h2>
+                <p class="section-subtitle" data-i18n="services.subtitle">نقدم مجموعة متكاملة من خدمات التوصيل والنقل</p>
+            </div>
+            
+            <div class="services-grid">
+                <!-- Service 1: توصيل دولي -->
+                <div class="service-card" data-service="scale-sales" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-icon gold-bg">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3>خدمة توصيل ميزان بين قطر وتونس</h3>
+                    <p>خدمة توصيل اغراض شخصية</p>
+                    
+                    <div class="service-selection">
+                        <select class="service-select" data-service="توصيل دولي" id="serviceSelectInternational">
+                            <option value="" selected disabled>-- اختر الخدمة --</option>
+                            <option value="تريد بيع ميزان">تريد بيع ميزان</option>
+                            <option value="حجز ميزان من قطر الي تونس">حجز ميزان من قطر الي تونس</option>
+                            <option value="حجز ميزان من تونس الي قطر">حجز ميزان من تونس الي قطر</option>
+                        </select>
+                    </div>
+                    
+                    <!-- حقل الإدخال للاسم -->
+                    <div class="input-group">
+                        <input type="text" id="nameInputInternational" placeholder="اسمك الكريم" class="service-input">
+                        <i class="fas fa-user input-icon"></i>
+                    </div>
+                    
+                    <!-- حقل الإدخال للهاتف -->
+                    <div class="input-group">
+                        <input type="tel" id="phoneInputInternational" placeholder="رقم هاتفك" class="service-input">
+                        <i class="fas fa-phone input-icon"></i>
+                    </div>
+                    
+                    <!-- زر الإرسال -->
+                    <button class="service-btn whatsapp send-service-request" 
+                            data-country="قطر" 
+                            data-service="توصيل دولي"
+                            data-phone-input="phoneInputInternational"
+                            data-name-input="nameInputInternational"
+                            data-service-select="serviceSelectInternational"
+                            data-whatsapp-number="97431691024">
+                        <i class="fab fa-whatsapp"></i> 
+                        <span class="btn-text">طلب خدمة توصيل دولي</span>
+                    </button>
+                    
+                    <!-- رقم الهاتف للتواصل -->
+                    <div class="contact-number-display">
+                        <a href="tel:+97431691024" class="phone-link">
+                            <i class="fas fa-phone-alt"></i> 
+                            قطر: 31691024
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Service 2: التوصيل المحلي في قطر -->
+                <div class="service-card" data-service="local-delivery-qatar" data-aos="fade-up" data-aos-delay="150">
+                    <div class="service-icon gold-bg">
+                        <i class="fas fa-truck-fast"></i>
+                    </div>
+                    <h3>خدمات توصيل داخل قطر</h3>
+                    <p>خدمات توصيل محلية داخل دولة قطر</p>
+                    
+                    <div class="service-selection">
+                        <select class="service-select" data-service="التوصيل المحلي في قطر" id="serviceSelectQatar">
+                            <option value="" selected disabled>-- اختر الخدمة --</option>
+                            <option value="توصيل موظفين وتلاميذ">توصيل موظفين وتلاميذ</option>
+                            <option value="توصيل مشاوير خاصة">توصيل مشاوير خاصة</option>
+                            <option value="توصيل أغراض ومشتريات">توصيل أغراض ومشتريات</option>
+                            <option value="توصيل هدايا">توصيل هدايا</option>
+                            <option value="توصيل مواد استهلاكية">توصيل مواد استهلاكية</option>
+                            <option value="خدمات التجارة الإلكترونية">خدمات التجارة الإلكترونية</option>
+                        </select>
+                    </div>
+                    
+                    <!-- حقل الإدخال للاسم -->
+                    <div class="input-group">
+                        <input type="text" id="nameInputQatar" placeholder="اسمك الكريم" class="service-input">
+                        <i class="fas fa-user input-icon"></i>
+                    </div>
+                    
+                    <!-- حقل الإدخال للهاتف -->
+                    <div class="input-group">
+                        <input type="tel" id="phoneInputQatar" placeholder="رقم هاتفك" class="service-input">
+                        <i class="fas fa-phone input-icon"></i>
+                    </div>
+                    
+                    <!-- زر الإرسال -->
+                    <button class="service-btn whatsapp send-service-request" 
+                            data-country="قطر" 
+                            data-service="التوصيل المحلي في قطر"
+                            data-phone-input="phoneInputQatar"
+                            data-name-input="nameInputQatar"
+                            data-service-select="serviceSelectQatar"
+                            data-whatsapp-number="97431691024">
+                        <i class="fab fa-whatsapp"></i> 
+                        <span class="btn-text">طلب خدمة التوصيل في قطر</span>
+                    </button>
+                    
+                    <!-- رقم الهاتف للتواصل -->
+                    <div class="contact-number-display">
+                        <a href="tel:+97431691024" class="phone-link">
+                            <i class="fas fa-phone-alt"></i> 
+                            قطر: 31691024
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Service 3: التوصيل المحلي في تونس -->
+                <div class="service-card" data-service="local-delivery-tunisia" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-icon gold-bg">
+                        <i class="fas fa-truck-fast"></i>
+                    </div>
+                    <h3>خدمات توصيل داخل تونس</h3>
+                    <p>خدمات توصيل محلية داخل تونس</p>
+        
+                    <div class="service-selection">
+                        <select class="service-select" data-service="التوصيل المحلي في تونس" id="serviceSelectTunisia">
+                            <option value="" selected disabled>-- اختر الخدمة --</option>
+                            <option value="توصيل موظفين وتلاميذ">توصيل موظفين وتلاميذ</option>
+                            <option value="توصيل مشاوير خاصة">توصيل مشاوير خاصة</option>
+                            <option value="توصيل أغراض ومشتريات">توصيل أغراض ومشتريات</option>
+                            <option value="توصيل هدايا">توصيل هدايا</option>
+                            <option value="توصيل مواد استهلاكية">توصيل مواد استهلاكية</option>
+                            <option value="خدمات التجارة الإلكترونية">خدمات التجارة الإلكترونية</option>
+                        </select>
+                    </div>
+                    
+                    <!-- حقل الإدخال للاسم -->
+                    <div class="input-group">
+                        <input type="text" id="nameInputTunisia" placeholder="اسمك الكريم" class="service-input">
+                        <i class="fas fa-user input-icon"></i>
+                    </div>
+                    
+                    <!-- حقل الإدخال للهاتف -->
+                    <div class="input-group">
+                        <input type="tel" id="phoneInputTunisia" placeholder="رقم هاتفك" class="service-input">
+                        <i class="fas fa-phone input-icon"></i>
+                    </div>
+                    
+                    <!-- زر الإرسال -->
+                    <button class="service-btn whatsapp send-service-request" 
+                            data-country="تونس" 
+                            data-service="التوصيل المحلي في تونس"
+                            data-phone-input="phoneInputTunisia"
+                            data-name-input="nameInputTunisia"
+                            data-service-select="serviceSelectTunisia"
+                            data-whatsapp-number="21656471550">
+                        <i class="fab fa-whatsapp"></i> 
+                        <span class="btn-text">طلب خدمة التوصيل في تونس</span>
+                    </button>
+                    
+                    <!-- رقم الهاتف للتواصل -->
+                    <div class="contact-number-display">
+                        <a href="tel:+21656471550" class="phone-link">
+                            <i class="fas fa-phone-alt"></i> 
+                            تونس: 56471550
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Service 4: توثيق تسليم الأموال -->
+                <div class="service-card important-card" data-service="money-delivery" data-aos="fade-up" data-aos-delay="250">
+                    <div class="service-icon gold-bg">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <h3>توثيق تسليم الأموال (يدًا بيد)</h3>
+                    <p>خدمة توثيق موثوقة لتسليم الأموال بين الأطراف</p>
+                    
+                    <div class="service-selection">
+                        <select class="service-select" data-service="توثيق تسليم الأموال" id="serviceSelectMoney">
+                            <option value="" selected disabled>-- اختر الخدمة --</option>
+                            <option value="تحويل ريال قطري إلى دينار تونسي">تحويل ريال قطري إلى دينار تونسي</option>
+                            <option value="تحويل دينار تونسي إلى ريال قطري">تحويل دينار تونسي إلى ريال قطري</option>
+                        </select>
+                    </div>
+                    
+                    <!-- حقل الإدخال للاسم -->
+                    <div class="input-group">
+                        <input type="text" id="nameInputMoney" placeholder="اسمك الكريم" class="service-input">
+                        <i class="fas fa-user input-icon"></i>
+                    </div>
+                    
+                    <!-- حقل الإدخال للهاتف -->
+                    <div class="input-group">
+                        <input type="tel" id="phoneInputMoney" placeholder="رقم هاتفك" class="service-input">
+                        <i class="fas fa-phone input-icon"></i>
+                    </div>
+                    
+                    <!-- زر الإرسال -->
+                    <button class="service-btn whatsapp send-service-request" 
+                            data-country="مشترك" 
+                            data-service="توثيق تسليم الأموال"
+                            data-phone-input="phoneInputMoney"
+                            data-name-input="nameInputMoney"
+                            data-service-select="serviceSelectMoney"
+                            data-whatsapp-number="97431691024">
+                        <i class="fab fa-whatsapp"></i> 
+                        <span class="btn-text">تواصل الآن لتوثيق الأموال</span>
+                    </button>
+                    
+                    <!-- رقم الهاتف للتواصل -->
+                    <div class="contact-number-display">
+                        <a href="tel:+21656471550" class="phone-link">
+                            <i class="fas fa-phone-alt"></i> 
+                            تونس: 56471550
+                        </a>
+                    </div>
+                    
+                    <div class="service-warning">
+                        <h3>تنويه</h3>
+                        <p>نوفر خدمة توثيق فقط لعمليات تسليم الأموال بين المرسل والمستلم، حيث يتم التسليم مباشرة بين الطرفين.</p>
+                    </div>
+                </div>
+
+                <!-- Space for Future Advertisements -->
+                <div class="service-card advertisement-placeholder" data-aos="fade-up" data-aos-delay="300">
+                    <div class="ad-icon">
+                        <i class="fas fa-ad gold-text"></i>
+                    </div>
+                    <h3>مساحة للإعلانات</h3>
+                    <p>هذه المساحة محجوزة للإعلانات أو الشراكات المستقبلية.</p>
+                    <div class="ad-contact">
+                        <a href="contact.html?subject=advertisement" class="ad-btn">
+                            <i class="fas fa-bullhorn"></i> للاستفسار عن الإعلان
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= DELIVERY PROCESS ================= -->
+    <section class="delivery-process section-padding" id="deliveryProcess">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="services.deliveryProcess.title">عملية التوصيل والتوثيق</h2>
+                <p class="section-subtitle" data-i18n="services.deliveryProcess.subtitle">نضمن لك توصيلاً آمناً وموثقاً بكل تفاصيله</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h3 data-i18n="services.deliveryProcess.feature1.title">التوثيق بالصور</h3>
+                    <p data-i18n="services.deliveryProcess.feature1.desc">صور واضحة للعناصر قبل وبعد التغليف والتسليم</p>
+                </div>
+                
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3 data-i18n="services.deliveryProcess.feature2.title">تسجيلات فيديو</h3>
+                    <p data-i18n="services.deliveryProcess.feature2.desc">تسجيل كامل لعملية التغليف والتسليم</p>
+                </div>
+                
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-icon">
+                        <i class="fas fa-qrcode"></i>
+                    </div>
+                    <h3 data-i18n="services.deliveryProcess.feature3.title">كود التتبع</h3>
+                    <p data-i18n="services.deliveryProcess.feature3.desc">كود تتبع فريد لكل عملية توصيل</p>
+                </div>
+                
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-signature"></i>
+                    </div>
+                    <h3 data-i18n="services.deliveryProcess.feature4.title">إيصال استلام</h3>
+                    <p data-i18n="services.deliveryProcess.feature4.desc">إيصال موقع من المستلم يؤكد التسليم</p>
+                </div>
+                
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3 data-i18n="services.deliveryProcess.feature5.title">تتبع الموقع</h3>
+                    <p data-i18n="services.deliveryProcess.feature5.desc">تحديثات مستمرة لموقع العنصر أثناء النقل</p>
+                </div>
+                
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="feature-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3 data-i18n="services.deliveryProcess.feature6.title">تسليم يداً بيد</h3>
+                    <p data-i18n="services.deliveryProcess.feature6.desc">تسليم مباشر بين المرسل والمستلم</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= EXTRA SERVICES ================= -->
+    <section class="extra-services section-padding" id="extraServices">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="services.extra.title">خدمات إضافية</h2>
+                <p class="section-subtitle" data-i18n="services.extra.subtitle">خدمات تكميلية لتجربة توصيل شاملة</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="extra-service-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="extra-service-icon">
+                        <i class="fas fa-user-tie gold-text"></i>
+                    </div>
+                    <h3 data-i18n="services.extra.service1.title">توصيل موظفين</h3>
+                    <p data-i18n="services.extra.service1.desc">توصيل موظفين إلى أماكن العمل بانتظام</p>
+                    <span class="extra-service-price">سعر خاص</span>
+                </div>
+                
+                <div class="extra-service-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="extra-service-icon">
+                        <i class="fas fa-graduation-cap gold-text"></i>
+                    </div>
+                    <h3 data-i18n="services.extra.service2.title">توصيل طلاب</h3>
+                    <p data-i18n="services.extra.service2.desc">توصيل طلاب إلى المدارس والجامعات</p>
+                    <span class="extra-service-price">سعر خاص</span>
+                </div>
+                
+                <div class="extra-service-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="extra-service-icon">
+                        <i class="fas fa-envelope-open-text gold-text"></i>
+                    </div>
+                    <h3 data-i18n="services.extra.service3.title">توصيل مستندات</h3>
+                    <p data-i18n="services.extra.service3.desc">توصيل مستندات هامة بسرعة وأمان</p>
+                    <span class="extra-service-price">سعر خاص</span>
+                </div>
+                
+                <div class="extra-service-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="extra-service-icon">
+                        <i class="fas fa-money-bill-wave gold-text"></i>
+                    </div>
+                    <h3 data-i18n="services.extra.service4.title">توثيق أموال</h3>
+                    <p data-i18n="services.extra.service4.desc">توثيق عمليات تحويل الأموال بأمان</p>
+                    <span class="extra-service-price">2% من المبلغ</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FAQ SECTION ================= -->
+    <section class="services-faq section-padding" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="services.faq.title">أسئلة شائعة</h2>
+                <p class="section-subtitle" data-i18n="services.faq.subtitle">إجابات على الأسئلة الأكثر شيوعاً حول خدماتنا</p>
+            </div>
+            
+            <div class="faq-container">
+                <!-- FAQ 1 -->
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="faq-question">
+                        <h3 data-i18n="services.faq.q1">ما هي مدة التوصيل داخل قطر؟</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p data-i18n="services.faq.a1">مدة التوصيل داخل قطر تتراوح بين 1-3 ساعات حسب الموقع ووقت الطلب. للطلبات العاجلة نقدم خدمة توصيل خلال ساعة.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 2 -->
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="faq-question">
+                        <h3 data-i18n="services.faq.q2">كيف يتم توثيق تسليم الأموال؟</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p data-i18n="services.faq.a2">نقوم بتوثيق العملية عبر صور وفيديوهات للتسليم، مع توقيع الطرفين على إيصال استلام، ونحتفظ بسجل كامل للعملية.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 3 -->
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="faq-question">
+                        <h3 data-i18n="services.faq.q3">هل يمكنني تتبع حالة طلبي؟</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p data-i18n="services.faq.a3">نعم، نقدم تحديثات مستمرة عبر الواتساب مع صور وفيديوهات لكل مرحلة من مراحل التنفيذ والتسليم.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 4 -->
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="400">
+                    <div class="faq-question">
+                        <h3 data-i18n="services.faq.q4">ما هي طرق الدفع المتاحة؟</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p data-i18n="services.faq.a4">نقبل الدفع نقداً عند التسليم، كما يمكن الدفع عبر التحويل البنكي مسبقاً للعملاء الدائمين.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 5 -->
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="500">
+                    <div class="faq-question">
+                        <h3 data-i18n="services.faq.q5">هل تقدمون خدمة الطوارئ؟</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p data-i18n="services.faq.a5">نعم، نقدم خدمة الطوارئ على مدار الساعة طوال أيام الأسبوع، بما في ذلك العطل الرسمية.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <!-- ================= TESTIMONIALS PREVIEW ================= -->
+<section class="testimonials-preview section-padding" id="testimonials">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title" data-i18n="services.testimonials.title">آراء عملائنا</h2>
+            <p class="section-subtitle" data-i18n="services.testimonials.subtitle">ما يقوله عملاؤنا عن خدماتنا</p>
+        </div>
+        
+        <div class="testimonials-grid">
+            <!-- Testimonial 1 -->
+            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="client-info">
+                    <div class="client-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="محمد العلي" 
+                             onerror="this.onerror=null; this.src='https://i.pravatar.cc/150?img=1'">
+                    </div>
+                    <div class="client-details">
+                        <h4>محمد العلي</h4>
+                        <span class="client-location">الدوحة، قطر</span>
+                        <span class="client-service">توصيل دولي</span>
+                    </div>
+                </div>
+                
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                
+                <p class="testimonial-text">"خدمة ممتازة وسريعة، قاموا بتوصيل أغراضي من تونس إلى قطر في وقت قياسي مع توثيق كامل. شكراً لكم!"</p>
+                
+                <!-- صور إضافية -->
+                <div class="testimonial-images">
+                    <div class="image-grid">
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" 
+                             alt="توصيل الشحنات" onclick="openImageModal(this.src)">
+                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" 
+                             alt="توثيق التسليم" onclick="openImageModal(this.src)">
+                    </div>
+                </div>
+                
+                <div class="testimonial-date">
+                    <i class="far fa-clock"></i> 2 فبراير 2024
+                </div>
+            </div>
+            
+            <!-- Testimonial 2 -->
+            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="client-info">
+                    <div class="client-avatar">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="فاطمة التونسية" 
+                             onerror="this.onerror=null; this.src='https://i.pravatar.cc/150?img=2'">
+                    </div>
+                    <div class="client-details">
+                        <h4>فاطمة التونسية</h4>
+                        <span class="client-location">تونس العاصمة</span>
+                        <span class="client-service">توثيق أموال</span>
+                    </div>
+                </div>
+                
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                
+                <p class="testimonial-text">"استخدمت خدمة توثيق الأموال وكانت عملية آمنة ومضمونة. أنصح الجميع بالتعامل معهم."</p>
+                
+                <!-- صور إضافية -->
+                <div class="testimonial-images">
+                    <div class="image-grid">
+                        <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" 
+                             alt="خدمة الأموال" onclick="openImageModal(this.src)">
+                        <img src="https://images.unsplash.com/photo-1600003263720-95b45a4035d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" 
+                             alt="التوثيق" onclick="openImageModal(this.src)">
+                    </div>
+                </div>
+                
+                <div class="testimonial-date">
+                    <i class="far fa-clock"></i> 25 يناير 2024
+                </div>
+            </div>
+            
+            <!-- Testimonial 3 -->
+            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="client-info">
+                    <div class="client-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="أحمد القطري" 
+                             onerror="this.onerror=null; this.src='https://i.pravatar.cc/150?img=3'">
+                    </div>
+                    <div class="client-details">
+                        <h4>أحمد القطري</h4>
+                        <span class="client-location">الريان، قطر</span>
+                        <span class="client-service">توصيل محلي</span>
+                    </div>
+                </div>
+                
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                
+                <p class="testimonial-text">"خدمة التوصيل المحلي في قطر سريعة وموثوقة. الموظفون محترفون والاسعار مناسبة."</p>
+                
+                <!-- صور إضافية -->
+                <div class="testimonial-images">
+                    <div class="image-grid">
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" 
+                             alt="توصيل محلي" onclick="openImageModal(this.src)">
+                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" 
+                             alt="خدمة العملاء" onclick="openImageModal(this.src)">
+                    </div>
+                </div>
+                
+                <div class="testimonial-date">
+                    <i class="far fa-clock"></i> 15 يناير 2024
+                </div>
+            </div>
+            
+            <!-- Testimonial 4 -->
+            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="client-info">
+                    <div class="client-avatar">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="سارة الخليفة" 
+                             onerror="this.onerror=null; this.src='https://i.pravatar.cc/150?img=4'">
+                    </div>
+                    <div class="client-details">
+                        <h4>سارة الخليفة</h4>
+                        <span class="client-location">الخور، قطر</span>
+                        <span class="client-service">توصيل هدايا</span>
+                    </div>
+                </div>
+                
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+                
+                <p class="testimonial-text">"خدمة توصيل الهدايا كانت رائعة! وصلت الهدية في الوقت المحدد وبحالة ممتازة."</p>
+                
+                <!-- صور إضافية -->
+                <div class="testimonial-images">
+                    <div class="image-grid">
+                        <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" 
+                             alt="توصيل الهدايا" onclick="openImageModal(this.src)">
+                        <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" 
+                             alt="التغليف" onclick="openImageModal(this.src)">
+                    </div>
+                </div>
+                
+                <div class="testimonial-date">
+                    <i class="far fa-clock"></i> 10 يناير 2024
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-3">
+            <a href="reviews.html" class="btn outline-btn" data-i18n="services.testimonials.viewAll">
+                <i class="fas fa-images"></i> عرض جميع المراجعات والصور
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Modal للصور الكبيرة -->
+<div id="imageModal" class="image-modal">
+    <span class="close-modal" onclick="closeImageModal()">&times;</span>
+    <img class="modal-content" id="modalImage">
+    <div id="caption" class="caption"></div>
+</div>
+    <!-- ================= FINAL CTA ================= -->
+    <section class="final-cta section-padding" id="finalCta">
+        <div class="container">
+            <div class="cta-content" data-aos="zoom-in" data-aos-duration="800">
+                <h2 class="cta-title gold-text" data-i18n="services.finalCta.title">جاهز لطلب الخدمة؟</h2>
+                <p class="cta-subtitle" data-i18n="services.finalCta.subtitle">اتصل بنا الآن واحصل على أفضل خدمة توصيل بين قطر وتونس</p>
+                
+                <div class="cta-buttons">
+                    <a href="https://wa.me/97431691024" class="btn whatsapp-btn ripple pulse" target="_blank" data-i18n="services.finalCta.whatsapp">
+                        <i class="fab fa-whatsapp"></i> اطلب الخدمة الآن
+                    </a>
+                    <a href="tel:+97431691024" class="btn outline-btn ripple" data-i18n="services.finalCta.call">
+                        <i class="fas fa-phone"></i> تواصل عبر الهاتف
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Footer Logo -->
+                <div class="footer-logo">
+                    <div class="logo">
+                        <div class="logo-icon">
+                            <img src="https://iili.io/fLgS9wP.md.jpg" alt="HELA Express Logo">
+                        </div>
+                        <div class="logo-text">
+                            <h2 data-i18n="companyName" class="gold-text">Tn-QA Delivery</h2>
+                            <p data-i18n="companySlogan">خدمة توصيل سريعة وآمنة</p>
+                        </div>
+                    </div>
+                    <p class="footer-desc" data-i18n="footer.description">خدمات توصيل ونقل موثوقة بين تونس وقطر</p>
+                    
+                    <!-- Social Media -->
+                    <div class="social-icons">
+                        <a href="https://wa.me/97431691024" class="social-icon whatsapp" aria-label="واتساب" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="https://www.facebook.com/share/17ZgZb5UFg/" class="social-icon facebook" aria-label="فيسبوك" target="_blank">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://www.tiktok.com/@twensafiqatar0" class="social-icon tiktok" aria-label="تيك توك" target="_blank">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div class="footer-links">
+                    <h3 class="footer-title gold-text" data-i18n="footer.quickLinks">روابط سريعة</h3>
+                    <ul class="footer-list">
+                        <li><a href="index.html" class="footer-link" data-i18n="nav.home">الرئيسية</a></li>
+                        <li><a href="index.html#about" class="footer-link" data-i18n="nav.about">من نحن</a></li>
+                        <li><a href="services.html" class="footer-link active" data-i18n="nav.services">الخدمات</a></li>
+                        <li><a href="contact.html" class="footer-link" data-i18n="nav.contact">تواصل معنا</a></li>
+                        <li><a href="reviews.html" class="footer-link" data-i18n="nav.reviews">المراجعات</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Services Links -->
+                <div class="footer-services">
+                    <h3 class="footer-title gold-text" data-i18n="footer.ourServices">خدماتنا</h3>
+                    <ul class="footer-list">
+                        <li><a href="#services" class="footer-link" data-i18n="services.main.local.title">التوصيل المحلي</a></li>
+                        <li><a href="#services" class="footer-link" data-i18n="services.main.international.title">التوصيل الدولي</a></li>
+                        <li><a href="#services" class="footer-link" data-i18n="services.main.money.title">توثيق الأموال</a></li>
+                        <li><a href="#extraServices" class="footer-link" data-i18n="services.extra.title">خدمات إضافية</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact Info -->
+                <div class="footer-contact">
+                    <h3 class="footer-title gold-text" data-i18n="footer.contactUs">تواصل معنا</h3>
+                    <div class="footer-contact-info">
+                        <p><i class="fab fa-whatsapp gold-text"></i> <span data-i18n="nav.whatsapp">واتساب:</span> +974 31 691 024</p>
+                        <p><i class="fas fa-phone gold-text"></i> <span data-i18n="countries.qatar">قطر:</span> +974 31 691 024</p>
+                        <p><i class="fas fa-phone gold-text"></i> <span data-i18n="countries.tunisia">تونس:</span> +216 56 471 550</p>
+                        <p><i class="fas fa-envelope gold-text"></i> <span data-i18n="contact.emailCard">البريد:</span> helamishwar@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="legal-notice">
+                    <i class="fas fa-exclamation-circle gold-text"></i>
+                    <p data-i18n="footer.legalNotice">الموقع منصة تعريفية وتنسيقية فقط، ولا يقوم بأي عمليات دفع إلكتروني أو تحصيل أموال.</p>
+                </div>
+                
+                <p class="copyright">© <span id="currentYear"></span> <span class="gold-text" data-i18n="companyName">Tn-QA Delivery</span> - <span data-i18n="footer.copyright">جميع الحقوق محفوظة</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= FLOATING BUTTONS ================= -->
+    <!-- Floating Theme Toggle -->
+    <button class="float-theme hover-lift" id="floatThemeToggle" aria-label="تبديل وضع السطوع" data-i18n-title="theme.toggle">
+        <i class="fas fa-moon"></i>
+    </button>
+    
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/+97431691024" class="float-whatsapp pulse hover-lift" aria-label="تواصل معنا عبر واتساب" target="_blank" data-i18n-title="nav.whatsapp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    
+    <!-- Scroll to Top -->
+    <button class="scroll-to-top hover-lift" id="scrollToTop" aria-label="العودة إلى الأعلى" data-i18n-title="common.backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- ================= SCRIPTS ================= -->
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Custom JavaScript Files -->
+    <!-- <script src="js/main.js"></script> -->
+    <!-- <script src="js/language.js"></script> -->
+    <!-- <script src="js/animations.js"></script> -->
+    
+    <!-- Services JavaScript -->
+    <script src="js/services.js"></script>
+    <script src="js/theme.js"></script>
+    
+    <!-- Initialize -->
+    <script>
+        // Initialize AOS with proper settings for RTL
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100,
+            disable: window.innerWidth < 768 ? true : false, // Disable on mobile
+            startEvent: 'DOMContentLoaded',
+            easing: 'ease-in-out',
+            delay: 0
+        });
+        
+        // Set current year
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
+        // Page transition
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                const pageTransition = document.querySelector('.page-transition');
+                if (pageTransition) {
+                    pageTransition.classList.add('hidden');
+                }
+            }, 800);
+            
+            setTimeout(function() {
+                const pageTransition = document.querySelector('.page-transition');
+                if (pageTransition) {
+                    pageTransition.style.display = 'none';
+                }
+            }, 1400);
+            
+            // Initialize progress bar
+            const progressBar = document.getElementById('progressBar');
+            const progressContainer = document.querySelector('.progress-container');
+            
+            if (progressBar && progressContainer) {
+                progressContainer.style.display = 'block';
+                
+                window.addEventListener('scroll', function() {
+                    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    const scrolled = (winScroll / height) * 100;
+                    progressBar.style.width = scrolled + '%';
+                });
+            }
+            
+            // Burger menu functionality
+            const burger = document.getElementById('burger');
+            const navLinks = document.getElementById('navLinks');
+            
+            if (burger && navLinks) {
+                burger.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                });
+                
+                // Close menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!burger.contains(event.target) && !navLinks.contains(event.target)) {
+                        burger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                    }
+                });
+                
+                // Close menu when clicking on a link
+                navLinks.querySelectorAll('.nav-link').forEach(link => {
+                    link.addEventListener('click', function() {
+                        burger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                    });
+                });
+            }
+            
+            // Scroll to top button
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+            if (scrollToTopBtn) {
+                window.addEventListener('scroll', () => {
+                    if (window.pageYOffset > 300) {
+                        scrollToTopBtn.style.opacity = '1';
+                        scrollToTopBtn.style.visibility = 'visible';
+                    } else {
+                        scrollToTopBtn.style.opacity = '0';
+                        scrollToTopBtn.style.visibility = 'hidden';
+                    }
+                });
+                
+                scrollToTopBtn.addEventListener('click', () => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tn-QA Delivery - خدمات التوصيل السريع بين قطر وتونس</title>
+    <title data-i18n="home.title">Tn-QA Delivery - خدمات التوصيل السريع بين قطر وتونس</title>
     <meta name="description" content="خدمات توصيل سريعة وآمنة داخل قطر وتونس وبين الدول - توصيل أغراض، توثيق تسليم أموال، توصيل موظفين">
     <meta name="keywords" content="توصيل, قطر, تونس, توصيل سريع, توصيل أموال, نقل, توصيل مشتريات">
     <meta name="author" content="Tn-QA Delivery">
@@ -12,7 +12,7 @@
     <meta property="og:title" content="Tn-QA Delivery - خدمات التوصيل السريع">
     <meta property="og:description" content="خدمات توصيل سريعة وآمنة داخل قطر وتونس وبين الدول">
     <meta property="og:image" content="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
-    <meta property="og:url" content="https://asapqatar.com">
+    <meta property="og:url" content="https://tnqa-delivery.com">
     <meta property="og:type" content="website">
     
     <!-- Font Awesome & Google Fonts -->
@@ -31,7 +31,7 @@
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "name": "Tn-QA Delivery",
-        "image": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d",
+        "image": "https://iili.io/fLgS9wP.md.jpg",
         "description": "خدمات توصيل سريعة وآمنة داخل قطر وتونس وبين الدول",
         "address": {
             "@type": "PostalAddress",
@@ -40,7 +40,7 @@
         },
         "telephone": "+97431691024",
         "openingHours": "Mo-Su 00:00-23:59",
-        "url": "https://asapqatar.com",
+        "url": "https://tnqa-delivery.com",
         "priceRange": "$$",
         "sameAs": [
             "https://www.facebook.com/share/17ZgZb5UFg/",
@@ -48,8 +48,55 @@
         ]
     }
     </script>
+    
+    <style>
+        /* استايل إضافي للصفحة الرئيسية */
+        .page-transition {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+        
+        .page-transition.hidden {
+            transform: translateY(-100%);
+        }
+        
+        .transition-logo {
+            animation: pulse 2s infinite;
+        }
+        
+        body.loaded .hero-slider {
+            animation: fadeIn 1s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
 </head>
 <body>
+    <!-- Page Transition -->
+    <div class="page-transition">
+        <div class="logo" style="color: white;">
+            <div class="logo-icon transition-logo">
+                <i class="fas fa-bolt" style="font-size: 3rem;"></i>
+            </div>
+            <div class="logo-text">
+                <h1>Tn-QA Delivery</h1>
+                <p>جار التحميل...</p>
+            </div>
+        </div>
+    </div>
+    
     <!-- ================= NAVIGATION ================= -->
     <header id="mainHeader" class="glass-header">
         <div class="nav-wrap container">
@@ -69,15 +116,18 @@
             <nav class="nav-links" id="navLinks">
                 <a href="#home" class="nav-link active" data-i18n="nav.home">الرئيسية</a>
                 <a href="#about" class="nav-link" data-i18n="nav.about">من نحن</a>
-                <a href="#services" class="nav-link" data-i18n="nav.services">الخدمات</a>
+                <a href="services.html" class="nav-link" data-i18n="nav.services">الخدمات</a>
                 <a href="contact.html" class="nav-link" data-i18n="nav.contact">التواصل</a>
+                <a href="reviews.html" class="nav-link" data-i18n="nav.reviews">المراجعات</a>
                 
                 <!-- Theme Switcher -->
                 <div class="theme-switcher">
-                    <button id="themeToggle" class="theme-btn" aria-label="تبديل وضع السطوع">
-                        <i class="fas fa-sun"></i>
+                    <button id="themeToggle" class="theme-btn">
+                        <i class="fa-solid fa-sun"></i>
+                        <i class="fa-solid fa-moon"></i>
                         <span class="theme-text">فاتح</span>
                     </button>
+
                 </div>
                 
                 <!-- Language Switcher -->
@@ -106,7 +156,7 @@
             </div>
             
             <!-- Mobile Menu Burger -->
-            <button class="burger" id="burger" aria-label="قائمة التنقل">
+            <button class="burger" id="burger" aria-label="قائمة التنقل" data-i18n-title="nav.menu">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -122,14 +172,14 @@
                 <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')"></div>
                 <div class="slide-overlay"></div>
                 <div class="container">
-                    <div class="slide-content">
+                    <div class="slide-content" data-aos="fade-up" data-aos-duration="1000">
                         <h1 class="gold-text" data-i18n="hero.title1">خدمة توصيل سريعة وآمنة داخل قطر وتونس</h1>
                         <p class="slide-subtitle" data-i18n="hero.subtitle1">
                             نوفر حلول نقل وتوصيل مرنة تناسب الأفراد والمتاجر والشركات، مع التركيز على السرعة، الأمان، وسهولة التواصل.
                         </p>
                         
                         <div class="slide-buttons">
-                            <a href="#services" class="btn primary-btn gold-bg" data-i18n="hero.servicesBtn">
+                            <a href="services.html" class="btn primary-btn gold-bg" data-i18n="hero.servicesBtn">
                                 <i class="fas fa-list"></i> عرض الخدمات
                             </a>
                             <a href="https://wa.me/+21656471550" class="btn whatsapp-btn" data-i18n="hero.whatsappBtn" target="_blank">
@@ -145,13 +195,13 @@
                 <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1578575437130-527eed3abbec?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')"></div>
                 <div class="slide-overlay"></div>
                 <div class="container">
-                    <div class="slide-content">
+                    <div class="slide-content" data-aos="fade-up" data-aos-duration="1000">
                         <h1 class="gold-text" data-i18n="hero.title2">توصيل أغراض بين تونس وقطر</h1>
                         <p class="slide-subtitle" data-i18n="hero.subtitle2">
                             توصيل الأغراض بين تونس وقطر عبر مسافرين موثوقين، بطريقة آمنة ومنسقة مع توثيق كامل.
                         </p>
                         <div class="slide-buttons">
-                            <a href="#services" class="btn primary-btn gold-bg" data-i18n="hero.servicesBtn">
+                            <a href="services.html" class="btn primary-btn gold-bg" data-i18n="hero.servicesBtn">
                                 <i class="fas fa-list"></i> عرض الخدمات
                             </a>
                         </div>
@@ -164,7 +214,7 @@
                 <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')"></div>
                 <div class="slide-overlay"></div>
                 <div class="container">
-                    <div class="slide-content">
+                    <div class="slide-content" data-aos="fade-up" data-aos-duration="1000">
                         <h1 class="gold-text" data-i18n="hero.title3">توثيق تسليم الأموال يدًا بيد</h1>
                         <p class="slide-subtitle" data-i18n="hero.subtitle3">
                             نقدم خدمة توثيق موثوقة لتسليم الأموال بين الأطراف، مع الحفاظ على الشفافية والأمان الكامل.
@@ -179,10 +229,10 @@
             </div>
             
             <!-- Slider Controls -->
-            <button class="slider-prev" aria-label="الشريحة السابقة">
+            <button class="slider-prev" aria-label="الشريحة السابقة" data-i18n-title="slider.prev">
                 <i class="fas fa-chevron-right"></i>
             </button>
-            <button class="slider-next" aria-label="الشريحة التالية">
+            <button class="slider-next" aria-label="الشريحة التالية" data-i18n-title="slider.next">
                 <i class="fas fa-chevron-left"></i>
             </button>
             
@@ -209,9 +259,75 @@
                     <a href="tel:+21656471550" class="btn outline-btn" data-i18n="hero.tunisiaPhone">
                         <i class="fas fa-phone"></i> تونس: 56471550
                     </a>
-                    <a href="#services" class="btn primary-btn gold-bg" data-i18n="hero.callNow">
+                    <a href="services.html" class="btn primary-btn gold-bg" data-i18n="hero.callNow">
                         <i class="fas fa-bolt"></i> طلب خدمة
                     </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= WHY CHOOSE US SECTION (جديدة) ================= -->
+    <section id="why-choose" class="why-choose section-padding">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title" data-i18n="whyChoose.title">لماذا تختار Tn-QA Delivery؟</h2>
+                <p class="section-subtitle" data-i18n="whyChoose.subtitle">نتميز بمجموعة من المزايا التي تجعلنا الخيار الأول</p>
+            </div>
+            
+            <div class="features-grid">
+                <!-- Feature 1 -->
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 data-i18n="whyChoose.feature1.title">خدمة 24/7</h3>
+                    <p data-i18n="whyChoose.feature1.desc">متاحون على مدار الساعة طوال أيام الأسبوع</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 data-i18n="whyChoose.feature2.title">ضمان الأمان</h3>
+                    <p data-i18n="whyChoose.feature2.desc">توصيل آمن مع توثيق كامل لكل عملية</p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 data-i18n="whyChoose.feature3.title">سرعة التوصيل</h3>
+                    <p data-i18n="whyChoose.feature3.desc">أقصر وقت للتوصيل مع متابعة مباشرة</p>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 data-i18n="whyChoose.feature4.title">دعم فوري</h3>
+                    <p data-i18n="whyChoose.feature4.desc">فريق دعم متاح للرد على استفساراتك</p>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="feature-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3 data-i18n="whyChoose.feature5.title">أسعار تنافسية</h3>
+                    <p data-i18n="whyChoose.feature5.desc">أسعار مناسبة مع جودة خدمة مضمونة</p>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3 data-i18n="whyChoose.feature6.title">تغطية واسعة</h3>
+                    <p data-i18n="whyChoose.feature6.desc">خدماتنا تغطي جميع مناطق قطر وتونس</p>
                 </div>
             </div>
         </div>
@@ -220,13 +336,13 @@
     <!-- ================= ABOUT SECTION ================= -->
     <section id="about" class="about section-padding">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header" data-aos="fade-up">
                 <h2 class="section-title" data-i18n="about.title">من نحن</h2>
                 <p class="section-subtitle" data-i18n="about.subtitle">خدمة توصيل مستقلة توفر حلول نقل وتوصيل مرنة</p>
             </div>
             
             <div class="about-content">
-                <div class="about-text">
+                <div class="about-text" data-aos="fade-right">
                     <h3 data-i18n="about.heading" class="gold-text">Tn-QA Delivery</h3>
                     <p data-i18n="about.desc1">
                         نحن خدمة توصيل مستقلة ومتخصصة في تقديم حلول النقل والتوصيل بين قطر وتونس. 
@@ -238,17 +354,17 @@
                     </p>
                     
                     <div class="about-features">
-                        <div class="feature">
+                        <div class="feature" data-aos="fade-up" data-aos-delay="100">
                             <i class="fas fa-bolt gold-text"></i>
                             <h4 data-i18n="about.feature1.title">سرعة في التنفيذ</h4>
                             <p data-i18n="about.feature1.desc">توصيل سريع في الوقت المحدد</p>
                         </div>
-                        <div class="feature">
+                        <div class="feature" data-aos="fade-up" data-aos-delay="200">
                             <i class="fas fa-shield-alt gold-text"></i>
                             <h4 data-i18n="about.feature2.title">أمان تام</h4>
                             <p data-i18n="about.feature2.desc">حماية للأغراض والمعلومات</p>
                         </div>
-                        <div class="feature">
+                        <div class="feature" data-aos="fade-up" data-aos-delay="300">
                             <i class="fas fa-handshake gold-text"></i>
                             <h4 data-i18n="about.feature3.title">توثيق موثوق</h4>
                             <p data-i18n="about.feature3.desc">تسليم موثق يدًا بيد</p>
@@ -256,26 +372,27 @@
                     </div>
                     
                     <div class="about-stats">
-                        <div class="stat">
+                        <div class="stat" data-aos="fade-up" data-aos-delay="400">
                             <h3 class="gold-text">100+</h3>
-                            <p>عمليـة توصيـل ناجحـة</p>
+                            <p data-i18n="about.stats1">عمليـة توصيـل ناجحـة</p>
                         </div>
-                        <div class="stat">
+                        <div class="stat" data-aos="fade-up" data-aos-delay="500">
                             <h3 class="gold-text">24/7</h3>
-                            <p>دعم على مدار الساعة</p>
+                            <p data-i18n="about.stats2">دعم على مدار الساعة</p>
                         </div>
-                        <div class="stat">
+                        <div class="stat" data-aos="fade-up" data-aos-delay="600">
                             <h3 class="gold-text">100%</h3>
-                            <p>رضـا العـملاء</p>
+                            <p data-i18n="about.stats3">رضـا العـملاء</p>
                         </div>
                     </div>
                 </div>
                 
-                <div class="about-image">
+                <div class="about-image" data-aos="fade-left">
                     <div class="image-frame">
                         <img src="https://iili.io/fQb9HTx.th.jpg"
                              alt="خدمات التوصيل"
-                             loading="lazy">
+                             loading="lazy"
+                             class="img-zoom">
                         <div class="frame-overlay">
                             <h3 class="gold-text">خدمات موثوقة</h3>
                             <p>بين قطر وتونس</p>
@@ -286,159 +403,189 @@
         </div>
     </section>
 
-    <!-- ================= SERVICES SECTION ================= -->
-    <section id="services" class="services section-padding">
+    <!-- ================= HOW IT WORKS SECTION (جديدة) ================= -->
+    <section id="how-it-works" class="how-it-works section-padding">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title" data-i18n="services.title">خدماتنا</h2>
-                <p class="section-subtitle" data-i18n="services.subtitle">نقدم مجموعة متكاملة من خدمات التوصيل والنقل</p>
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title" data-i18n="howItWorks.title">كيف تعمل خدمتنا؟</h2>
+                <p class="section-subtitle" data-i18n="howItWorks.subtitle">أربع خطوات بسيطة للحصول على خدمتنا</p>
             </div>
             
-            <div class="services-grid">
-                <!-- Service 1: توصيل دولي -->
-                <div class="service-card" data-service="scale-sales">
-                    <div class="service-icon gold-bg">
-                        <i class="fas fa-balance-scale"></i>
-                    </div>
-                    <h3>خدمة توصيل ميزان بين قطر وتونس</h3>
-                    <p>خدمة توصيل اغراض شخصية</p>
-                    
-                    <div class="service-selection">
-                        <select class="service-select" data-service="توصيل دولي">
-                            <option value="" selected disabled>-- اختر الخدمة --</option>
-                            <option value="تريد بيع ميزان">تريد بيع ميزان</option>
-                            <option value="حجز ميزان من قطر الي تونس">حجز ميزان من قطر الي تونس</option>
-                            <option value="حجز ميزان من تونس الي قطر">حجز ميزان من تونس الي قطر</option>
-                        </select>
-                    </div>
-                    
-                    <div class="service-contact-double">
-                        <div class="contact-numbers">
-                            <a href="tel:+21656471550" class="service-phone-btn">
-                                <i class="fas fa-phone"></i> تونس: 56471550
-                            </a>
+            <div class="timeline">
+                <!-- Step 1 -->
+                <div class="timeline-step" data-aos="fade-up" data-aos-delay="100">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <div class="step-icon">
+                            <i class="fas fa-clipboard-list"></i>
                         </div>
-                        <div class="contact-buttons-wrapper">
-                            <button class="service-btn whatsapp send-whatsapp" data-country="قطر" data-service="توصيل دولي">
-                                <i class="fab fa-whatsapp"></i> طلب خدمة
-                            </button>
-                        </div>
+                        <h3 data-i18n="howItWorks.step1.title">طلب الخدمة</h3>
+                        <p data-i18n="howItWorks.step1.desc">اتصل بنا أو أرسل طلبك عبر الواتساب مع تفاصيل الخدمة المطلوبة</p>
                     </div>
                 </div>
-
-                <!-- Service 2: التوصيل المحلي في قطر -->
-                <div class="service-card" data-service="local-delivery-qatar">
-                    <div class="service-icon gold-bg">
-                        <i class="fas fa-truck-fast"></i>
-                    </div>
-                    <h3>خدمات توصيل داخل قطر</h3>
-                    <div class="service-description">
-                        <p>خدمات توصيل محلية داخل دولة قطر</p>
-                    </div>
-                    
-                    <div class="service-selection">
-                        <select class="service-select" data-service="التوصيل المحلي في قطر">
-                            <option value="" selected disabled>-- اختر الخدمة --</option>
-                            <option value="توصيل موظفين وتلاميذ">توصيل موظفين وتلاميذ</option>
-                            <option value="توصيل مشاوير خاصة">توصيل مشاوير خاصة</option>
-                            <option value="توصيل أغراض ومشتريات">توصيل أغراض ومشتريات</option>
-                            <option value="توصيل هدايا">توصيل هدايا</option>
-                            <option value="توصيل مواد استهلاكية">توصيل مواد استهلاكية</option>
-                            <option value="ندك بزنس ومو عارف كيف توصلو ارفع مستوى تجارتك الالكترونية من خلال التعاون مع TN_Qa delivery">عندك بزنس ومو عارف كيف توصلو<br> ارفع مستوى تجارتك الالكترونية من خلال<br> التعاون مع TN_Qa delivery</option>
-                        </select>
-                    </div>
-                    
-                    <div class="service-contact">
-                        <div class="contact-numbers">
-                            <a href="tel:+97431691024" class="service-phone-btn">
-                                <i class="fas fa-phone"></i> قطر: 31691024
-                            </a>
+                
+                <!-- Step 2 -->
+                <div class="timeline-step" data-aos="fade-up" data-aos-delay="200">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <div class="step-icon">
+                            <i class="fas fa-calculator"></i>
                         </div>
-                        <button class="service-btn whatsapp send-whatsapp" data-country="قطر" data-service="التوصيل المحلي في قطر">
-                            <i class="fab fa-whatsapp"></i> طلب خدمة
-                        </button>
+                        <h3 data-i18n="howItWorks.step2.title">تحديد السعر</h3>
+                        <p data-i18n="howItWorks.step2.desc">نقوم بتقييم طلبك وتحديد السعر المناسب مع شرح شامل للخدمة</p>
                     </div>
                 </div>
-
-                <!-- Service 3: التوصيل المحلي في تونس -->
-                <div class="service-card" data-service="local-delivery-tunisia">
-                    <div class="service-icon gold-bg">
-                        <i class="fas fa-truck-fast"></i>
-                    </div>
-                    <h3>خدمات توصيل داخل تونس</h3>
-                    <div class="service-description">
-                        <p>خدمات توصيل محلية داخل تونس</p>
-                    </div>
-        
-                    <div class="service-selection">
-                        <select class="service-select" data-service="التوصيل المحلي في تونس">
-                            <option value="" selected disabled>-- اختر الخدمة --</option>
-                            <option value="توصيل موظفين وتلاميذ">توصيل موظفين وتلاميذ</option>
-                            <option value="توصيل مشاوير خاصة">توصيل مشاوير خاصة</option>
-                            <option value="توصيل أغراض ومشتريات">توصيل أغراض ومشتريات</option>
-                            <option value="توصيل هدايا">توصيل هدايا</option>
-                            <option value="توصيل مواد استهلاكية">توصيل مواد استهلاكية</option>
-                            <option value="ندك بزنس ومو عارف كيف توصلو ارفع مستوى تجارتك الالكترونية من خلال التعاون مع TN_Qa delivery">عندك بزنس ومو عارف كيف توصلو<br> ارفع مستوى تجارتك الالكترونية من خلال<br> التعاون مع TN_Qa delivery</option>
-                        </select>
-                    </div>
-                    
-                    <div class="service-contact">
-                        <div class="contact-numbers">
-                            <a href="tel:+21656471550" class="service-phone-btn">
-                                <i class="fas fa-phone"></i> تونس: 56471550
-                            </a>
+                
+                <!-- Step 3 -->
+                <div class="timeline-step" data-aos="fade-up" data-aos-delay="300">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <div class="step-icon">
+                            <i class="fas fa-truck"></i>
                         </div>
-                        <button class="service-btn whatsapp send-whatsapp" data-country="تونس" data-service="التوصيل المحلي في تونس">
-                            <i class="fab fa-whatsapp"></i> طلب خدمة
-                        </button>
+                        <h3 data-i18n="howItWorks.step3.title">التنفيذ</h3>
+                        <p data-i18n="howItWorks.step3.desc">نبدأ في تنفيذ الخدمة مع تحديثك بكل المراحل حتى التسليم</p>
                     </div>
                 </div>
-
-                <!-- Service 4: توثيق تسليم الأموال -->
-                <div class="service-card important-card" data-service="money-delivery">
-                    <div class="service-icon gold-bg">
-                        <i class="fas fa-hand-holding-usd"></i>
-                    </div>
-                    <h3>توثيق تسليم الأموال (يدًا بيد)</h3>
-                    <div class="service-description">
-                        <p>خدمة توثيق موثوقة لتسليم الأموال بين الأطراف</p>
-                    </div>
-                    
-                    <div class="service-selection">
-                        <select class="service-select" data-service="توثيق تسليم الأموال">
-                            <option value="" selected disabled>-- اختر الخدمة --</option>
-                            <option value="تحويل ريال قطري إلى دينار تونسي">تحويل ريال قطري إلى دينار تونسي</option>
-                            <option value="تحويل دينار تونسي إلى ريال قطري">تحويل دينار تونسي إلى ريال قطري</option>
-                        </select>
-                    </div>
-                    
-                    <div class="service-contact">
-                        <div class="contact-numbers">
-                            <a href="tel:+21656471550" class="service-phone-btn">
-                                <i class="fas fa-phone"></i> تونس: 56471550
-                            </a>
+                
+                <!-- Step 4 -->
+                <div class="timeline-step" data-aos="fade-up" data-aos-delay="400">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <div class="step-icon">
+                            <i class="fas fa-check-circle"></i>
                         </div>
-                        <button class="service-btn send-whatsapp" data-country="مشترك" data-service="توثيق تسليم الأموال">
-                            <i class="fab fa-whatsapp"></i> تواصل الآن
-                        </button>
-                    </div>
-                    <div class="service-warning">
-                        <h3>تنويه</h3>
-                        <p>نوفر خدمة توثيق فقط لعمليات تسليم الأموال بين المرسل والمستلم، حيث يتم التسليم مباشرة بين الطرفين.</p>
+                        <h3 data-i18n="howItWorks.step4.title">التسليم والتوثيق</h3>
+                        <p data-i18n="howItWorks.step4.desc">تسليم الخدمة مع توثيق كامل وضمان رضا العميل التام</p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
 
-                <!-- Space for Future Advertisements -->
-                <div class="service-card advertisement-placeholder">
-                    <div class="ad-icon">
-                        <i class="fas fa-ad gold-text"></i>
+
+
+    <!-- ================= TESTIMONIALS PREVIEW (جديدة) ================= -->
+    <section id="testimonials" class="testimonials-preview section-padding">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title" data-i18n="testimonials.title">ماذا يقول عملاؤنا؟</h2>
+                <p class="section-subtitle" data-i18n="testimonials.subtitle">ثقة عملائنا هي شهادة نجاحنا</p>
+            </div>
+            
+            <div class="testimonials-slider" data-aos="fade-up" data-aos-delay="100">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-slide active">
+                    <div class="client-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="محمد أحمد" loading="lazy">
                     </div>
-                    <h3>مساحة للإعلانات</h3>
-                    <p>هذه المساحة محجوزة للإعلانات أو الشراكات المستقبلية.</p>
-                    <div class="ad-contact">
-                        <a href="contact.html?subject=advertisement" class="ad-btn">
-                            <i class="fas fa-bullhorn"></i> للاستفسار عن الإعلان
-                        </a>
+                    <div class="testimonial-content">
+                        <p data-i18n="testimonials.review1">"خدمة استثنائية! حجزت ميزان من قطر إلى تونس وكانت العملية سلسة جداً. الفريق متجاوب ومحترف."</p>
+                    </div>
+                    <div class="client-info">
+                        <h4 data-i18n="testimonials.client1.name">محمد أحمد</h4>
+                        <p data-i18n="testimonials.client1.title">مستثمر من قطر</p>
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-slide">
+                    <div class="client-avatar">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="سارة القاسمي" loading="lazy">
+                    </div>
+                    <div class="testimonial-content">
+                        <p data-i18n="testimonials.review2">"استخدمت خدمة التوصيل المحلي في قطر وكانت رائعة. السائقون مؤدبون، والخدمة سريعة، والأسعار مناسبة."</p>
+                    </div>
+                    <div class="client-info">
+                        <h4 data-i18n="testimonials.client2.name">سارة القاسمي</h4>
+                        <p data-i18n="testimonials.client2.title">ربة منزل من الإمارات</p>
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-slide">
+                    <div class="client-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="علي التونسي" loading="lazy">
+                    </div>
+                    <div class="testimonial-content">
+                        <p data-i18n="testimonials.review3">"خدمة توثيق تسليم الأموال كانت آمنة ومضمونة 100%. الفريق محترف ويضمن وصول أموالك بأمان."</p>
+                    </div>
+                    <div class="client-info">
+                        <h4 data-i18n="testimonials.client3.name">علي التونسي</h4>
+                        <p data-i18n="testimonials.client3.title">تاجر من تونس</p>
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial Controls -->
+                <div class="testimonial-controls">
+                    <button class="testimonial-dot active" data-slide="1"></button>
+                    <button class="testimonial-dot" data-slide="2"></button>
+                    <button class="testimonial-dot" data-slide="3"></button>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4" data-aos="fade-up" data-aos-delay="200">
+                <a href="reviews.html" class="btn outline-btn" data-i18n="testimonials.viewAll">
+                    <i class="fas fa-eye"></i> عرض جميع المراجعات
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= CALL TO ACTION (جديدة) ================= -->
+    <section id="cta" class="cta-section section-padding">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title" data-i18n="cta.title">جاهز لطلب خدمتك؟</h2>
+                <p class="section-subtitle" data-i18n="cta.subtitle">اتصل بنا الآن واحصل على أفضل خدمة توصيل</p>
+            </div>
+            
+            <div class="cta-content" data-aos="fade-up" data-aos-delay="100">
+                <div class="cta-buttons">
+                    <a href="https://wa.me/97431691024" class="cta-btn primary ripple" target="_blank" data-i18n="cta.whatsapp">
+                        <i class="fab fa-whatsapp"></i> تواصل عبر واتساب
+                    </a>
+                    <a href="tel:+97431691024" class="cta-btn secondary ripple" data-i18n="cta.call">
+                        <i class="fas fa-phone"></i> اتصل الآن
+                    </a>
+                </div>
+                
+                <div class="cta-features" data-aos="fade-up" data-aos-delay="200">
+                    <div class="cta-feature">
+                        <i class="fas fa-bolt"></i>
+                        <h4 data-i18n="cta.feature1.title">رد فوري</h4>
+                        <p data-i18n="cta.feature1.desc">نرد على استفساراتك خلال دقائق</p>
+                    </div>
+                    <div class="cta-feature">
+                        <i class="fas fa-shield-alt"></i>
+                        <h4 data-i18n="cta.feature2.title">ضمان كامل</h4>
+                        <p data-i18n="cta.feature2.desc">خدمة موثقة وآمنة 100%</p>
+                    </div>
+                    <div class="cta-feature">
+                        <i class="fas fa-tag"></i>
+                        <h4 data-i18n="cta.feature3.title">أسعار مميزة</h4>
+                        <p data-i18n="cta.feature3.desc">أفضل الأسعار مع أعلى جودة</p>
                     </div>
                 </div>
             </div>
@@ -460,7 +607,7 @@
                             <p data-i18n="companySlogan">خدمة توصيل سريعة وآمنة</p>
                         </div>
                     </div>
-                    <p class="footer-desc">خدمات توصيل ونقل موثوقة بين تونس وقطر</p>
+                    <p class="footer-desc" data-i18n="footer.description">خدمات توصيل ونقل موثوقة بين تونس وقطر</p>
                     
                     <!-- Social Media -->
                     <div class="social-icons">
@@ -478,34 +625,35 @@
                 
                 <!-- Quick Links -->
                 <div class="footer-links">
-                    <h3 class="footer-title gold-text">روابط سريعة</h3>
+                    <h3 class="footer-title gold-text" data-i18n="footer.quickLinks">روابط سريعة</h3>
                     <ul class="footer-list">
-                        <li><a href="#home" class="footer-link">الرئيسية</a></li>
-                        <li><a href="#about" class="footer-link">من نحن</a></li>
-                        <li><a href="#services" class="footer-link">الخدمات</a></li>
-                        <li><a href="contact.html" class="footer-link">تواصل معنا</a></li>
+                        <li><a href="#home" class="footer-link" data-i18n="nav.home">الرئيسية</a></li>
+                        <li><a href="#about" class="footer-link" data-i18n="nav.about">من نحن</a></li>
+                        <li><a href="services.html" class="footer-link" data-i18n="nav.services">الخدمات</a></li>
+                        <li><a href="contact.html" class="footer-link" data-i18n="nav.contact">تواصل معنا</a></li>
+                        <li><a href="reviews.html" class="footer-link" data-i18n="nav.reviews">المراجعات</a></li>
                     </ul>
                 </div>
                 
                 <!-- Services Links -->
                 <div class="footer-services">
-                    <h3 class="footer-title gold-text">خدماتنا</h3>
+                    <h3 class="footer-title gold-text" data-i18n="footer.ourServices">خدماتنا</h3>
                     <ul class="footer-list">
-                        <li><a href="#services" class="footer-link">التوصيل المحلي</a></li>
-                        <li><a href="#services" class="footer-link">بيع الموازين</a></li>
-                        <li><a href="#services" class="footer-link">حجز الموازين</a></li>
-                        <li><a href="#services" class="footer-link">توثيق الأموال</a></li>
+                        <li><a href="services.html" class="footer-link" data-i18n="services.localQatar.title">التوصيل المحلي</a></li>
+                        <li><a href="services.html" class="footer-link" data-i18n="services.scaleSales.title">بيع الموازين</a></li>
+                        <li><a href="" class="footer-link" data-i18n="services.scaleSales.option2">حجز الموازين</a></li>
+                        <li><a href="services.html" class="footer-link" data-i18n="services.moneyDelivery.title">توثيق الأموال</a></li>
                     </ul>
                 </div>
                 
                 <!-- Contact Info -->
                 <div class="footer-contact">
-                    <h3 class="footer-title gold-text">تواصل معنا</h3>
+                    <h3 class="footer-title gold-text" data-i18n="footer.contactUs">تواصل معنا</h3>
                     <div class="footer-contact-info">
-                        <p><i class="fab fa-whatsapp gold-text"></i> واتساب: +974 31 691 024</p>
-                        <p><i class="fas fa-phone gold-text"></i> قطر: +974 31 691 024</p>
-                        <p><i class="fas fa-phone gold-text"></i> تونس: +216 56 471 550</p>
-                        <p><i class="fas fa-envelope gold-text"></i> helamishwar@gmail.com</p>
+                        <p><i class="fab fa-whatsapp gold-text"></i> <span data-i18n="nav.whatsapp">واتساب:</span> +974 31 691 024</p>
+                        <p><i class="fas fa-phone gold-text"></i> <span data-i18n="countries.qatar">قطر:</span> +974 31 691 024</p>
+                        <p><i class="fas fa-phone gold-text"></i> <span data-i18n="countries.tunisia">تونس:</span> +216 56 471 550</p>
+                        <p><i class="fas fa-envelope gold-text"></i> <span data-i18n="contact.emailCard">البريد:</span> helamishwar@gmail.com</p>
                     </div>
                 </div>
             </div>
@@ -514,44 +662,59 @@
             <div class="footer-bottom">
                 <div class="legal-notice">
                     <i class="fas fa-exclamation-circle gold-text"></i>
-                    <p>الموقع منصة تعريفية وتنسيقية فقط، ولا يقوم بأي عمليات دفع إلكتروني أو تحصيل أموال.</p>
+                    <p data-i18n="footer.legalNotice">الموقع منصة تعريفية وتنسيقية فقط، ولا يقوم بأي عمليات دفع إلكتروني أو تحصيل أموال.</p>
                 </div>
                 
-                <p class="copyright">© <span id="currentYear"></span> <span class="gold-text">Tn-QA Delivery</span> - جميع الحقوق محفوظة</p>
+                <p class="copyright">© <span id="currentYear"></span> <span class="gold-text" data-i18n="companyName">Tn-QA Delivery</span> - <span data-i18n="footer.copyright">جميع الحقوق محفوظة</span></p>
             </div>
         </div>
     </footer>
 
     <!-- ================= FLOATING BUTTONS ================= -->
     <!-- Floating Theme Toggle -->
-    <button class="float-theme" id="floatThemeToggle" aria-label="تبديل وضع السطوع">
+    <button class="float-theme" id="floatThemeToggle" aria-label="تبديل وضع السطوع" data-i18n-title="theme.toggle">
         <i class="fas fa-moon"></i>
     </button>
     
     <!-- Floating WhatsApp -->
-    <a href="https://wa.me/+21656471550" class="float-whatsapp" aria-label="تواصل معنا عبر واتساب" target="_blank">
+    <a href="https://wa.me/+21656471550" class="float-whatsapp" aria-label="تواصل معنا عبر واتساب" target="_blank" data-i18n-title="nav.whatsapp">
         <i class="fab fa-whatsapp"></i>
+        <span class="float-badge">1</span>
     </a>
     
     <!-- Scroll to Top -->
-    <button class="scroll-to-top" id="scrollToTop" aria-label="العودة إلى الأعلى">
+    <button class="scroll-to-top" id="scrollToTop" aria-label="العودة إلى الأعلى" data-i18n-title="common.backToTop">
         <i class="fas fa-chevron-up"></i>
     </button>
 
     <!-- ================= SCRIPTS ================= -->
-    
-    <!-- Custom JavaScript Files -->
-    <script src="js/language.js"></script>
     <script src="js/main.js"></script>
-    <!-- <script src="js/theme.js"></script> -->
-    <script src="js/services.js"></script>
+    <script src="js/home.js"></script>
+    <script src="js/theme.js"></script>
+
+
+
+<!-- Page Transition -->
+<script>
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+            const pageTransition = document.querySelector('.page-transition');
+            if (pageTransition) {
+                pageTransition.classList.add('hidden');
+                document.body.classList.add('loaded');
+            }
+        }, 800);
+    });
     
-    <!-- Initialize Current Year -->
-    <script>
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
-    </script>
-    <script>
-  
+    window.addEventListener('load', function() {
+        setTimeout(function() {
+            const pageTransition = document.querySelector('.page-transition');
+            if (pageTransition) {
+                pageTransition.style.display = 'none';
+            }
+        }, 1000);
+    });
 </script>
 </body>
 </html>
