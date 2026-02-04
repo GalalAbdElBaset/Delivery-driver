@@ -1,0 +1,2299 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خدمات قطر - Tn-QA Delivery</title>
+    <meta name="description" content="خدمات التوصيل المحلية والدولية في قطر - توصيل موظفين، توصيل أغراض، خدمات التجارة الإلكترونية">
+    <meta name="keywords" content="توصيل قطر, توصيل الدوحة, توصيل محلي قطر, خدمات قطر">
+    
+    <!-- Font Awesome & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <style>
+        /* CSS Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #D4AF37;
+            --gold-light: #F4E4A6;
+            --gold-dark: #B8860B;
+            --white: #FFFFFF;
+            --light-gray: #F8F9FA;
+            --gray: #6C757D;
+            --dark: #212529;
+            --success: #28A745;
+            --whatsapp: #25D366;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] {
+            --white: #121212;
+            --light-gray: #1E1E1E;
+            --dark: #E0E0E0;
+            --gray: #A0A0A0;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--white);
+            transition: var(--transition);
+            overflow-x: hidden;
+        }
+
+        .gold-text { color: var(--gold); }
+        .gold-bg { background-color: var(--gold); color: white; }
+        .gold-border { border-color: var(--gold); }
+        .whatsapp { background-color: var(--whatsapp); }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .text-center { text-align: center; }
+        .mt-3 { margin-top: 1rem; }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            font-size: 16px;
+        }
+
+        .btn i { font-size: 18px; }
+
+        .whatsapp-btn {
+            background-color: var(--whatsapp);
+            color: white;
+        }
+
+        .whatsapp-btn:hover {
+            background-color: #128C7E;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .outline-btn {
+            background-color: transparent;
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .outline-btn:hover {
+            background-color: var(--gold);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        .ripple {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ripple:after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+
+        .ripple:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+
+        @keyframes ripple {
+            0% { transform: scale(0, 0); opacity: 0.5; }
+            100% { transform: scale(20, 20); opacity: 0; }
+        }
+
+        /* Page Transition */
+        .page-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .page-transition.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .page-transition .logo {
+            text-align: center;
+        }
+
+        .page-transition .logo-icon {
+            margin-bottom: 20px;
+        }
+
+        .page-transition .logo-text h1 {
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: transparent;
+            z-index: 9998;
+            display: none;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold) 0%, var(--gold-dark) 100%);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Navigation */
+        .glass-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        [data-theme="dark"] .glass-header {
+            background: rgba(30, 30, 30, 0.95);
+        }
+
+        .nav-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--gold-light);
+        }
+
+        .logo-icon img {
+            width: 98%;
+            height: 98%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .logo-text h1 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .logo-text p {
+            font-size: 12px;
+            color: var(--gray);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            border-radius: 20px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--gold);
+        }
+
+        .nav-link.active {
+            color: var(--gold);
+        }
+
+        .theme-switcher, .language-switcher-nav {
+            position: relative;
+        }
+
+        .theme-btn, .lang-btn-nav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: none;
+            border: 1px solid var(--gray);
+            border-radius: 20px;
+            padding: 8px 15px;
+            cursor: pointer;
+            color: var(--dark);
+            transition: var(--transition);
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .theme-btn:hover, .lang-btn-nav:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .lang-dropdown-nav {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 10px;
+            min-width: 120px;
+            display: none;
+            z-index: 1001;
+        }
+
+        [data-theme="dark"] .lang-dropdown-nav {
+            background-color: var(--light-gray);
+        }
+
+        .lang-dropdown-nav.active {
+            display: block;
+        }
+
+        .lang-option-nav {
+            display: block;
+            padding: 8px 12px;
+            text-decoration: none;
+            color: var(--dark);
+            border-radius: 5px;
+            transition: var(--transition);
+            text-align: right;
+        }
+
+        .lang-option-nav:hover {
+            background-color: var(--light-gray);
+        }
+
+        .lang-option-nav.active {
+            background-color: var(--gold);
+            color: white;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-cta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .whatsapp-btn.nav-cta {
+            background-color: var(--whatsapp);
+            color: white;
+        }
+
+        .call-btn {
+            background-color: var(--gold);
+            color: white;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .burger {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .burger span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--dark);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        .burger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .burger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .burger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* Hero Section */
+        .services-hero {
+            padding: 150px 0 80px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+            text-align: center;
+        }
+
+        .services-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .services-hero p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat .number {
+            display: block;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 5px;
+        }
+
+        .hero-stat .label {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 50px;
+            height: 3px;
+            background-color: var(--gold);
+        }
+
+        .section-subtitle {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 15px auto 0;
+        }
+
+        /* Qatar Services Grid */
+        .qatar-services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background-color: var(--white);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: row-reverse;
+            gap: 20px;
+            height: auto;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.15);
+        }
+
+        .service-image {
+            width: 30%;
+            height: 250px;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .service-card:hover .service-image img {
+            transform: scale(1.05);
+        }
+
+        .service-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex: 1;
+            align-items: flex-start;
+        }
+
+        .service-header {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 10px;
+            justify-content: center;
+        }
+
+        .service-icon {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .service-title {
+            font-size: 17px;
+            margin: 0;
+            color: var(--gold);
+            line-height: 1.3;
+            text-align: center;
+        }
+
+        .service-description {
+            color: var(--gray);
+            text-align: center;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* Service Features List */
+        .service-features {
+            margin: 15px 0 20px;
+        }
+
+        .service-features h4 {
+            color: var(--gold);
+            margin-bottom: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .features-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .features-list li {
+            margin-bottom: 8px;
+            padding-right: 25px;
+            position: relative;
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
+
+        .features-list li:before {
+            content: "✓";
+            position: absolute;
+            right: 0;
+            color: var(--gold);
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        /* Service Button */
+        .service-button-container {
+            /* margin-top: 20px; */
+            text-align: left;
+            margin-left: auto;
+        }
+
+        .service-btn-small {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background-color: var(--gold);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Cairo', sans-serif;
+            min-width: 200px;
+        }
+
+        .service-btn-small:hover {
+            background-color: var(--gold-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2);
+        }
+
+        /* Process Steps */
+        .process-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .process-step {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background-color: var(--gold);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+
+        .step-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: var(--gold);
+        }
+
+        .step-content h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .step-content p {
+            color: var(--gray);
+        }
+
+        /* Service Form */
+        .service-selection {
+            margin: 20px 0;
+        }
+
+        .service-select {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            background-color: var(--white);
+            color: var(--dark);
+            font-family: 'Cairo', sans-serif;
+            font-size: 16px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .service-select:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+        }
+
+        .input-group {
+            position: relative;
+            margin: 15px 0;
+        }
+
+        .service-input {
+            width: 100%;
+            padding: 12px 45px 12px 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            background-color: var(--white);
+            color: var(--dark);
+            font-family: 'Cairo', sans-serif;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .service-input:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+
+        .service-btn {
+            width: 100%;
+            margin-top: 20px;
+            padding: 15px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Cairo', sans-serif;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .service-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .contact-number-display {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .phone-link {
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .phone-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background-color: var(--white);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.15);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(212, 175, 55, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 24px;
+            color: var(--gold);
+        }
+
+        .feature-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feature-card p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* FAQ */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background-color: var(--white);
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--light-gray);
+            transition: var(--transition);
+        }
+
+        .faq-question:hover {
+            background-color: rgba(212, 175, 55, 0.1);
+        }
+
+        .faq-question h3 {
+            font-size: 1.1rem;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .faq-question i {
+            color: var(--gold);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 500px;
+        }
+
+        .faq-answer p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .final-cta {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(212, 175, 55, 0.2) 100%);
+            text-align: center;
+            border-radius: 20px;
+            margin: 40px auto;
+            max-width: 1200px;
+        }
+
+        .cta-content {
+            padding: 60px 20px;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .cta-subtitle {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Footer */
+        .main-footer {
+            background-color: var(--light-gray);
+            padding: 60px 0 30px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo .logo {
+            margin-bottom: 20px;
+        }
+
+        .footer-desc {
+            color: var(--gray);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-icon.whatsapp { background-color: var(--whatsapp); }
+        .social-icon.facebook { background-color: #1877F2; }
+        .social-icon.tiktok { background-color: #000000; }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+        }
+
+        .footer-title {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-list {
+            list-style: none;
+        }
+
+        .footer-list li {
+            margin-bottom: 10px;
+        }
+
+        .footer-link {
+            color: var(--gray);
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-link:hover {
+            color: var(--gold);
+            transform: translateX(-5px);
+        }
+
+        .footer-contact-info p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            padding-top: 30px;
+            text-align: center;
+        }
+
+        .legal-notice {
+            background-color: rgba(212, 175, 55, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-align: right;
+        }
+
+        .copyright {
+            color: var(--gray);
+        }
+
+        /* Floating Buttons */
+        .float-theme, .float-whatsapp, .scroll-to-top {
+            position: fixed;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--gold);
+            color: white;
+            border: none;
+            cursor: pointer;
+            z-index: 999;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            font-size: 20px;
+        }
+
+        .float-whatsapp {
+            background-color: var(--whatsapp);
+            bottom: 100px;
+            right: 16px;
+        }
+
+        .float-theme {
+            bottom: 160px;
+            right: 16px;
+        }
+
+        .scroll-to-top {
+            bottom: 20px;
+            right: 16px;
+            opacity: 0;
+            visibility: hidden;
+            background-color: var(--gold);
+            color: var(--white);
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-5px);
+        }
+
+        /* قسم الخدمات المزدوجة */
+        .services-double-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+            padding: 40px 0;
+        }
+
+        .service-form-card {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, rgba(212, 175, 55, 0.15) 100%);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+        }
+
+        .service-form-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.15);
+        }
+
+        .service-form-title {
+            text-align: center;
+            color: var(--gold);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .service-form-description {
+            text-align: center;
+            color: var(--gray);
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .nav-links {
+                gap: 15px;
+            }
+            
+            .header-buttons {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                text-align: center;
+                top: 80px;
+                right: -100%;
+                width: 50%;
+                height: calc(100vh - 100px);
+                background-color: var(--white);
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 40px 20px;
+                gap: 0;
+                transition: right 0.3s ease;
+                box-shadow: var(--shadow);
+                z-index: 999;
+            }
+
+            [data-theme="dark"] .nav-links {
+                background-color: var(--light-gray);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-link {
+                width: 100%;
+                padding: 5px 30px 5px ;
+                border-radius: 10px;
+                margin-bottom: 10px;
+                text-align: right;
+            }
+            .theme-switcher, .language-switcher-nav {
+                padding: 5px 30px 5px ;
+            }
+            .burger {
+                display: flex;
+            }
+
+            .services-hero {
+                padding: 120px 0 60px;
+            }
+
+            .services-hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-stats {
+                gap: 20px;
+            }
+
+            .qatar-services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-container {
+                flex-direction: column;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-buttons .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .float-whatsapp, .float-theme, .scroll-to-top {
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+            }
+
+            .float-whatsapp {
+                bottom: 90px;
+                right: 16px;
+            }
+
+            .float-theme {
+                bottom: 145px;
+                right: 16px;
+            }
+            
+            .service-card {
+                flex-direction: row-reverse;
+                gap: 20px;
+            }
+            
+            .service-image {
+                width:40%;
+                height: 200px;
+            }
+
+            .service-button-container {
+                text-align: center;
+            }
+            .service-title {
+                font-size: 15.8px;
+            }
+            .service-description{
+                font-size: 13px;
+                text-align: right;
+            }
+            .features-list li{
+                font-size: 12px;
+            }
+            .services-double-section {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 20px 0;
+            }
+
+            .service-form-card {
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .section-padding {
+                padding: 60px 0;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .service-card {
+                padding: 20px;
+            }
+
+            .service-form-card {
+                padding: 20px;
+            }
+
+            .cta-title {
+                font-size: 2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .service-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .service-icon {
+                width: 18px;
+                height: 18px;
+                font-size: 18px;
+            }
+            
+            .service-image {
+                height: 180px;
+            }
+            
+            .service-btn-small {
+                width: 100%;
+                min-width: auto;
+            }
+
+            .process-steps {
+                padding-top: 120px;
+            }
+        }
+
+        .process-steps {
+            padding-top: 150px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Page Transition -->
+    <div class="page-transition">
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-cogs gold-text" style="font-size: 3rem;"></i>
+            </div>
+            <div class="logo-text">
+                <h1 class="gold-text">Tn-QA Delivery</h1>
+                <p>جار تحميل خدمات قطر...</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    
+    <!-- ================= NAVIGATION ================= -->
+    <header id="mainHeader" class="glass-header">
+        <div class="nav-wrap container">
+            <!-- Logo -->
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="https://iili.io/fLgS9wP.md.jpg" alt="HELA Express Logo">
+                </div>
+                <div class="logo-text">
+                    <h1 class="gold-text">Tn-QA Delivery</h1>
+                    <p>خدمة توصيل سريعة وآمنة</p>
+                </div>
+            </div>
+            
+            <!-- Navigation Links -->
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-link">الرئيسية</a>
+                <a href="index.html#about" class="nav-link">من نحن</a>
+                <a href="qatar-services.html" class="nav-link active">خدمات قطر</a>
+                <a href="tunisia-services.html" class="nav-link">خدمات تونس</a>
+                <a href="contact.html" class="nav-link">التواصل</a>
+                
+                <!-- Theme Switcher -->
+                <div class="theme-switcher">
+                    <button id="themeToggle" class="theme-btn" aria-label="تبديل وضع السطوع">
+                        <i class="fas fa-sun"></i>
+                        <span class="theme-text">فاتح</span>
+                    </button>
+                </div>
+                
+                <!-- Language Switcher -->
+                <div class="language-switcher-nav">
+                    <button id="langBtn" class="lang-btn-nav">
+                        <i class="fas fa-globe"></i>
+                        <span id="currentLang">العربية</span>
+                    </button>
+                    <div class="lang-dropdown-nav" id="langDropdown">
+                        <a href="#" data-lang="ar" class="lang-option-nav active">العربية</a>
+                        <a href="#" data-lang="en" class="lang-option-nav">English</a>
+                    </div>
+                </div>
+            </nav>
+            
+            <!-- Header Buttons -->
+            <div class="header-buttons">
+                <a href="https://wa.me/+97431691024" class="nav-cta whatsapp-btn ripple" target="_blank" aria-label="تواصل عبر واتساب">
+                    <i class="fab fa-whatsapp"></i> <span class="cta-text">تواصل عبر واتساب</span>
+                </a>
+                <a href="tel:+97431691024" class="nav-cta call-btn ripple" aria-label="اتصل الآن">
+                    <i class="fas fa-phone"></i> <span class="cta-text">اتصل الآن</span>
+                </a>
+            </div>
+            
+            <!-- Mobile Menu Burger -->
+            <button class="burger" id="burger" aria-label="قائمة التنقل">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ================= PROCESS STEPS ================= -->
+    <section class="process-steps section-padding" id="process">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">كيف تعمل خدماتنا في قطر</h2>
+                <p class="section-subtitle">ثلاث خطوات بسيطة للحصول على خدمة توصيل مميزة</p>
+            </div>
+            
+            <div class="process-container">
+                <div class="process-step" data-aos="fade-up" data-aos-delay="100">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <div class="step-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3>طلب الخدمة</h3>
+                        <p>اتصل بنا عبر الواتساب أو الهاتف واختر الخدمة التي تحتاجها</p>
+                    </div>
+                </div>
+                
+                <div class="process-step" data-aos="fade-up" data-aos-delay="200">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <div class="step-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <h3>التنفيذ والتوصيل</h3>
+                        <p>نقوم بتنفيذ طلبك بدقة عالية مع تحديثات مستمرة</p>
+                    </div>
+                </div>
+                
+                <div class="process-step" data-aos="fade-up" data-aos-delay="300">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <div class="step-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>التوثيق والتسليم</h3>
+                        <p>نوثق عملية التسليم يداً بيد مع إثباتات كاملة</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= QATAR SERVICES ================= -->
+    <section id="qatarServices" class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">خدمات التوصيل في قطر</h2>
+                <p class="section-subtitle">خدمات محلية شاملة لجميع احتياجاتك داخل دولة قطر</p>
+            </div>
+            
+            <div class="qatar-services-grid">
+                <!-- Service 1 -->
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                            alt="توصيل موظفين وتلاميذ في قطر - خدمة نقل موظفين" loading="lazy">
+                    </div>
+                    
+                    <div class="service-content">
+                        <div class="service-header">
+                            <div class="service-icon gold-bg">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <h3 class="service-title">توصيل موظفين وتلاميذ</h3>
+                        </div>
+                        <p class="service-description">
+                            خدمة نقل موظفين إلى أماكن العمل وتوصيل الطلاب إلى المدارس بمواعيد منتظمة وآمنة، مع سائعين مدربين ومركبات مكيفة.
+                        </p>
+                        
+                        <div class="service-features">
+                            <h4>مميزات الخدمة:</h4>
+                            <ul class="features-list">
+                                <li>مواعيد ثابتة ومنتظمة</li>
+                                <li>سائقون مدربون ومحترفون</li>
+                                <li>مركبات مكيفة وآمنة</li>
+                                <li>تتبع مباشر للمواقع</li>
+                                <li>تقارير يومية عن الرحلات</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-button-container">
+                            <button class="service-btn-small" onclick="window.open('https://wa.me/+97431691024?text=أريد خدمة توصيل موظفين وتلاميذ', '_blank')" aria-label="طلب خدمة توصيل موظفين">
+                                <i class="fab fa-whatsapp"></i> طلب الخدمة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card" data-aos="fade-up" data-aos-delay="150">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                            alt="توصيل مشاوير خاصة في قطر - خدمة تنفيذ مهام" loading="lazy">
+                    </div>
+                    
+                    <div class="service-content">
+                        <div class="service-header">
+                            <div class="service-icon gold-bg">
+                                <i class="fas fa-running"></i>
+                            </div>
+                            <h3 class="service-title">توصيل مشاوير خاصة</h3>
+                        </div>
+                        <p class="service-description">
+                            تنفيذ مشاوير خاصة مثل السحب من البنك، تسليم مستندات، زيارات رسمية، سحب معاملات حكومية، وغيرها من المهام الخاصة.
+                        </p>
+                        
+                        <div class="service-features">
+                            <h4>مميزات الخدمة:</h4>
+                            <ul class="features-list">
+                                <li>تنفيذ جميع أنواع المشاوير</li>
+                                <li>سريعة ومضمونة النتائج</li>
+                                <li>تسليم يداً بيد</li>
+                                <li>إيصالات رسمية للمعاملات</li>
+                                <li>خصوصية تامة للمستندات</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-button-container">
+                            <button class="service-btn-small" onclick="window.open('https://wa.me/+97431691024?text=أريد خدمة توصيل مشاوير خاصة', '_blank')" aria-label="طلب خدمة توصيل مشاوير">
+                                <i class="fab fa-whatsapp"></i> طلب الخدمة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-image">
+                        <img src="https://iili.io/ftEIV19.md.webp" 
+                            alt="توصيل أغراض ومشتريات في قطر - خدمة تسوق وتوصيل" loading="lazy">
+                    </div>
+                    
+
+
+                    <div class="service-content">
+                        <div class="service-header">
+                            <div class="service-icon gold-bg">
+                                <i class="fas fa-shopping-bag"></i>
+                            </div>
+                            <h3 class="service-title">توصيل أغراض ومشتريات</h3>
+                        </div>
+                        <p class="service-description">
+                            توصيل المشتريات والأغراض الشخصية من المتاجر والأسواق إلى منزلك أو عملك. نخدم جميع المحلات التجارية الكبرى.
+                        </p>
+                        
+                        <div class="service-features">
+                            <h4>مميزات الخدمة:</h4>
+                            <ul class="features-list">
+                                <li>توصيل من جميع المحلات التجارية</li>
+                                <li>فحص المنتجات قبل الشراء</li>
+                                <li>تغليف احترافي للأغراض</li>
+                                <li>توصيل سريع خلال 2-3 ساعات</li>
+                                <li>أسعار تنافسية</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-button-container">
+                            <button class="service-btn-small" onclick="window.open('https://wa.me/+97431691024?text=أريد خدمة توصيل أغراض ومشتريات', '_blank')" aria-label="طلب خدمة توصيل أغراض">
+                                <i class="fab fa-whatsapp"></i> طلب الخدمة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="service-card" data-aos="fade-up" data-aos-delay="250">
+                    <div class="service-image">
+                        <img src="https://iili.io/ftEoqJf.jpg" alt="ftEoqJf.jpg" 
+                            alt="توصيل هدايا في قطر - خدمة هدايا وورود" loading="lazy">
+                    </div>
+                    
+                    <div class="service-content">
+                        <div class="service-header">
+                            <div class="service-icon gold-bg">
+                                <i class="fas fa-gift"></i>
+                            </div>
+                            <h3 class="service-title">توصيل هدايا</h3>
+                        </div>
+                        <p class="service-description">
+                            توصيل الهدايا والورود والباقات في المناسبات الخاصة مع خدمة تغليف مميزة. نضمن وصول الهدايا في الوقت المحدد وبشكل أنيق.
+                        </p>
+                        
+                        <div class="service-features">
+                            <h4>مميزات الخدمة:</h4>
+                            <ul class="features-list">
+                                <li>تغليف احترافي للهدايا</li>
+                                <li>توصيل مفاجئة في المناسبات</li>
+                                <li>باقات ورد طازجة يومياً</li>
+                                <li>بطاقات تهنئة شخصية</li>
+                                <li>خدمة توصيل 24/7</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-button-container">
+                            <button class="service-btn-small" onclick="window.open('https://wa.me/+97431691024?text=أريد خدمة توصيل هدايا', '_blank')" aria-label="طلب خدمة توصيل هدايا">
+                                <i class="fab fa-whatsapp"></i> طلب الخدمة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 5 -->
+                <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                            alt="توصيل مواد استهلاكية في قطر - خدمة موزون" loading="lazy">
+                    </div>
+                    
+                    <div class="service-content">
+                        <div class="service-header">
+                            <div class="service-icon gold-bg">
+                                <i class="fas fa-box"></i>
+                            </div>
+                            <h3 class="service-title">توصيل مواد استهلاكية</h3>
+                        </div>
+                        <p class="service-description">
+                            توصيل المواد الغذائية والاستهلاكية من المحلات التجارية إلى المنازل والمطاعم والمؤسسات. نتعامل مع جميع المحلات الكبرى.
+                        </p>
+                        
+                        <div class="service-features">
+                            <h4>مميزات الخدمة:</h4>
+                            <ul class="features-list">
+                                <li>توصيل من جميع المحلات التجارية</li>
+                                <li>حفظ المواد سليمة ومبردة</li>
+                                <li>أسعار الجملة للمؤسسات</li>
+                                <li>توصيل منتظم للمطاعم</li>
+                                <li>فواتير رسمية</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-button-container">
+                            <button class="service-btn-small" onclick="window.open('https://wa.me/+97431691024?text=أريد خدمة توصيل مواد استهلاكية', '_blank')" aria-label="طلب خدمة توصيل مواد استهلاكية">
+                                <i class="fab fa-whatsapp"></i> طلب الخدمة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 6 -->
+                <div class="service-card" data-aos="fade-up" data-aos-delay="350">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1556742044-3c52d6e88c62?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                            alt="خدمات التجارة الإلكترونية في قطر - خدمة متاجر إلكترونية" loading="lazy">
+                    </div>
+                    
+                    <div class="service-content">
+                        <div class="service-header">
+                            <div class="service-icon gold-bg">
+                                <i class="fas fa-laptop"></i>
+                            </div>
+                            <h3 class="service-title">خدمات التجارة الإلكترونية</h3>
+                        </div>
+                        <p class="service-description">
+                            خدمات توصيل للمتاجر الإلكترونية وتنفيذ الطلبات مع تحديثات لحظية للعملاء. شريك موثوق في نجاح متجرك الإلكتروني.
+                        </p>
+                        
+                        <div class="service-features">
+                            <h4>مميزات الخدمة:</h4>
+                            <ul class="features-list">
+                                <li>تكامل مع منصات التجارة الإلكترونية</li>
+                                <li>تحديثات لحظية للعملاء</li>
+                                <li>إدارة المخزون والتوصيل</li>
+                                <li>خدمة عملاء مخصصة للتجار</li>
+                                <li>تقارير أداء شاملة</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-button-container">
+                            <button class="service-btn-small" onclick="window.open('https://wa.me/+97431691024?text=أريد خدمة توصيل للتجارة الإلكترونية', '_blank')" aria-label="طلب خدمة توصيل للتجارة الإلكترونية">
+                                <i class="fab fa-whatsapp"></i> طلب الخدمة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= SERVICES FORMS SECTION ================= -->
+    <section class="section-padding" id="servicesForms">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">اطلب خدمتك الآن</h2>
+                <p class="section-subtitle">اختر الخدمة التي تحتاجها واطلبها مباشرة</p>
+            </div>
+            
+            <div class="services-double-section">
+                <!-- خدمة توصيل داخل قطر -->
+                <div class="service-form-card" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="service-form-title gold-text">خدمات توصيل داخل قطر</h3>
+                    <p class="service-form-description">اختر الخدمة التي تحتاجها واطلبها الآن</p>
+                    
+                    <div class="service-selection">
+                        <select class="service-select" id="serviceSelectQatar">
+                            <option value="" selected disabled>-- اختر الخدمة --</option>
+                            <option value="توصيل موظفين وتلاميذ">توصيل موظفين وتلاميذ</option>
+                            <option value="توصيل مشاوير خاصة">توصيل مشاوير خاصة</option>
+                            <option value="توصيل أغراض ومشتريات">توصيل أغراض ومشتريات</option>
+                            <option value="توصيل هدايا">توصيل هدايا</option>
+                            <option value="توصيل مواد استهلاكية">توصيل مواد استهلاكية</option>
+                            <option value="خدمات التجارة الإلكترونية">خدمات التجارة الإلكترونية</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <input type="text" id="nameInputQatar" placeholder="اسمك الكريم" class="service-input" aria-label="اسم المستخدم">
+                        <i class="fas fa-user input-icon"></i>
+                    </div>
+                    
+                    <div class="input-group">
+                        <input type="tel" id="phoneInputQatar" placeholder="رقم هاتفك" class="service-input" aria-label="رقم الهاتف">
+                        <i class="fas fa-phone input-icon"></i>
+                    </div>
+                    
+                    <button class="service-btn whatsapp" id="sendQatarRequest" aria-label="إرسال طلب خدمة التوصيل في قطر">
+                        <i class="fab fa-whatsapp"></i> 
+                        <span>طلب خدمة التوصيل في قطر</span>
+                    </button>
+                    
+                    <div class="contact-number-display">
+                        <a href="tel:+97431691024" class="phone-link">
+                            <i class="fas fa-phone-alt"></i> 
+                            قطر: +974 31 691 024
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- خدمة توصيل ميزان بين قطر وتونس -->
+                <div class="service-form-card" data-aos="fade-up" data-aos-delay="150">
+                    <h3 class="service-form-title gold-text">خدمة توصيل ميزان بين قطر وتونس</h3>
+                    <p class="service-form-description">اختر الخدمة التي تحتاجها واطلبها الآن</p>
+                    
+                    <div class="service-selection">
+                        <select class="service-select" id="serviceSelectScale">
+                            <option value="" selected disabled>-- اختر الخدمة --</option>
+                            <option value="تريد بيع ميزان">تريد بيع ميزان</option>
+                            <option value="حجز ميزان من قطر إلى تونس">حجز ميزان من قطر إلى تونس</option>
+                            <option value="حجز ميزان من تونس إلى قطر">حجز ميزان من تونس إلى قطر</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <input type="text" id="nameInputScale" placeholder="اسمك الكريم" class="service-input" aria-label="اسم المستخدم">
+                        <i class="fas fa-user input-icon"></i>
+                    </div>
+                    
+                    <div class="input-group">
+                        <input type="tel" id="phoneInputScale" placeholder="رقم هاتفك" class="service-input" aria-label="رقم الهاتف">
+                        <i class="fas fa-phone input-icon"></i>
+                    </div>
+                    
+                    <button class="service-btn whatsapp" id="sendScaleRequest" aria-label="إرسال طلب خدمة التوصيل الدولي">
+                        <i class="fab fa-whatsapp"></i> 
+                        <span>طلب خدمة توصيل دولي</span>
+                    </button>
+                    
+                    <div class="contact-number-display">
+                        <a href="tel:+97431691024" class="phone-link">
+                            <i class="fas fa-phone-alt"></i> 
+                            قطر: +974 31 691 024
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= SERVICE FEATURES ================= -->
+    <section class="delivery-process section-padding" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">مميزات خدماتنا في قطر</h2>
+                <p class="section-subtitle">نضمن لك تجربة توصيل سلسة وآمنة</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>سرعة في التنفيذ</h3>
+                    <p>توصيل سريع خلال 1-3 ساعات داخل الدوحة</p>
+                </div>
+                
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>أمان كامل</h3>
+                    <p>تأمين على الشحنات وتوثيق كامل للعمليات</p>
+                </div>
+                
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>تغطية شاملة</h3>
+                    <p>خدمة جميع مناطق قطر بما فيها المناطق النائية</p>
+                </div>
+                
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>دعم فني 24/7</h3>
+                    <p>دعم فني متواصل على مدار الساعة</p>
+                </div>
+                
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="feature-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h3>توصيل موثق</h3>
+                    <p>صور وفيديوهات توثيقية للتسليم</p>
+                </div>
+                
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="feature-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <h3>أسعار مناسبة</h3>
+                    <p>أسعار تنافسية مع عروض خاصة</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FAQ ================= -->
+    <section class="services-faq section-padding" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">أسئلة شائعة عن خدمات قطر</h2>
+                <p class="section-subtitle">إجابات على الأسئلة الأكثر شيوعاً</p>
+            </div>
+            
+            <div class="faq-container">
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="faq-question">
+                        <h3>ما هي مدة التوصيل داخل الدوحة؟</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>مدة التوصيل داخل الدوحة تتراوح بين 1-3 ساعات حسب الموقع ووقت الطلب. للطلبات العاجلة نقدم خدمة توصيل خلال ساعة.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="faq-question">
+                        <h3>هل تقدمون خدمة خارج الدوحة؟</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>نعم، نقدم خدمة التوصيل لجميع مناطق قطر بما فيها الريان، الخور، الوكرة، وغيرها من المناطق.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="faq-question">
+                        <h3>كيف يتم تحديد السعر؟</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>يتم تحديد السعر بناءً على المسافة، حجم الشحنة، ونوع الخدمة. يمكنك الحصول على سعر فوري عبر التواصل معنا.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="400">
+                    <div class="faq-question">
+                        <h3>هل يمكنني تتبع حالة طلبي؟</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>نعم، نقدم تحديثات مستمرة عبر الواتساب مع صور وفيديوهات لكل مرحلة من مراحل التنفيذ والتسليم.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="500">
+                    <div class="faq-question">
+                        <h3>ما هي طرق الدفع المتاحة؟</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>نقبل الدفع نقداً عند التسليم، كما يمكن الدفع عبر التحويل البنكي مسبقاً للعملاء الدائمين.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= CTA ================= -->
+    <section class="final-cta section-padding" id="finalCta">
+        <div class="container">
+            <div class="cta-content" data-aos="zoom-in" data-aos-duration="800">
+                <h2 class="cta-title gold-text">جاهز لطلب الخدمة في قطر؟</h2>
+                <p class="cta-subtitle">اتصل بنا الآن واحصل على أفضل خدمة توصيل في قطر</p>
+                
+                <div class="cta-buttons">
+                    <a href="https://wa.me/+97431691024" class="btn whatsapp-btn ripple pulse" target="_blank" aria-label="تواصل عبر واتساب">
+                        <i class="fab fa-whatsapp"></i> تواصل عبر واتساب
+                    </a>
+                    <a href="tel:+97431691024" class="btn outline-btn ripple" aria-label="اتصل الآن">
+                        <i class="fas fa-phone"></i> اتصل الآن
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-bolt gold-text" style="font-size: 2rem;"></i>
+                        </div>
+                        <div class="logo-text">
+                            <h2 class="gold-text">Tn-QA Delivery</h2>
+                            <p>خدمة توصيل سريعة وآمنة</p>
+                        </div>
+                    </div>
+                    <p class="footer-desc">خدمات توصيل ونقل موثوقة بين تونس وقطر. نضمن لك تجربة توصيل آمنة وسريعة مع توثيق كامل.</p>
+                    
+                    <div class="social-icons">
+                        <a href="https://wa.me/+97431691024" class="social-icon whatsapp" aria-label="تواصل عبر واتساب" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="https://www.facebook.com/share/17ZgZb5UFg/" class="social-icon facebook" aria-label="تابعنا على فيسبوك" target="_blank">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://www.tiktok.com/@twensafiqatar0" class="social-icon tiktok" aria-label="تابعنا على تيك توك" target="_blank">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3 class="footer-title gold-text">روابط سريعة</h3>
+                    <ul class="footer-list">
+                        <li><a href="index.html" class="footer-link">الرئيسية</a></li>
+                        <li><a href="index.html#about" class="footer-link">من نحن</a></li>
+                        <li><a href="qatar-services.html" class="footer-link active">خدمات قطر</a></li>
+                        <li><a href="tunisia-services.html" class="footer-link">خدمات تونس</a></li>
+                        <li><a href="contact.html" class="footer-link">تواصل معنا</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-services">
+                    <h3 class="footer-title gold-text">خدمات قطر</h3>
+                    <ul class="footer-list">
+                        <li><a href="#qatarServices" class="footer-link">التوصيل المحلي</a></li>
+                        <li><a href="#servicesForms" class="footer-link">طلب الخدمات</a></li>
+                        <li><a href="#process" class="footer-link">كيفية العمل</a></li>
+                        <li><a href="#faq" class="footer-link">أسئلة شائعة</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3 class="footer-title gold-text">تواصل معنا في قطر</h3>
+                    <div class="footer-contact-info">
+                        <p><i class="fab fa-whatsapp gold-text"></i> <span>واتساب:</span> +974 31 691 024</p>
+                        <p><i class="fas fa-phone gold-text"></i> <span>هاتف قطر:</span> +974 31 691 024</p>
+                        <!-- <p><i class="fas fa-phone gold-text"></i> <span>هاتف تونس:</span> +216 56 471 550</p>
+                        <p><i class="fas fa-envelope gold-text"></i> <span>البريد:</span> helamishwar@gmail.com</p> -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="legal-notice">
+                    <i class="fas fa-exclamation-circle gold-text"></i>
+                    <p>الموقع منصة تعريفية وتنسيقية فقط، ولا يقوم بأي عمليات دفع إلكتروني أو تحصيل أموال.</p>
+                </div>
+                
+                <p class="copyright">© <span id="currentYear">2024</span> <span class="gold-text">Tn-QA Delivery</span> - جميع الحقوق محفوظة</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= FLOATING BUTTONS ================= -->
+    <button class="float-theme hover-lift" id="floatThemeToggle" aria-label="تبديل وضع السطوع">
+        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun" style="display: none;"></i>
+    </button>
+    
+    <a href="https://wa.me/+97431691024" class="float-whatsapp pulse hover-lift" aria-label="تواصل معنا عبر واتساب" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    
+    <button class="scroll-to-top hover-lift" id="scrollToTop" aria-label="العودة إلى الأعلى">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- ================= SCRIPTS ================= -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100,
+            disable: window.innerWidth < 768,
+            startEvent: 'DOMContentLoaded',
+            easing: 'ease-in-out'
+        });
+        
+        // Page Load Function
+        function initPage() {
+            // Set current year
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            
+            // Page transition
+            setTimeout(function() {
+                const pageTransition = document.querySelector('.page-transition');
+                if (pageTransition) {
+                    pageTransition.classList.add('hidden');
+                }
+            }, 800);
+            
+            setTimeout(function() {
+                const pageTransition = document.querySelector('.page-transition');
+                if (pageTransition) {
+                    pageTransition.style.display = 'none';
+                }
+            }, 1400);
+            
+            // Progress bar
+            const progressBar = document.getElementById('progressBar');
+            const progressContainer = document.querySelector('.progress-container');
+            
+            if (progressBar && progressContainer) {
+                progressContainer.style.display = 'block';
+                
+                window.addEventListener('scroll', function() {
+                    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    const scrolled = (winScroll / height) * 100;
+                    progressBar.style.width = scrolled + '%';
+                });
+            }
+            
+            // Mobile menu
+            const burger = document.getElementById('burger');
+            const navLinks = document.getElementById('navLinks');
+            
+            if (burger && navLinks) {
+                burger.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                });
+                
+                document.addEventListener('click', function(event) {
+                    if (!burger.contains(event.target) && !navLinks.contains(event.target)) {
+                        burger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                    }
+                });
+                
+                navLinks.querySelectorAll('.nav-link').forEach(link => {
+                    link.addEventListener('click', function() {
+                        burger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                    });
+                });
+            }
+            
+            // Scroll to top
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+            if (scrollToTopBtn) {
+                window.addEventListener('scroll', () => {
+                    if (window.pageYOffset > 300) {
+                        scrollToTopBtn.style.opacity = '1';
+                        scrollToTopBtn.style.visibility = 'visible';
+                    } else {
+                        scrollToTopBtn.style.opacity = '0';
+                        scrollToTopBtn.style.visibility = 'hidden';
+                    }
+                });
+                
+                scrollToTopBtn.addEventListener('click', () => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+            
+            // FAQ functionality
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    // Close other items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current item
+                    item.classList.toggle('active');
+                });
+            });
+            
+            // Theme toggle
+            const themeToggle = document.getElementById('themeToggle');
+            const floatThemeToggle = document.getElementById('floatThemeToggle');
+            const themeText = document.querySelector('.theme-text');
+            
+            function toggleTheme() {
+                const isDark = document.body.getAttribute('data-theme') === 'dark';
+                const moonIcon = floatThemeToggle.querySelector('.fa-moon');
+                const sunIcon = floatThemeToggle.querySelector('.fa-sun');
+                
+                if (isDark) {
+                    document.body.removeAttribute('data-theme');
+                    themeText.textContent = 'فاتح';
+                    themeToggle.innerHTML = '<i class="fas fa-sun"></i><span class="theme-text">فاتح</span>';
+                    moonIcon.style.display = 'block';
+                    sunIcon.style.display = 'none';
+                } else {
+                    document.body.setAttribute('data-theme', 'dark');
+                    themeText.textContent = 'داكن';
+                    themeToggle.innerHTML = '<i class="fas fa-moon"></i><span class="theme-text">داكن</span>';
+                    moonIcon.style.display = 'none';
+                    sunIcon.style.display = 'block';
+                }
+                localStorage.setItem('theme', isDark ? 'light' : 'dark');
+            }
+            
+            if (themeToggle) {
+                themeToggle.addEventListener('click', toggleTheme);
+            }
+            
+            if (floatThemeToggle) {
+                floatThemeToggle.addEventListener('click', toggleTheme);
+            }
+            
+            // Load saved theme
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            const moonIcon = floatThemeToggle.querySelector('.fa-moon');
+            const sunIcon = floatThemeToggle.querySelector('.fa-sun');
+            
+            if (savedTheme === 'dark') {
+                document.body.setAttribute('data-theme', 'dark');
+                themeText.textContent = 'داكن';
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i><span class="theme-text">داكن</span>';
+                moonIcon.style.display = 'none';
+                sunIcon.style.display = 'block';
+            } else {
+                moonIcon.style.display = 'block';
+                sunIcon.style.display = 'none';
+            }
+            
+            // Language switcher
+            const langBtn = document.getElementById('langBtn');
+            const langDropdown = document.getElementById('langDropdown');
+            const currentLang = document.getElementById('currentLang');
+            const langOptions = document.querySelectorAll('.lang-option-nav');
+            
+            if (langBtn && langDropdown) {
+                langBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    langDropdown.classList.toggle('active');
+                });
+                
+                document.addEventListener('click', () => {
+                    langDropdown.classList.remove('active');
+                });
+                
+                langOptions.forEach(option => {
+                    option.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const lang = option.getAttribute('data-lang');
+                        currentLang.textContent = lang === 'ar' ? 'العربية' : 'English';
+                        
+                        langOptions.forEach(opt => opt.classList.remove('active'));
+                        option.classList.add('active');
+                        
+                        langDropdown.classList.remove('active');
+                        
+                        // Here you would implement actual language switching
+                        console.log('Language changed to:', lang);
+                        // Implement actual translation here
+                    });
+                });
+            }
+            
+            // WhatsApp service request for international service
+            const sendScaleRequest = document.getElementById('sendScaleRequest');
+            if (sendScaleRequest) {
+                sendScaleRequest.addEventListener('click', function() {
+                    const serviceSelect = document.getElementById('serviceSelectScale');
+                    const nameInput = document.getElementById('nameInputScale');
+                    const phoneInput = document.getElementById('phoneInputScale');
+                    
+                    if (!serviceSelect.value) {
+                        alert('الرجاء اختيار الخدمة');
+                        serviceSelect.focus();
+                        return;
+                    }
+                    
+                    if (!nameInput.value.trim()) {
+                        alert('الرجاء إدخال الاسم');
+                        nameInput.focus();
+                        return;
+                    }
+                    
+                    if (!phoneInput.value.trim()) {
+                        alert('الرجاء إدخال رقم الهاتف');
+                        phoneInput.focus();
+                        return;
+                    }
+                    
+                    const serviceName = serviceSelect.options[serviceSelect.selectedIndex].text;
+                    const serviceValue = serviceSelect.value;
+                    
+                    const message = `📦 طلب خدمة توصيل دولي - قطر/تونس\n\n` +
+                                `👤 الاسم: ${nameInput.value}\n` +
+                                `📱 رقم الهاتف: ${phoneInput.value}\n` +
+                                `📋 الخدمة المطلوبة: ${serviceName}\n` +
+                                `🌍 نوع الخدمة: ${serviceValue}\n\n` +
+                                `🚚 Tn-QA Delivery - خدمات التوصيل`;
+                    
+                    const whatsappUrl = `https://wa.me/+97431691024?text=${encodeURIComponent(message)}`;
+                    window.open(whatsappUrl, '_blank');
+                    
+                    // Clear form
+                    serviceSelect.selectedIndex = 0;
+                    nameInput.value = '';
+                    phoneInput.value = '';
+                });
+            }
+            
+            // WhatsApp service request for local Qatar service
+            const sendQatarRequest = document.getElementById('sendQatarRequest');
+            if (sendQatarRequest) {
+                sendQatarRequest.addEventListener('click', function() {
+                    const serviceSelect = document.getElementById('serviceSelectQatar');
+                    const nameInput = document.getElementById('nameInputQatar');
+                    const phoneInput = document.getElementById('phoneInputQatar');
+                    
+                    if (!serviceSelect.value) {
+                        alert('الرجاء اختيار الخدمة');
+                        serviceSelect.focus();
+                        return;
+                    }
+                    
+                    if (!nameInput.value.trim()) {
+                        alert('الرجاء إدخال الاسم');
+                        nameInput.focus();
+                        return;
+                    }
+                    
+                    if (!phoneInput.value.trim()) {
+                        alert('الرجاء إدخال رقم الهاتف');
+                        phoneInput.focus();
+                        return;
+                    }
+                    
+                    const serviceName = serviceSelect.options[serviceSelect.selectedIndex].text;
+                    
+                    const message = `🚚 طلب خدمة توصيل محلي في قطر\n\n` +
+                                `👤 الاسم: ${nameInput.value}\n` +
+                                `📱 رقم الهاتف: ${phoneInput.value}\n` +
+                                `📋 الخدمة المطلوبة: ${serviceName}\n` +
+                                `📍 المنطقة: داخل قطر\n\n` +
+                                `⚡ Tn-QA Delivery - خدمة توصيل سريعة وآمنة`;
+                    
+                    const whatsappUrl = `https://wa.me/+97431691024?text=${encodeURIComponent(message)}`;
+                    window.open(whatsappUrl, '_blank');
+                    
+                    // Clear form
+                    serviceSelect.selectedIndex = 0;
+                    nameInput.value = '';
+                    phoneInput.value = '';
+                });
+            }
+            
+            // Add loading attribute to all images for better performance
+            document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+                if (!img.hasAttribute('loading')) {
+                    img.setAttribute('loading', 'lazy');
+                }
+            });
+        }
+        
+        // Initialize page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initPage);
+        
+        // Fallback for images
+        document.addEventListener('error', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.target.style.display = 'none';
+                const parent = e.target.parentElement;
+                if (parent.classList.contains('service-image')) {
+                    parent.innerHTML = '<div class="placeholder-image" style="width:100%;height:100%;background:linear-gradient(135deg, #f4e4a6 0%, #d4af37 100%);display:flex;align-items:center;justify-content:center;"><i class="fas fa-truck" style="font-size:3rem;color:white;"></i></div>';
+                }
+            }
+        }, true);
+    </script>
+</body>
+</html>

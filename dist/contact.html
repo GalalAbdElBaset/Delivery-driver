@@ -2,12 +2,14 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="contact.pageTitle">تواصل معنا - Tn-QA Delivery</title>
-    <meta name="description" content="تواصل مع HELA Express - خدمات التوصيل السريع بين قطر وتونس عبر الهاتف، واتساب، البريد الإلكتروني أو النموذج">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>تواصل معنا - Tn-QA Delivery</title>
+    <meta name="description" content="تواصل مع Tn-QA Delivery - خدمات التوصيل السريع في تونس عبر الهاتف، واتساب، البريد الإلكتروني أو النموذج">
     
-    <!-- Font Awesome & Google Fonts -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -17,67 +19,1556 @@
           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
           crossorigin="" />
     
-    <!-- AOS Animation Library -->
-    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/contact.css">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    
     <style>
-        /* استايلات إضافية لتحسين التصميم */
-        .toast-message {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 25px;
-            background: #28a745;
-            color: white;
-            border-radius: 8px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            z-index: 9999;
-            animation: slideInRight 0.3s ease, fadeOut 0.3s ease 2.7s;
-            max-width: 350px;
-            font-weight: 500;
-            font-family: 'Cairo', sans-serif;
+        /* ============== CSS Variables ============== */
+        :root {
+            /* الألوان الأساسية - أبيض وذهبي فقط */
+            --primary-gold: #D4AF37;
+            --gold-light: #F5E6A4;
+            --gold-dark: #B8941F;
+            --pure-white: #FFFFFF;
+            --off-white: #F8F9FA;
+            --light-gray: #E9ECEF;
+            --medium-gray: #DEE2E6;
+            --dark-gray: #343A40;
+            --text-dark: #212529;
+            --text-light: #6C757D;
+            
+            /* الظلال */
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 8px rgba(0,0,0,0.08);
+            --shadow-lg: 0 8px 16px rgba(0,0,0,0.1);
+            --shadow-gold: 0 4px 15px rgba(212, 175, 55, 0.3);
+            
+            /* الزوايا */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            
+            /* التباعد */
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 1.5rem;
+            --space-lg: 2rem;
+            --space-xl: 3rem;
+            
+            /* الخطوط */
+            --font-primary: 'Cairo', sans-serif;
+            --font-size-xs: 0.75rem;   /* 12px للجوال */
+            --font-size-sm: 0.875rem;  /* 14px للجوال */
+            --font-size-base: 1rem;    /* 16px للجوال */
+            --font-size-lg: 1.125rem;  /* 18px للجوال */
+            --font-size-xl: 1.25rem;   /* 20px للجوال */
+            --font-size-2xl: 1.5rem;   /* 24px للجوال */
+            --font-size-3xl: 1.875rem; /* 30px للجوال */
+            --font-size-4xl: 2.25rem;  /* 36px للجوال */
+            
+            /* التجاوب */
+            --container-sm: 100%;
+            --container-md: 720px;
+            --container-lg: 960px;
+            --container-xl: 1140px;
         }
         
-        .toast-message.error {
-            background: #dc3545;
+        /* ============== Dark Mode Variables ============== */
+        .dark-mode {
+            --pure-white: #121212;
+            --off-white: #1E1E1E;
+            --light-gray: #2D2D2D;
+            --medium-gray: #3D3D3D;
+            --dark-gray: #E9ECEF;
+            --text-dark: #F8F9FA;
+            --text-light: #ADB5BD;
+            
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.2);
+            --shadow-md: 0 4px 8px rgba(0,0,0,0.25);
+            --shadow-lg: 0 8px 16px rgba(0,0,0,0.3);
+            --shadow-gold: 0 4px 15px rgba(212, 175, 55, 0.5);
         }
         
-        .toast-message.warning {
-            background: #ffc107;
-            color: #000;
+        /* ============== Reset & Base Styles ============== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-primary);
         }
         
-        .toast-message.info {
-            background: #17a2b8;
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
         }
         
-        @keyframes slideInRight {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+        body {
+            background-color: var(--pure-white);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         
-        @keyframes fadeOut {
-            from { opacity: 1; }
-            to { opacity: 0; }
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s ease;
         }
         
-        /* تحسينات الأداء */
+        button {
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-family: var(--font-primary);
+        }
+        
+        ul, ol {
+            list-style: none;
+        }
+        
         img {
             max-width: 100%;
             height: auto;
+            display: block;
         }
         
-        /* تحسين الطباعة */
-        @media print {
-            .quick-contact-widget,
+        .container {
+            width: 100%;
+            max-width: var(--container-xl);
+            margin: 0 auto;
+            padding: 0 var(--space-md);
+        }
+        
+        .section-padding {
+            padding: var(--space-xl) 0;
+        }
+        
+        /* ============== Typography Responsive ============== */
+        h1 {
+            font-size: var(--font-size-4xl);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: var(--space-md);
+        }
+        
+        h2 {
+            font-size: var(--font-size-3xl);
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: var(--space-md);
+        }
+        
+        h3 {
+            font-size: var(--font-size-2xl);
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: var(--space-sm);
+        }
+        
+        h4 {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: var(--space-xs);
+        }
+        
+        p {
+            font-size: var(--font-size-base);
+            margin-bottom: var(--space-sm);
+            color: var(--text-light);
+        }
+        
+        .gold-text {
+            color: var(--primary-gold);
+        }
+        
+        /* ============== Responsive Typography for Mobile ============== */
+        @media (max-width: 768px) {
+            html {
+                font-size: 14px;
+            }
+            
+            h1 {
+                font-size: var(--font-size-3xl);
+            }
+            
+            h2 {
+                font-size: var(--font-size-2xl);
+            }
+            
+            h3 {
+                font-size: var(--font-size-xl);
+            }
+            
+            h4 {
+                font-size: var(--font-size-lg);
+            }
+            
+            .container {
+                padding: 0 var(--space-sm);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            html {
+                font-size: 13px;
+            }
+            
+            h1 {
+                font-size: var(--font-size-2xl);
+            }
+            
+            h2 {
+                font-size: var(--font-size-xl);
+            }
+        }
+        
+        /* ============== Header & Navigation ============== */
+        .glass-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+        
+        .dark-mode .glass-header {
+            background: rgba(30, 30, 30, 0.95);
+        }
+        
+        .nav-wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-sm) 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 2px solid var(--primary-gold);
+        }
+        
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .logo-text h1 {
+            font-size: var(--font-size-lg);
+            margin-bottom: 0;
+            white-space: nowrap;
+        }
+        
+        .logo-text p {
+            font-size: var(--font-size-xs);
+            margin-bottom: 0;
+            color: var(--text-light);
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            padding: var(--space-xs) var(--space-sm);
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-gold);
+        }
+        
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary-gold);
+            border-radius: 2px;
+        }
+        
+        /* Header Buttons Container */
+        .header-buttons {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        
+        /* Language Switcher */
+        .language-switcher {
+            position: relative;
+        }
+        
+        .lang-btn {
+            background: var(--light-gray);
+            color: var(--text-dark);
+            padding: 8px 12px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: var(--font-size-sm);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .dark-mode .lang-btn {
+            background: var(--medium-gray);
+        }
+        
+        .lang-btn:hover {
+            background: var(--medium-gray);
+        }
+        
+        .lang-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--pure-white);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            min-width: 120px;
+            display: none;
+            z-index: 1001;
+            overflow: hidden;
+        }
+        
+        .dark-mode .lang-dropdown {
+            background: var(--off-white);
+        }
+        
+        .language-switcher:hover .lang-dropdown {
+            display: block;
+        }
+        
+        .lang-option {
+            padding: 10px 15px;
+            display: block;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .lang-option:hover {
+            background: var(--off-white);
+            color: var(--primary-gold);
+        }
+        
+        .lang-option.active {
+            background: var(--primary-gold);
+            color: var(--pure-white);
+        }
+        
+        /* Theme Toggle Button */
+        .theme-toggle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--light-gray);
+            color: var(--text-dark);
+            font-size: var(--font-size-lg);
+            transition: all 0.3s ease;
+        }
+        
+        .dark-mode .theme-toggle {
+            background: var(--medium-gray);
+            color: var(--dark-gray);
+        }
+        
+        .theme-toggle:hover {
+            background: var(--primary-gold);
+            color: var(--pure-white);
+            transform: rotate(30deg);
+        }
+        
+        .theme-toggle .fa-sun {
+            display: block;
+        }
+        
+        .theme-toggle .fa-moon {
+            display: none;
+        }
+        
+        .dark-mode .theme-toggle .fa-sun {
+            display: none;
+        }
+        
+        .dark-mode .theme-toggle .fa-moon {
+            display: block;
+        }
+        
+        /* Call to Action Buttons */
+        .nav-cta {
+            padding: var(--space-xs) var(--space-md);
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: var(--font-size-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp-btn {
+            background: var(--primary-gold);
+            color: var(--pure-white);
+        }
+        
+        .whatsapp-btn:hover {
+            background: var(--gold-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-gold);
+        }
+        
+        .call-btn {
+            background: var(--light-gray);
+            color: var(--text-dark);
+        }
+        
+        .dark-mode .call-btn {
+            background: var(--medium-gray);
+        }
+        
+        .call-btn:hover {
+            background: var(--medium-gray);
+            transform: translateY(-2px);
+        }
+        
+        /* Mobile Navigation */
+        .burger {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            background: none;
+            padding: var(--space-xs);
+        }
+        
+        .burger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-dark);
+            border-radius: 2px;
+            transition: 0.3s ease;
+        }
+        
+        .dark-mode .burger span {
+            background: var(--dark-gray);
+        }
+        
+        /* ============== Hero Section ============== */
+        .contact-hero {
+            padding-top: 120px;
+            padding-bottom: var(--space-xl);
+            background: linear-gradient(135deg, var(--off-white) 0%, var(--pure-white) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dark-mode .contact-hero {
+            background: linear-gradient(135deg, var(--light-gray) 0%, var(--off-white) 100%);
+        }
+        
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero-subtitle {
+            font-size: var(--font-size-lg);
+            color: var(--text-light);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .emergency-alert {
+            background: linear-gradient(135deg, var(--primary-gold) 0%, var(--gold-dark) 100%);
+            color: var(--pure-white);
+            padding: var(--space-md);
+            border-radius: var(--radius-lg);
+            margin: var(--space-lg) auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-md);
+            max-width: 600px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-xl);
+            flex-wrap: wrap;
+            margin-top: var(--space-xl);
+        }
+        
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        
+        .stat-item i {
+            font-size: var(--font-size-2xl);
+            color: var(--primary-gold);
+        }
+        
+        /* ============== Contact Methods ============== */
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 80px;
+            height: 3px;
+            background: var(--primary-gold);
+            border-radius: 2px;
+        }
+        
+        .contact-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+        
+        @media (max-width: 768px) {
+            .contact-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .contact-card {
+            background: var(--pure-white);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--light-gray);
+        }
+        
+        .dark-mode .contact-card {
+            background: var(--off-white);
+            border-color: var(--medium-gray);
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gold-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--space-md);
+        }
+        
+        .card-icon i {
+            font-size: var(--font-size-xl);
+            color: var(--primary-gold);
+        }
+        
+        .card-description {
+            margin-bottom: var(--space-lg);
+            min-height: 60px;
+        }
+        
+        .whatsapp-numbers, .phone-numbers, .email-addresses {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .whatsapp-number, .phone-number, .email-address {
+            background: var(--off-white);
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--light-gray);
+        }
+        
+        .dark-mode .whatsapp-number,
+        .dark-mode .phone-number,
+        .dark-mode .email-address {
+            background: var(--light-gray);
+            border-color: var(--medium-gray);
+        }
+        
+        .country-flag {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            margin-bottom: var(--space-sm);
+        }
+        
+        .country-flag img {
+            width: 24px;
+            height: 16px;
+            border-radius: 2px;
+        }
+        
+        .whatsapp-number a {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-weight: 600;
+            color: var(--primary-gold);
+            padding: var(--space-xs) 0;
+        }
+        
+        .status-badge {
+            background: var(--primary-gold);
+            color: var(--pure-white);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: var(--font-size-xs);
+            font-weight: 500;
+        }
+        
+        /* ============== Contact Form ============== */
+        .form-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--pure-white);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--light-gray);
+        }
+        
+        .dark-mode .form-wrapper {
+            background: var(--off-white);
+            border-color: var(--medium-gray);
+        }
+        
+        .form-header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+        
+        .form-stats {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-lg);
+            flex-wrap: wrap;
+            margin-top: var(--space-md);
+        }
+        
+        .form-stat {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            font-size: var(--font-size-sm);
+            color: var(--text-light);
+        }
+        
+        .form-stat i {
+            color: var(--primary-gold);
+        }
+        
+        .form-section {
+            margin-bottom: var(--space-xl);
+            padding-bottom: var(--space-lg);
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .form-section:last-child {
+            border-bottom: none;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+        
+        @media (max-width: 480px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .form-group {
+            margin-bottom: var(--space-md);
+        }
+        
+        .full-width {
+            grid-column: 1 / -1;
+        }
+        
+        label {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            margin-bottom: var(--space-xs);
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .dark-mode label {
+            color: var(--dark-gray);
+        }
+        
+        label i {
+            color: var(--primary-gold);
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: var(--space-sm);
+            border: 1px solid var(--medium-gray);
+            border-radius: var(--radius-md);
+            font-size: var(--font-size-base);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            background: var(--pure-white);
+            color: var(--text-dark);
+        }
+        
+        .dark-mode input,
+        .dark-mode select,
+        .dark-mode textarea {
+            background: var(--light-gray);
+            border-color: var(--medium-gray);
+            color: var(--text-dark);
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+        
+        .phone-input-wrapper {
+            display: flex;
+            gap: var(--space-xs);
+        }
+        
+        .country-code-select {
+            flex: 0 0 120px;
+        }
+        
+        .form-hint {
+            font-size: var(--font-size-sm);
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .textarea-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: var(--space-xs);
+        }
+        
+        .char-count {
+            font-size: var(--font-size-sm);
+            color: var(--text-light);
+        }
+        
+        .file-upload-area {
+            border: 2px dashed var(--medium-gray);
+            border-radius: var(--radius-md);
+            padding: var(--space-xl);
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+            background: var(--off-white);
+        }
+        
+        .dark-mode .file-upload-area {
+            background: var(--light-gray);
+        }
+        
+        .file-upload-area:hover {
+            border-color: var(--primary-gold);
+        }
+        
+        .file-upload-area i {
+            font-size: var(--font-size-2xl);
+            color: var(--primary-gold);
+            margin-bottom: var(--space-sm);
+        }
+        
+        .browse-link {
+            color: var(--primary-gold);
+            font-weight: 600;
+            text-decoration: underline;
+        }
+        
+        .file-hint {
+            font-size: var(--font-size-sm);
+            color: var(--text-light);
+            margin-top: var(--space-xs);
+        }
+        
+        .file-list {
+            margin-top: var(--space-sm);
+        }
+        
+        .file-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-xs) var(--space-sm);
+            background: var(--off-white);
+            border-radius: var(--radius-sm);
+            margin-bottom: var(--space-xs);
+        }
+        
+        .dark-mode .file-item {
+            background: var(--light-gray);
+        }
+        
+        .file-name {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+        
+        .remove-file {
+            color: #dc3545;
+            background: none;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        .remove-file:hover {
+            background: rgba(220, 53, 69, 0.1);
+        }
+        
+        .form-actions {
+            margin-top: var(--space-xl);
+            padding-top: var(--space-lg);
+            border-top: 1px solid var(--light-gray);
+        }
+        
+        .form-agreement {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .form-agreement input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: var(--space-md);
+        }
+        
+        .btn {
+            padding: var(--space-sm) var(--space-lg);
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: var(--font-size-base);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-xs);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border-color: var(--medium-gray);
+            color: var(--text-dark);
+        }
+        
+        .btn-outline:hover {
+            border-color: var(--primary-gold);
+            color: var(--primary-gold);
+        }
+        
+        .btn-primary {
+            background: var(--primary-gold);
+            color: var(--pure-white);
+            border-color: var(--primary-gold);
+        }
+        
+        .btn-primary:hover {
+            background: var(--gold-dark);
+            border-color: var(--gold-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-gold);
+        }
+        
+        .whatsapp-submit {
+            background: #25D366;
+            border-color: #25D366;
+        }
+        
+        .whatsapp-submit:hover {
+            background: #1DA851;
+            border-color: #1DA851;
+        }
+        
+        .email-submit {
+            background: linear-gradient(135deg, #4285F4, #34A853);
+            color: var(--pure-white);
+            width: 100%;
+        }
+        
+        .loader {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--pure-white);
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            display: none;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .form-status {
+            margin-top: var(--space-lg);
+            display: none;
+        }
+        
+        .status-message {
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+        }
+        
+        .status-message.success {
+            background: rgba(40, 167, 69, 0.1);
+            border: 1px solid rgba(40, 167, 69, 0.3);
+        }
+        
+        .status-message.error {
+            background: rgba(220, 53, 69, 0.1);
+            border: 1px solid rgba(220, 53, 69, 0.3);
+        }
+        
+        .status-message i {
+            font-size: var(--font-size-xl);
+            margin-top: 2px;
+        }
+        
+        .status-message.success i {
+            color: #28a745;
+        }
+        
+        .status-message.error i {
+            color: #dc3545;
+        }
+        
+        /* ============== Map Section ============== */
+        .map-container {
+            position: relative;
+            margin-bottom: var(--space-xl);
+        }
+        
+        .map-wrapper {
+            height: 500px;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+        
+        @media (max-width: 768px) {
+            .map-wrapper {
+                height: 400px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .map-wrapper {
+                height: 300px;
+            }
+        }
+        
+        .map-overlay {
+            position: absolute;
+            top: var(--space-md);
+            left: var(--space-md);
+            background: var(--pure-white);
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            max-width: 300px;
+            z-index: 1000;
+        }
+        
+        .dark-mode .map-overlay {
+            background: var(--off-white);
+        }
+        
+        .coverage-areas {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+        
+        .country-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-xs);
+        }
+        
+        .country-flag-small {
+            width: 20px;
+            height: 15px;
+            border-radius: 2px;
+        }
+        
+        .coverage-list {
+            padding-right: var(--space-md);
+        }
+        
+        .coverage-list li {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            margin-bottom: var(--space-xs);
+            font-size: var(--font-size-sm);
+        }
+        
+        .coverage-list i {
+            color: var(--primary-gold);
+            font-size: var(--font-size-sm);
+        }
+        
+        .map-legend {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-xl);
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            font-size: var(--font-size-sm);
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+        
+        .qatar-color {
+            background: #8A1538;
+        }
+        
+        .tunisia-color {
+            background: #E70013;
+        }
+        
+        .gold-color {
+            background: var(--primary-gold);
+        }
+        
+        /* ============== FAQ Section ============== */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: var(--pure-white);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-sm);
+            overflow: hidden;
+            border: 1px solid var(--light-gray);
+            transition: all 0.3s ease;
+        }
+        
+        .dark-mode .faq-item {
+            background: var(--off-white);
+            border-color: var(--medium-gray);
+        }
+        
+        .faq-item.active {
+            border-color: var(--primary-gold);
+        }
+        
+        .faq-question {
+            padding: var(--space-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .faq-question h3 {
+            margin: 0;
+            font-size: var(--font-size-base);
+        }
+        
+        .faq-question i {
+            color: var(--primary-gold);
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            padding: 0 var(--space-md);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 0 var(--space-md) var(--space-md);
+            max-height: 500px;
+        }
+        
+        /* ============== Footer ============== */
+        .main-footer {
+            background: var(--off-white);
+            padding: var(--space-xl) 0;
+            border-top: 1px solid var(--light-gray);
+        }
+        
+        .dark-mode .main-footer {
+            background: var(--light-gray);
+            border-top-color: var(--medium-gray);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .footer-logo {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+        
+        .footer-desc {
+            font-size: var(--font-size-sm);
+            color: var(--text-light);
+        }
+        
+        .footer-title {
+            margin-bottom: var(--space-md);
+            font-size: var(--font-size-lg);
+        }
+        
+        .quick-contact-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+        
+        .quick-btn {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm);
+            background: var(--pure-white);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--light-gray);
+            transition: all 0.3s ease;
+        }
+        
+        .dark-mode .quick-btn {
+            background: var(--off-white);
+        }
+        
+        .quick-btn:hover {
+            border-color: var(--primary-gold);
+            transform: translateX(-5px);
+        }
+        
+        .quick-btn.whatsapp i {
+            color: #25D366;
+        }
+        
+        .quick-btn.phone i {
+            color: var(--primary-gold);
+        }
+        
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+        
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        
+        .contact-detail i {
+            width: 20px;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            margin-left: var(--space-xs);
+        }
+        
+        .detail-value {
+            color: var(--text-light);
+        }
+        
+        .footer-bottom {
+            padding-top: var(--space-lg);
+            border-top: 1px solid var(--light-gray);
+        }
+        
+        .legal-notice {
+            background: var(--gold-light);
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-lg);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-sm);
+        }
+        
+        .legal-notice i {
+            color: var(--primary-gold);
+            margin-top: 2px;
+        }
+        
+        .footer-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+        }
+        
+        .back-to-home {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            color: var(--primary-gold);
+            font-weight: 600;
+        }
+        
+        .copyright {
+            font-size: var(--font-size-sm);
+            color: var(--text-light);
+            margin: 0;
+        }
+        
+        /* ============== Floating Buttons ============== */
+        .float-whatsapp {
+            position: fixed;
+            bottom: var(--space-xl);
+            left: var(--space-xl);
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--pure-white);
+            font-size: var(--font-size-2xl);
+            box-shadow: var(--shadow-lg);
+            z-index: 999;
+            transition: all 0.3s ease;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .float-whatsapp:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+        }
+        
+        .float-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #dc3545;
+            color: var(--pure-white);
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-xs);
+            font-weight: 600;
+            animation: pulse-badge 2s infinite;
+        }
+        
+        @keyframes pulse-badge {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .float-theme {
+            position: fixed;
+            bottom: calc(var(--space-xl) + 70px);
+            left: var(--space-xl);
+            width: 50px;
+            height: 50px;
+            background: var(--pure-white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-dark);
+            font-size: var(--font-size-xl);
+            box-shadow: var(--shadow-md);
+            z-index: 999;
+            transition: all 0.3s ease;
+            border: 1px solid var(--light-gray);
+        }
+        
+        .dark-mode .float-theme {
+            background: var(--off-white);
+            color: var(--dark-gray);
+        }
+        
+        .float-theme:hover {
+            transform: rotate(30deg);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .float-theme .fa-sun {
+            display: block;
+        }
+        
+        .float-theme .fa-moon {
+            display: none;
+        }
+        
+        .dark-mode .float-theme .fa-sun {
+            display: none;
+        }
+        
+        .dark-mode .float-theme .fa-moon {
+            display: block;
+        }
+        
+        .scroll-to-top {
+            position: fixed;
+            bottom: var(--space-md);
+            left: var(--space-md);
+            width: 50px;
+            height: 50px;
+            background: var(--primary-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--pure-white);
+            font-size: var(--font-size-xl);
+            box-shadow: var(--shadow-md);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .scroll-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .scroll-to-top:hover {
+            background: var(--gold-dark);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-gold);
+        }
+        
+        /* ============== Mobile Responsive ============== */
+        @media (max-width: 992px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                right: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: var(--pure-white);
+                flex-direction: column;
+                align-items: flex-start;
+                padding: var(--space-xl);
+                transition: right 0.3s ease;
+                box-shadow: var(--shadow-lg);
+                z-index: 999;
+            }
+            
+            .dark-mode .nav-links {
+                background: var(--off-white);
+            }
+            
+            .nav-links.active {
+                right: 0;
+            }
+            
+            .burger {
+                display: flex;
+            }
+            
+            .burger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(8px, 8px);
+            }
+            
+            .burger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .burger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -7px);
+            }
+            
+            .header-buttons {
+                display: none;
+            }
+            
             .float-whatsapp,
             .float-theme,
             .scroll-to-top {
+                left: var(--space-md);
+                bottom: var(--space-md);
+            }
+            
+            .float-theme {
+                bottom: calc(var(--space-md) + 70px);
+            }
+            
+            .map-overlay {
+                position: relative;
+                top: 0;
+                left: 0;
+                max-width: 100%;
+                margin-bottom: var(--space-md);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-stats {
+                flex-direction: column;
+                gap: var(--space-lg);
+            }
+            
+            .emergency-alert {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .form-stats {
+                flex-direction: column;
+                align-items: center;
+                gap: var(--space-sm);
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .footer-actions {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .float-whatsapp,
+            .float-theme,
+            .scroll-to-top {
+                width: 50px;
+                height: 50px;
+                font-size: var(--font-size-lg);
+            }
+            
+            .float-whatsapp {
+                bottom: var(--space-md);
+                left: var(--space-md);
+            }
+            
+            .float-theme {
+                bottom: calc(var(--space-md) + 60px);
+                left: var(--space-md);
+            }
+            
+            .scroll-to-top {
+                bottom: var(--space-sm);
+                left: var(--space-sm);
+            }
+        }
+        
+        /* ============== Print Styles ============== */
+        @media print {
+            .float-whatsapp,
+            .float-theme,
+            .scroll-to-top,
+            .burger,
+            .nav-cta,
+            .emergency-alert {
                 display: none !important;
             }
             
@@ -90,292 +1581,12 @@
                 color: black !important;
                 text-decoration: underline !important;
             }
-        }
-        
-        /* تحسين الوصول */
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
+            
+            .contact-card {
+                break-inside: avoid;
+                box-shadow: none !important;
+                border: 1px solid #ddd !important;
             }
-        }
-        
-        /* إصلاحات الخريطة */
-        .map-error-container {
-            height: 500px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05));
-            border-radius: 12px;
-            padding: 40px;
-            text-align: center;
-        }
-        
-        .map-error-icon {
-            width: 80px;
-            height: 80px;
-            background: rgba(212, 175, 55, 0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-        
-        .map-error-icon i {
-            font-size: 40px;
-            color: #D4AF37;
-        }
-        
-        /* Leaflet map custom styles */
-        .leaflet-container {
-            font-family: 'Cairo', sans-serif;
-            font-size: 14px;
-        }
-        
-        .map-popup {
-            min-width: 200px;
-        }
-        
-        .map-popup h3 {
-            color: #D4AF37;
-            margin: 0 0 10px 0;
-            font-size: 16px;
-        }
-        
-        .map-popup p {
-            margin: 5px 0;
-            color: #333;
-        }
-        
-        .map-popup i {
-            color: #D4AF37;
-            width: 20px;
-            text-align: center;
-        }
-        
-        .map-legend {
-            background: white;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            font-size: 14px;
-        }
-        
-        .map-legend h4 {
-            margin: 0 0 10px 0;
-            color: #333;
-        }
-        
-        /* Page transition removed - using AOS instead */
-        
-        /* Emergency Services Alert */
-        .emergency-alert {
-            background: linear-gradient(135deg, #ff4757, #ff3838);
-            color: white;
-            padding: 15px 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            animation: pulseWarning 2s infinite;
-        }
-        
-        @keyframes pulseWarning {
-            0% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(255, 71, 87, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0); }
-        }
-        
-        /* WhatsApp QR Code Section */
-        .whatsapp-qr-section {
-            text-align: center;
-            padding: 40px;
-            background: rgba(37, 211, 102, 0.05);
-            border-radius: 15px;
-            margin: 30px 0;
-        }
-        
-        .whatsapp-qr-section h3 {
-            color: #25D366;
-            margin-bottom: 20px;
-        }
-        
-        .qr-code-container {
-            max-width: 300px;
-            margin: 0 auto;
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .qr-code-container img {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto;
-            display: block;
-        }
-        
-        /* Social Media Integration */
-        .social-contact {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .social-contact a {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-            transition: transform 0.3s;
-        }
-        
-        .social-contact a:hover {
-            transform: translateY(-5px);
-        }
-        
-        .social-contact .whatsapp {
-            background: #25D366;
-        }
-        
-        .social-contact .facebook {
-            background: #1877F2;
-        }
-        
-        .social-contact .instagram {
-            background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
-        }
-        
-        /* Live Chat Widget */
-        .live-chat-widget {
-            position: fixed;
-            bottom: 200px;
-            left: 30px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            padding: 20px;
-            z-index: 999;
-            transform: translateX(-150%);
-            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            max-width: 300px;
-        }
-        
-        .live-chat-widget.active {
-            transform: translateX(0);
-        }
-        
-        .chat-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 15px;
-            color: #25D366;
-        }
-        
-        .chat-header i {
-            font-size: 1.5rem;
-        }
-        
-        .chat-bubble {
-            background: #f0f0f0;
-            padding: 10px 15px;
-            border-radius: 15px;
-            margin-bottom: 10px;
-            font-size: 0.9rem;
-        }
-        
-        .chat-bubble.agent {
-            background: #25D366;
-            color: white;
-            margin-left: 20px;
-        }
-        
-        .chat-input {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        
-        .chat-input input {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-            font-family: 'Cairo', sans-serif;
-        }
-        
-        .chat-input button {
-            background: #25D366;
-            color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-        
-        /* Emergency Numbers */
-        .emergency-numbers {
-            background: linear-gradient(135deg, #ff3838, #ff4757);
-            color: white;
-            padding: 30px;
-            border-radius: 15px;
-            margin: 30px 0;
-            text-align: center;
-        }
-        
-        .emergency-numbers h3 {
-            color: white;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .emergency-numbers-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        
-        .emergency-number {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .emergency-number i {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-        
-        /* Loading Animation */
-        .loading-spinner {
-            width: 40px;
-            height: 40px;
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #D4AF37;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
@@ -401,35 +1612,37 @@
                 <a href="services.html" class="nav-link">الخدمات</a>
                 <a href="contact.html" class="nav-link active">التواصل</a>
                 <a href="reviews.html" class="nav-link">المراجعات</a>
-
+            </nav>
+            
+            <!-- Header Buttons (Language & Theme) -->
+            <div class="header-buttons">
                 <!-- Language Switcher -->
-                <div class="language-switcher-nav">
-                    <button id="langBtn" class="lang-btn-nav">
+                <div class="language-switcher">
+                    <button class="lang-btn" id="langBtn">
                         <i class="fas fa-globe"></i>
                         <span id="currentLang">العربية</span>
+                        <i class="fas fa-chevron-down"></i>
                     </button>
-                    <div class="lang-dropdown-nav" id="langDropdown">
-                        <a href="#" data-lang="ar" class="lang-option-nav active">العربية</a>
-                        <a href="#" data-lang="en" class="lang-option-nav">English</a>
+                    <div class="lang-dropdown" id="langDropdown">
+                        <a href="#" class="lang-option active" data-lang="ar">العربية</a>
+                        <a href="#" class="lang-option" data-lang="en">English</a>
                     </div>
                 </div>
                 
-                <!-- Theme Switcher -->
-                <div class="theme-switcher">
-                    <button id="themeToggle" class="theme-btn" aria-label="تبديل وضع السطوع">
-                        <i class="fas fa-sun"></i>
-                        <span class="theme-text">فاتح</span>
-                    </button>
-                </div>
-            </nav>
-            
-            <!-- Header Buttons -->
-            <div class="header-buttons">
-                <a href="https://wa.me/97471375390" class="nav-cta whatsapp-btn">
-                    <i class="fab fa-whatsapp"></i> <span class="cta-text">تواصل عبر واتساب</span>
+                <!-- Theme Toggle -->
+                <button class="theme-toggle" id="themeToggle" title="تبديل الوضع الداكن">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                </button>
+                
+                <!-- Call to Action Buttons -->
+                <a href="https://wa.me/21656471550" class="nav-cta whatsapp-btn">
+                    <i class="fab fa-whatsapp"></i>
+                    <span class="cta-text">واتساب</span>
                 </a>
-                <a href="tel:+97471375390" class="nav-cta call-btn">
-                    <i class="fas fa-phone"></i> <span class="cta-text">اتصل الآن</span>
+                <a href="tel:+21656471550" class="nav-cta call-btn">
+                    <i class="fas fa-phone"></i>
+                    <span class="cta-text">اتصال</span>
                 </a>
             </div>
             
@@ -444,25 +1657,24 @@
 
     <!-- ================= CONTACT HERO ================= -->
     <section class="contact-hero">
-        <div class="hero-overlay"></div>
         <div class="container">
-            <div class="hero-content" data-aos="fade-up">
+            <div class="hero-content">
                 <h1 class="gold-text">تواصل معنا</h1>
                 <p class="hero-subtitle">نحن هنا لمساعدتك على مدار الساعة، تواصل معنا بأي طريقة تفضلها</p>
                 
                 <!-- Emergency Alert -->
-                <div class="emergency-alert" data-aos="fade-up" data-aos-delay="100">
+                <div class="emergency-alert">
                     <i class="fas fa-ambulance fa-2x"></i>
                     <div>
                         <h3>خدمة الطوارئ 24/7</h3>
                         <p>للطلبات العاجلة والاستفسارات الفورية</p>
                     </div>
-                    <a href="tel:+97471375390" class="btn call-btn" style="margin-right: auto;">
+                    <a href="tel:+21656471550" class="btn call-btn" style="background: var(--pure-white); color: var(--primary-gold);">
                         <i class="fas fa-phone"></i> اتصل الآن
                     </a>
                 </div>
                 
-                <div class="hero-stats" data-aos="fade-up" data-aos-delay="200">
+                <div class="hero-stats">
                     <div class="stat-item">
                         <i class="fas fa-headset"></i>
                         <div>
@@ -492,14 +1704,14 @@
     <!-- ================= CONTACT METHODS ================= -->
     <section class="contact-methods-section section-padding">
         <div class="container">
-            <div class="section-header" data-aos="fade-up">
+            <div class="section-header">
                 <h2 class="section-title">طرق التواصل المباشرة</h2>
                 <p class="section-subtitle">اختر الطريقة المناسبة لك للتواصل معنا مباشرة</p>
             </div>
             
             <div class="contact-cards">
                 <!-- WhatsApp Card -->
-                <div class="contact-card whatsapp-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="contact-card">
                     <div class="card-icon">
                         <i class="fab fa-whatsapp"></i>
                     </div>
@@ -507,18 +1719,6 @@
                     <p class="card-description">للتواصل الفوري والرد السريع خلال دقائق</p>
                     
                     <div class="whatsapp-numbers">
-                        <div class="whatsapp-number">
-                            <div class="country-flag">
-                                <img src="https://flagcdn.com/w40/qa.png" alt="علم قطر">
-                                <span>قطر</span>
-                            </div>
-                            <a href="https://wa.me/97471375390" class="whatsapp-btn">
-                                <i class="fab fa-whatsapp"></i>
-                                <span>+974 71 375 390</span>
-                                <span class="status-badge active">متصل الآن</span>
-                            </a>
-                        </div>
-                        
                         <div class="whatsapp-number">
                             <div class="country-flag">
                                 <img src="https://flagcdn.com/w40/tn.png" alt="علم تونس">
@@ -532,49 +1732,24 @@
                         </div>
                     </div>
                     
-                    <!-- WhatsApp QR Code Section -->
-                    <div class="whatsapp-qr-section" data-aos="zoom-in" data-aos-delay="150">
-                        <h3><i class="fab fa-whatsapp"></i> مسح QR Code</h3>
-                        <div class="qr-code-container">
-                            <div class="qr-code-placeholder">
-                                <i class="fab fa-whatsapp fa-5x" style="color: #25D366;"></i>
-                                <p style="margin-top: 15px; color: #666;">QR Code سيتم إضافته قريباً</p>
-                            </div>
-                        </div>
-                        <p style="margin-top: 15px; color: #666;">استخدم كاميرا هاتفك لمسح الرمز والاتصال مباشرة</p>
-                    </div>
-                    
-                    <div class="card-features">
-                        <div class="feature">
-                            <i class="fas fa-bolt"></i>
+                    <div class="card-features" style="margin-top: var(--space-lg);">
+                        <div class="feature" style="display: flex; align-items: center; gap: var(--space-xs); margin-bottom: var(--space-sm);">
+                            <i class="fas fa-bolt" style="color: var(--primary-gold);"></i>
                             <span>رد فوري خلال دقائق</span>
                         </div>
-                        <div class="feature">
-                            <i class="fas fa-paperclip"></i>
+                        <div class="feature" style="display: flex; align-items: center; gap: var(--space-xs); margin-bottom: var(--space-sm);">
+                            <i class="fas fa-paperclip" style="color: var(--primary-gold);"></i>
                             <span>إرسال صور ومستندات</span>
                         </div>
-                        <div class="feature">
-                            <i class="fas fa-history"></i>
+                        <div class="feature" style="display: flex; align-items: center; gap: var(--space-xs);">
+                            <i class="fas fa-history" style="color: var(--primary-gold);"></i>
                             <span>سجل محادثات محفوظ</span>
                         </div>
-                    </div>
-                    
-                    <!-- Social Media Integration -->
-                    <div class="social-contact" data-aos="fade-up" data-aos-delay="200">
-                        <a href="https://wa.me/97471375390" class="whatsapp" title="واتساب">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                        <a href="https://facebook.com" class="facebook" title="فيسبوك">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="https://instagram.com" class="instagram" title="إنستجرام">
-                            <i class="fab fa-instagram"></i>
-                        </a>
                     </div>
                 </div>
                 
                 <!-- Phone Card -->
-                <div class="contact-card phone-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="contact-card">
                     <div class="card-icon">
                         <i class="fas fa-phone-alt"></i>
                     </div>
@@ -583,88 +1758,52 @@
                     
                     <div class="phone-numbers">
                         <div class="phone-number">
-                            <div class="country-info">
-                                <div class="country-flag">
-                                    <img src="https://flagcdn.com/w40/qa.png" alt="علم قطر">
-                                    <span>قطر</span>
-                                </div>
-                                <span class="country-code">+974</span>
-                            </div>
-                            <div class="number-actions">
-                                <a href="tel:+97471375390" class="call-btn">
-                                    <i class="fas fa-phone"></i>
-                                    <span>71375390</span>
-                                </a>
-                                <button class="copy-btn" data-number="+97471375390" title="نسخ الرقم">
-                                    <i class="far fa-copy"></i>
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <div class="phone-number">
-                            <div class="country-info">
-                                <div class="country-flag">
+                            <div class="country-info" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-sm);">
+                                <div class="country-flag" style="display: flex; align-items: center; gap: var(--space-xs);">
                                     <img src="https://flagcdn.com/w40/tn.png" alt="علم تونس">
                                     <span>تونس</span>
                                 </div>
-                                <span class="country-code">+216</span>
+                                <span class="country-code" style="color: var(--text-light);">+216</span>
                             </div>
-                            <div class="number-actions">
-                                <a href="tel:+21656471550" class="call-btn">
+                            <div class="number-actions" style="display: flex; align-items: center; justify-content: space-between;">
+                                <a href="tel:+21656471550" class="call-btn" style="display: flex; align-items: center; gap: var(--space-xs); color: var(--primary-gold); font-weight: 600;">
                                     <i class="fas fa-phone"></i>
                                     <span>56471550</span>
                                 </a>
-                                <button class="copy-btn" data-number="+21656471550" title="نسخ الرقم">
+                                <button class="copy-btn" data-number="+21656471550" title="نسخ الرقم" style="background: none; color: var(--text-light); padding: 5px; border-radius: 4px;">
                                     <i class="far fa-copy"></i>
                                 </button>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- Emergency Numbers -->
-                    <div class="emergency-numbers" data-aos="fade-up" data-aos-delay="150">
-                        <h3><i class="fas fa-ambulance"></i> أرقام الطوارئ</h3>
-                        <div class="emergency-numbers-grid">
-                            <div class="emergency-number">
-                                <i class="fas fa-clock"></i>
-                                <h4>خدمة 24 ساعة</h4>
-                                <p>متاح على مدار الساعة</p>
-                                <a href="tel:+97471375390" class="btn call-btn" style="margin-top: 10px;">
-                                    <i class="fas fa-phone"></i> اتصال عاجل
-                                </a>
-                            </div>
-                            <div class="emergency-number">
-                                <i class="fas fa-shipping-fast"></i>
-                                <h4>توصيل عاجل</h4>
-                                <p>للطلبات المستعجلة</p>
-                                <a href="https://wa.me/97471375390" class="btn whatsapp-btn" style="margin-top: 10px;">
-                                    <i class="fab fa-whatsapp"></i> واتساب عاجل
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="working-hours">
-                        <h4><i class="fas fa-clock"></i> أوقات العمل</h4>
+                    <div class="working-hours" style="margin-top: var(--space-lg);">
+                        <h4 style="display: flex; align-items: center; gap: var(--space-xs); margin-bottom: var(--space-md);">
+                            <i class="fas fa-clock" style="color: var(--primary-gold);"></i>
+                            <span>أوقات العمل</span>
+                        </h4>
                         <div class="hours-list">
-                            <div class="hour-item">
+                            <div class="hour-item" style="display: flex; justify-content: space-between; padding: var(--space-xs) 0; border-bottom: 1px solid var(--light-gray);">
                                 <span>الأحد - الخميس</span>
-                                <span class="time">24 ساعة</span>
+                                <span class="time" style="color: var(--text-light);">24 ساعة</span>
                             </div>
-                            <div class="hour-item">
+                            <div class="hour-item" style="display: flex; justify-content: space-between; padding: var(--space-xs) 0; border-bottom: 1px solid var(--light-gray);">
                                 <span>الجمعة - السبت</span>
-                                <span class="time">24 ساعة</span>
+                                <span class="time" style="color: var(--text-light);">24 ساعة</span>
                             </div>
-                            <div class="hour-item emergency">
-                                <span><i class="fas fa-bolt"></i> خدمة الطوارئ</span>
-                                <span class="time">متاحة 24/7</span>
+                            <div class="hour-item emergency" style="display: flex; justify-content: space-between; padding: var(--space-xs) 0;">
+                                <span style="display: flex; align-items: center; gap: var(--space-xs);">
+                                    <i class="fas fa-bolt" style="color: var(--primary-gold);"></i>
+                                    <span>خدمة الطوارئ</span>
+                                </span>
+                                <span class="time" style="color: var(--primary-gold); font-weight: 600;">متاحة 24/7</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Email Card -->
-                <div class="contact-card email-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="contact-card">
                     <div class="card-icon">
                         <i class="fas fa-envelope"></i>
                     </div>
@@ -673,73 +1812,50 @@
                     
                     <div class="email-addresses">
                         <div class="email-address">
-                            <div class="email-type">
-                                <i class="fas fa-envelope-open-text"></i>
+                            <div class="email-type" style="display: flex; align-items: center; gap: var(--space-xs); margin-bottom: var(--space-sm);">
+                                <i class="fas fa-envelope-open-text" style="color: var(--primary-gold);"></i>
                                 <span>البريد الرئيسي</span>
                             </div>
-                            <div class="email-actions">
-                                <a href="mailto:helamishwar@gmail.com" class="email-link">
+                            <div class="email-actions" style="display: flex; align-items: center; justify-content: space-between;">
+                                <a href="mailto:helamishwar@gmail.com" class="email-link" style="color: var(--primary-gold); font-weight: 600;">
                                     helamishwar@gmail.com
                                 </a>
-                                <button class="copy-btn" data-text="helamishwar@gmail.com" title="نسخ الإيميل">
-                                    <i class="far fa-copy"></i>
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <div class="email-address">
-                            <div class="email-type">
-                                <i class="fas fa-briefcase"></i>
-                                <span>للشؤون التجارية</span>
-                            </div>
-                            <div class="email-actions">
-                                <a href="mailto:business@tnqadelivery.com" class="email-link">
-                                    business@tnqadelivery.com
-                                </a>
-                                <button class="copy-btn" data-text="business@tnqadelivery.com" title="نسخ الإيميل">
+                                <button class="copy-btn" data-text="helamishwar@gmail.com" title="نسخ الإيميل" style="background: none; color: var(--text-light); padding: 5px; border-radius: 4px;">
                                     <i class="far fa-copy"></i>
                                 </button>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="response-time">
-                        <h4><i class="fas fa-stopwatch"></i> وقت الرد المتوقع</h4>
+                    <div class="response-time" style="margin-top: var(--space-lg);">
+                        <h4 style="display: flex; align-items: center; gap: var(--space-xs); margin-bottom: var(--space-md);">
+                            <i class="fas fa-stopwatch" style="color: var(--primary-gold);"></i>
+                            <span>وقت الرد المتوقع</span>
+                        </h4>
                         <div class="time-info">
-                            <div class="time-item">
+                            <div class="time-item" style="display: flex; justify-content: space-between; padding: var(--space-xs) 0; border-bottom: 1px solid var(--light-gray);">
                                 <span>الاستفسارات العامة</span>
-                                <span class="time-badge">4-6 ساعات</span>
+                                <span class="time-badge" style="background: var(--light-gray); padding: 2px 8px; border-radius: 12px; font-size: var(--font-size-sm);">4-6 ساعات</span>
                             </div>
-                            <div class="time-item">
+                            <div class="time-item" style="display: flex; justify-content: space-between; padding: var(--space-xs) 0; border-bottom: 1px solid var(--light-gray);">
                                 <span>الطلبات العاجلة</span>
-                                <span class="time-badge urgent">1-2 ساعة</span>
+                                <span class="time-badge urgent" style="background: var(--gold-light); color: var(--gold-dark); padding: 2px 8px; border-radius: 12px; font-size: var(--font-size-sm); font-weight: 600;">1-2 ساعة</span>
                             </div>
-                            <div class="time-item">
+                            <div class="time-item" style="display: flex; justify-content: space-between; padding: var(--space-xs) 0;">
                                 <span>الشؤون التجارية</span>
-                                <span class="time-badge">24 ساعة</span>
+                                <span class="time-badge" style="background: var(--light-gray); padding: 2px 8px; border-radius: 12px; font-size: var(--font-size-sm);">24 ساعة</span>
                             </div>
                         </div>
-                    </div>
-                    
-                    <!-- Email Form Section -->
-                    <div class="email-form-section" data-aos="fade-up" data-aos-delay="150">
-                        <h4><i class="fas fa-paper-plane"></i> إرسال بريد مباشر</h4>
-                        <a href="#contactFormSection"  class="btn primary-btn" style="width: 100%; margin-top: 15px;">
-                            <i class="fas fa-envelope"></i> فتح نموذج البريد
-                        </a>
-                        <p style="margin-top: 10px; font-size: 0.9rem; color: #666;">
-                            سنقوم بفتح بريدك الإلكتروني مع بيانات مسبقة التعبئة
-                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ================= CONTACT FORM SECTION ================= -->
+    <!-- ================= CONTACT FORM ================= -->
     <section class="contact-form-section section-padding" id="contactFormSection">
         <div class="container">
-            <div class="form-wrapper" data-aos="fade-up">
+            <div class="form-wrapper">
                 <div class="form-header">
                     <h2 class="gold-text">أرسل لنا رسالة مباشرة</h2>
                     <p>املأ النموذج وسنقوم بالرد عليك في أسرع وقت ممكن</p>
@@ -780,8 +1896,7 @@
                                 </label>
                                 <div class="phone-input-wrapper">
                                     <select id="countryCode" name="countryCode" class="country-code-select">
-                                        <option value="+974">🇶🇦 +974 (قطر)</option>
-                                        <option value="+216">🇹🇳 +216 (تونس)</option>
+                                        <option value="+216" selected>🇹🇳 +216 (تونس)</option>
                                         <option value="+966">🇸🇦 +966 (السعودية)</option>
                                         <option value="+971">🇦🇪 +971 (الإمارات)</option>
                                         <option value="+20">🇪🇬 +20 (مصر)</option>
@@ -829,11 +1944,9 @@
                                 </label>
                                 <select id="serviceType" name="serviceType" class="form-select" required>
                                     <option value="" selected disabled>اختر الخدمة المطلوبة</option>
-                                    <option value="local-delivery-qatar">التوصيل المحلي في قطر</option>
                                     <option value="local-delivery-tunisia">التوصيل المحلي في تونس</option>
                                     <option value="scale-sales">بيع موازين</option>
-                                    <option value="scale-booking-qa-tn">حجز ميزان من قطر إلى تونس</option>
-                                    <option value="scale-booking-tn-qa">حجز ميزان من تونس إلى قطر</option>
+                                    <option value="scale-booking">حجز ميزان</option>
                                     <option value="money-delivery">توثيق تسليم الأموال</option>
                                     <option value="other">استفسار عام / خدمة أخرى</option>
                                 </select>
@@ -877,21 +1990,6 @@
                                 <span class="form-hint">كلما كانت التفاصيل أكثر، كان الرد أفضل وأسرع</span>
                             </div>
                         </div>
-                        
-                        <!-- File Upload -->
-                        <div class="form-group full-width">
-                            <label for="fileUpload">
-                                <i class="fas fa-paperclip"></i>
-                                <span>إرفاق ملفات (اختياري)</span>
-                            </label>
-                            <div class="file-upload-area" id="fileUploadArea">
-                                <i class="fas fa-cloud-upload-alt"></i>
-                                <p><span>اسحب وأفلت الملفات هنا أو</span> <span class="browse-link">تصفح</span></p>
-                                <p class="file-hint">يمكنك رفع الصور، PDF، مستندات Word (حتى 10MB)</p>
-                                <input type="file" id="fileUpload" name="fileUpload" multiple accept=".jpg,.jpeg,.png,.pdf,.doc,.docx" hidden>
-                            </div>
-                            <div id="fileList" class="file-list"></div>
-                        </div>
                     </div>
                     
                     <!-- Form Actions -->
@@ -912,21 +2010,6 @@
                                 <span>إرسال عبر واتساب</span>
                                 <div class="loader" id="formLoader"></div>
                             </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Email Submit Button (NEW) -->
-                    <div class="form-section" style="margin-top: 30px; border-top: 2px dashed #D4AF37; padding-top: 20px;">
-                        <h3><i class="fas fa-envelope"></i> إرسال عبر البريد الإلكتروني</h3>
-                        <p style="margin-bottom: 15px; color: #666;">
-                            يمكنك إرسال النموذج مباشرة إلى بريدنا الإلكتروني
-                        </p>
-                        <button type="button" class="btn email-submit" id="emailSubmit" style="background: linear-gradient(135deg, #4285F4, #34A853); color: white; width: 100%; padding: 15px;">
-                            <i class="fas fa-paper-plane"></i>
-                            <span>إرسال عبر البريد الإلكتروني</span>
-                        </button>
-                        <div class="form-hint" style="margin-top: 10px;">
-                            سيتم فتح بريدك الإلكتروني مع بيانات النموذج مسبقة التعبئة
                         </div>
                     </div>
                     
@@ -955,31 +2038,18 @@
     <!-- ================= LOCATION MAP ================= -->
     <section class="location-map-section section-padding">
         <div class="container">
-            <div class="section-header" data-aos="fade-up">
+            <div class="section-header">
                 <h2 class="section-title">موقعنا على الخريطة</h2>
-                <p class="section-subtitle">خدمة التوصيل متاحة في قطر وتونس مع تغطية شاملة لكافة المناطق</p>
+                <p class="section-subtitle">خدمة التوصيل متاحة في تونس مع تغطية شاملة لكافة المناطق</p>
             </div>
             
-            <div class="map-container" data-aos="fade-up">
+            <div class="map-container">
                 <div id="contactMap" class="map-wrapper"></div>
                 
                 <div class="map-overlay">
                     <div class="location-info">
                         <h3 class="gold-text">مناطق التغطية</h3>
                         <div class="coverage-areas">
-                            <div class="coverage-country">
-                                <div class="country-header">
-                                    <img src="https://flagcdn.com/w40/qa.png" alt="قطر" class="country-flag-small">
-                                    <h4>قطر</h4>
-                                </div>
-                                <ul class="coverage-list">
-                                    <li><i class="fas fa-check-circle"></i> الدوحة وجميع مناطقها</li>
-                                    <li><i class="fas fa-check-circle"></i> الريان والوكرة</li>
-                                    <li><i class="fas fa-check-circle"></i> الخور والذخيرة</li>
-                                    <li><i class="fas fa-check-circle"></i> جميع مناطق قطر</li>
-                                </ul>
-                            </div>
-                            
                             <div class="coverage-country">
                                 <div class="country-header">
                                     <img src="https://flagcdn.com/w40/tn.png" alt="تونس" class="country-flag-small">
@@ -997,11 +2067,7 @@
                 </div>
             </div>
             
-            <div class="map-legend" data-aos="fade-up" data-aos-delay="100">
-                <div class="legend-item">
-                    <div class="legend-color qatar-color"></div>
-                    <span>مناطق الخدمة في قطر</span>
-                </div>
+            <div class="map-legend">
                 <div class="legend-item">
                     <div class="legend-color tunisia-color"></div>
                     <span>مناطق الخدمة في تونس</span>
@@ -1017,13 +2083,13 @@
     <!-- ================= FAQ SECTION ================= -->
     <section class="faq-section section-padding">
         <div class="container">
-            <div class="section-header" data-aos="fade-up">
+            <div class="section-header">
                 <h2 class="section-title">أسئلة متكررة</h2>
                 <p class="section-subtitle">إجابات عن الأسئلة الأكثر شيوعاً فيما يتعلق بالتواصل والخدمات</p>
             </div>
             
             <div class="faq-container">
-                <div class="faq-item active" data-aos="fade-up">
+                <div class="faq-item active">
                     <div class="faq-question">
                         <h3>ما هي أسرع طريقة للتواصل معكم؟</h3>
                         <i class="fas fa-chevron-down"></i>
@@ -1033,7 +2099,7 @@
                     </div>
                 </div>
                 
-                <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
+                <div class="faq-item">
                     <div class="faq-question">
                         <h3>ما هي أوقات العمل الرسمية؟</h3>
                         <i class="fas fa-chevron-down"></i>
@@ -1043,7 +2109,7 @@
                     </div>
                 </div>
                 
-                <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
+                <div class="faq-item">
                     <div class="faq-question">
                         <h3>كيف يمكنني تتبع حالة طلبي؟</h3>
                         <i class="fas fa-chevron-down"></i>
@@ -1053,17 +2119,17 @@
                     </div>
                 </div>
                 
-                <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
+                <div class="faq-item">
                     <div class="faq-question">
-                        <h3>هل الخدمات متاحة في جميع مناطق قطر وتونس؟</h3>
+                        <h3>هل الخدمات متاحة في جميع مناطق تونس؟</h3>
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>نعم، نقدم خدماتنا في جميع مناطق قطر وتونس. بعض المناطق النائية قد تحتاج إلى ترتيب مسبق. يمكنك التواصل معنا للتحقق من تغطية منطقتك.</p>
+                        <p>نعم، نقدم خدماتنا في جميع مناطق تونس. بعض المناطق النائية قد تحتاج إلى ترتيب مسبق. يمكنك التواصل معنا للتحقق من تغطية منطقتك.</p>
                     </div>
                 </div>
                 
-                <div class="faq-item" data-aos="fade-up" data-aos-delay="400">
+                <div class="faq-item">
                     <div class="faq-question">
                         <h3>ما هي مدة الرد على النموذج الإلكتروني؟</h3>
                         <i class="fas fa-chevron-down"></i>
@@ -1075,30 +2141,6 @@
             </div>
         </div>
     </section>
-
-    <!-- ================= QUICK CONTACT WIDGET ================= -->
-    <div class="quick-contact-widget">
-        <div class="widget-header">
-            <h4>تواصل الآن</h4>
-            <button class="widget-close" title="إغلاق">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <div class="widget-options">
-            <a href="https://wa.me/97471375390" class="widget-option whatsapp">
-                <i class="fab fa-whatsapp"></i>
-                <span>واتساب</span>
-            </a>
-            <a href="tel:+97471375390" class="widget-option phone">
-                <i class="fas fa-phone"></i>
-                <span>اتصال</span>
-            </a>
-            <a href="#contactFormSection" class="widget-option form">
-                <i class="fas fa-envelope"></i>
-                <span>نموذج</span>
-            </a>
-        </div>
-    </div>
 
     <!-- ================= FOOTER ================= -->
     <footer class="main-footer">
@@ -1115,18 +2157,18 @@
                             <p>خدمة توصيل سريعة وآمنة</p>
                         </div>
                     </div>
-                    <p class="footer-desc">خدمات توصيل ونقل موثوقة بين تونس وقطر</p>
+                    <p class="footer-desc">خدمات توصيل ونقل موثوقة في تونس</p>
                 </div>
                 
                 <!-- Quick Contact -->
                 <div class="footer-contact">
                     <h3 class="footer-title gold-text">تواصل سريع</h3>
                     <div class="quick-contact-buttons">
-                        <a href="https://wa.me/97471375390" class="quick-btn whatsapp">
+                        <a href="https://wa.me/21656471550" class="quick-btn whatsapp">
                             <i class="fab fa-whatsapp"></i>
                             <span>واتساب سريع</span>
                         </a>
-                        <a href="tel:+97471375390" class="quick-btn phone">
+                        <a href="tel:+21656471550" class="quick-btn phone">
                             <i class="fas fa-phone"></i>
                             <span>اتصال عاجل</span>
                         </a>
@@ -1141,20 +2183,13 @@
                             <i class="fab fa-whatsapp gold-text"></i>
                             <div>
                                 <span class="detail-label">واتساب:</span>
-                                <span class="detail-value">+974 71 375 390</span>
+                                <span class="detail-value">+216 56 471 550</span>
                             </div>
                         </div>
                         <div class="contact-detail">
                             <i class="fas fa-phone gold-text"></i>
                             <div>
-                                <span class="detail-label">قطر:</span>
-                                <span class="detail-value">+974 71 375 390</span>
-                            </div>
-                        </div>
-                        <div class="contact-detail">
-                            <i class="fas fa-phone gold-text"></i>
-                            <div>
-                                <span class="detail-label">تونس:</span>
+                                <span class="detail-label">هاتف:</span>
                                 <span class="detail-value">+216 56 471 550</span>
                             </div>
                         </div>
@@ -1189,15 +2224,15 @@
 
     <!-- ================= FLOATING BUTTONS ================= -->
     <!-- Floating WhatsApp -->
-    <a href="https://wa.me/97471375390" class="float-whatsapp" aria-label="تواصل معنا عبر واتساب" target="_blank" title="واتساب">
+    <a href="https://wa.me/21656471550" class="float-whatsapp" aria-label="تواصل معنا عبر واتساب" target="_blank" title="واتساب">
         <i class="fab fa-whatsapp"></i>
         <span class="float-badge">1</span>
     </a>
     
     <!-- Floating Theme Toggle -->
     <button class="float-theme" id="floatThemeToggle" aria-label="تبديل وضع السطوع" title="تبديل السطوع">
-        <i class="fas fa-moon"></i>
         <i class="fas fa-sun"></i>
+        <i class="fas fa-moon"></i>
     </button>
     
     <!-- Scroll to Top -->
@@ -1205,35 +2240,473 @@
         <i class="fas fa-chevron-up"></i>
     </button>
 
-    <!-- ================= SCRIPTS ================= -->
-    <!-- Leaflet JS -->
+    <!-- ================= JAVASCRIPT ================= -->
+    <!-- Leaflet JS Library -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin=""></script>
-    
-    <!-- AOS Animation Library -->
-    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-    
-    <!-- Custom JavaScript Files -->
-    <script src="js/theme.js"></script>
-    <script src="js/contact.js"></script>
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
     
     <script>
-        // Initialize AOS
+        // Initialize when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
-            AOS.init({
-                duration: 800,
-                once: true,
-                offset: 100,
-                easing: 'ease-in-out',
-                delay: 100,
-                disable: function() {
-                    return window.innerWidth < 768;
+            // Set current year
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            
+            // Mobile Navigation
+            const burger = document.getElementById('burger');
+            const navLinks = document.getElementById('navLinks');
+            
+            burger.addEventListener('click', function() {
+                this.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+            
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    burger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                });
+            });
+            
+            // Dark Mode Toggle (Header)
+            const themeToggle = document.getElementById('themeToggle');
+            const floatThemeToggle = document.getElementById('floatThemeToggle');
+            let isDarkMode = localStorage.getItem('darkMode') === 'true';
+            
+            // Apply saved theme
+            if (isDarkMode) {
+                document.body.classList.add('dark-mode');
+            }
+            
+            // Function to toggle dark mode
+            function toggleDarkMode() {
+                document.body.classList.toggle('dark-mode');
+                isDarkMode = !isDarkMode;
+                localStorage.setItem('darkMode', isDarkMode);
+            }
+            
+            // Header theme toggle
+            themeToggle.addEventListener('click', toggleDarkMode);
+            
+            // Floating theme toggle
+            floatThemeToggle.addEventListener('click', toggleDarkMode);
+            
+            // Language Switcher
+            const langBtn = document.getElementById('langBtn');
+            const currentLang = document.getElementById('currentLang');
+            const langOptions = document.querySelectorAll('.lang-option');
+            
+            langOptions.forEach(option => {
+                option.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all options
+                    langOptions.forEach(opt => opt.classList.remove('active'));
+                    
+                    // Add active class to clicked option
+                    this.classList.add('active');
+                    
+                    // Update current language text
+                    const lang = this.getAttribute('data-lang');
+                    currentLang.textContent = lang === 'ar' ? 'العربية' : 'English';
+                    
+                    // In a real app, you would change the actual language here
+                    // For demo, we'll just show an alert
+                    if (lang === 'en') {
+                        // Change to English (simplified demo)
+                        alert('Language changed to English. In a real implementation, all text would be translated.');
+                    } else {
+                        alert('تم تغيير اللغة إلى العربية');
+                    }
+                });
+            });
+            
+            // Scroll to Top Button
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    scrollToTopBtn.classList.add('show');
+                } else {
+                    scrollToTopBtn.classList.remove('show');
                 }
             });
             
-            // Set current year in footer
-            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            scrollToTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Initialize Map
+            initMap();
+            
+            // Contact Form Functionality
+            initContactForm();
+            
+            // FAQ Accordion
+            initFAQ();
+            
+            // Copy buttons functionality
+            initCopyButtons();
+            
+            // Character counter for textarea
+            const messageTextarea = document.getElementById('message');
+            const charCount = document.querySelector('.char-count');
+            
+            if (messageTextarea && charCount) {
+                messageTextarea.addEventListener('input', function() {
+                    const count = this.value.length;
+                    charCount.textContent = `${count}/2000 حرف`;
+                    
+                    if (count > 1900) {
+                        charCount.style.color = '#dc3545';
+                    } else {
+                        charCount.style.color = 'var(--text-light)';
+                    }
+                });
+            }
+            
+            // Clear Form Button
+            const clearFormBtn = document.getElementById('clearForm');
+            if (clearFormBtn) {
+                clearFormBtn.addEventListener('click', function() {
+                    if (confirm('هل تريد مسح جميع بيانات النموذج؟')) {
+                        document.getElementById('contactForm').reset();
+                        if (charCount) charCount.textContent = '0/2000 حرف';
+                    }
+                });
+            }
+        });
+        
+        // Initialize Map Function
+        function initMap() {
+            if (!document.getElementById('contactMap')) return;
+            
+            try {
+                // Create map centered on Tunisia
+                const map = L.map('contactMap').setView([34.0, 9.0], 6);
+                
+                // Add OpenStreetMap tile layer (free and easy to use)
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                    maxZoom: 18,
+                }).addTo(map);
+                
+                // Custom icon for markers
+                const goldIcon = L.divIcon({
+                    className: 'custom-marker',
+                    html: '<i class="fas fa-map-marker-alt" style="color: #D4AF37; font-size: 24px;"></i>',
+                    iconSize: [24, 24],
+                    iconAnchor: [12, 24]
+                });
+                
+                // Add markers for Tunisia cities
+                const tunisMarker = L.marker([36.8, 10.17], {icon: goldIcon}).addTo(map)
+                    .bindPopup(`
+                        <div class="map-popup">
+                            <h3 style="color: #D4AF37; margin: 0 0 10px 0;">تونس العاصمة</h3>
+                            <p style="margin: 5px 0;"><i class="fas fa-map-marker-alt" style="color: #D4AF37;"></i> المقر الرئيسي</p>
+                            <p style="margin: 5px 0;"><i class="fas fa-phone" style="color: #D4AF37;"></i> +216 56 471 550</p>
+                            <p style="margin: 5px 0;"><i class="fab fa-whatsapp" style="color: #25D366;"></i> واتساب متاح 24/7</p>
+                        </div>
+                    `);
+                
+                const sfaxMarker = L.marker([34.74, 10.76], {icon: goldIcon}).addTo(map)
+                    .bindPopup(`
+                        <div class="map-popup">
+                            <h3 style="color: #D4AF37; margin: 0 0 10px 0;">صفاقس</h3>
+                            <p style="margin: 5px 0;"><i class="fas fa-map-marker-alt" style="color: #D4AF37;"></i> فرع صفاقس</p>
+                            <p style="margin: 5px 0;"><i class="fas fa-phone" style="color: #D4AF37;"></i> +216 56 471 550</p>
+                        </div>
+                    `);
+                
+                const sousseMarker = L.marker([35.83, 10.64], {icon: goldIcon}).addTo(map)
+                    .bindPopup(`
+                        <div class="map-popup">
+                            <h3 style="color: #D4AF37; margin: 0 0 10px 0;">سوسة</h3>
+                            <p style="margin: 5px 0;"><i class="fas fa-map-marker-alt" style="color: #D4AF37;"></i> فرع سوسة</p>
+                            <p style="margin: 5px 0;"><i class="fas fa-phone" style="color: #D4AF37;"></i> +216 56 471 550</p>
+                        </div>
+                    `);
+                
+                // Add more cities for better coverage
+                const nabeulMarker = L.marker([36.45, 10.73], {icon: goldIcon}).addTo(map)
+                    .bindPopup('<div class="map-popup"><h3 style="color: #D4AF37;">نابل</h3><p>منطقة خدمة نشطة</p></div>');
+                
+                const monastirMarker = L.marker([35.78, 10.83], {icon: goldIcon}).addTo(map)
+                    .bindPopup('<div class="map-popup"><h3 style="color: #D4AF37;">المنستير</h3><p>منطقة خدمة نشطة</p></div>');
+                
+                // Add polygon for Tunisia coverage (simplified shape)
+                const tunisiaPolygon = L.polygon([
+                    [37.4, 8.6], [37.4, 11.6], [30.2, 11.6], [30.2, 8.6]
+                ], {
+                    color: '#E70013',
+                    weight: 2,
+                    opacity: 0.7,
+                    fillOpacity: 0.1,
+                    fillColor: '#E70013'
+                }).addTo(map);
+                
+                // Fit bounds to show all markers with padding
+                const bounds = L.latLngBounds([
+                    [36.8, 10.17],  // Tunis
+                    [34.74, 10.76], // Sfax
+                    [35.83, 10.64]  // Sousse
+                ]);
+                map.fitBounds(bounds.pad(0.2));
+                
+                // Add map controls
+                L.control.scale().addTo(map);
+                
+            } catch (error) {
+                console.error('Error loading map:', error);
+                // Fallback if map fails to load
+                document.getElementById('contactMap').innerHTML = `
+                    <div style="height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; background: var(--off-white); color: var(--text-light); border-radius: var(--radius-lg); padding: var(--space-xl); text-align: center;">
+                        <i class="fas fa-map-marked-alt fa-3x" style="color: var(--primary-gold); margin-bottom: 20px;"></i>
+                        <h3 style="color: var(--text-dark); margin-bottom: 10px;">خريطة المناطق</h3>
+                        <p style="margin-bottom: 5px;">الخدمة متاحة في جميع أنحاء تونس</p>
+                        <p style="font-size: var(--font-size-sm);">تونس العاصمة، صفاقس، سوسة، نابل، المنستير وجميع المناطق</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // Initialize Contact Form
+        function initContactForm() {
+            const contactForm = document.getElementById('contactForm');
+            if (!contactForm) return;
+            
+            const formLoader = document.getElementById('formLoader');
+            const formStatus = document.getElementById('formStatus');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+            
+            contactForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                // Show loader
+                formLoader.style.display = 'block';
+                formStatus.style.display = 'none';
+                
+                // Get form data
+                const formData = {
+                    fullName: document.getElementById('fullName').value,
+                    phoneNumber: document.getElementById('countryCode').value + document.getElementById('phoneNumber').value,
+                    email: document.getElementById('email').value,
+                    preferredContact: document.getElementById('preferredContact').value,
+                    serviceType: document.getElementById('serviceType').value,
+                    urgency: document.getElementById('urgency').value,
+                    messageSubject: document.getElementById('messageSubject').value,
+                    message: document.getElementById('message').value
+                };
+                
+                // Validate form
+                if (!validateForm(formData)) {
+                    showError('يرجى ملء جميع الحقول المطلوبة بشكل صحيح');
+                    formLoader.style.display = 'none';
+                    return;
+                }
+                
+                // Simulate API call
+                setTimeout(() => {
+                    formLoader.style.display = 'none';
+                    
+                    // Create WhatsApp message
+                    const whatsappMessage = createWhatsAppMessage(formData);
+                    
+                    // Open WhatsApp with pre-filled message
+                    const whatsappUrl = `https://wa.me/21656471550?text=${encodeURIComponent(whatsappMessage)}`;
+                    
+                    // Show success message
+                    showSuccess();
+                    
+                    // Open WhatsApp after 2 seconds
+                    setTimeout(() => {
+                        window.open(whatsappUrl, '_blank');
+                    }, 2000);
+                    
+                    // Reset form after success
+                    setTimeout(() => {
+                        contactForm.reset();
+                        document.querySelector('.char-count').textContent = '0/2000 حرف';
+                    }, 3000);
+                    
+                }, 1500);
+            });
+            
+            function validateForm(data) {
+                if (!data.fullName || data.fullName.length < 3) return false;
+                if (!data.phoneNumber || data.phoneNumber.length < 8) return false;
+                if (!data.serviceType) return false;
+                if (!data.messageSubject || data.messageSubject.length < 5) return false;
+                if (!data.message || data.message.length < 10) return false;
+                return true;
+            }
+            
+            function createWhatsAppMessage(data) {
+                const serviceTypes = {
+                    'local-delivery-tunisia': 'التوصيل المحلي في تونس',
+                    'scale-sales': 'بيع موازين',
+                    'scale-booking': 'حجز ميزان',
+                    'money-delivery': 'توثيق تسليم الأموال',
+                    'other': 'استفسار عام / خدمة أخرى'
+                };
+                
+                const urgencyTypes = {
+                    'normal': 'عادي',
+                    'urgent': 'عاجل',
+                    'emergency': 'طارئ'
+                };
+                
+                return `🌐 طلب جديد من موقع Tn-QA Delivery
+
+👤 الاسم: ${data.fullName}
+📞 الهاتف: ${data.phoneNumber}
+📧 البريد: ${data.email || 'غير محدد'}
+💬 طريقة التواصل المفضلة: ${data.preferredContact}
+
+📦 الخدمة المطلوبة: ${serviceTypes[data.serviceType] || data.serviceType}
+⚠️ درجة الاستعجال: ${urgencyTypes[data.urgency] || data.urgency}
+
+📌 الموضوع: ${data.messageSubject}
+
+📝 التفاصيل:
+${data.message}
+
+⏰ تم الإرسال في: ${new Date().toLocaleString('ar-TN')}`;
+            }
+            
+            function showError(message) {
+                errorText.textContent = message;
+                errorMessage.style.display = 'flex';
+                successMessage.style.display = 'none';
+                formStatus.style.display = 'block';
+                formStatus.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            
+            function showSuccess() {
+                errorMessage.style.display = 'none';
+                successMessage.style.display = 'flex';
+                formStatus.style.display = 'block';
+                formStatus.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+        
+        // Initialize FAQ Accordion
+        function initFAQ() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    // Close all other items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current item
+                    item.classList.toggle('active');
+                });
+            });
+        }
+        
+        // Initialize Copy Buttons
+        function initCopyButtons() {
+            const copyButtons = document.querySelectorAll('.copy-btn');
+            
+            copyButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    let textToCopy = '';
+                    
+                    if (this.dataset.number) {
+                        textToCopy = this.dataset.number;
+                    } else if (this.dataset.text) {
+                        textToCopy = this.dataset.text;
+                    } else {
+                        const linkElement = this.previousElementSibling;
+                        if (linkElement && linkElement.textContent) {
+                            textToCopy = linkElement.textContent.trim();
+                        }
+                    }
+                    
+                    if (textToCopy) {
+                        navigator.clipboard.writeText(textToCopy).then(() => {
+                            // Show feedback
+                            const originalHTML = this.innerHTML;
+                            this.innerHTML = '<i class="fas fa-check"></i>';
+                            this.style.color = '#28a745';
+                            
+                            setTimeout(() => {
+                                this.innerHTML = originalHTML;
+                                this.style.color = '';
+                            }, 2000);
+                        }).catch(err => {
+                            console.error('Failed to copy:', err);
+                            // Fallback for older browsers
+                            const textArea = document.createElement('textarea');
+                            textArea.value = textToCopy;
+                            document.body.appendChild(textArea);
+                            textArea.select();
+                            document.execCommand('copy');
+                            document.body.removeChild(textArea);
+                            
+                            // Show feedback
+                            const originalHTML = this.innerHTML;
+                            this.innerHTML = '<i class="fas fa-check"></i>';
+                            this.style.color = '#28a745';
+                            
+                            setTimeout(() => {
+                                this.innerHTML = originalHTML;
+                                this.style.color = '';
+                            }, 2000);
+                        });
+                    }
+                });
+            });
+        }
+        
+        // Handle window resize for responsive adjustments
+        window.addEventListener('resize', function() {
+            // Close mobile menu on resize to desktop
+            if (window.innerWidth > 992) {
+                const burger = document.getElementById('burger');
+                const navLinks = document.getElementById('navLinks');
+                
+                if (burger && navLinks) {
+                    burger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                }
+            }
+        });
+        
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if (this.getAttribute('href') === '#') return;
+                
+                const targetId = this.getAttribute('href');
+                if (targetId.startsWith('#')) {
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        e.preventDefault();
+                        const headerHeight = document.querySelector('.glass-header').offsetHeight;
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
         });
     </script>
 </body>

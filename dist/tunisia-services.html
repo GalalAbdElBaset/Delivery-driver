@@ -1,0 +1,2366 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خدمات تونس - Tn-QA Delivery</title>
+    <meta name="description" content="استكشف خدماتنا المتكاملة في التوصيل المحلي والدولي في تونس">
+    <meta name="keywords" content="خدمات توصيل تونس, توصيل محلي تونس, نقل أموال تونس, توصيل موازين">
+    
+    <!-- Font Awesome & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <style>
+        /* ================= CSS RESET & BASE ================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            /* ألوان الفاتح */
+            --primary: #dbb020ec;
+            --secondary: #d4af37;
+            --accent: #e63946;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --white: #ffffff;
+            --success: #28a745;
+            --warning: #ffc107;
+            --info: #17a2b8;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            
+            /* ألوان داكنة */
+            --dark-primary: #121212;
+            --dark-secondary: #1e1e1e;
+            --dark-accent: #d4af37;
+            --dark-light: #2d2d2d;
+            --dark-text: #f0f0f0;
+            --dark-gray: #444;
+            --dark-shadow: rgba(0, 0, 0, 0.3);
+        }
+        
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            transition: var(--transition);
+            overflow-x: hidden;
+        }
+        
+        body.dark-theme {
+            background-color: var(--dark-primary);
+            color: var(--dark-text);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .section-padding {
+            padding: 80px 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title {
+            font-size: 25px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: var(--dark-primary);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dark-theme .section-title {
+            color: var(--dark-accent);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary);
+            border-radius: 2px;
+        }
+        
+        .section-subtitle {
+            color: var(--gray);
+            font-size: 15px;
+            max-width: 600px;
+            margin: 15px auto 0;
+        }
+        
+        .dark-theme .section-subtitle {
+            color: #f0f0f0;
+        }
+        
+        .gold-text {
+            color: var(--secondary);
+        }
+        
+        .dark-theme .gold-text {
+            color: var(--dark-accent);
+        }
+        
+        .gold-bg {
+            background-color: var(--secondary);
+            color: var(--white);
+        }
+        
+        .dark-theme .gold-bg {
+            background-color: var(--dark-accent);
+        }
+        
+        /* ================= PAGE TRANSITION ================= */
+        .page-transition {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        
+        .page-transition.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .page-transition .logo {
+            text-align: center;
+            color: var(--white);
+        }
+        
+        .page-transition .logo-icon {
+            margin-bottom: 20px;
+            animation: spin 2s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* ================= PROGRESS BAR ================= */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 4px;
+            background: transparent;
+            z-index: 9998;
+        }
+        
+        .progress-bar {
+            height: 4px;
+            background: linear-gradient(to left, var(--secondary), var(--primary));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        /* ================= HEADER & NAVIGATION ================= */
+        .glass-header {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px var(--shadow);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+        
+        .dark-theme .glass-header {
+            background-color: rgba(30, 30, 30, 0.9);
+            box-shadow: 0 4px 20px var(--dark-shadow);
+        }
+        
+        .nav-wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-left: 10px;
+        }
+        
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--white);
+            border-radius: 50%;
+       
+        }
+        .logo-icon img {
+            width: 98%;
+            height: 98%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .dark-theme .logo-icon {
+            background-color: var(--dark-accent);
+            color: var(--dark-primary);
+        }
+        
+        .logo-text h1 {
+            font-size: 14px;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+        
+        .logo-text p {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .dark-theme .logo-text p {
+            color: var(--dark-gray);
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 5px 0;
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .dark-theme .nav-link {
+            color: var(--dark-text);
+        }
+        
+        .nav-link:hover {
+            color: var(--secondary);
+        }
+        
+        .dark-theme .nav-link:hover {
+            color: var(--dark-accent);
+        }
+        
+        .nav-link.active {
+            color: var(--secondary);
+        }
+        
+        .dark-theme .nav-link.active {
+            color: var(--dark-accent);
+        }
+        
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--secondary);
+            border-radius: 2px;
+        }
+        
+        .dark-theme .nav-link.active::after {
+            background-color: var(--dark-accent);
+        }
+        
+        .theme-switcher, .language-switcher-nav {
+            position: relative;
+        }
+        
+        .theme-btn, .lang-btn-nav {
+            background-color: var(--light-gray);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            color: var(--dark);
+        }
+        
+        .dark-theme .theme-btn, .dark-theme .lang-btn-nav {
+            background-color: var(--dark-light);
+            color: var(--dark-text);
+        }
+        
+        .theme-btn:hover, .lang-btn-nav:hover {
+            background-color: var(--secondary);
+            color: var(--white);
+        }
+        
+        .dark-theme .theme-btn:hover, .dark-theme .lang-btn-nav:hover {
+            background-color: var(--dark-accent);
+            color: var(--dark-primary);
+        }
+        
+        .lang-dropdown-nav {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px var(--shadow);
+            padding: 10px 0;
+            min-width: 120px;
+            display: none;
+            z-index: 100;
+        }
+        
+        .dark-theme .lang-dropdown-nav {
+            background-color: var(--dark-light);
+            box-shadow: 0 10px 30px var(--dark-shadow);
+        }
+        
+        .lang-dropdown-nav.show {
+            display: block;
+        }
+        
+        .lang-option-nav {
+            display: block;
+            padding: 8px 20px;
+            text-decoration: none;
+            color: var(--dark);
+            transition: var(--transition);
+        }
+        
+        .dark-theme .lang-option-nav {
+            color: var(--dark-text);
+        }
+        
+        .lang-option-nav:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .dark-theme .lang-option-nav:hover {
+            background-color: var(--dark-secondary);
+        }
+        
+        .lang-option-nav.active {
+            background-color: var(--secondary);
+            color: var(--white);
+        }
+        
+        .dark-theme .lang-option-nav.active {
+            background-color: var(--dark-accent);
+            color: var(--dark-primary);
+        }
+        
+        .header-buttons {
+            display: flex;
+            gap: 15px;
+            font-size: 12px;
+        }
+        
+        .nav-cta {
+
+            padding: 10px 5px ;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+        
+        .whatsapp-btn {
+            background-color: #25D366;
+            color: white;
+        }
+        
+        .call-btn {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .dark-theme .call-btn {
+            background-color: var(--dark-accent);
+            color: var(--dark-primary);
+        }
+        
+        .cta-text {
+            margin-right: 5px;
+        }
+        
+        .burger {
+            display: none;
+            background: none;
+            border: none;
+            width: 30px;
+            height: 20px;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1001;
+        }
+        
+        .burger span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background-color: var(--dark);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+        
+        .dark-theme .burger span {
+            background-color: var(--dark-text);
+        }
+        
+        .burger.active span:nth-child(1) {
+            transform: translateY(8.5px) rotate(45deg);
+        }
+        
+        .burger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .burger.active span:nth-child(3) {
+            transform: translateY(-8.5px) rotate(-45deg);
+        }
+        
+        /* ================= PROCESS STEPS ================= */
+        .process-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .process-step {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .dark-theme .process-step {
+            background-color: var(--dark-light);
+            box-shadow: 0 10px 30px var(--dark-shadow);
+        }
+        
+        .process-step:hover {
+            transform: translateY(-10px);
+        }
+        
+        .step-number {
+            position: absolute;
+            /* top: -20px;
+            right: -20px; */
+            width: 38px;
+            height: 38px;
+            background-color: var(--secondary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 15px;
+            font-weight: 800;
+        }
+        
+        .dark-theme .step-number {
+            background-color: var(--dark-accent);
+            color: var(--dark-primary);
+        }
+        
+        .step-icon {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        
+        .dark-theme .step-icon {
+            color: var(--dark-accent);
+        }
+        
+        .step-content h3 {
+            font-size: 17px;
+            margin-bottom: 15px;
+            color: var(--dark-primary);
+        }
+        
+        .dark-theme .step-content h3 {
+            color: white;
+        }
+        
+        .step-content p {
+            color: var(--gray);
+        }
+        
+        .dark-theme .step-content p {
+            color: white;
+        }
+        
+        /* ================= QATAR SERVICES ================= */
+        .qatar-services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .service-card {
+            background-color: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            padding: 5px;
+        }
+        .service-C {
+             flex-direction: row-reverse;
+        }
+        .service-padding {
+            padding: 30px;
+        }
+        .dark-theme .service-card {
+            background-color: var(--dark-light);
+            box-shadow: 0 10px 30px var(--dark-shadow);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .service-image {
+            height: 200px;
+            width: 50%;
+            overflow: hidden;
+        }
+        
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .service-card:hover .service-image img {
+            transform: scale(1.05);
+        }
+        
+        .service-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .service-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .service-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12.3px;
+        }
+        
+        .service-title {
+            font-size: 16px;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .dark-theme .service-title {
+            color: var(--dark-text);
+        }
+        
+        .service-description {
+            color: var(--gray);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+        
+        .dark-theme .service-description {
+            color: var(--dark-gray);
+        }
+        
+        .service-features {
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        
+        .service-features h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .dark-theme .service-features h4 {
+            color: var(--dark-text);
+        }
+        
+        .features-list {
+            list-style-type: none;
+            padding-right: 20px;
+        }
+        
+        .features-list li {
+            position: relative;
+            padding: 8px 0;
+            padding-right: 25px;
+            color: var(--dark-primary);
+        }
+        
+        .dark-theme .features-list li {
+            color: var(--dark-gray);
+        }
+        
+        .features-list li::before {
+            content: '✓';
+            position: absolute;
+            right: 0;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+        
+        .dark-theme .features-list li::before {
+            color: var(--dark-accent);
+        }
+        
+        .service-button-container {
+            margin-top: auto;
+        }
+        
+        .service-btn-small {
+            background-color: var(--secondary);
+            color: var(--white);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 30%;
+            transition: var(--transition);
+        }
+        
+        .dark-theme .service-btn-small {
+            background-color: var(--dark-accent);
+            color: var(--dark-primary);
+        }
+        
+        .service-btn-small:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .dark-theme .service-btn-small:hover {
+            background-color: var(--dark-secondary);
+            color: var(--dark-text);
+        }
+        
+        /* ================= SERVICES SECTION ================= */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+
+        
+        .service-card h3 {
+            text-align: center;
+            font-size: 17px;
+            margin-bottom: 15px;
+            color: var(--primary);
+            
+        }
+        
+        .dark-theme .service-card h3 {
+            color: var(--dark-text);
+        }
+        
+        .service-card p {
+            text-align: right;
+            color: var(--gray);
+            margin-bottom: 10px;
+        }
+        
+        .dark-theme .service-card p {
+            color: var(--dark-gray);
+        }
+        
+        .service-selection {
+            margin-bottom: 20px;
+        }
+        
+        .service-select {
+            width: 100%;
+            padding: 8px 20px;
+            border: 2px solid var(--light-gray);
+            border-radius: 10px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 12px;
+            background-color: var(--white);
+            color: var(--dark);
+            transition: var(--transition);
+        }
+        
+        .dark-theme .service-select {
+            background-color: var(--dark-secondary);
+            border-color: var(--dark-gray);
+            color: var(--dark-text);
+        }
+        
+        .service-select:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+        
+        .dark-theme .service-select:focus {
+            border-color: var(--dark-accent);
+        }
+        
+        .input-group {
+            position: relative;
+            margin-bottom: 15px;
+        }
+        
+        .service-input {
+            width: 100%;
+            padding: 8px 32px 8px 45px;
+            border: 2px solid var(--light-gray);
+            border-radius: 10px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 14px;
+            background-color: var(--white);
+            color: var(--dark);
+            transition: var(--transition);
+        }
+        
+        .dark-theme .service-input {
+            background-color: var(--dark-secondary);
+            border-color: var(--dark-gray);
+            color: var(--dark-text);
+        }
+        
+        .service-input:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+        
+        .dark-theme .service-input:focus {
+            border-color: var(--dark-accent);
+        }
+        
+        .input-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+        
+        .dark-theme .input-icon {
+            color: var(--dark-gray);
+        }
+        
+        .service-btn {
+            width: 70%;
+            padding: 12px 17px;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            margin: auto;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+            transition: var(--transition);
+        }
+        
+        .service-btn.whatsapp {
+            background-color: #25D366;
+            color: white;
+        }
+        
+        .service-btn.whatsapp:hover {
+            background-color: #1da851;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+        }
+        
+        .btn-text {
+            margin-right: 5px;
+        }
+        
+        .contact-number-display {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--light-gray);
+        }
+        
+        .dark-theme .contact-number-display {
+            border-top-color: var(--dark-gray);
+        }
+        
+        .phone-link {
+            text-decoration: none;
+            color: var(--secondary);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+        }
+        
+        .dark-theme .phone-link {
+            color: var(--dark-accent);
+        }
+        
+        .phone-link:hover {
+            color: var(--primary);
+        }
+        
+        .dark-theme .phone-link:hover {
+            color: var(--dark-text);
+        }
+        
+        .service-warning {
+            background-color: rgba(255, 193, 7, 0.1);
+            border: 1px solid var(--warning);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        
+        .dark-theme .service-warning {
+            background-color: rgba(255, 193, 7, 0.15);
+            border-color: var(--warning);
+        }
+        
+        .service-warning h3 {
+            color: var(--warning);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .service-warning p {
+            color: var(--gray);
+            text-align: right;
+            margin-bottom: 0;
+        }
+        
+        .dark-theme .service-warning p {
+            color: var(--dark-gray);
+        }
+        
+        /* ================= FINAL CTA ================= */
+        .services-hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #0a2540 100%);
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dark-theme .services-hero {
+            background: linear-gradient(135deg, var(--dark-secondary) 0%, #121212 100%);
+        }
+        
+        .cta-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        /* ================= FOOTER ================= */
+        .main-footer {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 60px 0 20px;
+        }
+        
+        .dark-theme .main-footer {
+            background-color: var(--dark-secondary);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo .logo {
+            margin-bottom: 20px;
+        }
+        
+        .footer-desc {
+            margin-bottom: 25px;
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--white);
+            font-size: 1.2rem;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--secondary);
+            transform: translateY(-5px);
+        }
+        
+        .dark-theme .social-icon:hover {
+            background-color: var(--dark-accent);
+        }
+        
+        .social-icon.whatsapp:hover {
+            background-color: #25D366;
+        }
+        
+        .social-icon.facebook:hover {
+            background-color: #1877F2;
+        }
+        
+        .social-icon.tiktok:hover {
+            background-color: #000000;
+        }
+        
+        .footer-title {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+        
+        .footer-list {
+            list-style-type: none;
+        }
+        
+        .footer-list li {
+            margin-bottom: 15px;
+        }
+        
+        .footer-link {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+        }
+        
+        .footer-link:hover {
+            color: var(--secondary);
+            transform: translateX(-5px);
+        }
+        
+        .dark-theme .footer-link:hover {
+            color: var(--dark-accent);
+        }
+        
+        .footer-link.active {
+            color: var(--secondary);
+            font-weight: 700;
+        }
+        
+        .footer-contact-info p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-contact-info p span {
+            font-weight: 600;
+            min-width: 70px;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            text-align: center;
+        }
+        
+        .legal-notice {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        
+        .legal-notice i {
+            font-size: 1.5rem;
+            margin-top: 3px;
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* ================= FLOATING BUTTONS ================= */
+        .float-theme, .float-whatsapp, .scroll-to-top {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 99;
+            transition: var(--transition);
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-5px);
+        }
+        
+        .float-theme {
+            left: 30px;
+            bottom: 130px;
+            background-color: var(--primary);
+            color: var(--white);
+        }
+        
+        .dark-theme .float-theme {
+            background-color: var(--dark-accent);
+            color: var(--dark-primary);
+        }
+        
+        .float-theme i:last-child {
+            display: none;
+        }
+        
+        .dark-theme .float-theme i:first-child {
+            display: none;
+        }
+        
+        .dark-theme .float-theme i:last-child {
+            display: block;
+        }
+        
+        .float-whatsapp {
+            left: 30px;
+            bottom: 60px;
+            background-color: #25D366;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .float-whatsapp.pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+        
+        .scroll-to-top {
+            left: 30px;
+            bottom: 200px;
+            background-color: var(--secondary);
+            color: var(--white);
+            display: none;
+        }
+        
+        .dark-theme .scroll-to-top {
+            background-color: var(--dark-accent);
+            color: var(--dark-primary);
+        }
+        
+        .scroll-to-top.show {
+            display: flex;
+        }
+        
+        /* ================= RESPONSIVE DESIGN ================= */
+        @media (max-width: 992px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 300px;
+                height: 100vh;
+                background-color: var(--white);
+                flex-direction: column;
+                justify-content: flex-start;
+                padding-top: 100px;
+                gap: 0;
+                transition: var(--transition);
+                box-shadow: -10px 0 30px var(--shadow);
+                z-index: 1000;
+            }
+            
+            .dark-theme .nav-links {
+                background-color: var(--dark-light);
+                box-shadow: -10px 0 30px var(--dark-shadow);
+            }
+            
+            .nav-links.active {
+                right: 0;
+            }
+            
+            .nav-link {
+                width: 100%;
+                padding: 15px 30px;
+                border-bottom: 1px solid var(--light-gray);
+            }
+            
+            .dark-theme .nav-link {
+                border-bottom: 1px solid var(--dark-gray);
+            }
+            
+            .nav-link:last-child {
+                border-bottom: none;
+            }
+            
+            .theme-switcher, .language-switcher-nav {
+                width: 100%;
+                padding: 15px 30px;
+            }
+            
+            .theme-btn, .lang-btn-nav {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .lang-dropdown-nav {
+                position: static;
+                box-shadow: none;
+                display: none;
+                background-color: var(--light-gray);
+                margin-top: 10px;
+                border-radius: 10px;
+            }
+            
+            .dark-theme .lang-dropdown-nav {
+                background-color: var(--dark-secondary);
+            }
+            
+            .lang-dropdown-nav.show {
+                display: block;
+            }
+            
+            .burger {
+                display: flex;
+            }
+            
+            .header-buttons {
+                display: none;
+            }
+            
+            .process-container, .qatar-services-grid, .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .process-step {
+                max-width: 100%;
+            }
+            
+            .float-theme, .float-whatsapp, .scroll-to-top {
+                left: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            
+            .float-theme {
+                bottom: 110px;
+            }
+            
+            .float-whatsapp {
+                bottom: 50px;
+            }
+            
+            .scroll-to-top {
+                bottom: 170px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .cta-content h2 {
+                font-size: 2rem;
+            }
+            
+            .service-title, .service-card h3 {
+                font-size: 1.3rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .nav-wrap {
+                padding: 10px 15px;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.2rem;
+            }
+            
+            .logo-text p {
+                font-size: 0.8rem;
+            }
+            
+            .section-padding {
+                padding: 60px 0;
+            }
+            
+            .service-card {
+                padding: 20px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        .process-steps {
+            padding-top: 120px;
+        }
+        
+
+        .process-steps {
+            padding-top: 150px;
+        }
+       
+    </style>
+</head>
+<body>
+    <!-- Page Transition -->
+    <div class="page-transition">
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-cogs" style="font-size: 3rem;"></i>
+            </div>
+            <div class="logo-text">
+                <h1>Tn-QA Delivery</h1>
+                <p>جار تحميل خدمات تونس...</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    
+    <!-- ================= NAVIGATION ================= -->
+    <header id="mainHeader" class="glass-header">
+        <div class="nav-wrap container">
+            <!-- Logo -->
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="https://iili.io/fLgS9wP.md.jpg" alt="">
+                </div>
+                <div class="logo-text">
+                    <h1 class="gold-text">Tn-QA Delivery</h1>
+                    <p>خدمات تونس</p>
+                </div>
+            </div>
+            
+            <!-- Navigation Links -->
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-link">الرئيسية</a>
+                <a href="index.html#about" class="nav-link">من نحن</a>
+                <a href="qatar-services.html" class="nav-link">خدمات قطر</a>
+                <a href="tunisia-services.html" class="nav-link active">خدمات تونس</a>
+                <a href="contact.html" class="nav-link">التواصل</a>
+                <a href="reviews.html" class="nav-link">المراجعات</a>
+                
+                <!-- Theme Switcher -->
+                <div class="theme-switcher">
+                    <button id="themeToggle" class="theme-btn" aria-label="تبديل وضع السطوع">
+                        <i class="fas fa-sun"></i>
+                        <span class="theme-text">فاتح</span>
+                    </button>
+                </div>
+                
+                <!-- Language Switcher -->
+                <div class="language-switcher-nav">
+                    <button id="langBtn" class="lang-btn-nav">
+                        <i class="fas fa-globe"></i>
+                        <span id="currentLang">العربية</span>
+                    </button>
+                    <div class="lang-dropdown-nav" id="langDropdown">
+                        <a href="#" data-lang="ar" class="lang-option-nav active">العربية</a>
+                        <a href="#" data-lang="en" class="lang-option-nav">English</a>
+                    </div>
+                </div>
+            </nav>
+            
+            <!-- Header Buttons -->
+            <div class="header-buttons">
+                <a href="https://wa.me/+21656471550" class="nav-cta whatsapp-btn ripple" target="_blank">
+                    <i class="fab fa-whatsapp"></i> <span class="cta-text">تواصل عبر واتساب</span>
+                </a>
+                <a href="tel:+21656471550" class="nav-cta call-btn ripple">
+                    <i class="fas fa-phone"></i> <span class="cta-text">اتصل الآن</span>
+                </a>
+            </div>
+            
+            <!-- Mobile Menu Burger -->
+            <button class="burger" id="burger" aria-label="قائمة التنقل">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ================= PROCESS STEPS ================= -->
+    <section class="process-steps section-padding" id="process">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">كيف تعمل خدماتنا في تونس</h2>
+                <p class="section-subtitle">ثلاث خطوات بسيطة للحصول على خدمة توصيل مميزة</p>
+            </div>
+            
+            <div class="process-container">
+                <div class="process-step" data-aos="fade-up" data-aos-delay="100">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <div class="step-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3>طلب الخدمة</h3>
+                        <p>اتصل بنا عبر الواتساب أو الهاتف واختر الخدمة التي تحتاجها</p>
+                    </div>
+                </div>
+                
+                <div class="process-step" data-aos="fade-up" data-aos-delay="200">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <div class="step-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <h3>التنفيذ والتوصيل</h3>
+                        <p>نقوم بتنفيذ طلبك بدقة عالية مع تحديثات مستمرة</p>
+                    </div>
+                </div>
+                
+                <div class="process-step" data-aos="fade-up" data-aos-delay="300">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <div class="step-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>التوثيق والتسليم</h3>
+                        <p>نوثق عملية التسليم يداً بيد مع إثباتات كاملة</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= TUNISIA SERVICES ================= -->
+    <section id="tunisiaServices" class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">خدمات التوصيل في تونس</h2>
+                <p class="section-subtitle">خدمات محلية شاملة لجميع احتياجاتك داخل دولة تونس</p>
+            </div>
+            
+            <div class="qatar-services-grid">
+                <!-- Service 1 -->
+                <div class="service-card service-C" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                            alt="توصيل موظفين وتلاميذ في تونس - خدمة نقل موظفين" loading="lazy">
+                    </div>
+                    
+                    <div class="service-content">
+                        <div class="service-header">
+                            <div class="service-icon gold-bg">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <h3 class="service-title">توصيل موظفين وتلاميذ</h3>
+                        </div>
+                        <p class="service-description">
+                            خدمة نقل موظفين إلى أماكن العمل وتوصيل الطلاب إلى المدارس بمواعيد منتظمة وآمنة، مع سائعين مدربين ومركبات مكيفة.
+                        </p>
+                        
+                        <div class="service-features">
+                            <h4>مميزات الخدمة:</h4>
+                            <ul class="features-list">
+                                <li>مواعيد ثابتة ومنتظمة</li>
+                                <li>سائقون مدربون ومحترفون</li>
+                                <li>مركبات مكيفة وآمنة</li>
+                                <li>تتبع مباشر للمواقع</li>
+                                <li>تقارير يومية عن الرحلات</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-button-container">
+                            <button class="service-btn-small" onclick="window.open('https://wa.me/+21656471550?text=أريد خدمة توصيل موظفين وتلاميذ', '_blank')" aria-label="طلب خدمة توصيل موظفين">
+                                <i class="fab fa-whatsapp"></i> طلب الخدمة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card service-C" data-aos="fade-up" data-aos-delay="150">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                            alt="توصيل مشاوير خاصة في تونس - خدمة تنفيذ مهام" loading="lazy">
+                    </div>
+                    
+                    <div class="service-content">
+                        <div class="service-header">
+                            <div class="service-icon gold-bg">
+                                <i class="fas fa-running"></i>
+                            </div>
+                            <h3 class="service-title">توصيل مشاوير خاصة</h3>
+                        </div>
+                        <p class="service-description">
+                            تنفيذ مشاوير خاصة مثل السحب من البنك، تسليم مستندات، زيارات رسمية، سحب معاملات حكومية، وغيرها من المهام الخاصة.
+                        </p>
+                        
+                        <div class="service-features">
+                            <h4>مميزات الخدمة:</h4>
+                            <ul class="features-list">
+                                <li>تنفيذ جميع أنواع المشاوير</li>
+                                <li>سريعة ومضمونة النتائج</li>
+                                <li>تسليم يداً بيد</li>
+                                <li>إيصالات رسمية للمعاملات</li>
+                                <li>خصوصية تامة للمستندات</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-button-container">
+                            <button class="service-btn-small" onclick="window.open('https://wa.me/+21656471550?text=أريد خدمة توصيل مشاوير خاصة', '_blank')" aria-label="طلب خدمة توصيل مشاوير">
+                                <i class="fab fa-whatsapp"></i> طلب الخدمة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card service-C" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                            alt="توصيل أغراض ومشتريات في تونس - خدمة تسوق وتوصيل" loading="lazy">
+                    </div>
+                    
+                    <div class="service-content">
+                        <div class="service-header">
+                            <div class="service-icon gold-bg">
+                                <i class="fas fa-shopping-bag"></i>
+                            </div>
+                            <h3 class="service-title">توصيل أغراض ومشتريات</h3>
+                        </div>
+                        <p class="service-description">
+                            توصيل المشتريات والأغراض الشخصية من المتاجر والأسواق إلى منزلك أو عملك. نخدم جميع المحلات التجارية الكبرى.
+                        </p>
+                        
+                        <div class="service-features">
+                            <h4>مميزات الخدمة:</h4>
+                            <ul class="features-list">
+                                <li>توصيل من جميع المحلات التجارية</li>
+                                <li>فحص المنتجات قبل الشراء</li>
+                                <li>تغليف احترافي للأغراض</li>
+                                <li>توصيل سريع خلال 2-3 ساعات</li>
+                                <li>أسعار تنافسية</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-button-container">
+                            <button class="service-btn-small" onclick="window.open('https://wa.me/+21656471550?text=أريد خدمة توصيل أغراض ومشتريات', '_blank')" aria-label="طلب خدمة توصيل أغراض">
+                                <i class="fab fa-whatsapp"></i> طلب الخدمة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="service-card service-C" data-aos="fade-up" data-aos-delay="250">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                            alt="توصيل هدايا في تونس - خدمة هدايا وورود" loading="lazy">
+                    </div>
+                    
+                    <div class="service-content">
+                        <div class="service-header">
+                            <div class="service-icon gold-bg">
+                                <i class="fas fa-gift"></i>
+                            </div>
+                            <h3 class="service-title">توصيل هدايا</h3>
+                        </div>
+                        <p class="service-description">
+                            توصيل الهدايا والورود والباقات في المناسبات الخاصة مع خدمة تغليف مميزة. نضمن وصول الهدايا في الوقت المحدد وبشكل أنيق.
+                        </p>
+                        
+                        <div class="service-features">
+                            <h4>مميزات الخدمة:</h4>
+                            <ul class="features-list">
+                                <li>تغليف احترافي للهدايا</li>
+                                <li>توصيل مفاجئة في المناسبات</li>
+                                <li>باقات ورد طازجة يومياً</li>
+                                <li>بطاقات تهنئة شخصية</li>
+                                <li>خدمة توصيل 24/7</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-button-container">
+                            <button class="service-btn-small" onclick="window.open('https://wa.me/+21656471550?text=أريد خدمة توصيل هدايا', '_blank')" aria-label="طلب خدمة توصيل هدايا">
+                                <i class="fab fa-whatsapp"></i> طلب الخدمة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 5 -->
+                <div class="service-card service-C" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                            alt="توصيل مواد استهلاكية في تونس - خدمة موزون" loading="lazy">
+                    </div>
+                    
+                    <div class="service-content">
+                        <div class="service-header">
+                            <div class="service-icon gold-bg">
+                                <i class="fas fa-box"></i>
+                            </div>
+                            <h3 class="service-title">توصيل مواد استهلاكية</h3>
+                        </div>
+                        <p class="service-description">
+                            توصيل المواد الغذائية والاستهلاكية من المحلات التجارية إلى المنازل والمطاعم والمؤسسات. نتعامل مع جميع المحلات الكبرى.
+                        </p>
+                        
+                        <div class="service-features">
+                            <h4>مميزات الخدمة:</h4>
+                            <ul class="features-list">
+                                <li>توصيل من جميع المحلات التجارية</li>
+                                <li>حفظ المواد سليمة ومبردة</li>
+                                <li>أسعار الجملة للمؤسسات</li>
+                                <li>توصيل منتظم للمطاعم</li>
+                                <li>فواتير رسمية</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-button-container">
+                            <button class="service-btn-small" onclick="window.open('https://wa.me/+21656471550?text=أريد خدمة توصيل مواد استهلاكية', '_blank')" aria-label="طلب خدمة توصيل مواد استهلاكية">
+                                <i class="fab fa-whatsapp"></i> طلب الخدمة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 6 -->
+                <div class="service-card service-C" data-aos="fade-up" data-aos-delay="350">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1556742044-3c52d6e88c62?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                            alt="خدمات التجارة الإلكترونية في تونس - خدمة متاجر إلكترونية" loading="lazy">
+                    </div>
+                    
+                    <div class="service-content">
+                        <div class="service-header">
+                            <div class="service-icon gold-bg">
+                                <i class="fas fa-laptop"></i>
+                            </div>
+                            <h3 class="service-title">خدمات التجارة الإلكترونية</h3>
+                        </div>
+                        <p class="service-description">
+                            خدمات توصيل للمتاجر الإلكترونية وتنفيذ الطلبات مع تحديثات لحظية للعملاء. شريك موثوق في نجاح متجرك الإلكتروني.
+                        </p>
+                        
+                        <div class="service-features">
+                            <h4>مميزات الخدمة:</h4>
+                            <ul class="features-list">
+                                <li>تكامل مع منصات التجارة الإلكترونية</li>
+                                <li>تحديثات لحظية للعملاء</li>
+                                <li>إدارة المخزون والتوصيل</li>
+                                <li>خدمة عملاء مخصصة للتجار</li>
+                                <li>تقارير أداء شاملة</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-button-container">
+                            <button class="service-btn-small" onclick="window.open('https://wa.me/+21656471550?text=أريد خدمة توصيل للتجارة الإلكترونية', '_blank')" aria-label="طلب خدمة توصيل للتجارة الإلكترونية">
+                                <i class="fab fa-whatsapp"></i> طلب الخدمة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= SERVICES SECTION ================= -->
+    <section id="services" class="services section-padding">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">خدمات تونس</h2>
+                <p class="section-subtitle">اختر الخدمة المناسبة لك واطلبها الآن</p>
+            </div>
+            
+            <div class="services-grid">
+                <!-- Service 1: التوصيل المحلي في تونس -->
+                <div class="service-card service-padding" data-aos="fade-up" data-aos-delay="100">
+                    <!-- <div class="service-icon gold-bg">
+                        <i class="fas fa-truck-fast"></i>
+                    </div> -->
+                    <h3>خدمات توصيل داخل تونس</h3>
+                    <p>خدمات توصيل محلية داخل جميع ولايات تونس لجميع أنواع البضائع والمستندات</p>
+                    
+                    <div class="service-selection">
+                        <select class="service-select" id="serviceSelectTunisia">
+                            <option value="" selected disabled>-- اختر الخدمة --</option>
+                            <option value="توصيل موظفين وتلاميذ">توصيل موظفين وتلاميذ</option>
+                            <option value="توصيل مشاوير خاصة">توصيل مشاوير خاصة</option>
+                            <option value="توصيل أغراض ومشتريات">توصيل أغراض ومشتريات</option>
+                            <option value="توصيل هدايا">توصيل هدايا</option>
+                            <option value="توصيل مواد استهلاكية">توصيل مواد استهلاكية</option>
+                            <option value="خدمات التجارة الإلكترونية">خدمات التجارة الإلكترونية</option>
+                        </select>
+                    </div>
+                    
+                    <!-- حقل الإدخال للاسم -->
+                    <div class="input-group">
+                        <input type="text" id="nameInputTunisia" placeholder="اسمك الكريم" class="service-input">
+                        <i class="fas fa-user input-icon"></i>
+                    </div>
+                    
+                    <!-- حقل الإدخال للهاتف -->
+                    <div class="input-group">
+                        <input type="tel" id="phoneInputTunisia" placeholder="رقم هاتفك" class="service-input">
+                        <i class="fas fa-phone input-icon"></i>
+                    </div>
+                    
+                    <!-- حقل الإدخال للبريد الإلكتروني -->
+                    <div class="input-group">
+                        <input type="email" id="emailInputTunisia" placeholder="البريد الإلكتروني" class="service-input">
+                        <i class="fas fa-envelope input-icon"></i>
+                    </div>
+                    
+                    <!-- زر الإرسال -->
+                    <button class="service-btn whatsapp send-service-request" 
+                            data-country="تونس" 
+                            data-service="التوصيل المحلي في تونس"
+                            data-phone-input="phoneInputTunisia"
+                            data-name-input="nameInputTunisia"
+                            data-email-input="emailInputTunisia"
+                            data-service-select="serviceSelectTunisia"
+                            data-whatsapp-number="21656471550">
+                        <i class="fab fa-whatsapp"></i> 
+                        <span class="btn-text">طلب خدمة التوصيل في تونس</span>
+                    </button>
+                    
+                    <!-- رقم الهاتف للتواصل -->
+                    <div class="contact-number-display">
+                        <a href="tel:+21656471550" class="phone-link">
+                            <i class="fas fa-phone-alt"></i> 
+                            تونس: 56471550
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Service 2: توصيل دولي -->
+                <div class="service-card service-padding" data-aos="fade-up" data-aos-delay="150">
+                    <!-- <div class="service-icon gold-bg">
+                        <i class="fas fa-balance-scale"></i>
+                    </div> -->
+                    <h3>خدمة توصيل ميزان بين قطر وتونس</h3>
+                    <p>خدمة توصيل أغراض شخصية وموازين بين تونس وتونس</p>
+                    
+                    <div class="service-selection">
+                        <select class="service-select" id="serviceSelectInternational">
+                            <option value="" selected disabled>-- اختر الخدمة --</option>
+                            <option value="تريد بيع ميزان">تريد بيع ميزان</option>
+                            <option value="حجز ميزان من تونس الي قطر">حجز ميزان من تونس الي تونس</option>
+                            <option value="حجز ميزان من قطر الي تونس">حجز ميزان من تونس الي تونس</option>
+                        </select>
+                    </div>
+                    
+                    <!-- حقل الإدخال للاسم -->
+                    <div class="input-group">
+                        <input type="text" id="nameInputInternational" placeholder="اسمك الكريم" class="service-input">
+                        <i class="fas fa-user input-icon"></i>
+                    </div>
+                    
+                    <!-- حقل الإدخال للهاتف -->
+                    <div class="input-group">
+                        <input type="tel" id="phoneInputInternational" placeholder="رقم هاتفك" class="service-input">
+                        <i class="fas fa-phone input-icon"></i>
+                    </div>
+                    
+                    <!-- حقل الإدخال للبريد الإلكتروني -->
+                    <div class="input-group">
+                        <input type="email" id="emailInputInternational" placeholder="البريد الإلكتروني" class="service-input">
+                        <i class="fas fa-envelope input-icon"></i>
+                    </div>
+                    
+                    <!-- زر الإرسال -->
+                    <button class="service-btn whatsapp send-service-request" 
+                            data-country="تونس" 
+                            data-service="توصيل دولي"
+                            data-phone-input="phoneInputInternational"
+                            data-name-input="nameInputInternational"
+                            data-email-input="emailInputInternational"
+                            data-service-select="serviceSelectInternational"
+                            data-whatsapp-number="21656471550">
+                        <i class="fab fa-whatsapp"></i> 
+                        <span class="btn-text">طلب خدمة توصيل دولي</span>
+                    </button>
+                    
+                    <!-- رقم الهاتف للتواصل -->
+                    <div class="contact-number-display">
+                        <a href="tel:+21656471550" class="phone-link">
+                            <i class="fas fa-phone-alt"></i> 
+                            تونس: 56471550
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Service 3: توثيق تسليم الأموال -->
+                <div class="service-card service-padding" data-aos="fade-up" data-aos-delay="200">
+                    <!-- <div class="service-icon gold-bg">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div> -->
+                    <h3>توثيق تسليم الأموال (يدًا بيد)</h3>
+                    <p>خدمة توثيق موثوقة لتسليم الأموال بين الأطراف</p>
+                    
+                    <div class="service-selection">
+                        <select class="service-select" id="serviceSelectMoney">
+                            <option value="" selected disabled>-- اختر الخدمة --</option>
+                            <option value="تحويل دينار تونسي إلى ريال تونسي">تحويل دينار تونسي إلى ريال تونسي</option>
+                            <option value="تحويل ريال تونسي إلى دينار تونسي">تحويل ريال تونسي إلى دينار تونسي</option>
+                        </select>
+                    </div>
+                    
+                    <!-- حقل الإدخال للاسم -->
+                    <div class="input-group">
+                        <input type="text" id="nameInputMoney" placeholder="اسمك الكريم" class="service-input">
+                        <i class="fas fa-user input-icon"></i>
+                    </div>
+                    
+                    <!-- حقل الإدخال للهاتف -->
+                    <div class="input-group">
+                        <input type="tel" id="phoneInputMoney" placeholder="رقم هاتفك" class="service-input">
+                        <i class="fas fa-phone input-icon"></i>
+                    </div>
+                    
+                    <!-- حقل الإدخال للبريد الإلكتروني -->
+                    <div class="input-group">
+                        <input type="email" id="emailInputMoney" placeholder="البريد الإلكتروني" class="service-input">
+                        <i class="fas fa-envelope input-icon"></i>
+                    </div>
+                    
+                    <!-- زر الإرسال -->
+                    <button class="service-btn whatsapp send-service-request" 
+                            data-country="مشترك" 
+                            data-service="توثيق تسليم الأموال"
+                            data-phone-input="phoneInputMoney"
+                            data-name-input="nameInputMoney"
+                            data-email-input="emailInputMoney"
+                            data-service-select="serviceSelectMoney"
+                            data-whatsapp-number="21656471550">
+                        <i class="fab fa-whatsapp"></i> 
+                        <span class="btn-text">تواصل الآن لتوثيق الأموال</span>
+                    </button>
+                    
+                    <!-- رقم الهاتف للتواصل -->
+                    <div class="contact-number-display">
+                        <a href="tel:+21656471550" class="phone-link">
+                            <i class="fas fa-phone-alt"></i> 
+                            تونس: 56471550
+                        </a>
+                    </div>
+                    
+                    <div class="service-warning">
+                        <h3>تنويه</h3>
+                        <p>نوفر خدمة توثيق فقط لعمليات تسليم الأموال بين المرسل والمستلم، حيث يتم التسليم مباشرة بين الطرفين.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FINAL CTA ================= -->
+    <section class="services-hero" id="finalCta" style="padding: 60px 0;">
+        <div class="container">
+            <div class="cta-content" data-aos="zoom-in" data-aos-duration="800">
+                <h2 class="gold-text">جاهز لطلب الخدمة؟</h2>
+                <p>اتصل بنا الآن واحصل على أفضل خدمة توصيل في تونس</p>
+                
+                <div style="margin-top: 30px;">
+                    <a href="https://wa.me/+21656471550" class="service-btn whatsapp" target="_blank" style="max-width: 300px; margin: 0 auto;">
+                        <i class="fab fa-whatsapp"></i> 
+                        <span>تواصل عبر واتساب</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Footer Logo -->
+                <div class="footer-logo">
+                    <div class="logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-shipping-fast" style="color: var(--white); font-size: 24px;"></i>
+                        </div>
+                        <div class="logo-text">
+                            <h2 class="gold-text">Tn-QA Delivery</h2>
+                            <p>خدمة توصيل سريعة وآمنة</p>
+                        </div>
+                    </div>
+                    <p class="footer-desc">خدمات توصيل ونقل موثوقة بين تونس وتونس</p>
+                    
+                    <!-- Social Media -->
+                    <div class="social-icons">
+                        <a href="https://wa.me/+21656471550" class="social-icon whatsapp" aria-label="واتساب" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="https://www.facebook.com/share/17ZgZb5UFg/" class="social-icon facebook" aria-label="فيسبوك" target="_blank">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://www.tiktok.com/@twensafiqatar0" class="social-icon tiktok" aria-label="تيك توك" target="_blank">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div class="footer-links">
+                    <h3 class="footer-title gold-text">روابط سريعة</h3>
+                    <ul class="footer-list">
+                        <li><a href="index.html" class="footer-link">الرئيسية</a></li>
+                        <li><a href="index.html#about" class="footer-link">من نحن</a></li>
+                        <li><a href="qatar-services.html" class="footer-link">خدمات قطر</a></li>
+                        <li><a href="tunisia-services.html" class="footer-link active">خدمات تونس</a></li>
+                        <li><a href="contact.html" class="footer-link">تواصل معنا</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Services Links -->
+                <div class="footer-services">
+                    <h3 class="footer-title gold-text">خدماتنا في تونس</h3>
+                    <ul class="footer-list">
+                        <li><a href="#services" class="footer-link">التوصيل المحلي</a></li>
+                        <li><a href="#services" class="footer-link">التوصيل الدولي</a></li>
+                        <li><a href="#services" class="footer-link">توثيق الأموال</a></li>
+                        <li><a href="#finalCta" class="footer-link">طلب الخدمة</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact Info -->
+                <div class="footer-contact">
+                    <h3 class="footer-title gold-text">تواصل معنا</h3>
+                    <div class="footer-contact-info">
+                        <p><i class="fab fa-whatsapp gold-text"></i> <span>واتساب:</span> +216 56 471 550</p>
+                        <p><i class="fas fa-phone gold-text"></i> <span>تونس:</span> +216 56 471 550</p>
+                        <p><i class="fas fa-envelope gold-text"></i> <span>البريد:</span> helamishwar@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="legal-notice">
+                    <i class="fas fa-exclamation-circle gold-text"></i>
+                    <p>الموقع منصة تعريفية وتنسيقية فقط، ولا يقوم بأي عمليات دفع إلكتروني أو تحصيل أموال.</p>
+                </div>
+                
+                <p class="copyright">© <span id="currentYear"></span> <span class="gold-text">Tn-QA Delivery</span> - جميع الحقوق محفوظة</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= FLOATING BUTTONS ================= -->
+    <!-- Floating Theme Toggle -->
+    <button class="float-theme hover-lift" id="floatThemeToggle" aria-label="تبديل وضع السطوع">
+        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun"></i>
+    </button>
+    
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/+21656471550" class="float-whatsapp pulse hover-lift" aria-label="تواصل معنا عبر واتساب" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    
+    <!-- Scroll to Top -->
+    <button class="scroll-to-top hover-lift" id="scrollToTop" aria-label="العودة إلى الأعلى">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- ================= SCRIPTS ================= -->
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script>
+        // ================= INITIALIZE AOS =================
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+        
+        // ================= PAGE LOAD TRANSITION =================
+        document.addEventListener('DOMContentLoaded', function() {
+            const pageTransition = document.querySelector('.page-transition');
+            
+            // Hide page transition after 1.5 seconds
+            setTimeout(() => {
+                pageTransition.classList.add('hide');
+                
+                // Remove from DOM after transition completes
+                setTimeout(() => {
+                    pageTransition.style.display = 'none';
+                }, 500);
+            }, 1500);
+            
+            // Set current year in footer
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            
+            // Initialize all interactive elements
+            initializeThemeToggle();
+            initializeMobileMenu();
+            initializeLanguageSwitcher();
+            initializeProgressBar();
+            initializeScrollToTop();
+            initializeServiceButtons();
+        });
+        
+        // ================= THEME TOGGLE =================
+        function initializeThemeToggle() {
+            const themeToggle = document.getElementById('themeToggle');
+            const floatThemeToggle = document.getElementById('floatThemeToggle');
+            const themeText = document.querySelector('.theme-text');
+            
+            // Check for saved theme preference or default to light
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            
+            // Apply the saved theme
+            if (currentTheme === 'dark') {
+                document.body.classList.add('dark-theme');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i> <span class="theme-text">داكن</span>';
+                floatThemeToggle.querySelector('.fa-moon').style.display = 'none';
+                floatThemeToggle.querySelector('.fa-sun').style.display = 'block';
+            }
+            
+            // Toggle theme function
+            function toggleTheme() {
+                document.body.classList.toggle('dark-theme');
+                
+                if (document.body.classList.contains('dark-theme')) {
+                    localStorage.setItem('theme', 'dark');
+                    themeToggle.innerHTML = '<i class="fas fa-moon"></i> <span class="theme-text">داكن</span>';
+                    floatThemeToggle.querySelector('.fa-moon').style.display = 'none';
+                    floatThemeToggle.querySelector('.fa-sun').style.display = 'block';
+                } else {
+                    localStorage.setItem('theme', 'light');
+                    themeToggle.innerHTML = '<i class="fas fa-sun"></i> <span class="theme-text">فاتح</span>';
+                    floatThemeToggle.querySelector('.fa-moon').style.display = 'block';
+                    floatThemeToggle.querySelector('.fa-sun').style.display = 'none';
+                }
+            }
+            
+            // Add event listeners
+            themeToggle.addEventListener('click', toggleTheme);
+            floatThemeToggle.addEventListener('click', toggleTheme);
+        }
+        
+        // ================= MOBILE MENU =================
+        function initializeMobileMenu() {
+            const burger = document.getElementById('burger');
+            const navLinks = document.getElementById('navLinks');
+            
+            burger.addEventListener('click', function() {
+                burger.classList.toggle('active');
+                navLinks.classList.toggle('active');
+                
+                // Close language dropdown if open
+                const langDropdown = document.getElementById('langDropdown');
+                langDropdown.classList.remove('show');
+            });
+            
+            // Close menu when clicking on a link
+            const navLinksList = document.querySelectorAll('.nav-link');
+            navLinksList.forEach(link => {
+                link.addEventListener('click', function() {
+                    burger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                });
+            });
+        }
+        
+        // ================= LANGUAGE SWITCHER =================
+        function initializeLanguageSwitcher() {
+            const langBtn = document.getElementById('langBtn');
+            const langDropdown = document.getElementById('langDropdown');
+            const currentLang = document.getElementById('currentLang');
+            const langOptions = document.querySelectorAll('.lang-option-nav');
+            
+            // Toggle dropdown
+            langBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                langDropdown.classList.toggle('show');
+            });
+            
+            // Close dropdown when clicking elsewhere
+            document.addEventListener('click', function(e) {
+                if (!langBtn.contains(e.target) && !langDropdown.contains(e.target)) {
+                    langDropdown.classList.remove('show');
+                }
+            });
+            
+            // Handle language selection
+            langOptions.forEach(option => {
+                option.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all options
+                    langOptions.forEach(opt => opt.classList.remove('active'));
+                    
+                    // Add active class to selected option
+                    this.classList.add('active');
+                    
+                    // Update current language text
+                    const selectedLang = this.getAttribute('data-lang');
+                    const langText = this.textContent;
+                    currentLang.textContent = langText;
+                    
+                    // Close dropdown
+                    langDropdown.classList.remove('show');
+                    
+                    // In a real implementation, you would load the appropriate language file here
+                    console.log(`Language changed to: ${selectedLang}`);
+                    
+                    // Show a message to the user
+                    if (selectedLang === 'en') {
+                        alert('Note: In a real implementation, the entire page content would be translated to English.');
+                    }
+                });
+            });
+        }
+        
+        // ================= PROGRESS BAR =================
+        function initializeProgressBar() {
+            const progressBar = document.getElementById('progressBar');
+            
+            window.addEventListener('scroll', function() {
+                const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (window.scrollY / windowHeight) * 100;
+                progressBar.style.width = scrolled + '%';
+            });
+        }
+        
+        // ================= SCROLL TO TOP =================
+        function initializeScrollToTop() {
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+            
+            // Show/hide button based on scroll position
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    scrollToTopBtn.classList.add('show');
+                } else {
+                    scrollToTopBtn.classList.remove('show');
+                }
+            });
+            
+            // Scroll to top when clicked
+            scrollToTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+        
+        // ================= SERVICE BUTTONS =================
+        function initializeServiceButtons() {
+            // Service request buttons
+            const serviceButtons = document.querySelectorAll('.send-service-request');
+            
+            serviceButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const country = this.getAttribute('data-country');
+                    const service = this.getAttribute('data-service');
+                    const phoneInputId = this.getAttribute('data-phone-input');
+                    const nameInputId = this.getAttribute('data-name-input');
+                    const emailInputId = this.getAttribute('data-email-input');
+                    const serviceSelectId = this.getAttribute('data-service-select');
+                    const whatsappNumber = this.getAttribute('data-whatsapp-number');
+                    
+                    // Get form values
+                    const phone = document.getElementById(phoneInputId).value.trim();
+                    const name = document.getElementById(nameInputId).value.trim();
+                    const email = document.getElementById(emailInputId).value.trim();
+                    const serviceSelect = document.getElementById(serviceSelectId);
+                    const selectedService = serviceSelect ? serviceSelect.value : service;
+                    
+                    // Validation
+                    if (!name) {
+                        alert('الرجاء إدخال اسمك الكريم');
+                        document.getElementById(nameInputId).focus();
+                        return;
+                    }
+                    
+                    if (!phone) {
+                        alert('الرجاء إدخال رقم هاتفك');
+                        document.getElementById(phoneInputId).focus();
+                        return;
+                    }
+                    
+                    if (!selectedService || selectedService === '') {
+                        alert('الرجاء اختيار الخدمة');
+                        if (serviceSelect) serviceSelect.focus();
+                        return;
+                    }
+                    
+                    // Create WhatsApp message
+                    let message = `مرحبًا، أريد طلب خدمة من Tn-QA Delivery\n\n`;
+                    message += `📌 البلد: ${country}\n`;
+                    message += `🛒 الخدمة: ${selectedService}\n`;
+                    message += `👤 الاسم: ${name}\n`;
+                    message += `📞 الهاتف: ${phone}\n`;
+                    
+                    if (email) {
+                        message += `📧 البريد الإلكتروني: ${email}\n`;
+                    }
+                    
+                    message += `\nأرجو التواصل معي للتفاصيل.`;
+                    
+                    // Encode message for URL
+                    const encodedMessage = encodeURIComponent(message);
+                    
+                    // Open WhatsApp
+                    window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
+                });
+            });
+            
+            // Small service buttons in service cards
+            const smallServiceButtons = document.querySelectorAll('.service-btn-small');
+            smallServiceButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // These buttons already have onclick handlers that open WhatsApp
+                    // We'll just add a visual feedback
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري التوجيه...';
+                    this.disabled = true;
+                    
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                        this.disabled = false;
+                    }, 2000);
+                });
+            });
+            
+            // Form input validation
+            const phoneInputs = document.querySelectorAll('input[type="tel"]');
+            phoneInputs.forEach(input => {
+                input.addEventListener('input', function() {
+                    // Remove any non-digit characters
+                    this.value = this.value.replace(/\D/g, '');
+                });
+            });
+            
+            const emailInputs = document.querySelectorAll('input[type="email"]');
+            emailInputs.forEach(input => {
+                input.addEventListener('blur', function() {
+                    const email = this.value.trim();
+                    if (email && !validateEmail(email)) {
+                        alert('الرجاء إدخال بريد إلكتروني صحيح');
+                        this.focus();
+                    }
+                });
+            });
+            
+            // Email validation function
+            function validateEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
+        }
+        
+        // ================= ADDITIONAL ENHANCEMENTS =================
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                
+                // Only process internal anchor links
+                if (href !== '#' && href.startsWith('#')) {
+                    e.preventDefault();
+                    
+                    const targetId = href.substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Close mobile menu if open
+                        const burger = document.getElementById('burger');
+                        const navLinks = document.getElementById('navLinks');
+                        burger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                    }
+                }
+            });
+        });
+        
+        // Add ripple effect to buttons
+        const buttons = document.querySelectorAll('.ripple');
+        buttons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                const x = e.clientX - e.target.getBoundingClientRect().left;
+                const y = e.clientY - e.target.getBoundingClientRect().top;
+                
+                const ripple = document.createElement('span');
+                ripple.classList.add('ripple-effect');
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+        
+        // Add CSS for ripple effect
+        const rippleStyle = document.createElement('style');
+        rippleStyle.textContent = `
+            .ripple {
+                position: relative;
+                overflow: hidden;
+            }
+            
+            .ripple-effect {
+                position: absolute;
+                border-radius: 50%;
+                background-color: rgba(255, 255, 255, 0.7);
+                transform: scale(0);
+                animation: ripple-animation 0.6s linear;
+                width: 100px;
+                height: 100px;
+                margin-left: -50px;
+                margin-top: -50px;
+                pointer-events: none;
+            }
+            
+            @keyframes ripple-animation {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(rippleStyle);
+    </script>
+</body>
+</html>

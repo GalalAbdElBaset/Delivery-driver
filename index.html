@@ -62,7 +62,23 @@
             <nav class="nav-links" id="navLinks">
                 <a href="#home" class="nav-link active" data-i18n="nav.home">الرئيسية</a>
                 <a href="#about" class="nav-link" data-i18n="nav.about">من نحن</a>
-                <a href="services.html" class="nav-link" data-i18n="nav.services">الخدمات</a>
+                <div class="nav-item has-dropdown">
+                    <span  class="nav-link" data-i18n="nav.services">
+                        الخدمات
+                    </span>
+
+                    <div class="services-dropdown">
+                        <a href="qatar-services.html" class="dropdown-link">
+                            <i class="fas fa-flag dropdown-icon"></i> خدمات داخل قطر
+                        </a>
+
+                        <a href="tunisia-services.html" class="dropdown-link">
+                            <i class="fas fa-flag dropdown-icon"></i> خدمات داخل تونس
+                        </a>
+                    </div>
+                </div>
+
+
                 <a href="contact.html" class="nav-link" data-i18n="nav.contact">التواصل</a>
                 <a href="reviews.html" class="nav-link" data-i18n="nav.reviews">المراجعات</a>
                 
@@ -117,11 +133,14 @@
             <div class="slider-container ">
                 <!-- الشريحة الأولى -->
                 <div class="slide active" id="slide1">
-                    <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');"></div>
+               
+                    <div class="slide-bg" style="background-image: 
+                    url('https://iili.io/ftTlpEb.md.png');"></div>
                     <div class="slide-content">
-                        <h1 class="slide-title">خدمة توصيل أغراض داخل قطر</h1>
-                        <p class="slide-description">نقدم لكم خدمة توصيل سريعة وآمنة داخل دولة قطر، مع ضمان وصول أغراضكم في الوقت المحدد وبأعلى معايير الجودة والأمان. فريقنا المدرب جاهز لخدمتكم على مدار الساعة.</p>
-                        <a href="#" class="slide-btn">تصفح الخدمات</a>
+                        <h1 class="slide-title"> خدمات توصيل الافراد والاغراض داخل تونس</h1>
+                        <p class="slide-description">نقدم لكم خدمة توصيل سريعة وآمنة داخل دولة تونس ، مع ضمان وصول أغراضكم في الوقت المحدد وبأعلى معايير الجودة والأمان. فريقنا المدرب جاهز لخدمتكم على مدار الساعة.</p>
+                        <!-- <h2>لخدمات تونس </h2> -->
+                        <a href="tunisia-services.html" class="slide-btn">تصفح الخدمات</a>
                     </div>
                     <div class="slide-number">01 / 03</div>
                     <div class="slide-badge">الخدمة الأكثر طلباً</div>
@@ -129,11 +148,12 @@
                 
                 <!-- الشريحة الثانية -->
                 <div class="slide" id="slide2">
-                    <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');"></div>
+                    <div class="slide-bg" style="background-image: url('https://iili.io/ftTKsoX.md.png');background-size: cover;background-repeat: no-repeat;"></div>
                     <div class="slide-content">
-                        <h1 class="slide-title">خدمة توصيل أغراض داخل قطر</h1>
+                        <h1 class="slide-title"> خدمات توصيل الافراد والاغراض داخل قطر
+                        </h1>
                         <p class="slide-description">نسعى دائمًا لتقديم أفضل خدمة توصيل داخل قطر مع فريق متخصص ووسائل نقل حديثة لتلبية جميع متطلباتكم. سرعة، دقة، وأمان في كل عملية توصيل.</p>
-                        <a href="#" class="slide-btn">تصفح الخدمات</a>
+                        <a href="qatar-services.html" class="slide-btn">تصفح الخدمات</a>
                     </div>
                     <div class="slide-number">02 / 03</div>
                     <div class="slide-badge">خدمة مميزة</div>
@@ -145,7 +165,7 @@
                     <div class="slide-content">
                         <h1 class="slide-title">توثيق تسليم الأموال يدًا بيد</h1>
                         <p class="slide-description">نقدم خدمة توثيق موثوقة لتسليم الأموال بين الأطراف، مع الحفاظ على الشفافية والأمان الكامل في كل عملية. نحن نضمن لكم تسليم آمن وموثق لكل المعاملات المالية.</p>
-                        <a href="#" class="slide-btn">تصفح الخدمات</a>
+                        <a href="tunisia-services.html" class="slide-btn">تصفح الخدمات</a>
                     </div>
                     <div class="slide-number">03 / 03</div>
                     <div class="slide-badge">خدمة جديدة</div>
@@ -276,7 +296,7 @@
                         </div>
                     </div>
                     
-                    <div class="about-stats">
+                    <!-- <div class="about-stats">
                         <div class="stat" data-aos="fade-up" data-aos-delay="400">
                             <h3 class="gold-text">100+</h3>
                             <p data-i18n="about.stats1">عمليـة توصيـل ناجحـة</p>
@@ -289,7 +309,7 @@
                             <h3 class="gold-text">100%</h3>
                             <p data-i18n="about.stats3">رضـا العـملاء</p>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 
                 <div class="about-image" data-aos="fade-left">
@@ -448,7 +468,7 @@
                 </div>
             </div>
             
-            <div class="text-center mt-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="text-center mt-4"style="margin-top: 20px ;" data-aos="fade-up" data-aos-delay="200">
                 <a href="reviews.html" class="btn outline-btn" data-i18n="testimonials.viewAll">
                     <i class="fas fa-eye"></i> عرض جميع المراجعات
                 </a>
@@ -714,7 +734,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // المتغيرات
     let currentSlide = 0;
     let slideInterval;
-    const slideDuration = 5000; // 5 ثواني بين كل شريحة
+    const slideDuration = 10000; // 5 ثواني بين كل شريحة
     
     // تهيئة السليدر
     function initSlider() {
@@ -849,6 +869,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // بدء السليدر
     initSlider();
 });
+
+
         // DarkMood
         // theme.js - Theme switching functionality
 const themeToggle = document.getElementById('themeToggle');
@@ -987,5 +1009,18 @@ document.addEventListener('DOMContentLoaded', () => {
 window.toggleTheme = toggleTheme;
 window.getCurrentTheme = () => html.getAttribute('data-theme') || 'light';
     </script> 
+
+    <script>
+        document.querySelectorAll('.nav-item.has-dropdown > .nav-link')
+.forEach(link => {
+    link.addEventListener('click', e => {
+        if (window.innerWidth <= 992) {
+            e.preventDefault(); // يمنع فتح صفحة الخدمات
+            link.parentElement.classList.toggle('active-dropdown');
+        }
+    });
+});
+
+    </script>
 </body>
 </html>
