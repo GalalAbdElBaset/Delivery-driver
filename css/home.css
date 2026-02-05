@@ -1707,7 +1707,8 @@ a {
   
   .slide-btn {
     padding: 8px 16px;
-    font-size: var(--font-xs);
+    font-size: 10px;
+    width: 30%;
   }
   
   .slider-control {
@@ -2213,13 +2214,13 @@ html[dir="rtl"] .scroll-progress {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    width: 25%;
+    width: 35%;
     padding: 12px;
     background: linear-gradient(135deg, var(--gold-primary) 0%, var(--gold-dark) 100%);
     color: white;
     border-radius: var(--border-radius);
     font-weight: 600;
-    font-size: 12px;
+    font-size: 14px;
     transition: var(--transition);
     border: none;
     cursor: pointer;
