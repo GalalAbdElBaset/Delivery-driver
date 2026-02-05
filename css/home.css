@@ -2186,6 +2186,7 @@ html[dir="rtl"] .scroll-progress {
 .qa-card-footer {
     padding: 0 24px 24px;
     margin-top: auto;
+    display: flex;
 }
 @media (max-width: 380px)  {
       .slide-btn {
@@ -2199,13 +2200,14 @@ html[dir="rtl"] .scroll-progress {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    width: 40%;
+    width: 60%;
     padding: 12px;
+    margin: auto;
     background: linear-gradient(135deg, var(--gold-primary) 0%, var(--gold-dark) 100%);
     color: white;
     border-radius: var(--border-radius);
     font-weight: 600;
-    font-size: 12px;
+    font-size: 14px;
     transition: var(--transition);
     border: none;
     cursor: pointer;
