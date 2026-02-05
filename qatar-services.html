@@ -228,6 +228,9 @@
         [data-theme="dark"] .glass-header {
             background: rgba(30, 30, 30, 0.95);
         }
+        [data-theme="dark"] .process-step {
+            background: linear-gradient(135deg, #9c8126cb 0%, #000 100%);
+        }
 
         .nav-wrap {
             display: flex;
@@ -700,13 +703,13 @@
 
         .service-select {
             width: 100%;
-            padding: 12px 15px;
+            padding: 8px 15px;
             border-radius: 8px;
             border: 1px solid #ddd;
             background-color: var(--white);
             color: var(--dark);
             font-family: 'Cairo', sans-serif;
-            font-size: 16px;
+            font-size: 14px;
             transition: var(--transition);
             cursor: pointer;
         }
@@ -724,13 +727,13 @@
 
         .service-input {
             width: 100%;
-            padding: 12px 45px 12px 15px;
+            padding: 8px 45px 8px 33px;
             border-radius: 8px;
             border: 1px solid #ddd;
             background-color: var(--white);
             color: var(--dark);
             font-family: 'Cairo', sans-serif;
-            font-size: 16px;
+            font-size: 14px;
             transition: var(--transition);
         }
 
@@ -917,7 +920,7 @@
         }
 
         .cta-subtitle {
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: var(--gray);
             margin-bottom: 30px;
             max-width: 600px;
@@ -1053,22 +1056,20 @@
             transition: var(--transition);
             box-shadow: var(--shadow);
             font-size: 20px;
+            right: 20px;
         }
 
         .float-whatsapp {
             background-color: var(--whatsapp);
-            bottom: 100px;
-            right: 16px;
+            bottom: 35px;
         }
-
+        
         .float-theme {
-            bottom: 160px;
-            right: 16px;
+            bottom: 100px;
         }
-
+        
         .scroll-to-top {
-            bottom: 20px;
-            right: 16px;
+            bottom: 160px;
             opacity: 0;
             visibility: hidden;
             background-color: var(--gold);
@@ -1195,26 +1196,29 @@
             }
 
             .cta-buttons .btn {
-                width: 100%;
+                width: 52%;
                 max-width: 300px;
+                font-size: 12px;
             }
 
             .float-whatsapp, .float-theme, .scroll-to-top {
                 width: 45px;
                 height: 45px;
                 font-size: 18px;
+                right: 20px;
             }
 
             .float-whatsapp {
                 bottom: 90px;
-                right: 16px;
             }
 
             .float-theme {
                 bottom: 145px;
-                right: 16px;
+                
             }
-            
+            .scroll-to-top {
+                bottom: 200px;
+            }
             .service-card {
                 flex-direction: row-reverse;
                 gap: 20px;
@@ -1253,7 +1257,10 @@
             .container {
                 padding: 0 15px;
             }
-
+            .scroll-to-top {
+                bottom: 200px;
+                right: 18px;
+            }
             .section-padding {
                 padding: 60px 0;
             }
@@ -1271,7 +1278,7 @@
             }
 
             .cta-title {
-                font-size: 2rem;
+                font-size: 1.5rem;
             }
 
             .footer-content {

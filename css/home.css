@@ -425,11 +425,11 @@ a {
 .nav-cta {
   padding: 8px 16px;
   border-radius: var(--border-radius);
-  font-weight: 600;
+  font-weight: 500;
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: var(--font-sm);
+  font-size: 12px;
   white-space: nowrap;
 }
 
@@ -1848,7 +1848,7 @@ a {
 /* زر العودة للأعلى */
 .scroll-to-top {
     position: fixed;
-    bottom: 20px;
+    bottom: 40px;
     right: 15px;
     width: 45px;
     height: 46px;
@@ -2064,5 +2064,226 @@ html[dir="rtl"] .scroll-progress {
         background: var(--gold-transparent);
         color: var(--gold-primary);
         border-right: 3px solid var(--gold-primary);
+    }
+}
+
+
+/* ========== Q&A Services Section ========== */
+.q-a-section {
+    background-color: var(--bg-tertiary);
+    position: relative;
+}
+
+.q-a-section .section-title {
+    color: var(--text-primary);
+}
+
+.q-a-section .section-subtitle {
+    color: var(--text-secondary);
+    max-width: 500px;
+}
+
+.qa-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+    .qa-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+    }
+}
+
+.qa-card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+    border: 1px solid var(--border-color);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.qa-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--gold-primary);
+}
+
+.qa-card-header {
+    background: linear-gradient(135deg, var(--gold-dark) 0%, #000 100%);
+    padding: 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.qa-card-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(255, 255, 255, 0.1) 50%,
+        transparent 100%
+    );
+    transform: rotate(30deg);
+    transition: transform 0.6s ease;
+}
+
+.qa-card:hover .qa-card-header::before {
+    transform: rotate(30deg) translateX(100%);
+}
+
+.flag-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    color: white;
+    font-size: 1.8rem;
+    backdrop-filter: blur(5px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.qa-card-header h2 {
+    color: white;
+    font-size: clamp(var(--font-lg), 3vw, var(--font-xl));
+    margin: 0;
+    font-weight: 700;
+    line-height: 1.3;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.qa-card-body {
+    padding: 24px;
+    flex-grow: 1;
+}
+
+.qa-card-body p {
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    line-height: 1.6;
+    font-size: var(--font-base);
+}
+
+.qa-features {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.qa-features li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+    font-size: var(--font-sm);
+}
+
+.qa-features li i {
+    color: var(--gold-primary);
+    font-size: 1rem;
+    width: 20px;
+    flex-shrink: 0;
+}
+
+.qa-card-footer {
+    padding: 0 24px 24px;
+    margin-top: auto;
+}
+
+.qa-card-footer .slide-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 25%;
+    padding: 12px;
+    background: linear-gradient(135deg, var(--gold-primary) 0%, var(--gold-dark) 100%);
+    color: white;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    font-size: 12px;
+    transition: var(--transition);
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.qa-card-footer .slide-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+    background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold-primary) 100%);
+}
+
+/* أنماط خاصة للوضع الداكن */
+[data-theme="dark"] .qa-card {
+    background: var(--card-bg);
+    border-color: rgba(193, 154, 79, 0.2);
+}
+
+[data-theme="dark"] .qa-card:hover {
+    border-color: var(--gold-primary);
+}
+
+[data-theme="dark"] .qa-features li {
+    color: var(--text-primary);
+}
+
+/* أنماط للأجهزة الصغيرة */
+@media (max-width: 767px) {
+    .qa-grid {
+        gap: 20px;
+    }
+    
+    .qa-card-header {
+        padding: 20px;
+    }
+    
+    .qa-card-body {
+        padding: 20px;
+    }
+    
+    .qa-card-footer {
+        padding: 0 20px 20px;
+    }
+    
+    .flag-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+        margin-bottom: 12px;
+    }
+    
+    .qa-card-header h2 {
+        font-size: var(--font-lg);
+    }
+}
+
+/* أنماط للأجهزة الكبيرة جداً */
+@media (min-width: 1200px) {
+    .qa-grid {
+        gap: 40px;
+    }
+    
+    .qa-card {
+        max-width: 540px;
+        margin: 0 auto;
     }
 }

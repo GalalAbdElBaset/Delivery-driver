@@ -77,18 +77,73 @@
             padding: 80px 0;
         }
         
+        @media (max-width: 768px) {
+            .section-padding {
+                padding: 60px 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .section-padding {
+                padding: 40px 0;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .section-padding {
+                padding: 30px 0;
+            }
+        }
+        
         .section-header {
             text-align: center;
             margin-bottom: 60px;
         }
         
+        @media (max-width: 768px) {
+            .section-header {
+                margin-bottom: 40px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .section-header {
+                margin-bottom: 30px;
+            }
+        }
+        
         .section-title {
-            font-size: 25px;
+            font-size: 22px;
             font-weight: 800;
             margin-bottom: 15px;
             color: var(--dark-primary);
             position: relative;
             display: inline-block;
+        }
+        
+        @media (max-width: 992px) {
+            .section-title {
+                font-size: 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 18px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .section-title {
+                font-size: 15px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .section-title {
+                font-size: 14px;
+                margin-bottom: 10px;
+            }
         }
         
         .dark-theme .section-title {
@@ -107,11 +162,43 @@
             border-radius: 2px;
         }
         
+        @media (max-width: 576px) {
+            .section-title::after {
+                width: 60px;
+                height: 3px;
+                bottom: -8px;
+            }
+        }
+        
         .section-subtitle {
             color: var(--gray);
-            font-size: 15px;
+            font-size: 16px;
             max-width: 600px;
             margin: 15px auto 0;
+            line-height: 1.8;
+        }
+        
+        @media (max-width: 768px) {
+            .section-subtitle {
+                font-size: 14px;
+                padding: 0 15px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .section-subtitle {
+                font-size: 1rem;
+                line-height: 1.6;
+                padding: 0 10px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .section-subtitle {
+                font-size: 0.95rem;
+                line-height: 1.5;
+                padding: 0 5px;
+            }
         }
         
         .dark-theme .section-subtitle {
@@ -194,7 +281,7 @@
             top: 0;
             right: 0;
             width: 100%;
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             box-shadow: 0 4px 20px var(--shadow);
             z-index: 1000;
@@ -202,7 +289,7 @@
         }
         
         .dark-theme .glass-header {
-            background-color: rgba(30, 30, 30, 0.9);
+            background-color: rgba(30, 30, 30, 0.95);
             box-shadow: 0 4px 20px var(--dark-shadow);
         }
         
@@ -213,6 +300,18 @@
             padding: 15px 20px;
         }
         
+        @media (max-width: 768px) {
+            .nav-wrap {
+                padding: 12px 15px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .nav-wrap {
+                padding: 10px 12px;
+            }
+        }
+        
         .logo {
             display: flex;
             align-items: center;
@@ -220,33 +319,75 @@
             margin-left: 10px;
         }
         
+        @media (max-width: 400px) {
+            .logo {
+                gap: 10px;
+                margin-left: 5px;
+            }
+        }
+        
         .logo-icon {
             width: 50px;
             height: 50px;
             background-color: var(--primary);
-            border-radius: 10px;
+            border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             color: var(--white);
-            border-radius: 50%;
-       
+            overflow: hidden;
+            flex-shrink: 0;
         }
+        
+        @media (max-width: 768px) {
+            .logo-icon {
+                width: 45px;
+                height: 45px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .logo-icon {
+                width: 40px;
+                height: 40px;
+            }
+        }
+        
         .logo-icon img {
-            width: 98%;
-            height: 98%;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             border-radius: 50%;
         }
+        
         .dark-theme .logo-icon {
             background-color: var(--dark-accent);
             color: var(--dark-primary);
         }
         
         .logo-text h1 {
-            font-size: 14px;
+            font-size: 1.4rem;
             font-weight: 800;
             margin-bottom: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .logo-text h1 {
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .logo-text h1 {
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .logo-text h1 {
+                font-size: 1rem;
+                margin-bottom: 3px;
+            }
         }
         
         .logo-text p {
@@ -254,24 +395,54 @@
             color: var(--gray);
         }
         
+        @media (max-width: 576px) {
+            .logo-text p {
+                font-size: 0.8rem;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .logo-text p {
+                font-size: 0.75rem;
+            }
+        }
+        
         .dark-theme .logo-text p {
-            color: var(--dark-gray);
+            color: rgb(216, 214, 214);
         }
         
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 25px;
+            gap: 18px;
+        }
+        
+        @media (max-width: 1200px) {
+            .nav-links {
+                gap: 20px;
+            }
         }
         
         .nav-link {
             text-decoration: none;
             color: var(--dark);
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 14.5px;
             padding: 5px 0;
             position: relative;
             transition: var(--transition);
+        }
+        
+        @media (max-width: 768px) {
+            .nav-link {
+                font-size: 0.95rem;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .nav-link {
+                font-size: 0.9rem;
+            }
         }
         
         .dark-theme .nav-link {
@@ -325,6 +496,17 @@
             font-weight: 600;
             transition: var(--transition);
             color: var(--dark);
+            font-size: 14px;
+            min-height: 44px;
+            min-width: 44px;
+            justify-content: center;
+        }
+        
+        @media (max-width: 768px) {
+            .theme-btn, .lang-btn-nav {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
         }
         
         .dark-theme .theme-btn, .dark-theme .lang-btn-nav {
@@ -370,6 +552,10 @@
             text-decoration: none;
             color: var(--dark);
             transition: var(--transition);
+            font-size: 0.95rem;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
         }
         
         .dark-theme .lang-option-nav {
@@ -396,13 +582,18 @@
         
         .header-buttons {
             display: flex;
-            gap: 15px;
-            font-size: 12px;
+            gap: 10px;
+            /* margin-right: 10px; */
+        }
+        
+        @media (max-width: 992px) {
+            .header-buttons {
+                display: none;
+            }
         }
         
         .nav-cta {
-
-            padding: 10px 5px ;
+            padding: 5px 8px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: 600;
@@ -410,6 +601,16 @@
             align-items: center;
             gap: 8px;
             transition: var(--transition);
+            font-size: 11px;
+            min-height: 44px;
+            min-width: 50px;
+        }
+        
+        @media (max-width: 1200px) {
+            .nav-cta {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
         }
         
         .whatsapp-btn {
@@ -436,11 +637,11 @@
             background: none;
             border: none;
             width: 30px;
-            height: 20px;
+            height: 30px;
             flex-direction: column;
             justify-content: space-between;
             cursor: pointer;
-            padding: 0;
+            padding: 5px;
             z-index: 1001;
         }
         
@@ -475,14 +676,57 @@
             justify-content: center;
             gap: 30px;
             margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        @media (max-width: 992px) {
+            .process-container {
+                gap: 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .process-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 40px;
+            }
         }
         
         .process-step {
             flex: 1;
             min-width: 250px;
+            max-width: 350px;
             text-align: center;
-            padding: 20px;
+            padding: 30px 20px;
             position: relative;
+            background-color: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px var(--shadow);
+            transition: var(--transition);
+        }
+        
+        @media (max-width: 992px) {
+            .process-step {
+                min-width: 220px;
+                padding: 25px 15px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .process-step {
+                max-width: 100%;
+                width: 100%;
+                margin-bottom: 0;
+                min-height: auto;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .process-step {
+                padding: 20px 15px;
+                min-width: 100%;
+            }
         }
         
         .dark-theme .process-step {
@@ -494,20 +738,46 @@
             transform: translateY(-10px);
         }
         
+        @media (max-width: 768px) {
+            .process-step:hover {
+                transform: translateY(-5px);
+            }
+        }
+        
         .step-number {
             position: absolute;
-            /* top: -20px;
-            right: -20px; */
-            width: 38px;
-            height: 38px;
+            top: -20px;
+            right: -20px;
+            width: 37px;
+            height: 37px;
             background-color: var(--secondary);
             color: var(--white);
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 15px;
+            font-size: 16.5px;
             font-weight: 800;
+        }
+        
+        @media (max-width: 768px) {
+            .step-number {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+                top: -17px;
+                right: -17px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .step-number {
+                width: 30px;
+                height: 30px;
+                font-size: 0.9rem;
+                top: -15px;
+                right: -15px;
+            }
         }
         
         .dark-theme .step-number {
@@ -516,9 +786,23 @@
         }
         
         .step-icon {
-            font-size: 2rem;
+            font-size: 35px;
             color: var(--secondary);
             margin-bottom: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .step-icon {
+                font-size: 22px;
+                margin-bottom: 15px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .step-icon {
+                font-size: 2rem;
+                margin-bottom: 12px;
+            }
         }
         
         .dark-theme .step-icon {
@@ -526,170 +810,377 @@
         }
         
         .step-content h3 {
-            font-size: 17px;
+            font-size: 1.2rem;
             margin-bottom: 15px;
             color: var(--dark-primary);
         }
         
+        @media (max-width: 768px) {
+            .step-content h3 {
+                font-size: 18px;
+                margin-bottom: 12px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .step-content h3 {
+                font-size: 1.2rem;
+                margin-bottom: 10px;
+            }
+        }
+        
         .dark-theme .step-content h3 {
-            color: white;
+            color: var(--dark-text);
         }
         
         .step-content p {
             color: var(--gray);
+            font-size: .8rem;
+            line-height: 1.7;
+        }
+        
+        @media (max-width: 400px) {
+            .step-content p {
+                font-size: 0.9rem;
+                line-height: 1.6;
+            }
         }
         
         .dark-theme .step-content p {
-            color: white;
+            color: rgb(228, 226, 226);
         }
         
-        /* ================= QATAR SERVICES ================= */
-        .qatar-services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
-            gap: 30px;
+        /* ================= TUNISIA SERVICES GRID ================= */
+        .tunisia-services-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
             margin-top: 40px;
         }
         
-        .service-card {
+        @media (max-width: 768px) {
+            .tunisia-services-grid {
+                gap: 30px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .tunisia-services-grid {
+                gap: 25px;
+                margin-top: 30px;
+            }
+        }
+        
+        .service-card-tunisia {
             background-color: var(--white);
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 10px 30px var(--shadow);
             transition: var(--transition);
             display: flex;
-            flex-direction: column;
-            padding: 5px;
+            flex-direction: row-reverse;
+            min-height: 300px;
         }
-        .service-C {
-             flex-direction: row-reverse;
+        
+        @media (max-width: 992px) {
+            .service-card-tunisia {
+                flex-direction: row-reverse;
+                min-height: auto;
+            }
         }
-        .service-padding {
-            padding: 30px;
+        
+        @media (max-width: 400px) {
+            .service-card-tunisia {
+                border-radius: 12px;
+            }
         }
-        .dark-theme .service-card {
+        
+        .dark-theme .service-card-tunisia {
             background-color: var(--dark-light);
             box-shadow: 0 10px 30px var(--dark-shadow);
         }
         
-        .service-card:hover {
+        .service-card-tunisia:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
         
-        .service-image {
-            height: 200px;
-            width: 50%;
-            overflow: hidden;
+        @media (max-width: 768px) {
+            .service-card-tunisia:hover {
+                transform: translateY(-5px);
+            }
         }
         
-        .service-image img {
+        .service-image-tunisia {
+            width: 40%;
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        @media (max-width: 992px) {
+            .service-image-tunisia {
+                width: 50%;
+                height: 250px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .service-image-tunisia {
+                height: 220px;
+                width: 40%;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .service-image-tunisia {
+                height: 200px;
+                 width: 40%;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .service-image-tunisia {
+                height: 180px;
+                 width: 40%;
+            }
+        }
+        
+        .service-image-tunisia img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
+            display: block;
         }
         
-        .service-card:hover .service-image img {
+        .service-card-tunisia:hover .service-image-tunisia img {
             transform: scale(1.05);
         }
         
-        .service-content {
-            padding: 25px;
-            flex-grow: 1;
+        .service-content-tunisia {
+            padding: 30px;
+            flex: 1;
             display: flex;
             flex-direction: column;
         }
         
-        .service-header {
+        @media (max-width: 992px) {
+            .service-content-tunisia {
+                padding: 25px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .service-content-tunisia {
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .service-content-tunisia {
+                padding: 18px 15px;
+            }
+        }
+        
+        .service-header-tunisia {
             display: flex;
             align-items: center;
             gap: 15px;
             margin-bottom: 20px;
         }
         
-        .service-icon {
-            width: 30px;
-            height: 30px;
+        @media (max-width: 400px) {
+            .service-header-tunisia {
+                gap: 12px;
+                margin-bottom: 15px;
+            }
+        }
+        
+        .service-icon-tunisia {
+            width: 37px;
+            height: 37px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 12.3px;
+            font-size: 1.04rem;
+            flex-shrink: 0;
         }
         
-        .service-title {
-            font-size: 16px;
+        @media (max-width: 576px) {
+            .service-icon-tunisia {
+                width: 33px;
+                height: 33px;
+                font-size: 12px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .service-icon-tunisia {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+        }
+        
+        .service-title-tunisia {
+            font-size: 1.3rem;
             color: var(--primary);
             margin-bottom: 5px;
+            word-break: break-word;
         }
         
-        .dark-theme .service-title {
+        @media (max-width: 768px) {
+            .service-title-tunisia {
+                font-size: 17px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .service-title-tunisia {
+                font-size: 16.5px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .service-title-tunisia {
+                font-size: 15px;
+            }
+        }
+        
+        .dark-theme .service-title-tunisia {
             color: var(--dark-text);
         }
         
-        .service-description {
+        .service-description-tunisia {
             color: var(--gray);
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             line-height: 1.7;
+            font-size: 15px;
+            word-break: break-word;
         }
         
-        .dark-theme .service-description {
-            color: var(--dark-gray);
+        @media (max-width: 576px) {
+            .service-description-tunisia {
+                font-size: 15px;
+                margin-bottom: 20px;
+                line-height: 1.6;
+            }
         }
         
-        .service-features {
-            margin-bottom: 20px;
+        @media (max-width: 400px) {
+            .service-description-tunisia {
+                font-size: 0.95rem;
+                margin-bottom: 18px;
+                line-height: 1.5;
+            }
+        }
+        
+        .dark-theme .service-description-tunisia {
+            color: rgb(223, 219, 219);
+        }
+        
+        .service-features-tunisia {
+            margin-bottom: 25px;
             flex-grow: 1;
         }
         
-        .service-features h4 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            color: var(--primary);
+        @media (max-width: 400px) {
+            .service-features-tunisia {
+                margin-bottom: 20px;
+            }
         }
         
-        .dark-theme .service-features h4 {
+        .service-features-tunisia h4 {
+            font-size: 16px;;
+            margin-bottom: 15px;
+            color: var(--primary);
+            word-break: break-word;
+        }
+        
+        @media (max-width: 576px) {
+            .service-features-tunisia h4 {
+                font-size: 1.2rem;
+                margin-bottom: 12px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .service-features-tunisia h4 {
+                font-size: 1.1rem;
+                margin-bottom: 10px;
+            }
+        }
+        
+        .dark-theme .service-features-tunisia h4 {
             color: var(--dark-text);
         }
         
-        .features-list {
+        .features-list-tunisia {
             list-style-type: none;
             padding-right: 20px;
         }
         
-        .features-list li {
+        .features-list-tunisia li {
             position: relative;
             padding: 8px 0;
-            padding-right: 25px;
+            padding-right: 30px;
             color: var(--dark-primary);
+            font-size: 14px;
+            word-break: break-word;
         }
         
-        .dark-theme .features-list li {
-            color: var(--dark-gray);
+        @media (max-width: 576px) {
+            .features-list-tunisia li {
+                font-size: 13px;
+                padding-right: 25px;
+                padding-top: 6px;
+                padding-bottom: 6px;
+            }
         }
         
-        .features-list li::before {
+        @media (max-width: 400px) {
+            .features-list-tunisia li {
+                font-size: 0.9rem;
+                padding-right: 22px;
+                padding-top: 5px;
+                padding-bottom: 5px;
+            }
+        }
+        
+        .dark-theme .features-list-tunisia li {
+            color: var(--dark-text);
+        }
+        
+        .features-list-tunisia li::before {
             content: '✓';
             position: absolute;
             right: 0;
             color: var(--secondary);
             font-weight: bold;
+            font-size: 1.1rem;
         }
         
-        .dark-theme .features-list li::before {
+        @media (max-width: 400px) {
+            .features-list-tunisia li::before {
+                font-size: 1rem;
+            }
+        }
+        
+        .dark-theme .features-list-tunisia li::before {
             color: var(--dark-accent);
         }
         
-        .service-button-container {
-            margin-top: auto;
+        .service-button-container-tunisia {
+            margin-top: 10px;
         }
         
-        .service-btn-small {
+        .service-btn-tunisia {
             background-color: var(--secondary);
             color: var(--white);
             border: none;
-            padding: 12px 25px;
+            padding: 12px 30px;
             border-radius: 30px;
             font-weight: 600;
             font-size: 1rem;
@@ -698,21 +1189,46 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            width: 30%;
             transition: var(--transition);
+            min-width: 200px;
+            min-height: 44px;
         }
         
-        .dark-theme .service-btn-small {
+        @media (max-width: 576px) {
+            .service-btn-tunisia {
+                width: 100%;
+                min-width: auto;
+                padding: 12px 20px;
+                font-size: 0.95rem;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .service-btn-tunisia {
+                padding: 10px 18px;
+                font-size: 0.9rem;
+                min-height: 42px;
+            }
+        }
+        
+        .dark-theme .service-btn-tunisia {
             background-color: var(--dark-accent);
             color: var(--dark-primary);
         }
         
-        .service-btn-small:hover {
+        .service-btn-tunisia:hover {
             background-color: var(--primary);
             transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
         
-        .dark-theme .service-btn-small:hover {
+        @media (max-width: 768px) {
+            .service-btn-tunisia:hover {
+                transform: translateY(-2px);
+            }
+        }
+        
+        .dark-theme .service-btn-tunisia:hover {
             background-color: var(--dark-secondary);
             color: var(--dark-text);
         }
@@ -725,32 +1241,139 @@
             margin-top: 40px;
         }
         
-
+        @media (max-width: 992px) {
+            .services-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 25px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .services-grid {
+                gap: 18px;
+                margin-top: 30px;
+            }
+        }
+        
+        .service-card {
+            background-color: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px var(--shadow);
+            transition: var(--transition);
+            padding: 30px;
+        }
+        
+        @media (max-width: 576px) {
+            .service-card {
+                padding: 25px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .service-card {
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .service-card {
+                padding: 18px 15px;
+                border-radius: 12px;
+            }
+        }
+        
+        .dark-theme .service-card {
+            background-color: var(--dark-light);
+            box-shadow: 0 10px 30px var(--dark-shadow);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        @media (max-width: 768px) {
+            .service-card:hover {
+                transform: translateY(-3px);
+            }
+        }
         
         .service-card h3 {
             text-align: center;
             font-size: 17px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             color: var(--primary);
-            
+            word-break: break-word;
+        }
+        
+        @media (max-width: 768px) {
+            .service-card h3 {
+                font-size: 1.4rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .service-card h3 {
+                font-size: 1.3rem;
+                margin-bottom: 15px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .service-card h3 {
+                font-size: 1.2rem;
+                margin-bottom: 12px;
+            }
         }
         
         .dark-theme .service-card h3 {
-            color: var(--dark-text);
+            color: var(--dark-accent);
         }
         
         .service-card p {
             text-align: right;
             color: var(--gray);
-            margin-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            line-height: 1.7;
+            word-break: break-word;
+        }
+        
+        @media (max-width: 576px) {
+            .service-card p {
+                font-size: 1rem;
+                margin-bottom: 15px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .service-card p {
+                font-size: 0.95rem;
+                line-height: 1.6;
+                margin-bottom: 12px;
+            }
         }
         
         .dark-theme .service-card p {
-            color: var(--dark-gray);
+            color: rgb(207, 206, 206);
         }
         
         .service-selection {
             margin-bottom: 20px;
+        }
+        
+        @media (max-width: 400px) {
+            .service-selection {
+                margin-bottom: 15px;
+            }
         }
         
         .service-select {
@@ -759,10 +1382,27 @@
             border: 2px solid var(--light-gray);
             border-radius: 10px;
             font-family: 'Cairo', sans-serif;
-            font-size: 12px;
+            font-size: 14px;
             background-color: var(--white);
             color: var(--dark);
             transition: var(--transition);
+            min-height: 44px;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 576px) {
+            .service-select {
+                padding: 10px 15px;
+                font-size: 0.95rem;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .service-select {
+                padding: 10px 12px;
+                font-size: 0.9rem;
+                min-height: 42px;
+            }
         }
         
         .dark-theme .service-select {
@@ -785,9 +1425,15 @@
             margin-bottom: 15px;
         }
         
+        @media (max-width: 400px) {
+            .input-group {
+                margin-bottom: 12px;
+            }
+        }
+        
         .service-input {
             width: 100%;
-            padding: 8px 32px 8px 45px;
+            padding: 8px 45px 8px 35px;
             border: 2px solid var(--light-gray);
             border-radius: 10px;
             font-family: 'Cairo', sans-serif;
@@ -795,6 +1441,23 @@
             background-color: var(--white);
             color: var(--dark);
             transition: var(--transition);
+            min-height: 44px;
+        }
+        
+        @media (max-width: 576px) {
+            .service-input {
+                padding: 10px 40px 10px 15px;
+                font-size: 0.95rem;
+                min-height: 42px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .service-input {
+                padding: 10px 35px 10px 12px;
+                font-size: 0.9rem;
+                min-height: 40px;
+            }
         }
         
         .dark-theme .service-input {
@@ -814,10 +1477,25 @@
         
         .input-icon {
             position: absolute;
-            right: 15px;
+            left: 15px;
             top: 50%;
             transform: translateY(-50%);
             color: var(--gray);
+            font-size: 1rem;
+        }
+        
+        @media (max-width: 576px) {
+            .input-icon {
+                left: 12px;
+                font-size: 0.95rem;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .input-icon {
+                left: 10px;
+                font-size: 0.9rem;
+            }
         }
         
         .dark-theme .input-icon {
@@ -825,21 +1503,38 @@
         }
         
         .service-btn {
-            width: 70%;
-            padding: 12px 17px;
+            width: 100%;
+            padding: 8px 10px;
             border: none;
             border-radius: 10px;
             font-family: 'Cairo', sans-serif;
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 700;
-            margin: auto;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            margin-top: 15px;
+            margin-top: 20px;
             transition: var(--transition);
+            min-height: 44px;
+        }
+        
+        @media (max-width: 576px) {
+            .service-btn {
+                padding: 12px 15px;
+                font-size: 1rem;
+                min-height: 42px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .service-btn {
+                padding: 10px 12px;
+                font-size: 0.95rem;
+                margin-top: 15px;
+                min-height: 40px;
+            }
         }
         
         .service-btn.whatsapp {
@@ -853,6 +1548,12 @@
             box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
         }
         
+        @media (max-width: 768px) {
+            .service-btn.whatsapp:hover {
+                transform: translateY(-2px);
+            }
+        }
+        
         .btn-text {
             margin-right: 5px;
         }
@@ -862,6 +1563,13 @@
             margin-top: 20px;
             padding-top: 20px;
             border-top: 1px solid var(--light-gray);
+        }
+        
+        @media (max-width: 400px) {
+            .contact-number-display {
+                margin-top: 15px;
+                padding-top: 15px;
+            }
         }
         
         .dark-theme .contact-number-display {
@@ -874,8 +1582,29 @@
             font-weight: 600;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 5px;
             transition: var(--transition);
+            font-size: 14px;
+            min-height: 44px;
+            background-color: var(--light-gray);
+            padding: 5px 10px;
+            border: .5px solid var(--dark-accent);
+            border-radius: 5px;
+        }
+        .phone-link:hover {
+            background-color: var(--light);
+        }
+        @media (max-width: 576px) {
+            .phone-link {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .phone-link {
+                font-size: 0.95rem;
+                gap: 8px;
+            }
         }
         
         .dark-theme .phone-link {
@@ -898,6 +1627,13 @@
             margin-top: 20px;
         }
         
+        @media (max-width: 400px) {
+            .service-warning {
+                padding: 12px;
+                margin-top: 15px;
+            }
+        }
+        
         .dark-theme .service-warning {
             background-color: rgba(255, 193, 7, 0.15);
             border-color: var(--warning);
@@ -907,16 +1643,34 @@
             color: var(--warning);
             font-size: 1.2rem;
             margin-bottom: 10px;
+            word-break: break-word;
+        }
+        
+        @media (max-width: 400px) {
+            .service-warning h3 {
+                font-size: 1.1rem;
+                margin-bottom: 8px;
+            }
         }
         
         .service-warning p {
             color: var(--gray);
             text-align: right;
             margin-bottom: 0;
+            font-size: 1rem;
+            line-height: 1.6;
+            word-break: break-word;
+        }
+        
+        @media (max-width: 400px) {
+            .service-warning p {
+                font-size: 0.95rem;
+                line-height: 1.5;
+            }
         }
         
         .dark-theme .service-warning p {
-            color: var(--dark-gray);
+            color: rgb(214, 214, 214);
         }
         
         /* ================= FINAL CTA ================= */
@@ -926,6 +1680,25 @@
             color: var(--white);
             position: relative;
             overflow: hidden;
+            padding: 60px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .services-hero {
+                padding: 50px 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .services-hero {
+                padding: 40px 0;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .services-hero {
+                padding: 35px 0;
+            }
         }
         
         .dark-theme .services-hero {
@@ -935,19 +1708,89 @@
         .cta-content h2 {
             font-size: 2.5rem;
             margin-bottom: 20px;
+            word-break: break-word;
+        }
+        
+        @media (max-width: 992px) {
+            .cta-content h2 {
+                font-size: 2.2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .cta-content h2 {
+                font-size: 1.8rem;
+                margin-bottom: 15px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .cta-content h2 {
+                font-size: 1.6rem;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .cta-content h2 {
+                font-size: 1.4rem;
+                margin-bottom: 12px;
+            }
         }
         
         .cta-content p {
             font-size: 1.2rem;
             margin-bottom: 30px;
             opacity: 0.9;
+            word-break: break-word;
+        }
+        
+        @media (max-width: 768px) {
+            .cta-content p {
+                font-size: 1.1rem;
+                margin-bottom: 25px;
+                padding: 0 15px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .cta-content p {
+                font-size: 1rem;
+                line-height: 1.6;
+                padding: 0 10px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .cta-content p {
+                font-size: 0.95rem;
+                margin-bottom: 20px;
+                padding: 0 5px;
+            }
         }
         
         /* ================= FOOTER ================= */
         .main-footer {
-            background-color: var(--primary);
+            background-color: #0e0b01ec;
             color: var(--white);
             padding: 60px 0 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .main-footer {
+                padding: 50px 0 20px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .main-footer {
+                padding: 40px 0 20px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .main-footer {
+                padding: 35px 0 20px;
+            }
         }
         
         .dark-theme .main-footer {
@@ -961,14 +1804,57 @@
             margin-bottom: 40px;
         }
         
+        @media (max-width: 992px) {
+            .footer-content {
+                gap: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .footer-content {
+                gap: 25px;
+                margin-bottom: 30px;
+            }
+        }
+        
         .footer-logo .logo {
             margin-bottom: 20px;
+        }
+        
+        @media (max-width: 400px) {
+            .footer-logo .logo {
+                margin-bottom: 15px;
+            }
         }
         
         .footer-desc {
             margin-bottom: 25px;
             opacity: 0.9;
             line-height: 1.7;
+            font-size: 1rem;
+            word-break: break-word;
+        }
+        
+        @media (max-width: 400px) {
+            .footer-desc {
+                font-size: 0.95rem;
+                margin-bottom: 20px;
+                line-height: 1.6;
+            }
         }
         
         .social-icons {
@@ -976,9 +1862,15 @@
             gap: 15px;
         }
         
+        @media (max-width: 400px) {
+            .social-icons {
+                gap: 12px;
+            }
+        }
+        
         .social-icon {
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             background-color: rgba(255, 255, 255, 0.1);
             display: flex;
@@ -988,11 +1880,39 @@
             font-size: 1.2rem;
             transition: var(--transition);
             text-decoration: none;
+            min-width: 45px;
+            min-height: 45px;
+        }
+        
+        @media (max-width: 576px) {
+            .social-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+                min-width: 40px;
+                min-height: 40px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .social-icon {
+                width: 38px;
+                height: 38px;
+                font-size: 1rem;
+                min-width: 38px;
+                min-height: 38px;
+            }
         }
         
         .social-icon:hover {
             background-color: var(--secondary);
             transform: translateY(-5px);
+        }
+        
+        @media (max-width: 768px) {
+            .social-icon:hover {
+                transform: translateY(-3px);
+            }
         }
         
         .dark-theme .social-icon:hover {
@@ -1016,6 +1936,22 @@
             margin-bottom: 25px;
             position: relative;
             padding-bottom: 10px;
+            word-break: break-word;
+        }
+        
+        @media (max-width: 576px) {
+            .footer-title {
+                font-size: 1.2rem;
+                margin-bottom: 20px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .footer-title {
+                font-size: 1.1rem;
+                margin-bottom: 18px;
+                padding-bottom: 8px;
+            }
         }
         
         .footer-title::after {
@@ -1032,8 +1968,17 @@
             list-style-type: none;
         }
         
-        .footer-list li {
-            margin-bottom: 15px;
+        
+        @media (max-width: 576px) {
+            .footer-list li {
+                margin-bottom: 12px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .footer-list li {
+                margin-bottom: 10px;
+            }
         }
         
         .footer-link {
@@ -1041,11 +1986,34 @@
             text-decoration: none;
             transition: var(--transition);
             display: inline-block;
+            font-size: 1rem;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+        }
+        
+        @media (max-width: 576px) {
+            .footer-link {
+                font-size: 0.95rem;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .footer-link {
+                font-size: 0.9rem;
+                min-height: 40px;
+            }
         }
         
         .footer-link:hover {
             color: var(--secondary);
             transform: translateX(-5px);
+        }
+        
+        @media (max-width: 768px) {
+            .footer-link:hover {
+                transform: translateX(-3px);
+            }
         }
         
         .dark-theme .footer-link:hover {
@@ -1060,8 +2028,24 @@
         .footer-contact-info p {
             margin-bottom: 15px;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 10px;
+            font-size: 1rem;
+            word-break: break-word;
+        }
+        
+        @media (max-width: 576px) {
+            .footer-contact-info p {
+                font-size: 0.95rem;
+                margin-bottom: 12px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .footer-contact-info p {
+                font-size: 0.9rem;
+                margin-bottom: 10px;
+            }
         }
         
         .footer-contact-info p span {
@@ -1069,10 +2053,28 @@
             min-width: 70px;
         }
         
+        @media (max-width: 400px) {
+            .footer-contact-info p span {
+                min-width: 60px;
+            }
+        }
+        
         .footer-bottom {
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             padding-top: 30px;
             text-align: center;
+        }
+        
+        @media (max-width: 576px) {
+            .footer-bottom {
+                padding-top: 25px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .footer-bottom {
+                padding-top: 20px;
+            }
         }
         
         .legal-notice {
@@ -1085,26 +2087,75 @@
             gap: 15px;
         }
         
+        @media (max-width: 400px) {
+            .legal-notice {
+                padding: 12px;
+                gap: 12px;
+                margin-bottom: 15px;
+            }
+        }
+        
         .legal-notice i {
             font-size: 1.5rem;
             margin-top: 3px;
+            flex-shrink: 0;
+        }
+        
+        @media (max-width: 400px) {
+            .legal-notice i {
+                font-size: 1.3rem;
+            }
+        }
+        
+        .legal-notice p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            text-align: right;
+            margin: 0;
+            word-break: break-word;
+        }
+        
+        @media (max-width: 576px) {
+            .legal-notice {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .legal-notice p {
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .legal-notice p {
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
         }
         
         .copyright {
             font-size: 0.9rem;
             opacity: 0.8;
+            word-break: break-word;
+        }
+        
+        @media (max-width: 400px) {
+            .copyright {
+                font-size: 0.85rem;
+            }
         }
         
         /* ================= FLOATING BUTTONS ================= */
         .float-theme, .float-whatsapp, .scroll-to-top {
             position: fixed;
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.5rem;
+            font-size: 17.5px;
             cursor: pointer;
             z-index: 99;
             transition: var(--transition);
@@ -1112,13 +2163,77 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         
+        @media (max-width: 768px) {
+            .float-theme, .float-whatsapp, .scroll-to-top {
+                width: 40px;
+                height: 40px;
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .float-theme, .float-whatsapp, .scroll-to-top {
+                width: 45px;
+                height: 45px;
+                font-size: 16px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .float-theme, .float-whatsapp, .scroll-to-top {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+                right: 10px;
+            }
+            
+            .float-theme {
+                bottom: 100px;
+            }
+            
+            .float-whatsapp {
+                bottom: 60px;
+            }
+            
+            .scroll-to-top {
+                bottom: 140px;
+            }
+        }
+        
+        @media (max-width: 350px) {
+            .float-theme, .float-whatsapp, .scroll-to-top {
+                width: 33px;
+                height: 33px;
+                font-size: 12px;
+                right: 8px;
+            }
+            
+            .float-theme {
+                bottom: 100px;
+            }
+            
+            .float-whatsapp {
+                bottom: 55px;
+            }
+            
+            .scroll-to-top {
+                bottom: 145px;
+            }
+        }
+        
         .hover-lift:hover {
             transform: translateY(-5px);
         }
         
+        @media (max-width: 768px) {
+            .hover-lift:hover {
+                transform: translateY(-3px);
+            }
+        }
+        
         .float-theme {
-            left: 30px;
-            bottom: 130px;
+            right: 30px;
+            bottom: 120px;
             background-color: var(--primary);
             color: var(--white);
         }
@@ -1141,7 +2256,7 @@
         }
         
         .float-whatsapp {
-            left: 30px;
+            right: 30px;
             bottom: 60px;
             background-color: #25D366;
             color: white;
@@ -1159,8 +2274,8 @@
         }
         
         .scroll-to-top {
-            left: 30px;
-            bottom: 200px;
+            right: 30px;
+            bottom: 180px;
             background-color: var(--secondary);
             color: var(--white);
             display: none;
@@ -1191,6 +2306,7 @@
                 transition: var(--transition);
                 box-shadow: -10px 0 30px var(--shadow);
                 z-index: 1000;
+                overflow-y: auto;
             }
             
             .dark-theme .nav-links {
@@ -1204,8 +2320,20 @@
             
             .nav-link {
                 width: 100%;
-                padding: 15px 30px;
+                padding: 15px 40px;
                 border-bottom: 1px solid var(--light-gray);
+                font-size: 16px;
+                min-height: 60px;
+                display: flex;
+                align-items: center;
+            }
+            
+            @media (max-width: 400px) {
+                .nav-link {
+                    padding: 12px 25px;
+                    font-size: 1rem;
+                    min-height: 55px;
+                }
             }
             
             .dark-theme .nav-link {
@@ -1217,13 +2345,28 @@
             }
             
             .theme-switcher, .language-switcher-nav {
-                width: 100%;
-                padding: 15px 30px;
+                width: 60%;
+                padding: 10px 20px;
+            }
+            
+            @media (max-width: 400px) {
+                .theme-switcher, .language-switcher-nav {
+                    padding: 12px 25px;
+                }
             }
             
             .theme-btn, .lang-btn-nav {
                 width: 100%;
                 justify-content: center;
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+            
+            @media (max-width: 400px) {
+                .theme-btn, .lang-btn-nav {
+                    padding: 10px 15px;
+                    font-size: 1rem;
+                }
             }
             
             .lang-dropdown-nav {
@@ -1233,6 +2376,7 @@
                 background-color: var(--light-gray);
                 margin-top: 10px;
                 border-radius: 10px;
+                width: 100%;
             }
             
             .dark-theme .lang-dropdown-nav {
@@ -1246,89 +2390,148 @@
             .burger {
                 display: flex;
             }
-            
-            .header-buttons {
-                display: none;
-            }
-            
-            .process-container, .qatar-services-grid, .services-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .process-step {
-                max-width: 100%;
-            }
-            
-            .float-theme, .float-whatsapp, .scroll-to-top {
-                left: 20px;
-                width: 50px;
-                height: 50px;
-                font-size: 1.2rem;
-            }
-            
-            .float-theme {
-                bottom: 110px;
-            }
-            
-            .float-whatsapp {
-                bottom: 50px;
-            }
-            
-            .scroll-to-top {
-                bottom: 170px;
-            }
         }
         
-        @media (max-width: 768px) {
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .cta-content h2 {
-                font-size: 2rem;
-            }
-            
-            .service-title, .service-card h3 {
-                font-size: 1.3rem;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .nav-wrap {
-                padding: 10px 15px;
-            }
-            
-            .logo-text h1 {
-                font-size: 1.2rem;
-            }
-            
-            .logo-text p {
-                font-size: 0.8rem;
-            }
-            
-            .section-padding {
-                padding: 60px 0;
-            }
-            
-            .service-card {
-                padding: 20px;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-        }
-
-        .process-steps {
-            padding-top: 120px;
-        }
-        
-
+        /* ================= PROCESS STEPS SECTION ================= */
         .process-steps {
             padding-top: 150px;
         }
-       
+        
+        @media (max-width: 768px) {
+            .process-steps {
+                padding-top: 150px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .process-steps {
+                padding-top: 90px;
+            }
+        }
+        
+        /* ================= ERROR MESSAGE STYLE ================= */
+        .error-message {
+            background-color: rgba(220, 53, 69, 0.1);
+            border: 1px solid #dc3545;
+            color: #dc3545;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            text-align: right;
+            animation: fadeIn 0.3s ease;
+            font-size: 0.95rem;
+        }
+        
+        @media (max-width: 400px) {
+            .error-message {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        .dark-theme .error-message {
+            background-color: rgba(220, 53, 69, 0.2);
+            border-color: #dc3545;
+            color: #ff6b6b;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* ================= RIPPLE EFFECT ================= */
+        .ripple {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ripple-effect {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.7);
+            transform: scale(0);
+            animation: ripple-animation 0.6s linear;
+            width: 100px;
+            height: 100px;
+            margin-left: -50px;
+            margin-top: -50px;
+            pointer-events: none;
+        }
+        
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+        
+        /* ================= ADDITIONAL RESPONSIVE FIXES ================= */
+        @media (max-width: 400px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .step-number {
+                width: 32px;
+                height: 32px;
+                font-size: 0.9rem;
+                top: -16px;
+                right: -16px;
+            }
+            
+            .service-title-tunisia {
+                font-size: 1.15rem;
+            }
+            
+            .service-description-tunisia {
+                font-size: 0.92rem;
+            }
+            
+            .service-features-tunisia h4 {
+                font-size: 1.05rem;
+            }
+            
+            .features-list-tunisia li {
+                font-size: 0.88rem;
+            }
+            
+            .nav-cta {
+                padding: 8px 15px;
+                font-size: 0.85rem;
+            }
+        }
+        
+        @media (max-width: 350px) {
+            .container {
+                padding: 0 12px;
+            }
+            
+            .logo {
+                gap: 8px;
+            }
+            
+            .logo-icon {
+                width: 35px;
+                height: 35px;
+            }
+            
+            .logo-text h1 {
+                font-size: 0.9rem;
+            }
+            
+            .logo-text p {
+                font-size: 0.7rem;
+            }
+            
+            .section-title {
+                font-size: 1rem;
+            }
+            
+            .section-subtitle {
+                font-size: 0.85rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1356,7 +2559,7 @@
             <!-- Logo -->
             <div class="logo">
                 <div class="logo-icon">
-                    <img src="https://iili.io/fLgS9wP.md.jpg" alt="">
+                    <img src="https://iili.io/fLgS9wP.md.jpg" alt="شعار Tn-QA Delivery" width="50" height="50" loading="lazy">
                 </div>
                 <div class="logo-text">
                     <h1 class="gold-text">Tn-QA Delivery</h1>
@@ -1375,7 +2578,7 @@
                 
                 <!-- Theme Switcher -->
                 <div class="theme-switcher">
-                    <button id="themeToggle" class="theme-btn" aria-label="تبديل وضع السطوع">
+                    <button id="themeToggle" class="theme-btn" aria-label="تبديل وضع السطوع" type="button">
                         <i class="fas fa-sun"></i>
                         <span class="theme-text">فاتح</span>
                     </button>
@@ -1383,7 +2586,7 @@
                 
                 <!-- Language Switcher -->
                 <div class="language-switcher-nav">
-                    <button id="langBtn" class="lang-btn-nav">
+                    <button id="langBtn" class="lang-btn-nav" type="button" aria-label="تغيير اللغة">
                         <i class="fas fa-globe"></i>
                         <span id="currentLang">العربية</span>
                     </button>
@@ -1396,7 +2599,7 @@
             
             <!-- Header Buttons -->
             <div class="header-buttons">
-                <a href="https://wa.me/+21656471550" class="nav-cta whatsapp-btn ripple" target="_blank">
+                <a href="https://wa.me/+21656471550" class="nav-cta whatsapp-btn ripple" target="_blank" rel="noopener noreferrer">
                     <i class="fab fa-whatsapp"></i> <span class="cta-text">تواصل عبر واتساب</span>
                 </a>
                 <a href="tel:+21656471550" class="nav-cta call-btn ripple">
@@ -1405,7 +2608,7 @@
             </div>
             
             <!-- Mobile Menu Burger -->
-            <button class="burger" id="burger" aria-label="قائمة التنقل">
+            <button class="burger" id="burger" aria-label="قائمة التنقل" type="button">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -1466,28 +2669,28 @@
                 <p class="section-subtitle">خدمات محلية شاملة لجميع احتياجاتك داخل دولة تونس</p>
             </div>
             
-            <div class="qatar-services-grid">
+            <div class="tunisia-services-grid">
                 <!-- Service 1 -->
-                <div class="service-card service-C" data-aos="fade-up" data-aos-delay="100">
-                    <div class="service-image">
+                <div class="service-card-tunisia" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-image-tunisia">
                         <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
                             alt="توصيل موظفين وتلاميذ في تونس - خدمة نقل موظفين" loading="lazy">
                     </div>
                     
-                    <div class="service-content">
-                        <div class="service-header">
-                            <div class="service-icon gold-bg">
+                    <div class="service-content-tunisia">
+                        <div class="service-header-tunisia">
+                            <div class="service-icon-tunisia gold-bg">
                                 <i class="fas fa-user-tie"></i>
                             </div>
-                            <h3 class="service-title">توصيل موظفين وتلاميذ</h3>
+                            <h3 class="service-title-tunisia">توصيل موظفين وتلاميذ</h3>
                         </div>
-                        <p class="service-description">
+                        <p class="service-description-tunisia">
                             خدمة نقل موظفين إلى أماكن العمل وتوصيل الطلاب إلى المدارس بمواعيد منتظمة وآمنة، مع سائعين مدربين ومركبات مكيفة.
                         </p>
                         
-                        <div class="service-features">
+                        <div class="service-features-tunisia">
                             <h4>مميزات الخدمة:</h4>
-                            <ul class="features-list">
+                            <ul class="features-list-tunisia">
                                 <li>مواعيد ثابتة ومنتظمة</li>
                                 <li>سائقون مدربون ومحترفون</li>
                                 <li>مركبات مكيفة وآمنة</li>
@@ -1496,8 +2699,8 @@
                             </ul>
                         </div>
                         
-                        <div class="service-button-container">
-                            <button class="service-btn-small" onclick="window.open('https://wa.me/+21656471550?text=أريد خدمة توصيل موظفين وتلاميذ', '_blank')" aria-label="طلب خدمة توصيل موظفين">
+                        <div class="service-button-container-tunisia">
+                            <button class="service-btn-tunisia" onclick="openWhatsApp('أريد خدمة توصيل موظفين وتلاميذ')" aria-label="طلب خدمة توصيل موظفين">
                                 <i class="fab fa-whatsapp"></i> طلب الخدمة
                             </button>
                         </div>
@@ -1505,26 +2708,26 @@
                 </div>
                 
                 <!-- Service 2 -->
-                <div class="service-card service-C" data-aos="fade-up" data-aos-delay="150">
-                    <div class="service-image">
+                <div class="service-card-tunisia" data-aos="fade-up" data-aos-delay="150">
+                    <div class="service-image-tunisia">
                         <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
                             alt="توصيل مشاوير خاصة في تونس - خدمة تنفيذ مهام" loading="lazy">
                     </div>
                     
-                    <div class="service-content">
-                        <div class="service-header">
-                            <div class="service-icon gold-bg">
+                    <div class="service-content-tunisia">
+                        <div class="service-header-tunisia">
+                            <div class="service-icon-tunisia gold-bg">
                                 <i class="fas fa-running"></i>
                             </div>
-                            <h3 class="service-title">توصيل مشاوير خاصة</h3>
+                            <h3 class="service-title-tunisia">توصيل مشاوير خاصة</h3>
                         </div>
-                        <p class="service-description">
+                        <p class="service-description-tunisia">
                             تنفيذ مشاوير خاصة مثل السحب من البنك، تسليم مستندات، زيارات رسمية، سحب معاملات حكومية، وغيرها من المهام الخاصة.
                         </p>
                         
-                        <div class="service-features">
+                        <div class="service-features-tunisia">
                             <h4>مميزات الخدمة:</h4>
-                            <ul class="features-list">
+                            <ul class="features-list-tunisia">
                                 <li>تنفيذ جميع أنواع المشاوير</li>
                                 <li>سريعة ومضمونة النتائج</li>
                                 <li>تسليم يداً بيد</li>
@@ -1533,8 +2736,8 @@
                             </ul>
                         </div>
                         
-                        <div class="service-button-container">
-                            <button class="service-btn-small" onclick="window.open('https://wa.me/+21656471550?text=أريد خدمة توصيل مشاوير خاصة', '_blank')" aria-label="طلب خدمة توصيل مشاوير">
+                        <div class="service-button-container-tunisia">
+                            <button class="service-btn-tunisia" onclick="openWhatsApp('أريد خدمة توصيل مشاوير خاصة')" aria-label="طلب خدمة توصيل مشاوير">
                                 <i class="fab fa-whatsapp"></i> طلب الخدمة
                             </button>
                         </div>
@@ -1542,26 +2745,26 @@
                 </div>
                 
                 <!-- Service 3 -->
-                <div class="service-card service-C" data-aos="fade-up" data-aos-delay="200">
-                    <div class="service-image">
+                <div class="service-card-tunisia" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-image-tunisia">
                         <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
                             alt="توصيل أغراض ومشتريات في تونس - خدمة تسوق وتوصيل" loading="lazy">
                     </div>
                     
-                    <div class="service-content">
-                        <div class="service-header">
-                            <div class="service-icon gold-bg">
+                    <div class="service-content-tunisia">
+                        <div class="service-header-tunisia">
+                            <div class="service-icon-tunisia gold-bg">
                                 <i class="fas fa-shopping-bag"></i>
                             </div>
-                            <h3 class="service-title">توصيل أغراض ومشتريات</h3>
+                            <h3 class="service-title-tunisia">توصيل أغراض ومشتريات</h3>
                         </div>
-                        <p class="service-description">
+                        <p class="service-description-tunisia">
                             توصيل المشتريات والأغراض الشخصية من المتاجر والأسواق إلى منزلك أو عملك. نخدم جميع المحلات التجارية الكبرى.
                         </p>
                         
-                        <div class="service-features">
+                        <div class="service-features-tunisia">
                             <h4>مميزات الخدمة:</h4>
-                            <ul class="features-list">
+                            <ul class="features-list-tunisia">
                                 <li>توصيل من جميع المحلات التجارية</li>
                                 <li>فحص المنتجات قبل الشراء</li>
                                 <li>تغليف احترافي للأغراض</li>
@@ -1570,8 +2773,8 @@
                             </ul>
                         </div>
                         
-                        <div class="service-button-container">
-                            <button class="service-btn-small" onclick="window.open('https://wa.me/+21656471550?text=أريد خدمة توصيل أغراض ومشتريات', '_blank')" aria-label="طلب خدمة توصيل أغراض">
+                        <div class="service-button-container-tunisia">
+                            <button class="service-btn-tunisia" onclick="openWhatsApp('أريد خدمة توصيل أغراض ومشتريات')" aria-label="طلب خدمة توصيل أغراض">
                                 <i class="fab fa-whatsapp"></i> طلب الخدمة
                             </button>
                         </div>
@@ -1579,26 +2782,26 @@
                 </div>
                 
                 <!-- Service 4 -->
-                <div class="service-card service-C" data-aos="fade-up" data-aos-delay="250">
-                    <div class="service-image">
+                <div class="service-card-tunisia" data-aos="fade-up" data-aos-delay="250">
+                    <div class="service-image-tunisia">
                         <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
                             alt="توصيل هدايا في تونس - خدمة هدايا وورود" loading="lazy">
                     </div>
                     
-                    <div class="service-content">
-                        <div class="service-header">
-                            <div class="service-icon gold-bg">
+                    <div class="service-content-tunisia">
+                        <div class="service-header-tunisia">
+                            <div class="service-icon-tunisia gold-bg">
                                 <i class="fas fa-gift"></i>
                             </div>
-                            <h3 class="service-title">توصيل هدايا</h3>
+                            <h3 class="service-title-tunisia">توصيل هدايا</h3>
                         </div>
-                        <p class="service-description">
+                        <p class="service-description-tunisia">
                             توصيل الهدايا والورود والباقات في المناسبات الخاصة مع خدمة تغليف مميزة. نضمن وصول الهدايا في الوقت المحدد وبشكل أنيق.
                         </p>
                         
-                        <div class="service-features">
+                        <div class="service-features-tunisia">
                             <h4>مميزات الخدمة:</h4>
-                            <ul class="features-list">
+                            <ul class="features-list-tunisia">
                                 <li>تغليف احترافي للهدايا</li>
                                 <li>توصيل مفاجئة في المناسبات</li>
                                 <li>باقات ورد طازجة يومياً</li>
@@ -1607,8 +2810,8 @@
                             </ul>
                         </div>
                         
-                        <div class="service-button-container">
-                            <button class="service-btn-small" onclick="window.open('https://wa.me/+21656471550?text=أريد خدمة توصيل هدايا', '_blank')" aria-label="طلب خدمة توصيل هدايا">
+                        <div class="service-button-container-tunisia">
+                            <button class="service-btn-tunisia" onclick="openWhatsApp('أريد خدمة توصيل هدايا')" aria-label="طلب خدمة توصيل هدايا">
                                 <i class="fab fa-whatsapp"></i> طلب الخدمة
                             </button>
                         </div>
@@ -1616,26 +2819,26 @@
                 </div>
                 
                 <!-- Service 5 -->
-                <div class="service-card service-C" data-aos="fade-up" data-aos-delay="300">
-                    <div class="service-image">
+                <div class="service-card-tunisia" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-image-tunisia">
                         <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
                             alt="توصيل مواد استهلاكية في تونس - خدمة موزون" loading="lazy">
                     </div>
                     
-                    <div class="service-content">
-                        <div class="service-header">
-                            <div class="service-icon gold-bg">
+                    <div class="service-content-tunisia">
+                        <div class="service-header-tunisia">
+                            <div class="service-icon-tunisia gold-bg">
                                 <i class="fas fa-box"></i>
                             </div>
-                            <h3 class="service-title">توصيل مواد استهلاكية</h3>
+                            <h3 class="service-title-tunisia">توصيل مواد استهلاكية</h3>
                         </div>
-                        <p class="service-description">
+                        <p class="service-description-tunisia">
                             توصيل المواد الغذائية والاستهلاكية من المحلات التجارية إلى المنازل والمطاعم والمؤسسات. نتعامل مع جميع المحلات الكبرى.
                         </p>
                         
-                        <div class="service-features">
+                        <div class="service-features-tunisia">
                             <h4>مميزات الخدمة:</h4>
-                            <ul class="features-list">
+                            <ul class="features-list-tunisia">
                                 <li>توصيل من جميع المحلات التجارية</li>
                                 <li>حفظ المواد سليمة ومبردة</li>
                                 <li>أسعار الجملة للمؤسسات</li>
@@ -1644,8 +2847,8 @@
                             </ul>
                         </div>
                         
-                        <div class="service-button-container">
-                            <button class="service-btn-small" onclick="window.open('https://wa.me/+21656471550?text=أريد خدمة توصيل مواد استهلاكية', '_blank')" aria-label="طلب خدمة توصيل مواد استهلاكية">
+                        <div class="service-button-container-tunisia">
+                            <button class="service-btn-tunisia" onclick="openWhatsApp('أريد خدمة توصيل مواد استهلاكية')" aria-label="طلب خدمة توصيل مواد استهلاكية">
                                 <i class="fab fa-whatsapp"></i> طلب الخدمة
                             </button>
                         </div>
@@ -1653,26 +2856,26 @@
                 </div>
                 
                 <!-- Service 6 -->
-                <div class="service-card service-C" data-aos="fade-up" data-aos-delay="350">
-                    <div class="service-image">
+                <div class="service-card-tunisia" data-aos="fade-up" data-aos-delay="350">
+                    <div class="service-image-tunisia">
                         <img src="https://images.unsplash.com/photo-1556742044-3c52d6e88c62?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
                             alt="خدمات التجارة الإلكترونية في تونس - خدمة متاجر إلكترونية" loading="lazy">
                     </div>
                     
-                    <div class="service-content">
-                        <div class="service-header">
-                            <div class="service-icon gold-bg">
+                    <div class="service-content-tunisia">
+                        <div class="service-header-tunisia">
+                            <div class="service-icon-tunisia gold-bg">
                                 <i class="fas fa-laptop"></i>
                             </div>
-                            <h3 class="service-title">خدمات التجارة الإلكترونية</h3>
+                            <h3 class="service-title-tunisia">خدمات التجارة الإلكترونية</h3>
                         </div>
-                        <p class="service-description">
+                        <p class="service-description-tunisia">
                             خدمات توصيل للمتاجر الإلكترونية وتنفيذ الطلبات مع تحديثات لحظية للعملاء. شريك موثوق في نجاح متجرك الإلكتروني.
                         </p>
                         
-                        <div class="service-features">
+                        <div class="service-features-tunisia">
                             <h4>مميزات الخدمة:</h4>
-                            <ul class="features-list">
+                            <ul class="features-list-tunisia">
                                 <li>تكامل مع منصات التجارة الإلكترونية</li>
                                 <li>تحديثات لحظية للعملاء</li>
                                 <li>إدارة المخزون والتوصيل</li>
@@ -1681,8 +2884,8 @@
                             </ul>
                         </div>
                         
-                        <div class="service-button-container">
-                            <button class="service-btn-small" onclick="window.open('https://wa.me/+21656471550?text=أريد خدمة توصيل للتجارة الإلكترونية', '_blank')" aria-label="طلب خدمة توصيل للتجارة الإلكترونية">
+                        <div class="service-button-container-tunisia">
+                            <button class="service-btn-tunisia" onclick="openWhatsApp('أريد خدمة توصيل للتجارة الإلكترونية')" aria-label="طلب خدمة توصيل للتجارة الإلكترونية">
                                 <i class="fab fa-whatsapp"></i> طلب الخدمة
                             </button>
                         </div>
@@ -1702,10 +2905,7 @@
             
             <div class="services-grid">
                 <!-- Service 1: التوصيل المحلي في تونس -->
-                <div class="service-card service-padding" data-aos="fade-up" data-aos-delay="100">
-                    <!-- <div class="service-icon gold-bg">
-                        <i class="fas fa-truck-fast"></i>
-                    </div> -->
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
                     <h3>خدمات توصيل داخل تونس</h3>
                     <p>خدمات توصيل محلية داخل جميع ولايات تونس لجميع أنواع البضائع والمستندات</p>
                     
@@ -1747,7 +2947,8 @@
                             data-name-input="nameInputTunisia"
                             data-email-input="emailInputTunisia"
                             data-service-select="serviceSelectTunisia"
-                            data-whatsapp-number="21656471550">
+                            data-whatsapp-number="21656471550"
+                            type="button">
                         <i class="fab fa-whatsapp"></i> 
                         <span class="btn-text">طلب خدمة التوصيل في تونس</span>
                     </button>
@@ -1762,19 +2963,16 @@
                 </div>
 
                 <!-- Service 2: توصيل دولي -->
-                <div class="service-card service-padding" data-aos="fade-up" data-aos-delay="150">
-                    <!-- <div class="service-icon gold-bg">
-                        <i class="fas fa-balance-scale"></i>
-                    </div> -->
+                <div class="service-card" data-aos="fade-up" data-aos-delay="150">
                     <h3>خدمة توصيل ميزان بين قطر وتونس</h3>
-                    <p>خدمة توصيل أغراض شخصية وموازين بين تونس وتونس</p>
+                    <p>خدمة توصيل أغراض شخصية وموازين بين تونس وقطر</p>
                     
                     <div class="service-selection">
                         <select class="service-select" id="serviceSelectInternational">
                             <option value="" selected disabled>-- اختر الخدمة --</option>
                             <option value="تريد بيع ميزان">تريد بيع ميزان</option>
-                            <option value="حجز ميزان من تونس الي قطر">حجز ميزان من تونس الي تونس</option>
-                            <option value="حجز ميزان من قطر الي تونس">حجز ميزان من تونس الي تونس</option>
+                            <option value="حجز ميزان من تونس الي قطر">حجز ميزان من تونس الي قطر</option>
+                            <option value="حجز ميزان من قطر الي تونس">حجز ميزان من قطر الي تونس</option>
                         </select>
                     </div>
                     
@@ -1804,7 +3002,8 @@
                             data-name-input="nameInputInternational"
                             data-email-input="emailInputInternational"
                             data-service-select="serviceSelectInternational"
-                            data-whatsapp-number="21656471550">
+                            data-whatsapp-number="21656471550"
+                            type="button">
                         <i class="fab fa-whatsapp"></i> 
                         <span class="btn-text">طلب خدمة توصيل دولي</span>
                     </button>
@@ -1819,10 +3018,7 @@
                 </div>
 
                 <!-- Service 3: توثيق تسليم الأموال -->
-                <div class="service-card service-padding" data-aos="fade-up" data-aos-delay="200">
-                    <!-- <div class="service-icon gold-bg">
-                        <i class="fas fa-hand-holding-usd"></i>
-                    </div> -->
+                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
                     <h3>توثيق تسليم الأموال (يدًا بيد)</h3>
                     <p>خدمة توثيق موثوقة لتسليم الأموال بين الأطراف</p>
                     
@@ -1860,7 +3056,8 @@
                             data-name-input="nameInputMoney"
                             data-email-input="emailInputMoney"
                             data-service-select="serviceSelectMoney"
-                            data-whatsapp-number="21656471550">
+                            data-whatsapp-number="21656471550"
+                            type="button">
                         <i class="fab fa-whatsapp"></i> 
                         <span class="btn-text">تواصل الآن لتوثيق الأموال</span>
                     </button>
@@ -1883,14 +3080,14 @@
     </section>
 
     <!-- ================= FINAL CTA ================= -->
-    <section class="services-hero" id="finalCta" style="padding: 60px 0;">
+    <section class="services-hero" id="finalCta">
         <div class="container">
             <div class="cta-content" data-aos="zoom-in" data-aos-duration="800">
                 <h2 class="gold-text">جاهز لطلب الخدمة؟</h2>
                 <p>اتصل بنا الآن واحصل على أفضل خدمة توصيل في تونس</p>
                 
-                <div style="margin-top: 30px;">
-                    <a href="https://wa.me/+21656471550" class="service-btn whatsapp" target="_blank" style="max-width: 300px; margin: 0 auto;">
+                <div style="margin-top: 30px; max-width: 300px; margin-left: auto; margin-right: auto;">
+                    <a href="https://wa.me/+21656471550" class="service-btn whatsapp" target="_blank" rel="noopener noreferrer">
                         <i class="fab fa-whatsapp"></i> 
                         <span>تواصل عبر واتساب</span>
                     </a>
@@ -1907,7 +3104,7 @@
                 <div class="footer-logo">
                     <div class="logo">
                         <div class="logo-icon">
-                            <i class="fas fa-shipping-fast" style="color: var(--white); font-size: 24px;"></i>
+                            <img src="https://iili.io/fLgS9wP.md.jpg" alt="شعار Tn-QA Delivery" width="50" height="50" loading="lazy">
                         </div>
                         <div class="logo-text">
                             <h2 class="gold-text">Tn-QA Delivery</h2>
@@ -1918,13 +3115,13 @@
                     
                     <!-- Social Media -->
                     <div class="social-icons">
-                        <a href="https://wa.me/+21656471550" class="social-icon whatsapp" aria-label="واتساب" target="_blank">
+                        <a href="https://wa.me/+21656471550" class="social-icon whatsapp" aria-label="واتساب" target="_blank" rel="noopener noreferrer">
                             <i class="fab fa-whatsapp"></i>
                         </a>
-                        <a href="https://www.facebook.com/share/17ZgZb5UFg/" class="social-icon facebook" aria-label="فيسبوك" target="_blank">
+                        <a href="https://www.facebook.com/share/17ZgZb5UFg/" class="social-icon facebook" aria-label="فيسبوك" target="_blank" rel="noopener noreferrer">
                             <i class="fab fa-facebook"></i>
                         </a>
-                        <a href="https://www.tiktok.com/@twensafiqatar0" class="social-icon tiktok" aria-label="تيك توك" target="_blank">
+                        <a href="https://www.tiktok.com/@twensafiqatar0" class="social-icon tiktok" aria-label="تيك توك" target="_blank" rel="noopener noreferrer">
                             <i class="fab fa-tiktok"></i>
                         </a>
                     </div>
@@ -1946,7 +3143,7 @@
                 <div class="footer-services">
                     <h3 class="footer-title gold-text">خدماتنا في تونس</h3>
                     <ul class="footer-list">
-                        <li><a href="#services" class="footer-link">التوصيل المحلي</a></li>
+                        <li><a href="#tunisiaServices" class="footer-link">التوصيل المحلي</a></li>
                         <li><a href="#services" class="footer-link">التوصيل الدولي</a></li>
                         <li><a href="#services" class="footer-link">توثيق الأموال</a></li>
                         <li><a href="#finalCta" class="footer-link">طلب الخدمة</a></li>
@@ -1978,18 +3175,18 @@
 
     <!-- ================= FLOATING BUTTONS ================= -->
     <!-- Floating Theme Toggle -->
-    <button class="float-theme hover-lift" id="floatThemeToggle" aria-label="تبديل وضع السطوع">
+    <button class="float-theme hover-lift" id="floatThemeToggle" aria-label="تبديل وضع السطوع" type="button">
         <i class="fas fa-moon"></i>
         <i class="fas fa-sun"></i>
     </button>
     
     <!-- Floating WhatsApp -->
-    <a href="https://wa.me/+21656471550" class="float-whatsapp pulse hover-lift" aria-label="تواصل معنا عبر واتساب" target="_blank">
+    <a href="https://wa.me/+21656471550" class="float-whatsapp pulse hover-lift" aria-label="تواصل معنا عبر واتساب" target="_blank" rel="noopener noreferrer">
         <i class="fab fa-whatsapp"></i>
     </a>
     
     <!-- Scroll to Top -->
-    <button class="scroll-to-top hover-lift" id="scrollToTop" aria-label="العودة إلى الأعلى">
+    <button class="scroll-to-top hover-lift" id="scrollToTop" aria-label="العودة إلى الأعلى" type="button">
         <i class="fas fa-chevron-up"></i>
     </button>
 
@@ -2002,7 +3199,8 @@
         AOS.init({
             duration: 800,
             once: true,
-            offset: 100
+            offset: 100,
+            disable: window.innerWidth < 768
         });
         
         // ================= PAGE LOAD TRANSITION =================
@@ -2082,6 +3280,13 @@
                 // Close language dropdown if open
                 const langDropdown = document.getElementById('langDropdown');
                 langDropdown.classList.remove('show');
+                
+                // Prevent body scroll when menu is open
+                if (navLinks.classList.contains('active')) {
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = '';
+                }
             });
             
             // Close menu when clicking on a link
@@ -2090,7 +3295,17 @@
                 link.addEventListener('click', function() {
                     burger.classList.remove('active');
                     navLinks.classList.remove('active');
+                    document.body.style.overflow = '';
                 });
+            });
+            
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!burger.contains(e.target) && !navLinks.contains(e.target) && navLinks.classList.contains('active')) {
+                    burger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
             });
         }
         
@@ -2138,7 +3353,7 @@
                     
                     // Show a message to the user
                     if (selectedLang === 'en') {
-                        alert('Note: In a real implementation, the entire page content would be translated to English.');
+                        showNotification('Note: In a real implementation, the entire page content would be translated to English.');
                     }
                 });
             });
@@ -2200,21 +3415,7 @@
                     const selectedService = serviceSelect ? serviceSelect.value : service;
                     
                     // Validation
-                    if (!name) {
-                        alert('الرجاء إدخال اسمك الكريم');
-                        document.getElementById(nameInputId).focus();
-                        return;
-                    }
-                    
-                    if (!phone) {
-                        alert('الرجاء إدخال رقم هاتفك');
-                        document.getElementById(phoneInputId).focus();
-                        return;
-                    }
-                    
-                    if (!selectedService || selectedService === '') {
-                        alert('الرجاء اختيار الخدمة');
-                        if (serviceSelect) serviceSelect.focus();
+                    if (!validateForm(name, phone, selectedService)) {
                         return;
                     }
                     
@@ -2231,28 +3432,14 @@
                     
                     message += `\nأرجو التواصل معي للتفاصيل.`;
                     
-                    // Encode message for URL
-                    const encodedMessage = encodeURIComponent(message);
-                    
                     // Open WhatsApp
-                    window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
-                });
-            });
-            
-            // Small service buttons in service cards
-            const smallServiceButtons = document.querySelectorAll('.service-btn-small');
-            smallServiceButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // These buttons already have onclick handlers that open WhatsApp
-                    // We'll just add a visual feedback
-                    const originalText = this.innerHTML;
-                    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري التوجيه...';
-                    this.disabled = true;
+                    openWhatsApp(message);
                     
-                    setTimeout(() => {
-                        this.innerHTML = originalText;
-                        this.disabled = false;
-                    }, 2000);
+                    // Clear form
+                    document.getElementById(phoneInputId).value = '';
+                    document.getElementById(nameInputId).value = '';
+                    document.getElementById(emailInputId).value = '';
+                    if (serviceSelect) serviceSelect.value = '';
                 });
             });
             
@@ -2270,21 +3457,138 @@
                 input.addEventListener('blur', function() {
                     const email = this.value.trim();
                     if (email && !validateEmail(email)) {
-                        alert('الرجاء إدخال بريد إلكتروني صحيح');
-                        this.focus();
+                        showError('الرجاء إدخال بريد إلكتروني صحيح', this);
                     }
                 });
             });
-            
-            // Email validation function
-            function validateEmail(email) {
-                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                return re.test(email);
-            }
         }
         
-        // ================= ADDITIONAL ENHANCEMENTS =================
-        // Smooth scrolling for anchor links
+        // ================= OPEN WHATSAPP FUNCTION =================
+        function openWhatsApp(message) {
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/+21656471550?text=${encodedMessage}`;
+            window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+        }
+        
+        // ================= FORM VALIDATION =================
+        function validateForm(name, phone, service) {
+            // Remove existing error messages
+            const existingErrors = document.querySelectorAll('.error-message');
+            existingErrors.forEach(error => error.remove());
+            
+            let isValid = true;
+            
+            // Name validation
+            if (!name || name.trim().length < 2) {
+                showError('الرجاء إدخال اسم صحيح (على الأقل حرفين)', document.getElementById('nameInputTunisia'));
+                isValid = false;
+            }
+            
+            // Phone validation
+            if (!phone || phone.replace(/\D/g, '').length < 8) {
+                showError('الرجاء إدخال رقم هاتف صحيح (على الأقل 8 أرقام)', document.getElementById('phoneInputTunisia'));
+                isValid = false;
+            }
+            
+            // Service validation
+            if (!service || service === '') {
+                showError('الرجاء اختيار الخدمة', document.querySelector('.service-select'));
+                isValid = false;
+            }
+            
+            return isValid;
+        }
+        
+        // ================= SHOW ERROR FUNCTION =================
+        function showError(message, element) {
+            // Remove existing error message for this element
+            const existingError = element.parentElement.querySelector('.error-message');
+            if (existingError) {
+                existingError.remove();
+            }
+            
+            // Create error message element
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.textContent = message;
+            
+            // Insert after the element
+            element.parentElement.insertBefore(errorDiv, element.nextSibling);
+            
+            // Focus on the element
+            element.focus();
+            
+            // Remove error message after 5 seconds
+            setTimeout(() => {
+                if (errorDiv.parentElement) {
+                    errorDiv.remove();
+                }
+            }, 5000);
+        }
+        
+        // ================= SHOW NOTIFICATION FUNCTION =================
+        function showNotification(message) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                right: 20px;
+                background-color: var(--secondary);
+                color: white;
+                padding: 15px 20px;
+                border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+                z-index: 10000;
+                text-align: center;
+                font-weight: 600;
+                animation: slideIn 0.3s ease;
+                word-break: break-word;
+            `;
+            
+            // Add dark theme support
+            if (document.body.classList.contains('dark-theme')) {
+                notification.style.backgroundColor = 'var(--dark-accent)';
+                notification.style.color = 'var(--dark-primary)';
+            }
+            
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    if (notification.parentElement) {
+                        notification.remove();
+                    }
+                }, 300);
+            }, 3000);
+            
+            // Add keyframes for animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateY(-100%); opacity: 0; }
+                    to { transform: translateY(0); opacity: 1; }
+                }
+                @keyframes slideOut {
+                    from { transform: translateY(0); opacity: 1; }
+                    to { transform: translateY(-100%); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        // ================= EMAIL VALIDATION =================
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+        
+        // ================= SMOOTH SCROLLING =================
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 const href = this.getAttribute('href');
@@ -2297,8 +3601,11 @@
                     const targetElement = document.getElementById(targetId);
                     
                     if (targetElement) {
+                        const headerHeight = document.querySelector('.glass-header').offsetHeight;
+                        const targetPosition = targetElement.offsetTop - headerHeight - 20;
+                        
                         window.scrollTo({
-                            top: targetElement.offsetTop - 80,
+                            top: targetPosition,
                             behavior: 'smooth'
                         });
                         
@@ -2307,17 +3614,19 @@
                         const navLinks = document.getElementById('navLinks');
                         burger.classList.remove('active');
                         navLinks.classList.remove('active');
+                        document.body.style.overflow = '';
                     }
                 }
             });
         });
         
-        // Add ripple effect to buttons
+        // ================= RIPPLE EFFECT =================
         const buttons = document.querySelectorAll('.ripple');
         buttons.forEach(button => {
             button.addEventListener('click', function(e) {
-                const x = e.clientX - e.target.getBoundingClientRect().left;
-                const y = e.clientY - e.target.getBoundingClientRect().top;
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
                 
                 const ripple = document.createElement('span');
                 ripple.classList.add('ripple-effect');
@@ -2332,35 +3641,67 @@
             });
         });
         
-        // Add CSS for ripple effect
-        const rippleStyle = document.createElement('style');
-        rippleStyle.textContent = `
-            .ripple {
-                position: relative;
-                overflow: hidden;
-            }
-            
-            .ripple-effect {
-                position: absolute;
-                border-radius: 50%;
-                background-color: rgba(255, 255, 255, 0.7);
-                transform: scale(0);
-                animation: ripple-animation 0.6s linear;
-                width: 100px;
-                height: 100px;
-                margin-left: -50px;
-                margin-top: -50px;
-                pointer-events: none;
-            }
-            
-            @keyframes ripple-animation {
-                to {
-                    transform: scale(4);
-                    opacity: 0;
+        // ================= HANDLE NON-EXISTENT PAGES =================
+        const pageLinks = document.querySelectorAll('a[href$=".html"]');
+        pageLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                
+                // Skip if it's the current page or external links
+                if (href === window.location.pathname.split('/').pop() || 
+                    this.target === '_blank' ||
+                    href.startsWith('http')) {
+                    return;
                 }
-            }
-        `;
-        document.head.appendChild(rippleStyle);
+                
+                // Check if page exists (in a real implementation, you would make an AJAX request)
+                // For now, show a message for non-existent pages
+                
+            });
+        });
+        
+        // ================= TOUCH EVENT SUPPORT FOR MOBILE =================
+        // Improve touch experience on mobile
+        if ('ontouchstart' in window) {
+            document.documentElement.classList.add('touch-device');
+            
+            // Improve button touch experience
+            const buttons = document.querySelectorAll('button, a');
+            buttons.forEach(button => {
+                button.addEventListener('touchstart', function() {
+                    this.classList.add('touch-active');
+                });
+                
+                button.addEventListener('touchend', function() {
+                    setTimeout(() => {
+                        this.classList.remove('touch-active');
+                    }, 150);
+                });
+            });
+            
+            // Prevent zoom on double tap
+            let lastTouchEnd = 0;
+            document.addEventListener('touchend', function(event) {
+                const now = (new Date()).getTime();
+                if (now - lastTouchEnd <= 300) {
+                    event.preventDefault();
+                }
+                lastTouchEnd = now;
+            }, false);
+        }
+        
+        // ================= HANDLE ORIENTATION CHANGE =================
+        window.addEventListener('orientationchange', function() {
+            // Reload AOS on orientation change
+            AOS.refresh();
+            
+            // Close mobile menu on orientation change
+            const burger = document.getElementById('burger');
+            const navLinks = document.getElementById('navLinks');
+            burger.classList.remove('active');
+            navLinks.classList.remove('active');
+            document.body.style.overflow = '';
+        });
     </script>
 </body>
 </html>

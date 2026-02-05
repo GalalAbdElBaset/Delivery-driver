@@ -13,12 +13,1499 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/reviews.css">
-    <!-- <link rel="stylesheet" href="css/animations.css"> -->
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    
     <style>
+        /* ================= CSS VARIABLES ================= */
+        :root {
+            /* Color Palette - أبيض، ذهبي، أسود */
+            --primary: #000000;          /* أسود */
+            --secondary: #D4AF37;        /* ذهبي */
+            --light: #FFFFFF;            /* أبيض */
+            --gray-light: #F5F5F5;       /* أبيض فاتح */
+            --gray: #777777;             /* رمادي */
+            --gray-dark: #333333;        /* رمادي داكن */
+            
+            /* Color Variations */
+            --gold: #D4AF37;
+            --gold-light: #E6C878;
+            --gold-dark: #B7950B;
+            --white: #FFFFFF;
+            --black: #000000;
+            --off-white: #FAFAFA;
+            
+            /* Gradients */
+            --gold-gradient: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            --gold-gradient-light: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
+            --white-gradient: linear-gradient(135deg, var(--white) 0%, var(--off-white) 100%);
+            
+            /* Shadows */
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+            --shadow-gold: 0 4px 12px rgba(212, 175, 55, 0.2);
+            
+            /* Border Radius */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-round: 50%;
+            
+            /* Transitions */
+            --transition-fast: 0.2s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.5s ease;
+            
+            /* Font Sizes - تحسين الخطوط لجميع الأجهزة */
+            --fs-xs: 0.75rem;      /* 12px */
+            --fs-sm: 0.875rem;     /* 14px */
+            --fs-base: 1rem;       /* 16px */
+            --fs-md: 1.125rem;     /* 18px */
+            --fs-lg: 1.25rem;      /* 20px */
+            --fs-xl: 1.5rem;       /* 24px */
+            --fs-2xl: 1.75rem;     /* 28px - تم تصغير */
+            --fs-3xl: 2rem;        /* 32px - تم تصغير */
+            --fs-4xl: 2.5rem;      /* 40px - تم تصغير */
+        }
+
+        /* ================= BASE STYLES ================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px; /* حجم خط أساسي مناسب */
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+            direction: rtl;
+            overflow-x: hidden;
+            transition: background-color var(--transition-normal);
+            font-size: var(--fs-base); /* استخدام حجم الخط الأساسي */
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        /* ================= TYPOGRAPHY ================= */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.3;
+            color: var(--black);
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: var(--fs-4xl);
+        }
+
+        h2 {
+            font-size: var(--fs-3xl);
+        }
+
+        h3 {
+            font-size: var(--fs-xl);
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--gray-dark);
+            font-size: var(--fs-base);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color var(--transition-fast);
+        }
+
+        .gold-text {
+            color: var(--gold) !important;
+        }
+
+        .black-text {
+            color: var(--black) !important;
+        }
+
+        .white-text {
+            color: var(--white) !important;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 1rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 50%;
+            transform: translateX(50%);
+            width: 80px;
+            height: 3px;
+            background: var(--gold-gradient);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            font-size: var(--fs-md);
+        }
+
+        /* ================= BUTTONS ================= */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 28px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: var(--fs-base);
+            cursor: pointer;
+            border: none;
+            transition: all var(--transition-normal);
+            font-family: 'Cairo', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .primary-btn {
+            background: var(--gold-gradient);
+            color: var(--black);
+            border: 2px solid transparent;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-gold);
+            color: var(--black);
+        }
+
+        .primary-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .secondary-btn {
+            background: transparent;
+            color: var(--black);
+            border: 2px solid var(--gold);
+        }
+
+        .secondary-btn:hover {
+            background: var(--gold);
+            color: var(--black);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .outline-btn {
+            background: transparent;
+            color: var(--black);
+            border: 2px solid var(--black);
+        }
+
+        .outline-btn:hover {
+            background: var(--black);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        /* ================= NAVIGATION ================= */
+        .glass-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: var(--radius-md);
+            background: var(--gold-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .logo-icon i {
+            font-size: 1.5rem;
+            color: var(--black);
+        }
+
+        .logo-text h1 {
+            font-size: 1rem;
+            margin-bottom: 0;
+            line-height: 1.2;
+        }
+
+        .logo-text p {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-bottom: 0;
+        }
+
+        /* ================= تحسينات قائمة الخدمات (Dropdown) ================= */
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-item.has-dropdown {
+            position: relative;
+        }
+
+        .nav-item.has-dropdown .nav-link {
+            cursor: pointer;
+        }
+
+        .services-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--white);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            padding: 15px 0;
+            min-width: 220px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(15px);
+            transition: all var(--transition-normal);
+            z-index: 100;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .nav-item.has-dropdown:hover .services-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 25px;
+            color: var(--gray-dark);
+            transition: all var(--transition-fast);
+            font-weight: 500;
+            font-size: var(--fs-sm);
+            white-space: nowrap;
+        }
+
+        .dropdown-link:hover {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--gold-dark);
+            transform: translateX(-5px);
+        }
+
+        .dropdown-icon {
+            color: var(--gold);
+            width: 20px;
+            text-align: center;
+            font-size: var(--fs-md);
+        }
+
+        .nav-link {
+            font-weight: 600;
+            color: var(--gray-dark);
+            position: relative;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        body.dark-theme .nav-link {
+            color: #fff;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold-gradient);
+            transition: width var(--transition-normal);
+        }
+
+        .nav-link:hover {
+            color: var(--gold);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: var(--gold);
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .theme-switcher, .language-switcher-nav {
+            position: relative;
+        }
+
+        .theme-btn, .lang-btn-nav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--gray-light);
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--black);
+            transition: all var(--transition-fast);
+            font-size: var(--fs-sm);
+        }
+
+        .theme-btn:hover, .lang-btn-nav:hover {
+            background: var(--gold-dark);
+            color: var(--light);
+        }
+
+        .lang-dropdown-nav {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--white);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+            padding: 10px 0;
+            min-width: 120px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all var(--transition-normal);
+            z-index: 100;
+        }
+
+        .language-switcher-nav:hover .lang-dropdown-nav {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .lang-option-nav {
+            display: block;
+            padding: 8px 20px;
+            color: var(--black);
+            transition: all var(--transition-fast);
+            font-size: var(--fs-sm);
+        }
+
+        .lang-option-nav:hover {
+            background: var(--gold-dark);
+            color: var(--light);
+        }
+
+        .lang-option-nav.active {
+            background: var(--gold-dark);
+            color: var(--light);
+            font-weight: 700;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .nav-cta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            transition: all var(--transition-normal);
+            font-size: 12px;
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+        }
+
+        .whatsapp-btn:hover {
+            background: #128C7E;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+        }
+
+        .call-btn {
+            background: var(--gold-gradient);
+            color: var(--black);
+        }
+
+        .call-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .burger {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .burger span {
+            width: 25px;
+            height: 3px;
+            background: var(--black);
+            border-radius: 2px;
+            transition: all var(--transition-normal);
+        }
+
+        /* ================= REVIEWS HERO ================= */
+        .reviews-hero {
+            background: var(--white-gradient);
+            padding: 140px 0 80px;
+            text-align: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .reviews-hero h1 {
+            font-size: var(--fs-4xl);
+            margin-bottom: 1rem;
+        }
+
+        .reviews-hero p {
+            font-size: var(--fs-lg);
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+        }
+
+        .hero-ratings {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .hero-rating {
+            background: var(--white);
+            padding: 25px 35px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            min-width: 180px;
+        }
+
+        .rating-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--gold);
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .rating-stars {
+            color: var(--gold);
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+
+        .rating-label {
+            color: var(--gray);
+            font-weight: 600;
+            font-size: var(--fs-sm);
+        }
+
+        /* ================= REVIEWS FILTERS ================= */
+        .reviews-filters {
+            background: var(--white);
+            padding: 30px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .filters-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .filter-label {
+            font-weight: 600;
+            color: var(--black);
+            font-size: var(--fs-base);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            background: var(--gray-light);
+            border: none;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            color: var(--gray-dark);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            font-size: var(--fs-sm);
+        }
+
+        .filter-btn:hover {
+            background: var(--gold-light);
+            color: var(--black);
+        }
+
+        .filter-btn.active {
+            background: var(--gold-gradient);
+            color: var(--black);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .search-box {
+            position: relative;
+            min-width: 250px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 35px 12px 45px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: var(--radius-md);
+            font-family: 'Cairo', sans-serif;
+            font-size: var(--fs-base);
+            background: var(--white);
+            color: var(--black);
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+        }
+
+        .search-box i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+
+        /* ================= REVIEWS GRID ================= */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .review-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 25px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .review-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--gold-light);
+        }
+
+        .review-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--gold-gradient);
+            opacity: 0;
+            transition: opacity var(--transition-normal);
+        }
+
+        .review-card:hover::before {
+            opacity: 1;
+        }
+
+        .review-header {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .reviewer-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: var(--radius-round);
+            overflow: hidden;
+            border: 3px solid var(--gold-light);
+            flex-shrink: 0;
+        }
+
+        .reviewer-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .reviewer-info h3 {
+            margin-bottom: 5px;
+            font-size: var(--fs-lg);
+        }
+
+        .reviewer-info p {
+            color: var(--gray);
+            font-size: var(--fs-sm);
+            margin-bottom: 8px;
+        }
+
+        .review-rating {
+            color: var(--gold);
+            font-size: var(--fs-sm);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .review-date {
+            color: var(--gray);
+            font-size: var(--fs-xs);
+            margin-right: 10px;
+        }
+
+        .review-content {
+            position: relative;
+        }
+
+        .review-verified {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(37, 211, 102, 0.1);
+            color: #25D366;
+            padding: 4px 10px;
+            border-radius: var(--radius-sm);
+            font-size: var(--fs-xs);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .review-service {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--gold-dark);
+            padding: 4px 10px;
+            border-radius: var(--radius-sm);
+            font-size: var(--fs-xs);
+            font-weight: 600;
+            margin-bottom: 15px;
+            margin-right: 10px;
+        }
+
+        .review-content p {
+            color: var(--gray-dark);
+            font-size: var(--fs-base);
+            line-height: 1.7;
+        }
+
+        /* ================= LOAD MORE ================= */
+        .load-more-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .load-more-btn {
+            padding: 12px 35px;
+            background: var(--white);
+            border: 2px solid var(--gold);
+            color: var(--gold-dark);
+            font-weight: 600;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: var(--fs-base);
+        }
+
+        .load-more-btn:hover {
+            background: var(--gold);
+            color: var(--black);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-gold);
+        }
+
+        /* ================= REVIEW STATS ================= */
+        .review-stats {
+            background: var(--gray-light);
+            padding: 80px 0;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 35px 25px;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all var(--transition-normal);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--gold-light);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--gold);
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: var(--fs-lg);
+            font-weight: 700;
+            color: var(--black);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .stat-description {
+            color: var(--gray);
+            font-size: var(--fs-sm);
+            margin-bottom: 0;
+        }
+
+        /* ================= ADD REVIEW FORM ================= */
+        .add-review {
+            background: var(--white-gradient);
+            padding: 80px 0;
+        }
+
+        .review-form-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .review-form {
+            background: var(--white);
+            padding: 40px;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .review-form h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--black);
+            font-size: var(--fs-2xl);
+        }
+
+        .rating-input {
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .rating-input p {
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: var(--black);
+            font-size: var(--fs-base);
+        }
+
+        .stars-input {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+
+        .star-input {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: var(--gray-light);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            padding: 5px;
+        }
+
+        .star-input:hover {
+            color: var(--gold-light);
+            transform: scale(1.2);
+        }
+
+        .star-input.active {
+            color: var(--gold);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--black);
+            font-size: var(--fs-base);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 20px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: var(--radius-md);
+            font-family: 'Cairo', sans-serif;
+            font-size: var(--fs-base);
+            background: var(--white);
+            color: var(--black);
+            transition: all var(--transition-fast);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+        }
+
+        .form-submit {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        /* ================= FOOTER ================= */
+        .main-footer {
+            background: var(--black);
+            color: var(--white);
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo .logo {
+            margin-bottom: 20px;
+        }
+
+        .footer-logo .logo-icon {
+            width: 60px;
+            height: 60px;
+        }
+
+        .footer-desc {
+            color: #CCCCCC;
+            margin-bottom: 25px;
+            font-size: var(--fs-base);
+            line-height: 1.7;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: var(--radius-round);
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            font-size: 1.2rem;
+            transition: all var(--transition-normal);
+        }
+
+        .social-icon:hover {
+            transform: translateY(-5px);
+            color: var(--white);
+        }
+
+        .social-icon.whatsapp:hover {
+            background: #25D366;
+        }
+
+        .social-icon.facebook:hover {
+            background: #1877F2;
+        }
+
+        .social-icon.tiktok:hover {
+            background: #000000;
+        }
+
+        .footer-title {
+            font-size: var(--fs-lg);
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--gold-gradient);
+        }
+
+        .footer-list {
+            list-style: none;
+        }
+
+        .footer-list li {
+            margin-bottom: 12px;
+        }
+
+        .footer-link {
+            color: #CCCCCC;
+            transition: all var(--transition-fast);
+            display: inline-block;
+            font-size: var(--fs-base);
+        }
+
+        .footer-link:hover {
+            color: var(--gold);
+            transform: translateX(-5px);
+        }
+
+        .footer-contact-info p {
+            margin-bottom: 15px;
+            color: #CCCCCC;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: var(--fs-base);
+        }
+
+        .footer-contact-info i {
+            font-size: 1.1rem;
+            min-width: 20px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            text-align: center;
+        }
+
+        .legal-notice {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: var(--radius-md);
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+
+        .legal-notice i {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .legal-notice p {
+            color: var(--gold-light);
+            font-size: var(--fs-sm);
+            margin-bottom: 0;
+            text-align: center;
+        }
+
+        .copyright {
+            color: #999999;
+            font-size: var(--fs-sm);
+        }
+
+        /* ================= FLOATING BUTTONS ================= */
+        .float-theme,
+        .float-whatsapp,
+        .scroll-to-top {
+            position: fixed;
+            width: 55px;
+            height: 55px;
+            border-radius: var(--radius-round);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            border: none;
+            z-index: 999;
+            transition: all var(--transition-normal);
+            box-shadow: var(--shadow-md);
+            right: 20px;
+        }
+
+        .float-theme {
+            background: var(--gold-gradient);
+            color: var(--black);
+            bottom: 100px;
+        }
+
+        .float-theme:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .float-whatsapp {
+            background: #25D366;
+            color: white;
+            bottom: 175px;
+        }
+
+        .float-whatsapp:hover {
+            background: #128C7E;
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        .scroll-to-top {
+            background: var(--gold);
+            color: var(--white);
+            bottom: 25px;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .scroll-to-top:hover {
+            background: var(--gold-dark);
+            transform: translateY(-5px);
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ================= DARK THEME ================= */
+        body.dark-theme {
+            background-color: #121212;
+            color: #E0E0E0;
+        }
+
+        body.dark-theme .glass-header {
+            background: rgba(18, 18, 18, 0.95);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        body.dark-theme h1,
+        body.dark-theme h2,
+        body.dark-theme h3,
+        body.dark-theme h4,
+        body.dark-theme h5,
+        body.dark-theme h6 {
+            color: #FFFFFF;
+        }
+
+        body.dark-theme p {
+            color: #CCCCCC;
+        }
+
+        body.dark-theme .review-card,
+        body.dark-theme .stat-card,
+        body.dark-theme .review-form,
+        body.dark-theme .hero-rating {
+            background: #1E1E1E;
+            border-color: rgba(255, 255, 255, 0.05);
+        }
+
+        body.dark-theme .search-box input,
+        body.dark-theme .form-group input,
+        body.dark-theme .form-group select,
+        body.dark-theme .form-group textarea {
+            background: #2D2D2D;
+            color: #E0E0E0;
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        body.dark-theme .filter-btn {
+            background: #29251c;
+            color: #CCCCCC;
+        }
+
+        body.dark-theme .review-stats {
+            background: #1A1A1A;
+        }
+        body.dark-theme .reviews-filters {
+            background: #000000;
+        }
+
+        body.dark-theme .reviews-hero,
+        body.dark-theme .add-review {
+            background: linear-gradient(184deg, #9A7A1A  0%, #000000 100%);
+        }
+        body.dark-theme .burger span {
+            background-color: var(--gold) ;
+        }
+        body.dark-theme .services-dropdown {
+            background: #2D2D2D;
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        body.dark-theme .dropdown-link {
+            color: #CCCCCC;
+        }
+
+        body.dark-theme .dropdown-link:hover {
+            background: rgba(212, 175, 55, 0.2);
+            color: var(--gold-light);
+        }
+
+        /* ================= RESPONSIVE STYLES ================= */
+        @media (max-width: 1200px) {
+            :root {
+                --fs-4xl: 2.25rem;  /* 36px */
+                --fs-3xl: 1.875rem; /* 30px */
+                --fs-2xl: 1.625rem; /* 26px */
+            }
+        }
+        @media (max-width: 768px) { 
+            .nav-wrap {
+                padding: 15px;
+            }
+            .reviews-hero h1 {
+                font-size: 18px;
+            }
+            .reviews-hero p {
+                font-size: 15px;
+            }
+        }
+        @media (max-width: 992px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: var(--white);
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 100px 40px 30px;
+                box-shadow: var(--shadow-lg);
+                transition: right var(--transition-normal);
+                z-index: 999;
+                gap: 15px;
+                overflow-y: auto;
+            }
+            
+            body.dark-theme .nav-links {
+                background: #1E1E1E;
+            }
+            
+            .nav-links.active {
+                right: 0;
+            }
+            
+            .nav-item.has-dropdown {
+                width: 100%;
+            }
+            
+            .nav-item.has-dropdown .services-dropdown {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                background: transparent;
+                padding: 10px 0 10px 20px;
+                border: none;
+                margin-top: 5px;
+                display: none;
+                border-right: 2px solid var(--gold);
+            }
+            
+            .nav-item.has-dropdown.active .services-dropdown {
+                display: block;
+            }
+            
+            .dropdown-link {
+                padding: 8px 15px;
+                font-size: var(--fs-sm);
+            }
+            
+            .header-buttons {
+                display: none;
+            }
+            
+            .burger {
+                display: flex;
+                z-index: 1000;
+            }
+            
+            .burger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(8px, 8px);
+            }
+            
+            .burger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .burger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -7px);
+            }
+            
+            .hero-ratings {
+                gap: 20px;
+            }
+            
+            .hero-rating {
+                min-width: 150px;
+                padding: 20px 25px;
+            }
+            
+            .rating-number {
+                font-size: 27px;
+            }
+            .rating-stars {
+                font-size: 15px;
+            }
+            .section-title {
+                font-size: 20px;
+            }
+            .section-subtitle {
+                font-size: 15px;
+            }
+            .reviews-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+            
+            .filters-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .search-box {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --fs-4xl: 2rem;     /* 32px */
+                --fs-3xl: 1.75rem;  /* 28px */
+                --fs-2xl: 1.5rem;   /* 24px */
+                --fs-xl: 1.25rem;   /* 20px */
+                --fs-lg: 1.125rem;  /* 18px */
+                --fs-md: 1rem;      /* 16px */
+                --fs-base: 0.9375rem; /* 15px */
+            }
+            
+            .section-padding {
+                padding: 60px 0;
+            }
+            
+            .reviews-hero {
+                padding: 120px 0 60px;
+            }
+            
+            .hero-ratings {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero-rating {
+                width: 100%;
+                max-width: 250px;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+                max-width: 300px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .review-form {
+                padding: 30px 20px;
+            }
+            
+            .float-theme,
+            .float-whatsapp,
+            .scroll-to-top {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+                bottom: 20px;
+                left: 20px;
+            }
+            
+            .float-whatsapp {
+                bottom: 85px;
+            }
+            
+            .float-theme {
+                bottom: 150px;
+            }
+            
+            .nav-cta .cta-text {
+                display: none;
+            }
+            
+            .nav-cta {
+                padding: 10px;
+            }
+            
+            .nav-cta i {
+                margin: 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            :root {
+                --fs-4xl: 1.75rem;  /* 28px */
+                --fs-3xl: 1.5rem;   /* 24px */
+                --fs-2xl: 1.25rem;  /* 20px */
+                --fs-xl: 1.125rem;  /* 18px */
+                --fs-lg: 1rem;      /* 16px */
+            }
+            
+            .container {
+                padding: 12px 15px;
+            }
+            
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .review-card {
+                padding: 20px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .social-icons {
+                justify-content: center;
+            }
+            
+            .footer-title::after {
+                right: 50%;
+                transform: translateX(50%);
+            }
+            
+            .footer-contact-info p {
+                justify-content: center;
+            }
+            
+            .nav-links {
+                width: 250px;
+                padding: 80px 20px 20px;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.25rem;
+            }
+            .stat-number {
+                font-size: 1.25rem;
+            }
+            .gold-text {
+                font-size: 16.7px;
+            }
+        }
+        
+        /* ================= PAGE TRANSITION ================= */
         .page-transition {
             position: fixed;
             top: 0;
@@ -71,7 +1558,22 @@
             <nav class="nav-links" id="navLinks">
                 <a href="index.html" class="nav-link" data-i18n="nav.home">الرئيسية</a>
                 <a href="index.html#about" class="nav-link" data-i18n="nav.about">من نحن</a>
-                <a href="services.html" class="nav-link" data-i18n="nav.services">الخدمات</a>
+                <div class="nav-item has-dropdown">
+                    <span class="nav-link dropdown-toggle" data-i18n="nav.services">
+                        الخدمات
+                        <i class="fas fa-chevron-down" style="margin-right: 5px; font-size: 0.9em;"></i>
+                    </span>
+
+                    <div class="services-dropdown">
+                        <a href="qatar-services.html" class="dropdown-link" onclick="event.preventDefault(); navigateTo('qatar-services.html')">
+                            <i class="fas fa-flag dropdown-icon"></i> خدمات داخل قطر
+                        </a>
+
+                        <a href="tunisia-services.html" class="dropdown-link" onclick="event.preventDefault(); navigateTo('tunisia-services.html')">
+                            <i class="fas fa-flag dropdown-icon"></i> خدمات داخل تونس
+                        </a>
+                    </div>
+                </div>
                 <a href="contact.html" class="nav-link" data-i18n="nav.contact">التواصل</a>
                 <a href="reviews.html" class="nav-link active" data-i18n="nav.reviews">المراجعات</a>
                 
@@ -98,7 +1600,7 @@
             
             <!-- Header Buttons -->
             <div class="header-buttons">
-                <a href="https://wa.me/+21656471550" class="nav-cta whatsapp-btn" data-i18n="nav.whatsapp">
+                <a href="https://wa.me/+21656471550" class="nav-cta whatsapp-btn" data-i18n="nav.whatsapp" target="_blank">
                     <i class="fab fa-whatsapp"></i> <span class="cta-text">تواصل عبر واتساب</span>
                 </a>
                 <a href="tel:+21656471550" class="nav-cta call-btn" data-i18n="nav.call">
@@ -523,7 +2025,7 @@
                     <ul class="footer-list">
                         <li><a href="index.html" class="footer-link" data-i18n="nav.home">الرئيسية</a></li>
                         <li><a href="index.html#about" class="footer-link" data-i18n="nav.about">من نحن</a></li>
-                        <li><a href="services.html" class="footer-link" data-i18n="nav.services">الخدمات</a></li>
+                        <li><a href="#" class="footer-link services-link" data-i18n="nav.services">الخدمات</a></li>
                         <li><a href="contact.html" class="footer-link" data-i18n="nav.contact">تواصل معنا</a></li>
                         <li><a href="reviews.html" class="footer-link" data-i18n="nav.reviews">المراجعات</a></li>
                     </ul>
@@ -533,9 +2035,9 @@
                 <div class="footer-services">
                     <h3 class="footer-title gold-text" data-i18n="footer.ourServices">خدماتنا</h3>
                     <ul class="footer-list">
-                        <li><a href="services.html#local-delivery" class="footer-link" data-i18n="services.localDelivery.title">التوصيل المحلي</a></li>
-                        <li><a href="services.html#international-delivery" class="footer-link" data-i18n="services.internationalDelivery.title">التوصيل الدولي</a></li>
-                        <li><a href="services.html#money-delivery" class="footer-link" data-i18n="services.moneyDelivery.title">توثيق الأموال</a></li>
+                        <li><a href="qatar-services.html" class="footer-link" data-i18n="services.localQatar.title">خدمات داخل قطر</a></li>
+                        <li><a href="tunisia-services.html" class="footer-link" data-i18n="services.localTunisia.title">خدمات داخل تونس</a></li>
+                        <li><a href="contact.html" class="footer-link" data-i18n="services.moneyDelivery.title">توثيق الأموال</a></li>
                     </ul>
                 </div>
                 
@@ -580,28 +2082,1376 @@
         <i class="fas fa-chevron-up"></i>
     </button>
 
-    <!-- ================= SCRIPTS ================= -->
-    <!-- Custom JavaScript Files -->
-     <!-- <script src="js/language.js"></script> -->
-    <!-- <script src="js/theme.js"></script>  -->
-   <!-- <script src="js/main.js"></script>  -->
-    <script src="js/reviews.js"></script>
-    
-    <!-- Initialize Current Year -->
     <script>
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
-    </script>
-    
-    <!-- Page Transition -->
-    <script>
+        // ================= DOM ELEMENTS =================
+        const pageTransition = document.querySelector('.page-transition');
+        const navLinks = document.querySelector('#navLinks');
+        const burger = document.querySelector('#burger');
+        const themeToggle = document.querySelector('#themeToggle');
+        const floatThemeToggle = document.querySelector('#floatThemeToggle');
+        const langBtn = document.querySelector('#langBtn');
+        const langDropdown = document.querySelector('#langDropdown');
+        const currentLang = document.querySelector('#currentLang');
+        const scrollToTop = document.querySelector('#scrollToTop');
+        const reviewForm = document.querySelector('#reviewForm');
+        const starsInput = document.querySelectorAll('.star-input');
+        const ratingValue = document.querySelector('#ratingValue');
+        const loadMoreBtn = document.querySelector('#loadMoreBtn');
+        const reviewsGrid = document.querySelector('#reviewsGrid');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const searchBox = document.querySelector('.search-box input');
+        const servicesDropdownToggle = document.querySelector('.dropdown-toggle');
+        const servicesDropdown = document.querySelector('.services-dropdown');
+        const mobileServicesLink = document.querySelector('.services-link');
+        const mobileDropdownToggle = document.querySelector('.nav-item.has-dropdown .nav-link');
+
+        // ================= PAGE TRANSITION =================
         document.addEventListener('DOMContentLoaded', function() {
+            // إخفاء انتقال الصفحة بعد التحميل
             setTimeout(function() {
-                document.querySelector('.page-transition').classList.add('hidden');
+                if (pageTransition) {
+                    pageTransition.classList.add('hidden');
+                }
             }, 800);
             
             setTimeout(function() {
-                document.querySelector('.page-transition').style.display = 'none';
+                if (pageTransition) {
+                    pageTransition.style.display = 'none';
+                }
             }, 1400);
+            
+            // تهيئة السنة الحالية في الفوتر
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            
+            // تهيئة جميع الوظائف
+            initNavigation();
+            initThemeSwitcher();
+            initLanguageSwitcher();
+            initReviewForm();
+            initReviewsFilter();
+            initScrollToTop();
+            initAnimations();
+            initServicesDropdown();
+            
+            // عرض المراجعات المحفوظة محلياً
+            displayLocalReviews();
+        });
+
+        // ================= SERVICES DROPDOWN =================
+        function initServicesDropdown() {
+            // لمنع السلوك الافتراضي لرابط الخدمات في الشاشات الكبيرة
+            if (servicesDropdownToggle) {
+                servicesDropdownToggle.addEventListener('click', function(e) {
+                    // على الأجهزة المحمولة، نسمح بفتح القائمة الفرعية
+                    if (window.innerWidth < 992) {
+                        e.preventDefault();
+                        const parent = this.closest('.nav-item.has-dropdown');
+                        parent.classList.toggle('active');
+                    }
+                });
+            }
+
+            // إدارة النقر على روابط الخدمات
+            const serviceLinks = document.querySelectorAll('.dropdown-link');
+            serviceLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const href = this.getAttribute('href');
+                    if (href) {
+                        navigateTo(href);
+                    }
+                });
+            });
+
+            // إدارة النقر على رابط الخدمات في الفوتر
+            if (mobileServicesLink) {
+                mobileServicesLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const servicesSection = document.querySelector('.nav-item.has-dropdown .nav-link');
+                    if (servicesSection) {
+                        // فتح قائمة الخدمات
+                        if (window.innerWidth >= 992) {
+                            // على الشاشات الكبيرة، نفتح القائمة المنسدلة
+                            const dropdown = document.querySelector('.services-dropdown');
+                            dropdown.style.opacity = '1';
+                            dropdown.style.visibility = 'visible';
+                            dropdown.style.transform = 'translateY(0)';
+                            
+                            // إخفاء القائمة بعد 3 ثواني
+                            setTimeout(() => {
+                                dropdown.style.opacity = '0';
+                                dropdown.style.visibility = 'hidden';
+                                dropdown.style.transform = 'translateY(15px)';
+                            }, 3000);
+                        } else {
+                            // على الأجهزة المحمولة، نفتح القائمة
+                            const parent = servicesSection.closest('.nav-item.has-dropdown');
+                            parent.classList.toggle('active');
+                        }
+                    }
+                });
+            }
+        }
+
+        // ================= NAVIGATION FUNCTIONS =================
+        function navigateTo(url) {
+            // يمكنك إضافة تأثير انتقالي هنا إذا أردت
+            if (url && url !== '#') {
+                window.location.href = url;
+            }
+        }
+
+        function initNavigation() {
+            if (burger) {
+                burger.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    navLinks.classList.toggle('active');
+                    
+                    if (navLinks.classList.contains('active')) {
+                        document.body.style.overflow = 'hidden';
+                    } else {
+                        document.body.style.overflow = '';
+                    }
+                });
+            }
+            
+            const navLinkItems = document.querySelectorAll('.nav-link:not(.dropdown-toggle)');
+            navLinkItems.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        burger.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                });
+            });
+            
+            // إغلاق القائمة عند النقر خارجها
+            document.addEventListener('click', function(event) {
+                if (navLinks.classList.contains('active') && 
+                    !event.target.closest('.nav-links') && 
+                    !event.target.closest('.burger')) {
+                    navLinks.classList.remove('active');
+                    burger.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        }
+
+        // ================= THEME SWITCHER =================
+        function initThemeSwitcher() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            setTheme(savedTheme);
+            
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function() {
+                    const currentTheme = document.body.classList.contains('dark-theme') ? 'dark' : 'light';
+                    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                    setTheme(newTheme);
+                });
+            }
+            
+            if (floatThemeToggle) {
+                floatThemeToggle.addEventListener('click', function() {
+                    const currentTheme = document.body.classList.contains('dark-theme') ? 'dark' : 'light';
+                    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                    setTheme(newTheme);
+                });
+            }
+        }
+
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                document.body.classList.add('dark-theme');
+                document.querySelectorAll('.theme-btn i').forEach(icon => {
+                    icon.className = 'fas fa-moon';
+                });
+                document.querySelectorAll('.theme-text').forEach(text => {
+                    text.textContent = 'داكن';
+                });
+                if (floatThemeToggle) {
+                    floatThemeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                }
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.body.classList.remove('dark-theme');
+                document.querySelectorAll('.theme-btn i').forEach(icon => {
+                    icon.className = 'fas fa-sun';
+                });
+                document.querySelectorAll('.theme-text').forEach(text => {
+                    text.textContent = 'فاتح';
+                });
+                if (floatThemeToggle) {
+                    floatThemeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                }
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // ================= LANGUAGE SWITCHER =================
+        function initLanguageSwitcher() {
+            const savedLang = localStorage.getItem('language') || 'ar';
+            setLanguage(savedLang);
+            
+            if (langBtn) {
+                langBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    langDropdown.classList.toggle('show');
+                });
+            }
+            
+            const langOptions = document.querySelectorAll('.lang-option-nav');
+            langOptions.forEach(option => {
+                option.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const lang = this.getAttribute('data-lang');
+                    setLanguage(lang);
+                    langDropdown.classList.remove('show');
+                });
+            });
+            
+            document.addEventListener('click', function() {
+                if (langDropdown.classList.contains('show')) {
+                    langDropdown.classList.remove('show');
+                }
+            });
+            
+            if (langDropdown) {
+                langDropdown.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+            }
+        }
+
+        function setLanguage(lang) {
+            if (lang === 'en') {
+                document.documentElement.dir = 'ltr';
+                document.documentElement.lang = 'en';
+                
+                if (currentLang) {
+                    currentLang.textContent = 'English';
+                }
+                
+                updateTextsForEnglish();
+                
+                document.querySelectorAll('.lang-option-nav').forEach(option => {
+                    option.classList.remove('active');
+                    if (option.getAttribute('data-lang') === 'en') {
+                        option.classList.add('active');
+                    }
+                });
+            } else {
+                document.documentElement.dir = 'rtl';
+                document.documentElement.lang = 'ar';
+                
+                if (currentLang) {
+                    currentLang.textContent = 'العربية';
+                }
+                
+                updateTextsForArabic();
+                
+                document.querySelectorAll('.lang-option-nav').forEach(option => {
+                    option.classList.remove('active');
+                    if (option.getAttribute('data-lang') === 'ar') {
+                        option.classList.add('active');
+                    }
+                });
+            }
+            
+            localStorage.setItem('language', lang);
+        }
+
+        function updateTextsForEnglish() {
+            const pageTitle = document.querySelector('title[data-i18n="reviews.pageTitle"]');
+            if (pageTitle) pageTitle.textContent = 'Customer Reviews - Tn-QA Delivery';
+            
+            const companyName = document.querySelectorAll('[data-i18n="companyName"]');
+            companyName.forEach(el => {
+                if (el.textContent.includes('Tn-QA Delivery')) return;
+                el.textContent = 'Tn-QA Delivery';
+            });
+            
+            const companySlogan = document.querySelectorAll('[data-i18n="companySlogan"]');
+            companySlogan.forEach(el => {
+                el.textContent = 'Fast and Secure Delivery Service';
+            });
+        }
+
+        function updateTextsForArabic() {
+            const pageTitle = document.querySelector('title[data-i18n="reviews.pageTitle"]');
+            if (pageTitle) pageTitle.textContent = 'مراجعات العملاء - Tn-QA Delivery';
+            
+            const companyName = document.querySelectorAll('[data-i18n="companyName"]');
+            companyName.forEach(el => {
+                el.textContent = 'Tn-QA Delivery';
+            });
+            
+            const companySlogan = document.querySelectorAll('[data-i18n="companySlogan"]');
+            companySlogan.forEach(el => {
+                el.textContent = 'خدمة توصيل سريعة وآمنة';
+            });
+        }
+
+        // ================= REVIEW FORM WITH WHATSAPP =================
+        function initReviewForm() {
+            // إعداد نجوم التقييم
+            initStarRating();
+            
+            // معالجة إرسال النموذج إلى واتساب
+            if (reviewForm) {
+                reviewForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    // جمع البيانات
+                    const formData = {
+                        name: document.getElementById('reviewerName').value.trim(),
+                        email: document.getElementById('reviewerEmail').value.trim(),
+                        service: document.getElementById('reviewService').value,
+                        rating: ratingValue ? parseInt(ratingValue.value) : 0,
+                        content: document.getElementById('reviewContent').value.trim(),
+                        date: new Date().toLocaleDateString('ar-SA'),
+                        time: new Date().toLocaleTimeString('ar-SA'),
+                        timestamp: Date.now()
+                    };
+                    
+                    // التحقق من البيانات
+                    if (!validateReviewForm(formData)) {
+                        return;
+                    }
+                    
+                    // إظهار نافذة تأكيد قبل الإرسال
+                    showReviewConfirmation(formData, () => {
+                        // إذا وافق المستخدم، نرسل إلى واتساب
+                        sendReviewToWhatsApp(formData);
+                    });
+                });
+            }
+        }
+
+        function initStarRating() {
+            if (!starsInput || starsInput.length === 0) return;
+            
+            // تهيئة النجوم
+            starsInput.forEach(star => {
+                // النقر على نجمة
+                star.addEventListener('click', function() {
+                    const value = parseInt(this.getAttribute('data-value'));
+                    updateStarsDisplay(value);
+                    if (ratingValue) {
+                        ratingValue.value = value;
+                    }
+                });
+                
+                // التحويم فوق نجمة
+                star.addEventListener('mouseover', function() {
+                    const value = parseInt(this.getAttribute('data-value'));
+                    previewStarsDisplay(value);
+                });
+                
+                // مغادرة النجوم
+                star.addEventListener('mouseout', function() {
+                    const currentValue = ratingValue ? parseInt(ratingValue.value) : 0;
+                    updateStarsDisplay(currentValue);
+                });
+            });
+        }
+
+        function updateStarsDisplay(rating) {
+            starsInput.forEach((star, index) => {
+                const starElement = star.querySelector('i') || star;
+                if (index < rating) {
+                    starElement.className = 'fas fa-star';
+                    star.classList.add('active');
+                } else {
+                    starElement.className = 'far fa-star';
+                    star.classList.remove('active');
+                }
+            });
+        }
+
+        function previewStarsDisplay(rating) {
+            starsInput.forEach((star, index) => {
+                const starElement = star.querySelector('i') || star;
+                starElement.className = index < rating ? 'fas fa-star' : 'far fa-star';
+            });
+        }
+
+        function validateReviewForm(formData) {
+            // التحقق من التقييم
+            if (formData.rating < 1 || formData.rating > 5) {
+                showAlert('الرجاء اختيار تقييم من 1 إلى 5 نجوم', 'error');
+                return false;
+            }
+            
+            // التحقق من الحقول المطلوبة
+            if (!formData.name || !formData.content || !formData.service) {
+                showAlert('الرجاء ملء جميع الحقول المطلوبة', 'error');
+                return false;
+            }
+            
+            // التحقق من البريد الإلكتروني (إذا تم إدخاله)
+            if (formData.email && !isValidEmail(formData.email)) {
+                showAlert('البريد الإلكتروني غير صحيح', 'error');
+                return false;
+            }
+            
+            return true;
+        }
+
+        function isValidEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function showReviewConfirmation(formData, onConfirm) {
+            // إنشاء نافذة تأكيد مخصصة
+            const confirmationModal = createConfirmationModal(formData, onConfirm);
+            document.body.appendChild(confirmationModal);
+            
+            // منع التمرير
+            document.body.style.overflow = 'hidden';
+        }
+
+        function createConfirmationModal(formData, onConfirm) {
+            const modal = document.createElement('div');
+            modal.className = 'whatsapp-confirmation-modal';
+            
+            const serviceName = getServiceName(formData.service);
+            const stars = '★'.repeat(formData.rating) + '☆'.repeat(5 - formData.rating);
+            
+            modal.innerHTML = `
+                <div class="modal-overlay"></div>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3><i class="fab fa-whatsapp"></i> تأكيد إرسال المراجعة</h3>
+                        <button class="modal-close">&times;</button>
+                    </div>
+                    
+                    <div class="modal-body">
+                        <div class="confirmation-message">
+                            <p>سيتم إرسال مراجعتك عبر واتساب إلى الرقم:</p>
+                            <p class="phone-number">+21656471550</p>
+                            
+                            <div class="review-preview">
+                                <div class="preview-item">
+                                    <span class="preview-label">الاسم:</span>
+                                    <span class="preview-value">${formData.name}</span>
+                                </div>
+                                ${formData.email ? `
+                                <div class="preview-item">
+                                    <span class="preview-label">البريد:</span>
+                                    <span class="preview-value">${formData.email}</span>
+                                </div>
+                                ` : ''}
+                                <div class="preview-item">
+                                    <span class="preview-label">الخدمة:</span>
+                                    <span class="preview-value">${serviceName}</span>
+                                </div>
+                                <div class="preview-item">
+                                    <span class="preview-label">التقييم:</span>
+                                    <span class="preview-value gold-text">${stars}</span>
+                                </div>
+                                <div class="preview-item full-width">
+                                    <span class="preview-label">المراجعة:</span>
+                                    <div class="preview-content">${formData.content}</div>
+                                </div>
+                            </div>
+                            
+                            <div class="whatsapp-notice">
+                                <i class="fas fa-info-circle"></i>
+                                <p>سيتم فتح واتساب ويتم إعداد الرسالة تلقائياً. تحتاج فقط إلى النقر على إرسال.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button class="btn secondary-btn cancel-btn">إلغاء</button>
+                        <button class="btn primary-btn confirm-btn">
+                            <i class="fab fa-whatsapp"></i> إرسال عبر واتساب
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            // إضافة CSS للمودال
+            addModalStyles();
+            
+            // إضافة أحداث
+            modal.querySelector('.modal-close').addEventListener('click', () => {
+                removeModal(modal);
+            });
+            
+            modal.querySelector('.modal-overlay').addEventListener('click', () => {
+                removeModal(modal);
+            });
+            
+            modal.querySelector('.cancel-btn').addEventListener('click', () => {
+                removeModal(modal);
+            });
+            
+            modal.querySelector('.confirm-btn').addEventListener('click', () => {
+                removeModal(modal);
+                onConfirm();
+            });
+            
+            return modal;
+        }
+
+        function removeModal(modal) {
+            modal.style.opacity = '0';
+            setTimeout(() => {
+                modal.remove();
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        function addModalStyles() {
+            if (document.querySelector('#whatsapp-modal-styles')) return;
+            
+            const styles = document.createElement('style');
+            styles.id = 'whatsapp-modal-styles';
+            styles.textContent = `
+                .whatsapp-confirmation-modal {
+                    position: fixed;
+                    top: 0;
+                    right: 0;
+                    width: 100%;
+                    height: 100%;
+                    z-index: 9999;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    animation: fadeIn 0.3s ease;
+                }
+                
+                @keyframes fadeIn {
+                    from { opacity: 0; }
+                    to { opacity: 1; }
+                }
+                
+                .whatsapp-confirmation-modal .modal-overlay {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.7);
+                    backdrop-filter: blur(5px);
+                }
+                
+                .whatsapp-confirmation-modal .modal-content {
+                    position: relative;
+                    background: var(--white);
+                    border-radius: var(--radius-xl);
+                    width: 90%;
+                    max-width: 500px;
+                    max-height: 90vh;
+                    overflow-y: auto;
+                    box-shadow: var(--shadow-lg);
+                    animation: slideUp 0.3s ease;
+                    border: 2px solid var(--gold);
+                }
+                
+                body.dark-theme .whatsapp-confirmation-modal .modal-content {
+                    background: #1e1e1e;
+                }
+                
+                @keyframes slideUp {
+                    from {
+                        opacity: 0;
+                        transform: translateY(50px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+                
+                .whatsapp-confirmation-modal .modal-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 20px;
+                    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+                    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+                    color: white;
+                    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+                }
+                
+                .whatsapp-confirmation-modal .modal-header h3 {
+                    margin: 0;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    color: white;
+                }
+                
+                .whatsapp-confirmation-modal .modal-close {
+                    background: rgba(255, 255, 255, 0.2);
+                    border: none;
+                    color: white;
+                    font-size: 1.5rem;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: all 0.2s;
+                }
+                
+                .whatsapp-confirmation-modal .modal-close:hover {
+                    background: rgba(255, 255, 255, 0.3);
+                }
+                
+                .whatsapp-confirmation-modal .modal-body {
+                    padding: 20px;
+                }
+                
+                .whatsapp-confirmation-modal .confirmation-message {
+                    text-align: center;
+                }
+                
+                .whatsapp-confirmation-modal .phone-number {
+                    font-size: 1.3rem;
+                    font-weight: bold;
+                    color: var(--gold);
+                    margin: 10px 0 20px;
+                    direction: ltr;
+                    display: inline-block;
+                    background: rgba(212, 175, 55, 0.1);
+                    padding: 8px 15px;
+                    border-radius: var(--radius-md);
+                }
+                
+                .whatsapp-confirmation-modal .review-preview {
+                    background: var(--gray-light);
+                    border-radius: var(--radius-md);
+                    padding: 15px;
+                    margin: 20px 0;
+                    text-align: right;
+                }
+                
+                body.dark-theme .whatsapp-confirmation-modal .review-preview {
+                    background: #2d2d2d;
+                }
+                
+                .whatsapp-confirmation-modal .preview-item {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 10px;
+                    padding-bottom: 10px;
+                    border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+                }
+                
+                .whatsapp-confirmation-modal .preview-item:last-child {
+                    border-bottom: none;
+                    margin-bottom: 0;
+                    padding-bottom: 0;
+                }
+                
+                .whatsapp-confirmation-modal .preview-item.full-width {
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+                
+                .whatsapp-confirmation-modal .preview-label {
+                    font-weight: bold;
+                    color: var(--black);
+                    min-width: 80px;
+                }
+                
+                body.dark-theme .whatsapp-confirmation-modal .preview-label {
+                    color: #fff;
+                }
+                
+                .whatsapp-confirmation-modal .preview-value {
+                    color: var(--gray-dark);
+                    text-align: left;
+                    flex: 1;
+                }
+                
+                .whatsapp-confirmation-modal .preview-content {
+                    background: var(--white);
+                    padding: 10px;
+                    border-radius: var(--radius-sm);
+                    margin-top: 5px;
+                    border: 1px solid rgba(0, 0, 0, 0.1);
+                    max-height: 150px;
+                    overflow-y: auto;
+                    text-align: right;
+                    line-height: 1.6;
+                }
+                
+                body.dark-theme .whatsapp-confirmation-modal .preview-content {
+                    background: #1a1a1a;
+                    color: #e0e0e0;
+                }
+                
+                .whatsapp-confirmation-modal .whatsapp-notice {
+                    background: rgba(37, 211, 102, 0.1);
+                    border: 1px solid rgba(37, 211, 102, 0.2);
+                    border-radius: var(--radius-md);
+                    padding: 15px;
+                    margin-top: 20px;
+                    display: flex;
+                    align-items: flex-start;
+                    gap: 10px;
+                }
+                
+                .whatsapp-confirmation-modal .whatsapp-notice i {
+                    color: #25D366;
+                    font-size: 1.2rem;
+                    margin-top: 2px;
+                }
+                
+                .whatsapp-confirmation-modal .whatsapp-notice p {
+                    margin: 0;
+                    color: #155724;
+                    font-size: 0.9rem;
+                    text-align: right;
+                }
+                
+                body.dark-theme .whatsapp-confirmation-modal .whatsapp-notice p {
+                    color: #d4edda;
+                }
+                
+                .whatsapp-confirmation-modal .modal-footer {
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 20px;
+                    border-top: 1px solid rgba(0, 0, 0, 0.1);
+                    gap: 10px;
+                }
+                
+                .whatsapp-confirmation-modal .modal-footer .btn {
+                    flex: 1;
+                    padding: 12px;
+                    font-size: 0.95rem;
+                }
+                
+                .whatsapp-confirmation-modal .confirm-btn {
+                    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+                    color: white;
+                    border: none;
+                }
+                
+                .whatsapp-confirmation-modal .confirm-btn:hover {
+                    background: linear-gradient(135deg, #128C7E 0%, #25D366 100%);
+                    transform: translateY(-2px);
+                }
+                
+                @media (max-width: 576px) {
+                    .whatsapp-confirmation-modal .modal-content {
+                        width: 95%;
+                        margin: 10px;
+                    }
+                    
+                    .whatsapp-confirmation-modal .modal-footer {
+                        flex-direction: column;
+                    }
+                    
+                    .whatsapp-confirmation-modal .preview-item {
+                        flex-direction: column;
+                        align-items: flex-start;
+                    }
+                    
+                    .whatsapp-confirmation-modal .preview-label {
+                        margin-bottom: 5px;
+                    }
+                }
+            `;
+            
+            document.head.appendChild(styles);
+        }
+
+        function getServiceName(serviceId) {
+            const services = {
+                'local-delivery-qatar': 'التوصيل المحلي في قطر',
+                'local-delivery-tunisia': 'التوصيل المحلي في تونس',
+                'scale-sales': 'بيع الموازين',
+                'scale-booking': 'حجز الموازين',
+                'money-delivery': 'توثيق تسليم الأموال'
+            };
+            return services[serviceId] || serviceId;
+        }
+
+        function sendReviewToWhatsApp(formData) {
+            // إنشاء رسالة واتساب مخصصة
+            const whatsappMessage = createWhatsAppMessage(formData);
+            
+            // ترميز الرسالة
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+            
+            // إنشاء رابط واتساب
+            const whatsappUrl = `https://wa.me/21656471550?text=${encodedMessage}`;
+            
+            // عرض حالة التحميل
+            showAlert('جاري فتح واتساب...', 'info');
+            
+            // حفظ المراجعة محلياً أولاً
+            saveReviewLocally(formData);
+            
+            // فتح واتساب في نافذة جديدة بعد تأخير قصير
+            setTimeout(() => {
+                window.open(whatsappUrl, '_blank');
+                
+                // إعادة تعيين النموذج
+                resetReviewForm();
+                
+                // عرض رسالة النجاح بعد التأخير
+                setTimeout(() => {
+                    showAlert('تم فتح واتساب! الرجاء إرسال الرسالة.', 'success');
+                }, 1000);
+                
+            }, 500);
+        }
+
+        function createWhatsAppMessage(formData) {
+            const serviceName = getServiceName(formData.service);
+            const stars = '⭐'.repeat(formData.rating) + '☆'.repeat(5 - formData.rating);
+            const dateTime = `${formData.date} - ${formData.time}`;
+            
+            return `🎯 *مراجعة جديدة - Tn-QA Delivery*
+            
+👤 *المراجع:* ${formData.name}
+📧 *البريد:* ${formData.email || 'لم يتم الإدخال'}
+📋 *الخدمة:* ${serviceName}
+⭐ *التقييم:* ${formData.rating}/5
+${stars}
+
+📝 *المراجعة:*
+"${formData.content}"
+
+📅 *التاريخ:* ${dateTime}
+
+🔗 *المصدر:* ${window.location.href}
+---
+*هذه رسالة تلقائية من موقع المراجعات*
+`;
+        }
+
+        function saveReviewLocally(review) {
+            try {
+                const savedReviews = JSON.parse(localStorage.getItem('tnqa_whatsapp_reviews') || '[]');
+                
+                const reviewWithId = {
+                    ...review,
+                    id: Date.now(),
+                    status: 'sent',
+                    sent_via: 'whatsapp',
+                    sent_at: new Date().toISOString()
+                };
+                
+                savedReviews.push(reviewWithId);
+                localStorage.setItem('tnqa_whatsapp_reviews', JSON.stringify(savedReviews));
+                
+                console.log('✅ Review saved locally:', reviewWithId);
+                return reviewWithId;
+            } catch (error) {
+                console.error('❌ Error saving review:', error);
+                return null;
+            }
+        }
+
+        function displayLocalReviews() {
+            try {
+                const savedReviews = JSON.parse(localStorage.getItem('tnqa_whatsapp_reviews') || '[]');
+                console.log('📊 Saved reviews:', savedReviews.length);
+                
+                // يمكنك عرض المراجعات المحفوظة في قسم خاص إذا أردت
+                if (savedReviews.length > 0) {
+                    // إضافة مؤشر في الفوتر
+                    addReviewsCounter(savedReviews.length);
+                }
+            } catch (error) {
+                console.error('Error loading local reviews:', error);
+            }
+        }
+
+        function addReviewsCounter(count) {
+            const footer = document.querySelector('.footer-bottom');
+            if (!footer) return;
+            
+            const counter = document.createElement('div');
+            counter.className = 'local-reviews-counter';
+            counter.innerHTML = `
+                <i class="fas fa-history"></i>
+                <span>${count} مراجعة محفوظة محلياً</span>
+            `;
+            
+            // إضافة CSS
+            const style = document.createElement('style');
+            style.textContent = `
+                .local-reviews-counter {
+                    background: rgba(212, 175, 55, 0.1);
+                    border: 1px solid var(--gold-light);
+                    border-radius: var(--radius-md);
+                    padding: 10px 15px;
+                    margin: 10px auto;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 10px;
+                    max-width: 300px;
+                    font-size: 0.9rem;
+                    color: var(--gold-dark);
+                }
+                
+                .local-reviews-counter i {
+                    color: var(--gold);
+                }
+                
+                @media (max-width: 768px) {
+                    .local-reviews-counter {
+                        margin: 10px;
+                        font-size: 0.8rem;
+                    }
+                }
+            `;
+            
+            document.head.appendChild(style);
+            footer.parentNode.insertBefore(counter, footer);
+        }
+
+        function resetReviewForm() {
+            if (reviewForm) {
+                reviewForm.reset();
+                updateStarsDisplay(0);
+                if (ratingValue) {
+                    ratingValue.value = 0;
+                }
+            }
+        }
+
+        function showAlert(message, type = 'info') {
+            const existingAlert = document.querySelector('.custom-alert');
+            if (existingAlert) {
+                existingAlert.remove();
+            }
+            
+            const alert = document.createElement('div');
+            alert.className = `custom-alert alert-${type}`;
+            alert.innerHTML = `
+                <div class="alert-content">
+                    <i class="fas ${getAlertIcon(type)}"></i>
+                    <span>${message}</span>
+                </div>
+                <button class="alert-close">&times;</button>
+            `;
+            
+            // إضافة CSS إذا لم يكن موجوداً
+            if (!document.querySelector('#alert-styles')) {
+                const style = document.createElement('style');
+                style.id = 'alert-styles';
+                style.textContent = `
+                    .custom-alert {
+                        position: fixed;
+                        top: 20px;
+                        right: 20px;
+                        left: 20px;
+                        max-width: 500px;
+                        margin: 0 auto;
+                        padding: 15px 20px;
+                        border-radius: var(--radius-md);
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        z-index: 9999;
+                        box-shadow: var(--shadow-lg);
+                        animation: slideDown 0.3s ease;
+                        transform-origin: top center;
+                    }
+                    
+                    .alert-success {
+                        background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+                        border: 2px solid #28a745;
+                        color: #155724;
+                    }
+                    
+                    .alert-error {
+                        background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+                        border: 2px solid #dc3545;
+                        color: #721c24;
+                    }
+                    
+                    .alert-info {
+                        background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
+                        border: 2px solid #17a2b8;
+                        color: #0c5460;
+                    }
+                    
+                    .alert-content {
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        flex: 1;
+                    }
+                    
+                    .alert-content i {
+                        font-size: 1.2rem;
+                    }
+                    
+                    .alert-close {
+                        background: none;
+                        border: none;
+                        font-size: 1.5rem;
+                        cursor: pointer;
+                        color: inherit;
+                        padding: 0;
+                        width: 30px;
+                        height: 30px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 50%;
+                        transition: background-color 0.2s;
+                    }
+                    
+                    .alert-close:hover {
+                        background-color: rgba(0,0,0,0.1);
+                    }
+                    
+                    @keyframes slideDown {
+                        from {
+                            opacity: 0;
+                            transform: translateY(-20px);
+                        }
+                        to {
+                            opacity: 1;
+                            transform: translateY(0);
+                        }
+                    }
+                    
+                    @media (max-width: 768px) {
+                        .custom-alert {
+                            top: 10px;
+                            right: 10px;
+                            left: 10px;
+                            padding: 12px 15px;
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            document.body.appendChild(alert);
+            
+            alert.querySelector('.alert-close').addEventListener('click', function() {
+                alert.style.animation = 'slideDown 0.3s ease reverse';
+                setTimeout(() => alert.remove(), 300);
+            });
+            
+            setTimeout(() => {
+                if (alert.parentNode) {
+                    alert.style.animation = 'slideDown 0.3s ease reverse';
+                    setTimeout(() => alert.remove(), 300);
+                }
+            }, 5000);
+        }
+
+        function getAlertIcon(type) {
+            switch(type) {
+                case 'success': return 'fa-check-circle';
+                case 'error': return 'fa-exclamation-circle';
+                case 'info': return 'fa-info-circle';
+                default: return 'fa-info-circle';
+            }
+        }
+
+        // ================= REVIEWS FILTER =================
+        function initReviewsFilter() {
+            if (filterButtons) {
+                filterButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        filterButtons.forEach(btn => btn.classList.remove('active'));
+                        this.classList.add('active');
+                        const filterValue = this.getAttribute('data-filter');
+                        filterReviews(filterValue);
+                    });
+                });
+            }
+            
+            if (searchBox) {
+                searchBox.addEventListener('input', function() {
+                    const searchTerm = this.value.toLowerCase();
+                    searchReviews(searchTerm);
+                });
+            }
+            
+            if (loadMoreBtn) {
+                loadMoreBtn.addEventListener('click', function() {
+                    loadMoreReviews();
+                });
+            }
+        }
+
+        function filterReviews(filter) {
+            const reviewCards = document.querySelectorAll('.review-card');
+            
+            reviewCards.forEach(card => {
+                if (filter === 'all') {
+                    card.style.display = 'block';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 50);
+                } else if (filter === 'service') {
+                    card.style.display = 'block';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 50);
+                } else {
+                    const rating = card.getAttribute('data-rating');
+                    if (rating === filter) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 50);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                }
+            });
+        }
+
+        function searchReviews(term) {
+            const reviewCards = document.querySelectorAll('.review-card');
+            
+            reviewCards.forEach(card => {
+                const name = card.querySelector('h3').textContent.toLowerCase();
+                const content = card.querySelector('.review-content p').textContent.toLowerCase();
+                const service = card.querySelector('.review-service').textContent.toLowerCase();
+                
+                if (name.includes(term) || content.includes(term) || service.includes(term)) {
+                    card.style.display = 'block';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 50);
+                } else {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        card.style.display = 'none';
+                    }, 300);
+                }
+            });
+        }
+
+        function loadMoreReviews() {
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            if (!loadMoreBtn) return;
+            
+            loadMoreBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري التحميل...';
+            loadMoreBtn.disabled = true;
+            
+            setTimeout(() => {
+                const newReviews = [
+                    {
+                        id: 7,
+                        name: 'ياسر النجار',
+                        location: 'مهندس من الأردن',
+                        rating: 5,
+                        date: 'قبل يومين',
+                        service: 'توصيل معدات',
+                        content: '"خدمة ممتازة لنقل المعدات الهندسية. الدقة والأمان كانا في أعلى مستوى. أوصي بهم بشدة."',
+                        avatar: 'https://randomuser.me/api/portraits/men/22.jpg'
+                    },
+                    {
+                        id: 8,
+                        name: 'لمياء السعيد',
+                        location: 'طبيبة من مصر',
+                        rating: 4,
+                        date: 'قبل 6 أيام',
+                        service: 'توصيل طبي',
+                        content: '"خدمة توصيل المستلزمات الطبية كانت سريعة وآمنة. الفريق محترف ومتعاون. شكراً لكم."',
+                        avatar: 'https://randomuser.me/api/portraits/women/65.jpg'
+                    }
+                ];
+                
+                newReviews.forEach(review => {
+                    const reviewCard = createReviewCard(review);
+                    reviewsGrid.appendChild(reviewCard);
+                });
+                
+                loadMoreBtn.innerHTML = '<i class="fas fa-sync-alt"></i> تحميل المزيد';
+                loadMoreBtn.disabled = false;
+                
+                if (document.querySelectorAll('.review-card').length >= 10) {
+                    loadMoreBtn.style.display = 'none';
+                }
+                
+                initReviewsFilter();
+                
+            }, 1500);
+        }
+
+        function createReviewCard(review) {
+            const card = document.createElement('div');
+            card.className = 'review-card';
+            card.setAttribute('data-rating', review.rating);
+            card.setAttribute('data-service', review.service.toLowerCase().replace(' ', '-'));
+            
+            let starsHtml = '';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= review.rating) {
+                    starsHtml += '<i class="fas fa-star"></i>';
+                } else if (i === Math.ceil(review.rating) && review.rating % 1 !== 0) {
+                    starsHtml += '<i class="fas fa-star-half-alt"></i>';
+                } else {
+                    starsHtml += '<i class="far fa-star"></i>';
+                }
+            }
+            
+            card.innerHTML = `
+                <div class="review-header">
+                    <div class="reviewer-avatar">
+                        <img src="${review.avatar}" alt="${review.name}" loading="lazy">
+                    </div>
+                    <div class="reviewer-info">
+                        <h3>${review.name}</h3>
+                        <p>${review.location}</p>
+                        <div class="review-rating">
+                            ${starsHtml}
+                            <span class="review-date">${review.date}</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="review-content">
+                    <span class="review-verified">
+                        <i class="fas fa-check-circle"></i> <span>مراجعة موثقة</span>
+                    </span>
+                    <span class="review-service">${review.service}</span>
+                    
+                    <p>"${review.content}"</p>
+                </div>
+            `;
+            
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 100);
+            
+            return card;
+        }
+
+        // ================= SCROLL TO TOP =================
+        function initScrollToTop() {
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    scrollToTop.classList.add('visible');
+                } else {
+                    scrollToTop.classList.remove('visible');
+                }
+            });
+            
+            if (scrollToTop) {
+                scrollToTop.addEventListener('click', function() {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+        }
+
+        // ================= ANIMATIONS =================
+        function initAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                    }
+                });
+            }, observerOptions);
+            
+            const animatedElements = document.querySelectorAll('.review-card, .stat-card, .section-header');
+            animatedElements.forEach(el => {
+                observer.observe(el);
+            });
+            
+            const style = document.createElement('style');
+            style.textContent = `
+                .review-card, .stat-card, .section-header {
+                    opacity: 0;
+                    transform: translateY(30px);
+                    transition: opacity 0.6s ease, transform 0.6s ease;
+                }
+                
+                .review-card.animated, .stat-card.animated, .section-header.animated {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+                
+                .review-card:nth-child(1) { transition-delay: 0.1s; }
+                .review-card:nth-child(2) { transition-delay: 0.2s; }
+                .review-card:nth-child(3) { transition-delay: 0.3s; }
+                .review-card:nth-child(4) { transition-delay: 0.4s; }
+                .review-card:nth-child(5) { transition-delay: 0.5s; }
+                .review-card:nth-child(6) { transition-delay: 0.6s; }
+                
+                .stat-card:nth-child(1) { transition-delay: 0.1s; }
+                .stat-card:nth-child(2) { transition-delay: 0.2s; }
+                .stat-card:nth-child(3) { transition-delay: 0.3s; }
+                .stat-card:nth-child(4) { transition-delay: 0.4s; }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // ================= WINDOW RESIZE HANDLER =================
+        let resizeTimer;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                if (window.innerWidth >= 992 && navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    burger.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            }, 250);
+        });
+
+        // ================= KEYBOARD NAVIGATION =================
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowUp' && e.ctrlKey) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            
+            if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                burger.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // ================= WHATSAPP BUTTONS =================
+        document.querySelectorAll('.whatsapp-btn, .float-whatsapp').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const phone = '21656471550';
+                const message = encodeURIComponent('مرحباً، أود الاستفسار عن خدمات التوصيل');
+                const whatsappUrl = `https://wa.me/${phone}?text=${message}`;
+                
+                window.open(whatsappUrl, '_blank');
+            });
         });
     </script>
 </body>
