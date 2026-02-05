@@ -2208,19 +2208,25 @@ html[dir="rtl"] .scroll-progress {
     padding: 0 24px 24px;
     margin-top: auto;
 }
-
+@media (max-width: 380px)  {
+      .slide-btn {
+        padding: 8px 16px;
+        font-size: 10px;
+        width: 30%;
+    }
+}
 .qa-card-footer .slide-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    width: 35%;
+    width: 40%;
     padding: 12px;
     background: linear-gradient(135deg, var(--gold-primary) 0%, var(--gold-dark) 100%);
     color: white;
     border-radius: var(--border-radius);
     font-weight: 600;
-    font-size: 14px;
+    font-size: 12px;
     transition: var(--transition);
     border: none;
     cursor: pointer;
