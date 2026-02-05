@@ -690,9 +690,7 @@
     let scrollTimeout;
 
     /* -------- Scroll Progress -------- */
-    const progress = document.createElement('div');
-    progress.className = 'scroll-progress';
-    document.body.appendChild(progress);
+    
 
     /* -------- Helpers -------- */
     const getScrollPercent = () => {
@@ -710,8 +708,7 @@
             btn.classList.add('show', 'pulse');
             btn.classList.remove('hide');
 
-            progress.classList.add('show');
-            progress.textContent = `${getScrollPercent()}%`;
+           
         } else {
             btn.classList.remove('show', 'pulse');
             btn.classList.add('hide');

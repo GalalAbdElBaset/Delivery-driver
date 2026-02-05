@@ -1935,29 +1935,8 @@ a {
     }
 }
 
-/* ================= Scroll Percentage ================= */
 
-.scroll-progress {
-    position: fixed;
-    bottom: 35px;
-    right: 95px;
-    background: var(--gold-primary);
-    color: var(--white);
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: bold;
-    opacity: 0;
-    transform: translateX(-10px);
-    transition: all 0.3s ease;
-    z-index: 999;
-    pointer-events: none;
-}
 
-.scroll-progress.show {
-    opacity: 1;
-    transform: translateX(0);
-}
 
 /* ================= Responsive ================= */
 
