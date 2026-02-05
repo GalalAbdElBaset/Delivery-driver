@@ -120,17 +120,17 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     /* ================= FLOATING BUTTON ================= */
-    function initFloatingButtons() {
-        const btn = document.querySelector('.float-whatsapp');
-        if (!btn) return;
+    // function initFloatingButtons() {
+    //     const btn = document.querySelector('.float-whatsapp');
+    //     if (!btn) return;
 
-        let lastScroll = 0;
-        window.addEventListener('scroll', () => {
-            const current = window.scrollY;
-            btn.style.opacity = current > lastScroll && current > 200 ? '0' : '1';
-            lastScroll = current;
-        });
-    }
+    //     let lastScroll = 0;
+    //     window.addEventListener('scroll', () => {
+    //         const current = window.scrollY;
+    //         btn.style.opacity = current > lastScroll && current > 200 ? '0' : '1';
+    //         lastScroll = current;
+    //     });
+    // }
 
     /* ================= SCROLL ANIMATIONS ================= */
     function initScrollAnimations() {
@@ -220,7 +220,7 @@ document.addEventListener('DOMContentLoaded', function () {
         initLanguage();
         initMobileMenu();
         initScrollToTop();
-        initFloatingButtons();
+    //    initFloatingButtons(); 
         initScrollAnimations();
         initTestimonialsSlider();
         initCounters();
