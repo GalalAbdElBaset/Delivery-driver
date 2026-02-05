@@ -1410,6 +1410,7 @@
             display: flex;
             gap: var(--space-md);
             justify-content: center;
+            align-items: center;
         }
         
         @media (max-width: 768px) {
@@ -1453,7 +1454,7 @@
             background: linear-gradient(135deg, var(--primary-gold), var(--gold-dark));
             color: white;
             border: none;
-            width: 40%;
+            width: 60%;
             font-size: 15px;
         }
         
@@ -1986,7 +1987,7 @@
             color: white;
             font-size: var(--font-size-lg);
             box-shadow: var(--shadow-md);
-            z-index: 999;
+            z-index: 1000;
             transition: all var(--transition-normal);
             border: none;
             cursor: pointer;
@@ -2004,6 +2005,37 @@
             box-shadow: var(--shadow-gold);
         }
         
+        @media (max-width: 400px) {
+            .status-badge {
+                padding: 5px 12px;
+            }
+            .contact-card h3 , .working-hours h4 {
+                font-size: 15px;
+            }
+            .card-description {
+                font-size: 12px;
+            }
+            .hour-item {
+                font-size: 12px;
+            }
+            .card-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 12px;
+            }
+            .email-submit {
+                width: 70%;
+                font-size: 12px;
+                padding: 0;
+                margin: 0;
+            }
+            .action-buttons {
+                align-items: center;
+            }
+            .contact-card {
+                padding: 20px 10px;
+            }
+        }
         @media (max-width: 768px) {
             .float-whatsapp,
             .float-theme,
